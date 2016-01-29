@@ -1,0 +1,27 @@
+language: ruby
+
+sudo: false
+
+rvm:
+  - 2.1.8
+  - 2.2.4
+  - 2.3.0
+
+cache:
+  - bundler
+
+env:
+  matrix:
+    - RAILS_ENV=test
+
+before_script:
+  - bundle exec rake db:migrate
+
+script:
+  - bundle exec rake spec
+
+notifications:
+  slack:
+    rooms:
+      secure: "fzeAaVgxrazt+kBfLdOBqNk7i2PExOCe0rZqob8jxouS1ZZZ8tG/6OuFOSp6D2HSxEvYrDpRocKpYzJ1J7zj+3XYH2fHmO0ucA2MxWBU+NiuX9lvViKmBRtCgLAmOaeY3LGX5HOuFNyGexv2dVO5OIpfNKOBYRja2TqPCE6rUXD3+0KVOKjJrDeDNMFx4rfsM3xQEfUjLQEG4R6sfSlV40RQAP6KU24+P+ErIE/dabW5cwAlgBv0XRtXtI/2pWlLacb+MlCsSyEtpZBS164D2ataJz6IJfp5kaddGq2DqQfyVZ6njAJs235QCaZRBsPY2M4cwKX9MTeEHG6YGjJvg1fvgTtSSQ+DGZJhvY7P/Ww+jHGil4XYUR3OslBZmTJZgKM7fdJGQy+W+hg6RIIOUbL2TM92ouCQMJ0cp32bpQByxWyGjvYUK3z6Bng3+sKcUhko7lb8FA5eBwK1pfogeAmgRKYxFSQm9lzD4ScWjD8IUn4RF52XmI8bRxYh/1od0pGLjfiPgIvyXOa4ZIZ4Btj5eFiDm7jldYriF2ZKoI5YBn6nNUYgYJ8umPNgzLH9Yi819XOH1GOcDSmcJugjSBo/9mwkN1s+T9ZZphXjgyIZm9mNvVQxuVRwM4TEoHsqS8Y1/e//5aDcqvqS3OsDvdV2x+Lx3px9Gh46PLKdE0k="
+
