@@ -11,7 +11,7 @@ cache:
   - bundler
 
 addons:
-  codeclimate:
+  code_climate:
     repo_token: 328680c3572296adae2df9b2adda5597540cded840017a139d760a791aa6b307
 
 env:
