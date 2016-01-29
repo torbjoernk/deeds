@@ -35,4 +35,32 @@ describe Storage, type: :model do
       end
     end
   end
+
+  context 'has associations with' do
+    context 'archives' do
+      it 'can have multiple' do
+        storage = create(:storage_one)
+        archive1 = create(:archive_one)
+        archive2 = create(:archive_two)
+
+        storage.archives = [archive1, archive2]
+        storage.save!
+
+        expect(storage.archives).to include archive1
+        expect(storage.archives).to include archive2
+      end
+
+      it 'does not allow duplication' do
+        storage = create(:storage_one)
+        archive1 = create(:archive_one)
+
+        storage.archives = [archive1]
+        storage.save!
+
+        expect {
+          storage.archives << archive1
+        }.to raise_error ActiveRecord::RecordInvalid
+      end
+    end
+  end
 end
