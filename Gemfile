@@ -50,3 +50,6 @@ group :development do
   gem 'spring'
 end
 
+gem 'coveralls', require: false
+gem 'codeclimate-test-reporter', require: false
+
