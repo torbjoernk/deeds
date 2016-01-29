@@ -10,11 +10,21 @@ rvm:
 cache:
   - bundler
 
+addons:
+  codeclimate:
+    repo_token: 328680c3572296adae2df9b2adda5597540cded840017a139d760a791aa6b307
+
 env:
   global:
     secure: "moIDBJT9hxtAOGwakGbOj6zurF9WK5irsKafp41AAAvgRmqesWHEdlhbuIt5UPSw4Q0xkcNeRnP9zMHTcX/SUOgivpjlJ4aNTS4GkRCM4TbD66ANxozZTqwVukKWK9XRwwIE0P8AYVua0LK9rq5mD+7X6J1lBNkrF7CHR52uo+Qr+gSihWRBMJdeoIzAfjSksVNKsYI5Rzj8H6JxCsI/8CUiJFw9Eoh44JzSxyNd5spV0LFgrRDVqxHPO1m0xo5LGqVtUlEuayNVgSLWyog2FW3hptgjIvhQLqagpRhK8ZbMLVTF4hXC2PHrVMXJ2fz+DX1te3wFcgqi4A3KvzsDoX9ov0vBdRedXwUjyVtC/kxCIrnQ3U2vySICBTY28Z04FykDwJ/CoY7tftR/QOeB8xjjRh9cgU9QZx4H7g1hWyam5dFF+//KsMyzLTbOipS+ZvM94SNbDdNv1Rz1YWWNQQX27ZSaW2+Cmw5VD6Ba6v5THppAyg+3uxyHjGx1k6a/MmvOAKCjWLa2MIZMyflPkUFqia3kOT6vfMWEUpLHSaAkT4fyNgrfUEXwBRbyvmwQgwpbzX42C2r3BBeSnbXnN+SpgXOyWVvviYEPpfvmdr06UWt84mbHISDxkoDIEVTODsxhkDiIXgb8uyM6QUw0dUw1KZ/Dt+LyQNNSOUS6Llg="
   matrix:
     - RAILS_ENV=test
+
+matrix:
+  include:
+    - rvm: 2.3.0
+      env:
+        - CODECLIMATE=true
 
 before_script:
   - bundle exec rake db:migrate
