@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160129080830) do
+ActiveRecord::Schema.define(version: 20160129082340) do
+
+  create_table "archive_storages", id: false, force: :cascade do |t|
+    t.integer  "archive_id"
+    t.integer  "storage_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "archive_storages", ["archive_id"], name: "index_archive_storages_on_archive_id"
+  add_index "archive_storages", ["storage_id"], name: "index_archive_storages_on_storage_id"
 
   create_table "archives", force: :cascade do |t|
     t.string   "title"
