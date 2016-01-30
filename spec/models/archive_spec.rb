@@ -69,5 +69,25 @@ describe Archive, type: :model do
         }.to raise_error ActiveRecord::RecordInvalid
       end
     end
+
+    context 'sources' do
+      it 'is associated with multiple' do
+        archive = create(:archive_one)
+        source = create(:source_one)
+
+        archive.sources << source
+        expect(archive.sources).to include source
+      end
+
+      it 'does not allow duplicates' do
+        archive = create(:archive_one)
+        source = create(:source_one)
+
+        archive.sources << source
+        expect {
+          archive.sources << source
+        }.to raise_error ActiveRecord::RecordInvalid
+      end
+    end
   end
 end
