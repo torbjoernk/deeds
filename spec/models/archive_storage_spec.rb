@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ArchiveStorage, :type => :model do
+describe ArchiveStorage, type: :model do
   it 'associates an Archive with a Storage' do
     archive_storage = create(:archive_storage_one)
 
