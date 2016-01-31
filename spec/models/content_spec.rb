@@ -42,4 +42,15 @@ describe Content, type: :model do
       end
     end
   end
+
+  context 'has associations with' do
+    context 'translations' do
+      it 'can have multiple' do
+        translation = create(:content_translation_one)
+        content = Content.find_by(attributes_for(:content_one))
+
+        expect(content.translations).to include translation
+      end
+    end
+  end
 end

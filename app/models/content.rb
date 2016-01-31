@@ -1,5 +1,5 @@
 class Content < ActiveRecord::Base
-  LANGUAGES = %w(latin old_german)
+  LANGUAGES = %w(latin old_german contemporary_german)
 
   has_many :translations, class_name: 'ContentTranslation'
 
