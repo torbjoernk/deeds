@@ -4,6 +4,10 @@ class Person < ActiveRecord::Base
   has_many :person_relations
   has_many :related, through: :person_relations
 
+  has_many :mentions
+  has_many :roles, through: :mentions, class_name: 'Role', source: :role
+  has_many :mentioned_places, through: :mentions, class_name: 'Place', source: :place
+
   def relatives
     Person.joins(:person_relations).where(person_relations: { related_id: self })
   end

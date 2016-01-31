@@ -70,5 +70,25 @@ describe Person, type: :model do
         expect(second.relatives).to include first
       end
     end
+
+    context 'places' do
+      it 'through mentions' do
+        create(:mention_per1_pla1_rol1)
+        person = Person.find_by(attributes_for(:person_one))
+        place = Place.find_by(attributes_for(:place_one))
+
+        expect(person.mentioned_places).to include place
+      end
+    end
+
+    context 'roles' do
+      it 'through mentions' do
+        create(:mention_per1_pla1_rol1)
+        person = Person.find_by(attributes_for(:person_one))
+        role = Role.find_by(attributes_for(:role_one))
+
+        expect(person.roles).to include role
+      end
+    end
   end
 end
