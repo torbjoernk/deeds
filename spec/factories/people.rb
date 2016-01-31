@@ -4,4 +4,10 @@ FactoryGirl.define do
     gender 'male'
     notes 'Test Note'
   end
+
+  factory :person_two, class: Person do
+    name 'Test Person Female'
+    gender 'female'
+    notes 'Test Note text'
+  end
 end

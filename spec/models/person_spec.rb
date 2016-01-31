@@ -50,4 +50,25 @@ describe Person, type: :model do
       Person.create!(name: first.name, gender: first.gender)
     }.to raise_error ActiveRecord::RecordInvalid
   end
+
+  context 'has associations with' do
+    context 'other people' do
+      it 'does have related people' do
+        create(:person_relation_one_two)
+        first = Person.find_by attributes_for(:person_one)
+        second = Person.find_by attributes_for(:person_two)
+
+        expect(first.related).to include second
+      end
+
+      it 'can query for relatives' do
+        create(:person_relation_one_two)
+        first = Person.find_by attributes_for(:person_one)
+        second = Person.find_by attributes_for(:person_two)
+
+        expect(first.related).to include second
+        expect(second.relatives).to include first
+      end
+    end
+  end
 end
