@@ -38,6 +38,15 @@ describe Place, type: :model do
 
         expect(first.related).to include second
       end
+
+      it 'can query for relatives' do
+        create(:place_relation_one_two)
+        first = Place.find_by attributes_for(:place_one)
+        second = Place.find_by attributes_for(:place_two)
+
+        expect(first.related).to include second
+        expect(second.relatives).to include first
+      end
     end
   end
 end
