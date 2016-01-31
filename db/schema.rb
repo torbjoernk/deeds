@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160131201041) do
+ActiveRecord::Schema.define(version: 20160131210704) do
 
   create_table "archive_sources", id: false, force: :cascade do |t|
     t.integer  "archive_id"
@@ -43,6 +43,14 @@ ActiveRecord::Schema.define(version: 20160131201041) do
 
   add_index "archives", ["abbr"], name: "index_archives_on_abbr", unique: true
   add_index "archives", ["title"], name: "index_archives_on_title", unique: true
+
+  create_table "contents", force: :cascade do |t|
+    t.text     "content"
+    t.string   "language"
+    t.text     "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "mentions", force: :cascade do |t|
     t.integer  "person_id"
