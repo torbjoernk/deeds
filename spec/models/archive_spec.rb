@@ -11,11 +11,12 @@ describe Archive, type: :model do
     expect(@source1.title).not_to eq @source2.title
   end
 
-  it 'has valid factory' do
-    expect(build(:archive)).to be_valid
+  it 'has a valid factory' do
+    @archive.save!
+    expect(@archive).to be_valid
   end
 
-  describe 'has attributes' do
+  describe 'has attribute' do
     specify 'title as string' do
       expect(@archive.title).to be_a String
     end

@@ -1,80 +1,94 @@
 require 'rails_helper'
 
 describe Source, type: :model do
-  context 'has attribute' do
-    context 'title' do
-      it 'as string' do
-        source = create(:source_one)
-        expect(source.title).to be_a String
+  before :each do
+    @source = build(:source)
+    @archive1 = build(:archive)
+    @archive2 = build(:archive, title: Faker::Name.title, abbr: Faker::Lorem.characters(5))
+    expect(@archive1.title).not_to eq @archive2.title
+    expect(@archive1.abbr).not_to eq @archive2.abbr
+  end
+
+  it 'has a valid factory' do
+    @source.save!
+    expect(@source).to be_valid
+  end
+
+  describe 'has attribute' do
+    specify 'title as string' do
+      expect(@source.title).to be_a String
+    end
+
+    specify 'source_type as string' do
+      expect(@source.source_type).to be_a String
+    end
+
+    specify 'notes as string' do
+      expect(@source.notes).to be_a String
+    end
+  end
+
+  describe 'has association with' do
+    specify 'many Archives' do
+      @source.save!
+      @source.archives = [@archive1, @archive2]
+
+      expect(@source).to be_valid
+      @source.save!
+
+      expect(@source.archives).to include @archive1, @archive2
+    end
+
+  end
+
+  describe 'validates' do
+    describe 'presence of' do
+      specify 'title' do
+        @source.title = nil
+        expect(@source).not_to be_valid
       end
 
-      it 'is required' do
-        expect {
-          Source.create!(title: nil, source_type: 'original')
-        }.to raise_error ActiveRecord::RecordInvalid
+      specify 'source_type' do
+        @source.source_type = nil
+        expect(@source).not_to be_valid
       end
     end
 
-    context 'source_type' do
-      it 'as string' do
-        source = create(:source_one)
-        expect(source.source_type).to be_a String
+    describe 'uniqueness of' do
+      specify 'title w.r.t. source_type' do
+        create(:source)
+        expect(@source).not_to be_valid
       end
 
-      it 'is required' do
-        expect {
-          Source.create!(title: 'title', source_type: nil)
-        }.to raise_error ActiveRecord::RecordInvalid
-      end
+      describe 'association with' do
+        specify 'Archive' do
+          @source.save!
+          @source.archives << @archive1
 
-      Source::SOURCE_TYPES.each do |valid_type|
-        it "accepts type '#{valid_type}'" do
           expect {
-            Source.create!(title: "type #{valid_type}", source_type: valid_type)
-          }.not_to raise_error
+            @source.archives << @archive1
+          }.to raise_error ActiveRecord::RecordInvalid
         end
       end
     end
 
-    context 'notes' do
-      it 'as string' do
-        source = create(:source_one)
-        expect(source.notes).to be_a String
+    describe 'value of' do
+      describe 'source_type' do
+        specify "within #{Source::SOURCE_TYPES}" do
+          Source::SOURCE_TYPES.each do |valid_type|
+            @source.source_type = valid_type
+            expect(@source).to be_valid
+          end
+        end
       end
-
-      it 'is not required' do
-        expect {
-          Source.create(title: 'no notes', source_type: Source::SOURCE_TYPES[0], notes: nil)
-        }.not_to raise_error
-      end
-    end
-
-    it 'ensures uniqueness of Title-SourceType combination' do
-      first = create(:source_one)
-      expect {
-        Source.create!(title: first.title, source_type: first.source_type)
-      }.to raise_error ActiveRecord::RecordInvalid
     end
   end
 
-  context 'has association with' do
-    context 'archives' do
-      it 'is associated with multiple' do
-        source = create(:source_one)
-        archive = create(:archive_one)
-
-        source.archives << archive
-        expect(source.archives).to include archive
-      end
-
-      it 'does not allow duplicates' do
-        source = create(:source_one)
-        archive = create(:archive_one)
-
-        source.archives << archive
-        expect {
-          source.archives << archive
-        }.to raise_error ActiveRecord::RecordInvalid
+  describe 'allows' do
+    describe 'absence of' do
+      specify 'notes' do
+        @source.notes = nil
+        expect(@source).to be_valid
       end
     end
   end
