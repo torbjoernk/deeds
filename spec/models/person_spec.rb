@@ -90,5 +90,18 @@ describe Person, type: :model do
         expect(person.roles).to include role
       end
     end
+
+    context 'deeds' do
+      it 'through mentions' do
+        mention = create(:mention_per1_pla1_rol1)
+        deed = create(:deed_one)
+        deed.mentions << mention
+        deed.save!
+
+        person = Person.find_by(attributes_for(:person_one))
+        expect(person.deeds).to include deed
+        expect(deed.people).to include person
+      end
+    end
   end
 end
