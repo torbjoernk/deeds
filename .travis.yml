@@ -26,6 +26,9 @@ matrix:
     - rvm: 2.3.0
       env:
         - CODECLIMATE=true
+  allow_failures:
+    - rvm: ruby-head
+  fast_finish: true
 
 before_script:
   - bundle exec rake db:migrate
