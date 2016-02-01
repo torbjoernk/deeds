@@ -62,12 +62,12 @@ describe Archive, type: :model do
 
     describe 'uniqueness of' do
       specify 'title' do
-        create(:archive, title: @archive.title)
+        create(:archive)
         expect(@archive).not_to be_valid
       end
 
       specify 'abbr' do
-        create(:archive, abbr: @archive.abbr)
+        create(:archive)
         expect(@archive).not_to be_valid
       end
 
