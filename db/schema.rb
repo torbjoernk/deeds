@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160131211625) do
+ActiveRecord::Schema.define(version: 20160201054912) do
 
   create_table "archive_sources", id: false, force: :cascade do |t|
     t.integer  "archive_id"
@@ -57,6 +57,14 @@ ActiveRecord::Schema.define(version: 20160131211625) do
     t.text     "content"
     t.string   "language"
     t.text     "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "deed_formats", force: :cascade do |t|
+    t.string   "material"
+    t.float    "width"
+    t.float    "height"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
