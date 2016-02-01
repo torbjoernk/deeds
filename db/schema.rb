@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20160201061334) do
   end
 
   create_table "contents", force: :cascade do |t|
+    t.integer  "deed_id"
     t.text     "content"
     t.string   "language"
     t.text     "notes"
