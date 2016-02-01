@@ -65,5 +65,18 @@ describe ContentTranslation, type: :model do
         expect(translation.content).to eq content
       end
     end
+
+    context 'deed' do
+      it 'belongs to one through content' do
+        translation = create(:content_translation_one)
+        deed = create(:deed_one)
+
+        deed.content = translation.content
+        deed.save!
+
+        expect(translation.deed).to eq deed
+        expect(deed.translations).to include translation
+      end
+    end
   end
 end

@@ -142,6 +142,32 @@ describe Deed, type: :model do
       end
     end
 
+    context 'content' do
+      it 'has one' do
+        deed = create(:deed_one)
+        content = create(:content_one)
+
+        deed.content = content
+        deed.save!
+
+        expect(deed.content).to eq content
+        expect(content.deed).to eq deed
+      end
+    end
+
+    context 'translations' do
+      it 'has many through content' do
+        deed = create(:deed_one)
+        translation = create(:content_translation_one)
+
+        deed.content = translation.content
+        deed.save!
+
+        expect(deed.translations).to include translation
+        expect(translation.deed).to eq deed
+      end
+    end
+
     context 'mentions' do
       it 'multiple' do
         deed = create(:deed_one)

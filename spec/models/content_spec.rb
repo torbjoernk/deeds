@@ -44,6 +44,19 @@ describe Content, type: :model do
   end
 
   context 'has associations with' do
+    context 'deed' do
+      it 'belongs to one' do
+        content = create(:content_one)
+        deed = create(:deed_one)
+
+        content.deed = deed
+        content.save!
+
+        expect(content.deed).to eq deed
+        expect(deed.content).to eq content
+      end
+    end
+
     context 'translations' do
       it 'can have multiple' do
         translation = create(:content_translation_one)
