@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 20160201061334) do
   end
 
   create_table "deed_formats", force: :cascade do |t|
+    t.integer  "deed_id"
     t.string   "material"
     t.float    "width"
     t.float    "height"
