@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 20160201061334) do
   add_index "deeds", ["title", "year", "month", "day"], name: "index_deeds_on_title_and_year_and_month_and_day", unique: true
 
   create_table "mentions", force: :cascade do |t|
+    t.integer  "deed_id"
     t.integer  "person_id"
     t.integer  "role_id"
     t.integer  "place_id"
