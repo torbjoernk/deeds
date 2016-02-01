@@ -68,5 +68,18 @@ describe Place, type: :model do
         expect(place.roles).to include role
       end
     end
+
+    context 'deeds' do
+      it 'through mentions' do
+        mention = create(:mention_per1_pla1_rol1)
+        deed = create(:deed_one)
+        deed.mentions << mention
+        deed.save!
+
+        place = Place.find_by(attributes_for(:place_one))
+        expect(place.deeds).to include deed
+        expect(deed.places).to include place
+      end
+    end
   end
 end

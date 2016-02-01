@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160131201041) do
+ActiveRecord::Schema.define(version: 20160201061334) do
 
   create_table "archive_sources", id: false, force: :cascade do |t|
     t.integer  "archive_id"
@@ -44,7 +44,48 @@ ActiveRecord::Schema.define(version: 20160131201041) do
   add_index "archives", ["abbr"], name: "index_archives_on_abbr", unique: true
   add_index "archives", ["title"], name: "index_archives_on_title", unique: true
 
+  create_table "content_translations", force: :cascade do |t|
+    t.integer  "content_id"
+    t.text     "translation"
+    t.string   "language"
+    t.text     "notes"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "contents", force: :cascade do |t|
+    t.integer  "deed_id"
+    t.text     "content"
+    t.string   "language"
+    t.text     "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "deed_formats", force: :cascade do |t|
+    t.integer  "deed_id"
+    t.string   "material"
+    t.float    "width"
+    t.float    "height"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "deeds", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "year"
+    t.integer  "month"
+    t.integer  "day"
+    t.text     "description"
+    t.text     "notes"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "deeds", ["title", "year", "month", "day"], name: "index_deeds_on_title_and_year_and_month_and_day", unique: true
+
   create_table "mentions", force: :cascade do |t|
+    t.integer  "deed_id"
     t.integer  "person_id"
     t.integer  "role_id"
     t.integer  "place_id"
