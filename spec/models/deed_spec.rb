@@ -124,4 +124,22 @@ describe Deed, type: :model do
       end
     end
   end
+
+  context 'has associations with' do
+    context 'deed format' do
+      it 'multiple' do
+        deed = create(:deed_one)
+        format1 = create(:deed_format_one)
+        format2 = create(:deed_format_one, material: 'paper')
+        deed.formats << format1
+        deed.formats << format2
+        deed.save!
+
+        expect(deed.formats).to include format1
+        expect(format1.deed).to eq deed
+        expect(deed.formats).to include format2
+        expect(format2.deed).to eq deed
+      end
+    end
+  end
 end

@@ -75,4 +75,19 @@ describe DeedFormat, type: :model do
       end
     end
   end
+
+  context 'has associations with' do
+    context 'deed' do
+      it 'belongs to one' do
+        format = create(:deed_format_one)
+        deed = create(:deed_one)
+
+        format.deed = deed
+        format.save!
+
+        expect(format.deed).to eq deed
+        expect(deed.formats).to include format
+      end
+    end
+  end
 end
