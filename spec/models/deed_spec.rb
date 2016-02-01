@@ -141,5 +141,24 @@ describe Deed, type: :model do
         expect(format2.deed).to eq deed
       end
     end
+
+    context 'mentions' do
+      it 'multiple' do
+        deed = create(:deed_one)
+        mention1 = create(:mention_per1_pla1_rol1)
+        mention2 = create(:mention_per2_pla2_rol1)
+
+        deed.mentions << mention1
+        deed.mentions << mention2
+        deed.save!
+
+        expect(deed.people).to include mention1.person
+        expect(deed.people).to include mention2.person
+        expect(deed.roles).to include mention1.role
+        expect(deed.roles).to include mention2.role
+        expect(deed.places).to include mention1.place
+        expect(deed.places).to include mention2.place
+      end
+    end
   end
 end

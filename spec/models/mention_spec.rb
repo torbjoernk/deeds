@@ -11,6 +11,19 @@ describe Mention, type: :model do
   end
 
   context 'has associations with' do
+    context 'deed' do
+      it 'belongs to a single deed' do
+        mention = create(:mention_per1_pla1_rol1)
+        deed = create(:deed_one)
+
+        mention.deed = deed
+        mention.save!
+
+        expect(mention.deed).to eq deed
+        expect(deed.mentions).to include mention
+      end
+    end
+
     context 'people' do
       it 'single' do
         mention = create(:mention_per1_pla1_rol1)
