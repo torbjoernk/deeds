@@ -11,7 +11,7 @@ describe PersonRelation, type: :model do
   end
 
   describe 'has attribute' do
-    specify 'type as string' do
+    specify 'relation_type as string' do
       expect(@person_relation.relation_type).to be_a String
     end
 
