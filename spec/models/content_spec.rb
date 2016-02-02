@@ -1,68 +1,84 @@
 require 'rails_helper'
 
 describe Content, type: :model do
-  context 'has attributes' do
-    context 'content' do
-      it 'as string' do
-        content = create(:content_one)
-        expect(content.content).to be_a String
+  before :each do
+    @content = build(:content)
+  end
+
+  it 'has a valid factory' do
+    @content.save!
+    expect(@content).to be_valid
+  end
+
+  describe 'has attributes' do
+    specify 'content as text' do
+      expect(@content.content).to be_a String
+    end
+
+    specify 'language as string' do
+      expect(@content.language).to be_a String
+    end
+
+    specify 'notes as text' do
+      expect(@content.notes).to be_a String
+    end
+  end
+
+  context 'has association with' do
+    specify 'one Deed' do
+      deed = build(:deed)
+
+      @content.deed = deed
+      expect(@content).to be_valid
+
+      expect(@content.deed).to eq deed
+      expect(deed.content).to eq @content
+    end
+
+    specify 'many ContentTranslations' do
+      translation1 = build(:content_translation)
+      translation2 = build(:content_translation)
+      @content.translations << translation1
+      @content.translations << translation2
+      expect(@content).to be_valid
+
+      expect(@content.translations).to include translation1, translation2
+    end
+  end
+
+  describe 'validates' do
+    describe 'presence of' do
+      specify 'content' do
+        @content.content = nil
+        expect(@content).not_to be_valid
       end
 
-      it 'is required' do
-        expect {
-          Content.create!(content: nil)
-        }.to raise_error ActiveRecord::RecordInvalid
+      specify 'language' do
+        @content.language = nil
+        expect(@content).not_to be_valid
       end
     end
 
-    context 'language' do
-      it 'as string' do
-        content = create(:content_one)
-        expect(content.language).to be_a String
-      end
+    describe 'value of' do
+      describe 'language' do
+        specify "within #{Content::LANGUAGES}" do
+          Content::LANGUAGES.each do |valid_language|
+            @content.language = valid_language
+            expect(@content).to be_valid
+          end
 
-      it 'is required' do
-        expect {
-          Content.create!(content: 'a text', language: nil)
-        }.to raise_error ActiveRecord::RecordInvalid
-      end
-
-      Content::LANGUAGES.each do |valid_lang|
-        it "accepts language '#{valid_lang}'" do
-          expect {
-            Content.create!(content: 'a text', language: valid_lang)
-          }.not_to raise_error
+          @content.language = 'not a language'
+          expect(@content).not_to be_valid
         end
-      end
-
-      it 'does not accept invalid language' do
-        expect {
-          Content.create!(content: 'a text', language: 'definitively not a language')
-        }.to raise_error ActiveRecord::RecordInvalid
       end
     end
   end
 
-  context 'has associations with' do
-    context 'deed' do
-      it 'belongs to one' do
-        content = create(:content_one)
-        deed = create(:deed_one)
-
-        content.deed = deed
-        content.save!
-
-        expect(content.deed).to eq deed
-        expect(deed.content).to eq content
-      end
-    end
-
-    context 'translations' do
-      it 'can have multiple' do
-        translation = create(:content_translation_one)
-        content = Content.find_by(attributes_for(:content_one))
-
-        expect(content.translations).to include translation
+  describe 'allows' do
+    describe 'absence of' do
+      specify 'notes' do
+        @content.notes = nil
+        expect(@content).to be_valid
       end
     end
   end

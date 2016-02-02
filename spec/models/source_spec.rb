@@ -67,6 +67,9 @@ describe Source, type: :model do
             @source.source_type = valid_type
             expect(@source).to be_valid
           end
+
+          @source.source_type = 'not a source type'
+          expect(@source).not_to be_valid
         end
       end
     end
