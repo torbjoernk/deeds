@@ -32,7 +32,8 @@ describe Person, type: :model do
 
     specify 'many People' do
       other = create(:person, name: Faker::Name.name)
-      @person.related << other
+      @person.person_relations << build(:person_relation, person: @person, related: other)
+      @person.save!
       expect(@person).to be_valid
 
       expect(@person.related).to include other
@@ -130,7 +131,7 @@ describe Person, type: :model do
     describe '#relatives' do
       it 'is inverse of related People' do
         other = create(:person, name: Faker::Name.name)
-        other.related << @person
+        other.person_relations << build(:person_relation, person: other, related: @person)
 
         expect(@person.relatives).to include other
       end

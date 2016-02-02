@@ -1,7 +1,6 @@
 FactoryGirl.define do
-  factory :person_relation_one_two, class: PersonRelation do
-    association :person, factory: :person_one, strategy: :create
-    association :related, factory: :person_two, strategy: :create
-    notes 'note text'
+  factory :person_relation, class: PersonRelation do
+    relation_type PersonRelation::RELATION_TYPES[Faker::Number.between(0, PersonRelation::RELATION_TYPES.size - 1)]
+    notes Faker::Lorem.paragraphs(2)
   end
 end
