@@ -1,5 +1,5 @@
 class PersonRelation < ActiveRecord::Base
-  RELATION_TYPES = %w(parent married child sibling)
+  RELATION_TYPES = %w(same parent married child sibling)
 
   belongs_to :person, class_name: 'Person'
   belongs_to :related, class_name: 'Person'

@@ -117,9 +117,10 @@ ActiveRecord::Schema.define(version: 20160201061334) do
   create_table "place_relations", force: :cascade do |t|
     t.integer  "place_id"
     t.integer  "related_id"
+    t.string   "relation_type"
     t.text     "notes"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   add_index "place_relations", ["place_id"], name: "index_place_relations_on_place_id"
