@@ -72,15 +72,6 @@ describe Archive, type: :model do
       end
 
       describe 'association with' do
-        specify 'Storage' do
-          @archive.save!
-          @archive.storages << @storage1
-
-          expect {
-            @archive.storages << @storage1
-          }.to raise_error ActiveRecord::RecordInvalid
-        end
-
         specify 'Source' do
           @archive.save!
           @archive.storages << @storage1

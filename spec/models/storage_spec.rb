@@ -47,17 +47,6 @@ describe Storage, type: :model do
         create(:storage)
         expect(@storage).not_to be_valid
       end
-
-      describe 'association with' do
-        specify 'Archive' do
-          @storage.save!
-          @storage.archives << @archive1
-
-          expect {
-            @storage.archives << @archive1
-          }.to raise_error ActiveRecord::RecordInvalid
-        end
-      end
     end
   end
 

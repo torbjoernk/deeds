@@ -23,15 +23,14 @@ ActiveRecord::Schema.define(version: 20160201061334) do
   add_index "archive_sources", ["archive_id"], name: "index_archive_sources_on_archive_id"
   add_index "archive_sources", ["source_id"], name: "index_archive_sources_on_source_id"
 
-  create_table "archive_storages", id: false, force: :cascade do |t|
+  create_table "archive_storages", force: :cascade do |t|
     t.integer  "archive_id"
     t.integer  "storage_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "archive_storages", ["archive_id"], name: "index_archive_storages_on_archive_id"
-  add_index "archive_storages", ["storage_id"], name: "index_archive_storages_on_storage_id"
+  add_index "archive_storages", ["archive_id", "storage_id"], name: "index_archive_storages_on_archive_id_and_storage_id", unique: true
 
   create_table "archives", force: :cascade do |t|
     t.string   "title"

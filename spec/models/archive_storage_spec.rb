@@ -1,18 +1,41 @@
 require 'rails_helper'
 
 describe ArchiveStorage, type: :model do
-  it 'associates an Archive with a Storage' do
-    archive_storage = create(:archive_storage_one)
-
-    expect(archive_storage.archive).to eq Archive.first
-    expect(archive_storage.storage).to eq Storage.first
+  before :each do
+    @archive = create(:archive)
+    @storage = create(:storage)
+    @archive_storage = build(:archive_storage)
   end
 
-  it 'does not allow duplicated associations' do
-    first = create(:archive_storage_one)
+  it 'has a valid factory' do
+    @archive_storage.save!
+    expect(@archive_storage).to be_valid
+  end
 
-    expect {
-      ArchiveStorage.create!(archive: first.archive, storage: first.storage)
-    }.to raise_error ActiveRecord::RecordInvalid
+  describe 'associates' do
+    specify 'an Archive with a Storage' do
+      @archive_storage.archive = @archive
+      @archive_storage.storage = @storage
+
+      @archive_storage.save!
+
+      expect(@archive_storage.archive).to eq @archive
+      expect(@archive_storage.storage).to eq @storage
+    end
+  end
+
+  describe 'validates' do
+    describe 'uniqueness of' do
+      describe 'association' do
+        specify 'between Archive and Storage' do
+          ArchiveStorage.create(archive: @archive, storage: @storage)
+
+          @archive_storage.archive = @archive
+          @archive_storage.storage = @storage
+
+          expect(@archive_storage).not_to be_valid
+        end
+      end
+    end
   end
 end

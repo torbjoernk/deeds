@@ -1,6 +1,6 @@
 FactoryGirl.define do
-  factory :archive_storage_one, class: 'ArchiveStorage' do
-    association :archive, factory: :archive_one
-    association :storage, factory: :storage_one
+  factory :archive_storage do
+    association :archive, factory: :archive, strategy: :build
+    association :storage, factory: :storage, strategy: :build
   end
 end
