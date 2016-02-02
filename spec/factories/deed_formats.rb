@@ -4,10 +4,4 @@ FactoryGirl.define do
     width Faker::Number.positive
     height Faker::Number.positive
   end
-
-  factory :deed_format_one, class: 'DeedFormat' do
-    material 'parchment'
-    width 1.5
-    height 1.5
-  end
 end
