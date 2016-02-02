@@ -5,12 +5,12 @@ class NotSelfRelatedValidator < ActiveModel::Validator
     if record.is_a? PersonRelation
       obj_id = record.person_id
       obj = Person
-    elsif record.is_a? PlaceRelation
+    else # record.is_a? PlaceRelation
       obj_id = record.place_id
       obj = Place
     end
 
-    if obj_id != nil and record.related_id != nil and obj_id == record.related_id
+    if obj_id != nil and obj_id == record.related_id
       record.errors.add(:self_related, "can not relate a #{obj.name} to its self")
     end
   end
