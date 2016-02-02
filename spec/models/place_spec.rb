@@ -22,8 +22,8 @@ describe Place, type: :model do
 
   describe 'has association with' do
     before :each do
-      @mention1 = build(:mention_per1_pla1_rol1)
-      @mention2 = build(:mention_per2_pla2_rol1)
+      @mention1 = build(:mention)
+      @mention2 = build(:mention)
     end
 
     specify 'many Places' do
@@ -45,6 +45,9 @@ describe Place, type: :model do
     end
 
     specify 'many mentioned People through Mentions' do
+      @mention1.person = build(:person)
+      @mention2.person = build(:person, name: Faker::Name.name)
+
       @place.mentions << @mention1
       @place.mentions << @mention2
       @place.save!
@@ -54,6 +57,9 @@ describe Place, type: :model do
     end
 
     specify 'many Roles through Mentions' do
+      @mention1.role = build(:role)
+      @mention2.role = build(:role, title: Faker::Name.title)
+
       @place.mentions << @mention1
       @place.mentions << @mention2
       @place.save!

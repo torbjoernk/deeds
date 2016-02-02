@@ -42,8 +42,8 @@ describe Deed, type: :model do
 
   describe 'has association with' do
     before :each do
-      @mention1 = build(:mention_per1_pla1_rol1)
-      @mention2 = build(:mention_per2_pla2_rol1)
+      @mention1 = build(:mention)
+      @mention2 = build(:mention)
     end
 
     specify 'many DeedFormats' do
@@ -92,6 +92,9 @@ describe Deed, type: :model do
     end
 
     specify 'many People through Mentions' do
+      @mention1.person = build(:person)
+      @mention2.person = build(:person, name: Faker::Name.name)
+
       @deed.mentions << @mention1
       @deed.mentions << @mention2
       @deed.save!
@@ -101,6 +104,9 @@ describe Deed, type: :model do
     end
 
     specify 'many Places through Mentions' do
+      @mention1.place = build(:place)
+      @mention2.place = build(:place, title: Faker::Name.title)
+
       @deed.mentions << @mention1
       @deed.mentions << @mention2
       @deed.save!
@@ -110,6 +116,9 @@ describe Deed, type: :model do
     end
 
     specify 'many Roles through Mentions' do
+      @mention1.role = build(:role)
+      @mention2.role = build(:role, title: Faker::Name.title)
+
       @deed.mentions << @mention1
       @deed.mentions << @mention2
       @deed.save!

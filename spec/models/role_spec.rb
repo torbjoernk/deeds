@@ -26,8 +26,8 @@ describe Role, type: :model do
 
   context 'has association with' do
     before :each do
-      @mention1 = build(:mention_per1_pla1_rol1)
-      @mention2 = build(:mention_per2_pla2_rol1)
+      @mention1 = build(:mention)
+      @mention2 = build(:mention)
     end
 
     specify 'many Mentions' do
@@ -40,6 +40,9 @@ describe Role, type: :model do
     end
 
     specify 'many People through Mentions' do
+      @mention1.person = build(:person)
+      @mention2.person = build(:person, name: Faker::Name.name)
+
       @role.mentions << @mention1
       @role.mentions << @mention2
       @role.save!
@@ -49,6 +52,9 @@ describe Role, type: :model do
     end
 
     specify 'many Places through Mentions' do
+      @mention1.place = build(:place)
+      @mention2.place = build(:place, title: Faker::Name.title)
+
       @role.mentions << @mention1
       @role.mentions << @mention2
       @role.save!
