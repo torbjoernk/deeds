@@ -38,7 +38,6 @@ describe Source, type: :model do
 
       expect(@source.archives).to include @archive1, @archive2
     end
-
   end
 
   describe 'validates' do
@@ -58,17 +57,6 @@ describe Source, type: :model do
       specify 'title w.r.t. source_type' do
         create(:source)
         expect(@source).not_to be_valid
-      end
-
-      describe 'association with' do
-        specify 'Archive' do
-          @source.save!
-          @source.archives << @archive1
-
-          expect {
-            @source.archives << @archive1
-          }.to raise_error ActiveRecord::RecordInvalid
-        end
       end
     end
 
