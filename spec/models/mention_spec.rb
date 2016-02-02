@@ -1,53 +1,72 @@
 require 'rails_helper'
 
 describe Mention, type: :model do
-  context 'has attributes' do
-    context 'notes' do
-      it 'as string' do
-        mention = create(:mention_per1_pla1_rol1)
-        expect(mention.notes).to be_a String
-      end
+  before :each do
+    @mention = build(:mention)
+  end
+
+  it 'has a valid factory' do
+    @mention.save!
+    expect(@mention).to be_valid
+  end
+
+  describe 'has attribute' do
+    specify 'notes as string' do
+      expect(@mention.notes).to be_a String
     end
   end
 
-  context 'has associations with' do
-    context 'deed' do
-      it 'belongs to a single deed' do
-        mention = create(:mention_per1_pla1_rol1)
-        deed = create(:deed_one)
+  describe 'has association with' do
+    specify 'one Deed' do
+      deed = build(:deed)
 
-        mention.deed = deed
-        mention.save!
+      @mention.deed = deed
+      @mention.save!
 
-        expect(mention.deed).to eq deed
-        expect(deed.mentions).to include mention
-      end
+      expect(@mention).to be_valid
+      expect(@mention.deed).to eq deed
+      expect(deed.mentions).to include @mention
     end
 
-    context 'people' do
-      it 'single' do
-        mention = create(:mention_per1_pla1_rol1)
-        person = Person.find_by(attributes_for(:person_one))
+    specify 'one Person' do
+      person = build(:person)
 
-        expect(mention.person).to eq person
-      end
+      @mention.person = person
+      @mention.save!
+
+      expect(@mention).to be_valid
+      expect(@mention.person).to eq person
+      expect(person.mentions).to include @mention
     end
 
-    context 'people' do
-      it 'single' do
-        mention = create(:mention_per1_pla1_rol1)
-        place = Place.find_by(attributes_for(:place_one))
+    specify 'one Place' do
+      place = build(:place)
 
-        expect(mention.place).to eq place
-      end
+      @mention.place = place
+      @mention.save!
+
+      expect(@mention).to be_valid
+      expect(@mention.place).to eq place
+      expect(place.mentions).to include @mention
     end
 
-    context 'roles' do
-      it 'single' do
-        mention = create(:mention_per1_pla1_rol1)
-        role = Role.find_by(attributes_for(:role_one))
+    specify 'one Role' do
+      role = build(:role)
 
-        expect(mention.role).to eq role
+      @mention.role = role
+      @mention.save!
+
+      expect(@mention).to be_valid
+      expect(@mention.role).to eq role
+      expect(role.mentions).to include @mention
+    end
+  end
+
+  describe 'allows' do
+    describe 'absence of' do
+      specify 'notes' do
+        @mention.notes = nil
+        expect(@mention).to be_valid
       end
     end
   end

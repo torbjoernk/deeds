@@ -1,4 +1,8 @@
 FactoryGirl.define do
+  factory :mention do
+    notes Faker::Lorem.paragraphs(2)
+  end
+
   factory :mention_per1_pla1_rol1, class: 'Mention' do
     association :person, factory: :person_one, strategy: :create
     association :place, factory: :place_one, strategy: :create
