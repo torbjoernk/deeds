@@ -5,5 +5,4 @@ class ContentTranslation < ActiveRecord::Base
   validates :translation, presence: true
   validates :language, presence: true
   validates :language, inclusion: { in: Content::LANGUAGES }
-  validates :content_id, presence: true
 end

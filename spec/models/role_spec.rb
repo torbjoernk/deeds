@@ -1,92 +1,114 @@
 require 'rails_helper'
 
 describe Role, type: :model do
-  context 'has attributes' do
-    context 'title' do
-      it 'as string' do
-        role = create(:role_one)
-        expect(role.title).to be_a String
+  before :each do
+    @role = build(:role)
+  end
+
+  it 'has a valid factory' do
+    @role.save!
+    expect(@role).to be_valid
+  end
+
+  describe 'has attribute' do
+    specify 'title as string' do
+      expect(@role.title).to be_a String
+    end
+
+    specify 'referring as string' do
+      expect(@role.referring).to be_a String
+    end
+
+    specify 'notes as text' do
+      expect(@role.notes).to be_a String
+    end
+  end
+
+  context 'has association with' do
+    before :each do
+      @mention1 = build(:mention)
+      @mention2 = build(:mention)
+    end
+
+    specify 'many Mentions' do
+      @role.mentions << @mention1
+      @role.mentions << @mention2
+      @role.save!
+
+      expect(@role).to be_valid
+      expect(@role.mentions).to include @mention1, @mention2
+    end
+
+    specify 'many People through Mentions' do
+      @mention1.person = build(:person)
+      @mention2.person = build(:person, name: Faker::Name.name)
+
+      @role.mentions << @mention1
+      @role.mentions << @mention2
+      @role.save!
+
+      expect(@role).to be_valid
+      expect(@role.people).to include @mention1.person, @mention2.person
+    end
+
+    specify 'many Places through Mentions' do
+      @mention1.place = build(:place)
+      @mention2.place = build(:place, title: Faker::Name.title)
+
+      @role.mentions << @mention1
+      @role.mentions << @mention2
+      @role.save!
+
+      expect(@role).to be_valid
+      expect(@role.places).to include @mention1.place, @mention2.place
+    end
+
+    specify 'many Deeds through Mentions' do
+      deed = build(:deed)
+      @mention1.deed = deed
+      @mention2.deed = deed
+      @role.mentions << @mention1
+      @role.mentions << @mention2
+      @role.save!
+
+      expect(@role).to be_valid
+      expect(@role.deeds).to include @mention1.deed, @mention2.deed
+    end
+  end
+
+  describe 'validates' do
+    describe 'presence of' do
+      it 'title' do
+        @role.title = nil
+        expect(@role).not_to be_valid
       end
 
-      it 'is required' do
-        expect {
-          Role.create!(title: nil)
-        }.to raise_error ActiveRecord::RecordInvalid
+      it 'referring' do
+        @role.referring = nil
+        expect(@role).not_to be_valid
       end
     end
 
-    context 'referring' do
-      it 'as string' do
-        role = create(:role_one)
-        expect(role.referring).to be_a String
-      end
+    describe 'value of' do
+      describe 'referring' do
+        specify "within #{Role::REFERS_TO}" do
+          Role::REFERS_TO.each do |valid_ref|
+            @role.referring = valid_ref
+            expect(@role).to be_valid
+          end
 
-      it 'is required' do
-        expect {
-          Role.create!(title: 'Title', referring: nil)
-        }.to raise_error ActiveRecord::RecordInvalid
-      end
-
-      Role::REFERS_TO.each do |valid_ref|
-        it "accepts referring to '#{valid_ref}'" do
-          expect {
-            Role.create!(title: 'Title', referring: valid_ref)
-          }.not_to raise_error
+          @role.referring = 'not a valid referring type'
+          expect(@role).not_to be_valid
         end
-      end
-
-      it 'does not accept invalid referring' do
-        expect {
-          Role.create!(title: 'Title', referring: 'this is not a referring identifier')
-        }.to raise_error ActiveRecord::RecordInvalid
-      end
-    end
-
-    context 'notes' do
-      it 'as string' do
-        role = create(:role_one)
-        expect(role.notes).to be_a String
-      end
-
-      it 'is not required' do
-        expect {
-          Role.create!(title: 'Title', referring: 'place', notes: nil)
-        }.not_to raise_error
       end
     end
   end
 
-  context 'has associations with' do
-    context 'people' do
-      it 'through mentions' do
-        create(:mention_per1_pla1_rol1)
-        role = Role.find_by(attributes_for(:role_one))
-        person = Person.find_by(attributes_for(:person_one))
-
-        expect(role.people).to include person
-      end
-    end
-
-    context 'places' do
-      it 'through mentions' do
-        create(:mention_per1_pla1_rol1)
-        role = Role.find_by(attributes_for(:role_one))
-        place = Place.find_by(attributes_for(:place_one))
-
-        expect(role.places).to include place
-      end
-    end
-
-    context 'deeds' do
-      it 'through mentions' do
-        mention = create(:mention_per1_pla1_rol1)
-        deed = create(:deed_one)
-        deed.mentions << mention
-        deed.save!
-
-        role = Role.find_by(attributes_for(:role_one))
-        expect(role.deeds).to include deed
-        expect(deed.roles).to include role
+  describe 'allows' do
+    describe 'absence of' do
+      it 'notes' do
+        @role.notes = nil
+        expect(@role).to be_valid
       end
     end
   end

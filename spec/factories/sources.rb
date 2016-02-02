@@ -1,7 +1,7 @@
 FactoryGirl.define do
-  factory :source_one, class: 'Source' do
-    title 'A Source'
-    source_type 'original'
-    notes 'notes text'
+  factory :source do
+    title Faker::Name.title
+    source_type Source::SOURCE_TYPES[Faker::Number.between(0, Source::SOURCE_TYPES.size - 1)]
+    notes Faker::Lorem.paragraphs(2)
   end
 end

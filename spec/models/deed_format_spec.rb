@@ -1,92 +1,100 @@
 require 'rails_helper'
 
 describe DeedFormat, type: :model do
-  context 'has attributes' do
-    context 'material' do
-      it 'as string' do
-        format = create(:deed_format_one)
-        expect(format.material).to be_a String
-      end
+  before :each do
+    @deed_format = build(:deed_format)
+  end
 
-      it 'is required' do
-        expect {
-          create(:deed_format_one, material: nil)
-        }.to raise_error ActiveRecord::RecordInvalid
-      end
+  it 'has a valid factory' do
+    @deed_format.save!
+    expect(@deed_format).to be_valid
+  end
 
-      DeedFormat::MATERIALS.each do |valid_material|
-        it "accepts material '#{valid_material}'" do
-          expect {
-            create(:deed_format_one, material: valid_material)
-          }.not_to raise_error
+  describe 'has attribute' do
+    specify 'material as string' do
+      expect(@deed_format.material).to be_a String
+    end
+
+    specify 'width as float' do
+      expect(@deed_format.width).to be_a Float
+
+      @deed_format.width = 'a string'
+      expect(@deed_format).not_to be_valid
+    end
+
+    specify 'height as float' do
+      expect(@deed_format.height).to be_a Float
+
+      @deed_format.height = 'a string'
+      expect(@deed_format).not_to be_valid
+    end
+  end
+
+  context 'has association with' do
+    specify 'one Deed' do
+      deed = build(:deed)
+
+      @deed_format.deed = deed
+      @deed_format.save!
+
+      expect(@deed_format.deed).to eq deed
+      expect(deed.formats).to include @deed_format
+    end
+  end
+
+  describe 'validates' do
+    describe 'presence of' do
+      specify 'material' do
+        @deed_format.material = nil
+        expect(@deed_format).not_to be_valid
+      end
+    end
+
+    describe 'value of' do
+      describe 'material' do
+        specify "within #{DeedFormat::MATERIALS}" do
+          DeedFormat::MATERIALS.each do |valid_material|
+            @deed_format.material = valid_material
+            expect(@deed_format).to be_valid
+          end
+
+          @deed_format.material = 'not a material'
+          expect(@deed_format).not_to be_valid
         end
       end
 
-      it 'does not accept invalid material key' do
-        expect {
-          create(:deed_format_one, material: 'not a material key')
-        }.to raise_error ActiveRecord::RecordInvalid
-      end
-    end
+      describe 'width' do
+        specify 'must be greater 0.0' do
+          @deed_format.width = 0.0
+          expect(@deed_format).not_to be_valid
 
-    context 'width' do
-      it 'as float' do
-        format = create(:deed_format_one)
-        expect(format.width).to be_a Float
-
-        expect {
-          create(:deed_format_one, width: 'a string')
-        }.to raise_error ActiveRecord::RecordInvalid
+          @deed_format.width = Faker::Number.positive
+          expect(@deed_format).to be_valid
+        end
       end
 
-      it 'is not required' do
-        expect {
-          create(:deed_format_one, width: nil)
-        }.not_to raise_error
-      end
+      describe 'height' do
+        specify 'must be greater 0.0' do
+          @deed_format.height = 0.0
+          expect(@deed_format).not_to be_valid
 
-      it 'must be greater 0.0' do
-        expect {
-          create(:deed_format_one, width: 0.0)
-        }.to raise_error ActiveRecord::RecordInvalid
-      end
-    end
-
-    context 'height' do
-      it 'as float' do
-        format = create(:deed_format_one)
-        expect(format.height).to be_a Float
-
-        expect {
-          create(:deed_format_one, width: 'a string')
-        }.to raise_error ActiveRecord::RecordInvalid
-      end
-
-      it 'is not required' do
-        expect {
-          create(:deed_format_one, height: nil)
-        }.not_to raise_error
-      end
-
-      it 'must be greater 0.0' do
-        expect {
-          create(:deed_format_one, height: 0.0)
-        }.to raise_error ActiveRecord::RecordInvalid
+          @deed_format.height = Faker::Number.positive
+          expect(@deed_format).to be_valid
+        end
       end
     end
   end
 
-  context 'has associations with' do
-    context 'deed' do
-      it 'belongs to one' do
-        format = create(:deed_format_one)
-        deed = create(:deed_one)
+  describe 'allows' do
+    describe 'absence of' do
+      specify 'width' do
+        @deed_format.width = nil
+        expect(@deed_format).to be_valid
+      end
 
-        format.deed = deed
-        format.save!
-
-        expect(format.deed).to eq deed
-        expect(deed.formats).to include format
+      specify 'height' do
+        @deed_format.height = nil
+        expect(@deed_format).to be_valid
       end
     end
   end

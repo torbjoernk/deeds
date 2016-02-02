@@ -1,8 +1,7 @@
 FactoryGirl.define do
-  factory :content_translation_one, class: 'ContentTranslation' do
-    association :content, factory: :content_one, strategy: :create
-    translation 'a translation'
-    language 'old_german'
-    notes 'a note on the translation'
+  factory :content_translation do
+    translation Faker::Lorem.paragraphs(5)
+    language Content::LANGUAGES[Faker::Number.between(0, Content::LANGUAGES.size - 1)]
+    notes Faker::Lorem.paragraphs(2)
   end
 end

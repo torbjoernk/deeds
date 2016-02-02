@@ -3,6 +3,7 @@ class CreatePlaceRelations < ActiveRecord::Migration
     create_table :place_relations do |t|
       t.belongs_to :place, index: true
       t.belongs_to :related, index: true
+      t.string :relation_type
       t.text :notes
 
       t.timestamps null: false

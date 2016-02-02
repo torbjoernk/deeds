@@ -1,65 +1,60 @@
 require 'rails_helper'
 
 describe Storage, type: :model do
-  context 'has attributes' do
-    context 'title' do
-      it 'as string' do
-        storage = create(:storage_one)
-        expect(storage.title).to be_a String
-      end
+  before :each do
+    @storage = build(:storage)
+    @archive1 = build(:archive)
+    @archive2 = build(:archive, title: Faker::Name.title, abbr: Faker::Lorem.characters(5))
+    expect(@archive1.title).not_to eq @archive2.title
+    expect(@archive1.abbr).not_to eq @archive2.abbr
+  end
 
-      it 'is required' do
-        expect {
-          Storage.create!(title: nil)
-        }.to raise_error ActiveRecord::RecordInvalid
-      end
+  it 'has a valid factory' do
+    @storage.save!
+    expect(@storage).to be_valid
+  end
 
-      it 'must be unique' do
-        first = create(:storage_one)
-        expect {
-          Storage.create!(title: first.title)
-        }.to raise_error ActiveRecord::RecordInvalid
+  describe 'has attribute' do
+    specify 'title as string' do
+      expect(@storage.title).to be_a String
+    end
+
+    specify 'notes as string' do
+      expect(@storage.notes).to be_a String
+    end
+  end
+
+  describe 'has association with' do
+    specify 'many Archives' do
+      @storage.save!
+      @storage.archives = [@archive1, @archive2]
+      @storage.save!
+
+      expect(@storage.archives).to include @archive1, @archive2
+    end
+  end
+
+  describe 'validates' do
+    describe 'presence of' do
+      specify 'title' do
+        @storage.title = nil
+        expect(@storage).not_to be_valid
       end
     end
 
-    context 'notes' do
-      it 'as string' do
-        storage = create(:storage_one)
-        expect(storage.notes).to be_a String
-      end
-
-      it 'is not required' do
-        expect {
-          Storage.create!(title: 't', notes: nil)
-        }.not_to raise_error
+    describe 'uniqueness of' do
+      specify 'title' do
+        create(:storage)
+        expect(@storage).not_to be_valid
       end
     end
   end
 
-  context 'has associations with' do
-    context 'archives' do
-      it 'can have multiple' do
-        storage = create(:storage_one)
-        archive1 = create(:archive_one)
-        archive2 = create(:archive_two)
-
-        storage.archives = [archive1, archive2]
-        storage.save!
-
-        expect(storage.archives).to include archive1
-        expect(storage.archives).to include archive2
-      end
-
-      it 'does not allow duplication' do
-        storage = create(:storage_one)
-        archive1 = create(:archive_one)
-
-        storage.archives = [archive1]
-        storage.save!
-
-        expect {
-          storage.archives << archive1
-        }.to raise_error ActiveRecord::RecordInvalid
+  describe 'allows' do
+    describe 'absence of' do
+      specify 'notes' do
+        @storage.notes = nil
+        expect(@storage).to be_valid
       end
     end
   end
