@@ -105,10 +105,10 @@ ActiveRecord::Schema.define(version: 20160201061334) do
   create_table "person_relations", force: :cascade do |t|
     t.integer  "person_id"
     t.integer  "related_id"
-    t.string   "type"
+    t.string   "relation_type"
     t.text     "notes"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   add_index "person_relations", ["person_id"], name: "index_person_relations_on_person_id"
