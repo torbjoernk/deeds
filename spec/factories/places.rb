@@ -1,4 +1,9 @@
 FactoryGirl.define do
+  factory :place do
+    title Faker::Name.title
+    notes Faker::Lorem.paragraphs(2)
+  end
+
   factory :place_one, class: 'Place' do
     title 'A Place'
     notes 'A note'

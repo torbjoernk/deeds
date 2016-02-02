@@ -1,84 +1,94 @@
 require 'rails_helper'
 
 describe Place, type: :model do
-  context 'has attributes' do
-    context 'title' do
-      it 'as string' do
-        place = create(:place_one)
-        expect(place.title).to be_a String
-      end
+  before :each do
+    @place = build(:place)
+  end
 
-      it 'is required' do
-        expect {
-          Place.create!(title: nil)
-        }.to raise_error ActiveRecord::RecordInvalid
-      end
+  it 'has a valid factory' do
+    @place.save!
+    expect(@place).to be_valid
+  end
+
+  describe 'has attribute' do
+    specify 'title as string' do
+      expect(@place.title).to be_a String
     end
 
-    context 'notes' do
-      it 'as string' do
-        place = create(:place_one)
-        expect(place.notes).to be_a String
-      end
+    specify 'notes as text' do
+      expect(@place.notes).to be_a String
+    end
+  end
 
-      it 'is not required' do
-        expect {
-          Place.create!(title: 'Title', notes: nil)
-        }.not_to raise_error
+  describe 'has association with' do
+    before :each do
+      @mention1 = build(:mention_per1_pla1_rol1)
+      @mention2 = build(:mention_per2_pla2_rol1)
+    end
+
+    specify 'many Places' do
+      other = create(:place, title: Faker::Name.title)
+      @place.place_relations << build(:place_relation, place: @place, related: other)
+      @place.save!
+      expect(@place).to be_valid
+
+      expect(@place.related).to include other
+    end
+
+    specify 'many Mentions' do
+      @place.mentions << @mention1
+      @place.mentions << @mention2
+      @place.save!
+
+      expect(@place).to be_valid
+      expect(@place.mentions).to include @mention1, @mention2
+    end
+
+    specify 'many mentioned People through Mentions' do
+      @place.mentions << @mention1
+      @place.mentions << @mention2
+      @place.save!
+
+      expect(@place).to be_valid
+      expect(@place.mentioned_people).to include @mention1.person, @mention2.person
+    end
+
+    specify 'many Roles through Mentions' do
+      @place.mentions << @mention1
+      @place.mentions << @mention2
+      @place.save!
+
+      expect(@place).to be_valid
+      expect(@place.roles).to include @mention1.role, @mention2.role
+    end
+
+    specify 'many Deeds through Mentions' do
+      deed = build(:deed)
+      @mention1.deed = deed
+      @mention2.deed = deed
+      @place.mentions << @mention1
+      @place.mentions << @mention2
+      @place.save!
+
+      expect(@place).to be_valid
+      expect(@place.deeds).to include @mention1.deed, @mention2.deed
+    end
+  end
+
+  describe 'validates' do
+    describe 'presence of' do
+      specify 'title' do
+        @place.title = nil
+        expect(@place).not_to be_valid
       end
     end
   end
 
-  context 'has associations with' do
-    context 'other places' do
-      it 'does have related Places' do
-        create(:place_relation_one_two)
-        first = Place.find_by attributes_for(:place_one)
-        second = Place.find_by attributes_for(:place_two)
-
-        expect(first.related).to include second
-      end
-
-      it 'can query for relatives' do
-        create(:place_relation_one_two)
-        first = Place.find_by attributes_for(:place_one)
-        second = Place.find_by attributes_for(:place_two)
-
-        expect(first.related).to include second
-        expect(second.relatives).to include first
-      end
-    end
-
-    context 'people' do
-      it 'through mentions' do
-        create(:mention_per1_pla1_rol1)
-        place = Place.find_by(attributes_for(:place_one))
-        person = Person.find_by(attributes_for(:person_one))
-
-        expect(place.mentioned_people).to include person
-      end
-    end
-
-    context 'roles' do
-      it 'through mentions' do
-        create(:mention_per1_pla1_rol1)
-        place = Place.find_by(attributes_for(:place_one))
-        role = Role.find_by(attributes_for(:role_one))
-
-        expect(place.roles).to include role
-      end
-    end
-
-    context 'deeds' do
-      it 'through mentions' do
-        mention = create(:mention_per1_pla1_rol1)
-        deed = create(:deed_one)
-        deed.mentions << mention
-        deed.save!
-
-        place = Place.find_by(attributes_for(:place_one))
-        expect(place.deeds).to include deed
-        expect(deed.places).to include place
+  describe 'allows' do
+    describe 'absence of' do
+      specify 'notes' do
+        @place.notes = nil
+        expect(@place).to be_valid
       end
     end
   end
