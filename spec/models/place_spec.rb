@@ -98,4 +98,15 @@ describe Place, type: :model do
       end
     end
   end
+
+  describe 'methods' do
+    describe '#relatives' do
+      it 'is inverse of related Places' do
+        other = create(:place, title: Faker::Name.title)
+        other.place_relations << build(:place_relation, place: other, related: @place)
+
+        expect(@place.relatives).to include other
+      end
+    end
+  end
 end
