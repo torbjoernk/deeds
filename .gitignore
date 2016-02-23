@@ -10,9 +10,14 @@ capybara-*.html
 /db/*.sqlite3
 /db/*.sqlite3-journal
 /public/assets/.sprockets-manifest-*
-/public/assets/*.js
-/public/assets/*.gz
-/public/assets/*.css
+/public/assets/**/*.js
+/public/assets/**/*.gz
+/public/assets/**/*.css
+/public/assets/**/*.ttf
+/public/assets/**/*.woff
+/public/assets/**/*.woff2
+/public/assets/**/*.svg
+/public/assets/**/*.eot
 /public/system
 /coverage/
 /spec/tmp
