@@ -1,0 +1,31 @@
+<h1>
+  Storages
+  <span class="btn-group">
+    <%= link_to new_storage_url,
+                class: 'btn btn-sm btn-primary',
+                title: 'Add new Storage',
+                data: { toggle: 'tooltip' },
+                remote: true do -%>
+      <%= icon('plus', class: 'fa-fw') %>
+    <% end -%>
+  </span>
+</h1>
+
+<div id="storages-table">
+  <table class="table table-hover table-sm" id="storages">
+    <thead>
+    <tr>
+      <th class="col-storage-title">Title</th>
+      <th class="col-storage-notes">Notes</th>
+      <th class="col-storage-actions">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+      <%= render partial: 'storage', collection: @storages %>
+    </tbody>
+  </table>
+</div>
+
+<div class="modal fade" id="storage-modal" tabindex="-1" role="dialog"
+     aria-labelledby="storage-modal-label" aria-hidden="true">
+</div>

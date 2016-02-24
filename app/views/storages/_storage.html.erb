@@ -1,0 +1,29 @@
+<tr id="storage-row-<%= storage.id %>">
+  <td class="col-storage-title"><%= storage.title %></td>
+  <td class="col-storage-notes"><%= storage.notes %></td>
+  <td class="col-storage-actions">
+    <div class="btn-group btn-group-sm">
+      <%= link_to storage_path(storage.id),
+                  class: 'btn btn-sm btn-outline-info',
+                  title: 'Show Details', data: { toggle: 'tooltip' },
+                  remote: true do %>
+        <%= icon('search', class: 'fa-fw') %>
+      <% end %>
+      <%= link_to edit_storage_path(storage.id),
+                  class: 'btn btn-sm btn-outline-primary',
+                  title: 'Edit Storage', data: { toggle: 'tooltip' },
+                  remote: true do %>
+        <%= icon('pencil', class: 'fa-fw') %>
+      <% end %>
+      <%= link_to storage_path(storage.id), method: :delete,
+                  class: 'btn btn-sm btn-outline-danger',
+                  title: 'Delete Storage',
+                  data: {
+                      confirm: 'Do you really want to delete this item?',
+                      toggle: 'tooltip'
+                  } do %>
+        <%= icon('trash', class: 'fa-fw') %>
+      <% end %>
+    </div>
+  </td>
+</tr>
