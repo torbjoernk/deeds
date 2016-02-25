@@ -37,7 +37,8 @@ feature 'User interacts with Storages', type: :feature do
         end
       end
 
-      find('table#storages > tbody > tr:first-child > td:last-child').click_on 'Show Details'
+      find('table#storages > tbody > tr:first-child > td:last-child').
+          click_on "btn-storage-show-details-#{storage.id}"
 
       expect(find('#storage-modal')).to have_text storage.title
       expect(find('#storage-modal')).to have_text storage.notes

@@ -5,6 +5,7 @@
     <div class="btn-group btn-group-sm">
       <%= link_to storage_path(storage.id),
                   class: 'btn btn-sm btn-outline-info',
+                  id: "btn-storage-show-details-#{storage.id}",
                   title: 'Show Details', data: { toggle: 'tooltip' },
                   remote: true do %>
         <%= icon('search', class: 'fa-fw') %>
