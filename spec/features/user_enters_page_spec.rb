@@ -1,4 +1,4 @@
-feature 'User enters page' do
+feature 'User enters page', type: :feature do
   scenario 'they see "Hello World"' do
     visit root_path
 

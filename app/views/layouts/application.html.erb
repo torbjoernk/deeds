@@ -3,8 +3,25 @@
     <%= render 'shared/head' %>
   </head>
   <body>
-  <%= yield %>
+    <%= render 'shared/menu' %>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-2">
 
-  <%= render 'shared/after_footer' %>
+        </div>
+        <div class="col-md-10">
+          <div id="notes">
+            <% if flash %>
+              <%= render 'shared/flash' %>
+            <% end %>
+          </div>
+
+          <%= yield %>
+        </div>
+      </div>
+      <footer id="site-footer" class="row">
+      </footer>
+    </div>
+    <%= render 'shared/after_footer' %>
   </body>
 </html>
