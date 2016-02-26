@@ -5,19 +5,21 @@
     <div class="btn-group btn-group-sm">
       <%= link_to storage_path(storage.id),
                   class: 'btn btn-sm btn-outline-info',
-                  id: "btn-storage-show-details-#{storage.id}",
+                  id: "btn-storage-show-#{storage.id}",
                   title: 'Show Details', data: { toggle: 'tooltip' },
                   remote: true do %>
         <%= icon('search', class: 'fa-fw') %>
       <% end %>
       <%= link_to edit_storage_path(storage.id),
                   class: 'btn btn-sm btn-outline-primary',
+                  id: "btn-storage-edit-#{storage.id}",
                   title: 'Edit Storage', data: { toggle: 'tooltip' },
                   remote: true do %>
         <%= icon('pencil', class: 'fa-fw') %>
       <% end %>
       <%= link_to storage_path(storage.id), method: :delete,
                   class: 'btn btn-sm btn-outline-danger',
+                  id: "btn-storage-delete-#{storage.id}",
                   title: 'Delete Storage',
                   data: {
                       confirm: 'Do you really want to delete this item?',
