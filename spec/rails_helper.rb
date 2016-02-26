@@ -4,31 +4,6 @@ require 'faker'
 require 'spec_helper'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
-require 'capybara/rspec'
-
-driver = ENV['DRIVER'].try(:to_sym)
-
-if driver == :poltergeist
-  require 'capybara/poltergeist'
-  Capybara.default_driver = :poltergeist
-  Capybara.current_driver = :poltergeist
-  Capybara.javascript_driver = :poltergeist
-  puts 'INFO: Using Capybara with Poltergeist only'
-elsif driver.nil?
-  require 'capybara/poltergeist'
-  Capybara.default_driver = :rack_test
-  Capybara.current_driver = :rack_test
-  Capybara.javascript_driver = :poltergeist
-  puts 'INFO: Using Capybara with RackTest and Poltergeist'
-else
-  require 'selenium-webdriver'
-  Capybara.register_driver :selenium do |app|
-    Capybara::Selenium::Driver.new(app, browser: driver)
-  end
-  Capybara.default_driver = :selenium
-  Capybara.javascript_driver = :selenium
-  puts "INFO: Using Capybara with Selenium and #{driver}"
-end
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are

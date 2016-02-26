@@ -41,6 +41,7 @@ group :development, :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'poltergeist'
+  gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'simplecov'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
