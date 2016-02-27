@@ -82,7 +82,7 @@ end
 
 
 When /^the User clicks on the "([^"]*)" button$/ do |arg|
-  click_on "btn-#{arg.downcase}-storage"
+  click_on "btn-#{arg.gsub(' ', '-').downcase}"
 end
 
 When /^enters the new Storage's title$/ do

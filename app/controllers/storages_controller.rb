@@ -37,7 +37,7 @@ class StoragesController < ApplicationController
     @storage = Storage.find params[:id]
     @storage.delete
     flash[:success] = "Deleted storage with ID #{@storage.id}."
-    redirect_to storages_url
+    redirect_to storages_path
   end
 
   private
