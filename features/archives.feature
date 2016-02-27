@@ -16,7 +16,7 @@ Feature: Archives
 
   @javascript
   Scenario: Show details of a single Archive
-    And the User clicks on the "Show" button of the first Archive
+    When the User clicks on the "Show" button of the first Archive
     Then the User should see the Archives's details
 
   @javascript
