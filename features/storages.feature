@@ -9,7 +9,7 @@ Feature: Storages
 
   @javascript
   Scenario: Creating a new Storage
-    When the User clicks on the "New" button
+    When the User clicks on the "New Storage" button
     And enters the new Storage's title
     And clicks on "Create Storage"
     Then a new Storage with given title should be created
