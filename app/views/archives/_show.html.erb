@@ -1,0 +1,35 @@
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h4 class="modal-title" id="archive-modal-label">
+        <%= Archive.model_name.human %>
+        <label class="label secondary">ID: <%= @archive.id %></label>
+      </h4>
+    </div>
+    <div class="modal-body">
+      <div class="container-fluid">
+        <div class="row">
+          <label class="col-md-3"><strong><%= Archive.human_attribute_name :title %></strong></label>
+          <div class="col-md-9">
+            <%= @archive.title %>
+          </div>
+        </div>
+        <div class="row">
+          <label class="col-md-3"><strong><%= Archive.human_attribute_name :abbr %></strong></label>
+          <div class="col-md-9">
+            <%= @archive.abbr %>
+          </div>
+        </div>
+        <div class="row">
+          <label class="col-md-3"><strong><%= Archive.human_attribute_name :notes %></strong></label>
+          <div class="col-md-9">
+            <%= @archive.notes %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
