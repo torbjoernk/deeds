@@ -22,7 +22,7 @@
   <div class="row">
     <label class="col-md-3"><strong><%= Archive.human_attribute_name :storages %></strong></label>
     <ul class="col-md-9 list-group list-group-flush" id="archive-storages-accordion" role="tablist" aria-multiselectable="true">
-      <%= render partial: 'storages/oneline', collection: archive.storages, as: :storage %>
+      <%= render partial: 'storages/nested_show', collection: archive.storages, as: :storage %>
     </ul>
   </div>
 <% end %>
