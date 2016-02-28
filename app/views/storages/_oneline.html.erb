@@ -1,0 +1,20 @@
+<li class="list-group-item">
+  <div id="storage-<%= storage.id %>" class="list-group-item-heading" role="tab">
+    <%= storage.title %>
+    <a class="pull-right btn btn-sm btn-outline-info collapsed"
+       aria-controls="storage-<%= storage.id %>-content"
+       aria-expanded="false"
+       href="#storage-<%= storage.id %>-content"
+       data-parent="#archive-storages-accordion"
+       data-toggle="collapse">
+      <%= icon('search', class: 'fa-fw') %>
+    </a>
+  </div>
+  <div id="storage-<%= storage.id %>-content"
+       class="list-group-item-text collapse"
+       aria-labelledby="storage-<%= storage.id %>"
+       role="tabpanel"
+       aria-expanded="false">
+    <%= render partial: 'storages/inner_show', locals: { storage: storage } %>
+  </div>
+</li>

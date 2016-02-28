@@ -1,6 +1,15 @@
 <tr id="storage-row-<%= storage.id %>">
   <td class="col-storage-title"><%= storage.title %></td>
   <td class="col-storage-notes"><%= storage.notes %></td>
+  <td class="col-storage-assoc">
+    <%= content_tag :label,
+                    class: 'tag tag-default',
+                    title: "#{Archive.model_name.plural.humanize} linked",
+                    data: { toggle: 'tooltip' } do %>
+      <%= storage.archives.count %>
+      <%= icon('book', class: 'fa-fw') %>
+    <% end %>
+  </td>
   <td class="col-storage-actions">
     <div class="btn-group btn-group-sm">
       <%= link_to_show_entity storage %>

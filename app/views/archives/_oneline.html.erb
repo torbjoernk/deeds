@@ -1,0 +1,21 @@
+<li class="list-group-item">
+  <div id="archive-<%= archive.id %>" class="list-group-item-heading" role="tab">
+    <%= archive.title %>
+    (<%= archive.abbr %>)
+    <a class="pull-right btn btn-sm btn-outline-info collapsed"
+       aria-controls="archive-<%= archive.id %>-content"
+       aria-expanded="false"
+       href="#archive-<%= archive.id %>-content"
+       data-parent="#storage-archives-accordion"
+       data-toggle="collapse">
+      <%= icon('search', class: 'fa-fw') %>
+    </a>
+  </div>
+  <div id="archive-<%= archive.id %>-content"
+       class="list-group-item-text collapse"
+       aria-labelledby="archive-<%= archive.id %>"
+       role="tabpanel"
+       aria-expanded="false">
+    <%= render partial: 'archives/inner_show', locals: { archive: archive } %>
+  </div>
+</li>

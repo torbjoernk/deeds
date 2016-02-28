@@ -11,24 +11,7 @@
     </div>
     <div class="modal-body">
       <div class="container-fluid">
-        <div class="row">
-          <label class="col-md-3"><strong><%= Archive.human_attribute_name :title %></strong></label>
-          <div class="col-md-9">
-            <%= @archive.title %>
-          </div>
-        </div>
-        <div class="row">
-          <label class="col-md-3"><strong><%= Archive.human_attribute_name :abbr %></strong></label>
-          <div class="col-md-9">
-            <%= @archive.abbr %>
-          </div>
-        </div>
-        <div class="row">
-          <label class="col-md-3"><strong><%= Archive.human_attribute_name :notes %></strong></label>
-          <div class="col-md-9">
-            <%= @archive.notes %>
-          </div>
-        </div>
+        <%= render partial: 'archives/inner_show', locals: { archive: @archive, native: true } %>
       </div>
     </div>
   </div>

@@ -1,0 +1,28 @@
+<% native ||= false %>
+
+<div class="row">
+  <label class="col-md-3"><strong><%= Archive.human_attribute_name :title %></strong></label>
+  <div class="col-md-9">
+    <%= archive.title %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3"><strong><%= Archive.human_attribute_name :abbr %></strong></label>
+  <div class="col-md-9">
+    <%= archive.abbr %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3"><strong><%= Archive.human_attribute_name :notes %></strong></label>
+  <div class="col-md-9">
+    <%= archive.notes %>
+  </div>
+</div>
+<% if native %>
+  <div class="row">
+    <label class="col-md-3"><strong><%= Archive.human_attribute_name :storages %></strong></label>
+    <ul class="col-md-9 list-group list-group-flush" id="archive-storages-accordion" role="tablist" aria-multiselectable="true">
+      <%= render partial: 'storages/oneline', collection: archive.storages, as: :storage %>
+    </ul>
+  </div>
+<% end %>
