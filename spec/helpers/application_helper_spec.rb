@@ -1,15 +1,20 @@
 require 'rails_helper'
 
 describe ApplicationHelper, type: :helper do
-  before :each do
-    @storage = create :storage
+  shared_examples 'link_to_entity_helpers' do |action|
+    before :each do
+      @storage = create :storage
+      @html_link = send("link_to_#{action}_entity", @storage)
+    end
+
+    specify 'uses Bootstrap\'s tooltip interface' do
+      expect(@html_link).to match /data-toggle="tooltip"/
+    end
   end
 
   describe '#link_to_show_entity' do
     describe 'creates a link-button' do
-      before :each do
-        @html_link = link_to_show_entity @storage
-      end
+      include_examples 'link_to_entity_helpers', 'show'
 
       specify 'to show the given entity' do
         expect(@html_link).to match /Show Details/
@@ -19,18 +24,12 @@ describe ApplicationHelper, type: :helper do
       specify 'displays a search icon' do
         expect(@html_link).to match /<i class="fa fa-fw fa-search"><\/i>/
       end
-
-      specify 'uses Bootstrap\'s tooltip interface' do
-        expect(@html_link).to match /data-toggle="tooltip"/
-      end
     end
   end
 
   describe '#link_to_edit_entity' do
     describe 'creates a link-button' do
-      before :each do
-        @html_link = link_to_edit_entity @storage
-      end
+      include_examples 'link_to_entity_helpers', 'edit'
 
       specify 'to edit the given entity' do
         expect(@html_link).to match /Edit Storage/
@@ -40,18 +39,12 @@ describe ApplicationHelper, type: :helper do
       specify 'displays a pencil icon' do
         expect(@html_link).to match /<i class="fa fa-fw fa-pencil"><\/i>/
       end
-
-      specify 'uses Bootstrap\'s tooltip interface' do
-        expect(@html_link).to match /data-toggle="tooltip"/
-      end
     end
   end
 
   describe '#link_to_destroy_entity' do
     describe 'creates a link-button' do
-      before :each do
-        @html_link = link_to_destroy_entity @storage
-      end
+      include_examples 'link_to_entity_helpers', 'destroy'
 
       specify 'to delete the given entity' do
         expect(@html_link).to match /Delete Storage/
@@ -60,10 +53,6 @@ describe ApplicationHelper, type: :helper do
 
       specify 'displays a trash icon' do
         expect(@html_link).to match /<i class="fa fa-fw fa-trash"><\/i>/
-      end
-
-      specify 'uses Bootstrap\'s tooltip interface' do
-        expect(@html_link).to match /data-toggle="tooltip"/
       end
     end
   end
