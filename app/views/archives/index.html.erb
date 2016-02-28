@@ -12,8 +12,21 @@
   </span>
 </h1>
 
+<% if @archive %>
+  <dl class="row">
+    <dt class="col-md-2">associated with Archive</dt>
+    <dd class="col-md-10">
+      <%= render partial: 'archives/oneline', locals: { archive: @archive } %>
+    </dd>
+  </dl>
+<% end %>
 <% if @storage %>
-  <p class="lead">for Storage: <%= @storage.title %></p>
+  <dl class="row">
+    <dt class="col-md-2">associated with Storage</dt>
+    <dd class="col-md-10">
+      <%= render partial: 'storages/oneline', locals: { storage: @storage } %>
+    </dd>
+  </dl>
 <% end %>
 
 <div id="archives-table">
@@ -35,4 +48,7 @@
 
 <div class="modal fade" id="archive-modal" tabindex="-1" role="dialog"
      aria-labelledby="archive-modal-label" aria-hidden="true">
+</div>
+<div class="modal fade" id="storage-modal" tabindex="-1" role="dialog"
+     aria-labelledby="storage-modal-label" aria-hidden="true">
 </div>

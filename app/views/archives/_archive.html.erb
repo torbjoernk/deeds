@@ -3,12 +3,12 @@
   <td class="col-archive-abbr"><%= archive.abbr %></td>
   <td class="col-archive-notes"><%= archive.notes %></td>
   <td class="col-storage-assoc">
-    <%= content_tag :label,
-                    class: 'tag tag-default',
-                    title: "#{Storage.model_name.plural.humanize} linked",
-                    data: { toggle: 'tooltip' } do %>
-        <%= archive.storages.count %>
-        <%= icon('archive', class: 'fa-fw') %>
+    <%= link_to archive_storages_path(archive_id: archive.id),
+                class: 'btn btn-sm btn-secondary',
+                title: "show #{Storage.model_name.plural.humanize} linked",
+                data: { toggle: 'tooltip' } do %>
+      <%= archive.storages.count %>
+      <%= icon('archive', class: 'fa-fw') %>
     <% end %>
   </td>
   <td class="col-archive-actions">

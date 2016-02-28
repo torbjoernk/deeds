@@ -13,10 +13,15 @@
 </h1>
 
 <% if @archive %>
-  <p class="lead">for Archive: <%= @archive.title %></p>
+  <dl class="row">
+    <dt class="col-md-2">associated with Archive</dt>
+    <dd class="col-md-10">
+      <%= render partial: 'archives/oneline', locals: { archive: @archive } %>
+    </dd>
+  </dl>
 <% end %>
 
-<div id="storages-table">
+<div id="storages-table" class="row">
   <table class="table table-hover table-sm" id="storages">
     <thead>
     <tr>
@@ -34,4 +39,7 @@
 
 <div class="modal fade" id="storage-modal" tabindex="-1" role="dialog"
      aria-labelledby="storage-modal-label" aria-hidden="true">
+</div>
+<div class="modal fade" id="archive-modal" tabindex="-1" role="dialog"
+     aria-labelledby="archive-modal-label" aria-hidden="true">
 </div>
