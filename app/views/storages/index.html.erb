@@ -12,6 +12,10 @@
   </span>
 </h1>
 
+<% if @archive %>
+  <p class="lead">for Archive: <%= @archive.title %></p>
+<% end %>
+
 <div id="storages-table">
   <table class="table table-hover table-sm" id="storages">
     <thead>
