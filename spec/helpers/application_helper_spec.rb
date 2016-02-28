@@ -2,13 +2,11 @@ require 'rails_helper'
 
 describe ApplicationHelper, type: :helper do
   shared_examples 'link_to_entity_helpers' do |action|
-    before :each do
-      @storage = create :storage
-      @html_link = send("link_to_#{action}_entity", @storage)
-    end
+    let(:storage) { create :storage }
+    let(:html_link) { send("link_to_#{action}_entity", storage) }
 
     specify 'uses Bootstrap\'s tooltip interface' do
-      expect(@html_link).to match /data-toggle="tooltip"/
+      expect(html_link).to match /data-toggle="tooltip"/
     end
   end
 
@@ -17,12 +15,12 @@ describe ApplicationHelper, type: :helper do
       include_examples 'link_to_entity_helpers', 'show'
 
       specify 'to show the given entity' do
-        expect(@html_link).to match /Show Details/
-        expect(@html_link).to match storage_path(@storage)
+        expect(html_link).to match /Show Details/
+        expect(html_link).to match storage_path(storage)
       end
 
       specify 'displays a search icon' do
-        expect(@html_link).to match /<i class="fa fa-fw fa-search"><\/i>/
+        expect(html_link).to match /<i class="fa fa-fw fa-search"><\/i>/
       end
     end
   end
@@ -32,12 +30,12 @@ describe ApplicationHelper, type: :helper do
       include_examples 'link_to_entity_helpers', 'edit'
 
       specify 'to edit the given entity' do
-        expect(@html_link).to match /Edit Storage/
-        expect(@html_link).to match edit_storage_path(@storage)
+        expect(html_link).to match /Edit Storage/
+        expect(html_link).to match edit_storage_path(storage)
       end
 
       specify 'displays a pencil icon' do
-        expect(@html_link).to match /<i class="fa fa-fw fa-pencil"><\/i>/
+        expect(html_link).to match /<i class="fa fa-fw fa-pencil"><\/i>/
       end
     end
   end
@@ -47,12 +45,12 @@ describe ApplicationHelper, type: :helper do
       include_examples 'link_to_entity_helpers', 'destroy'
 
       specify 'to delete the given entity' do
-        expect(@html_link).to match /Delete Storage/
-        expect(@html_link).to match storage_path(@storage)
+        expect(html_link).to match /Delete Storage/
+        expect(html_link).to match storage_path(storage)
       end
 
       specify 'displays a trash icon' do
-        expect(@html_link).to match /<i class="fa fa-fw fa-trash"><\/i>/
+        expect(html_link).to match /<i class="fa fa-fw fa-trash"><\/i>/
       end
     end
   end

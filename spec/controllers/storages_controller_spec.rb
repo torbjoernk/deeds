@@ -2,9 +2,7 @@ require 'rails_helper'
 
 describe StoragesController, type: :controller do
   shared_context 'Storage exists' do
-    before :each do
-      @storage = create :storage
-    end
+    let(:storage) { create :storage }
   end
 
   describe 'GET #index' do
@@ -12,7 +10,7 @@ describe StoragesController, type: :controller do
 
     it 'assigns @storages' do
       get :index
-      expect(assigns :storages).to include @storage
+      expect(assigns :storages).to include storage
     end
 
     it 'renders the index template' do
@@ -22,21 +20,22 @@ describe StoragesController, type: :controller do
     end
 
     describe 'filtered by associated Archive' do
-      before :each do
-        @archive = create :archive
-        @archive.storages << @storage
-        @archive.save!
+      let(:archive) do
+        archive = create :archive
+        archive.storages << storage
+        archive.save!
+        archive
       end
 
       specify 'renders the index template' do
-        get :index, archive_id: @archive.id
+        get :index, archive_id: archive.id
         expect(response).to render_template :index
       end
 
       specify 'assigns @storages and @archive' do
-        get :index, archive_id: @archive.id
-        expect(assigns :archive).to eq @archive
-        expect(assigns :storages).to include @storage
+        get :index, archive_id: archive.id
+        expect(assigns :archive).to eq archive
+        expect(assigns :storages).to include storage
       end
     end
   end
@@ -52,12 +51,12 @@ describe StoragesController, type: :controller do
     include_context 'Storage exists'
 
     it 'assigns @storage' do
-      xhr :get, :show, id: @storage.id
-      expect(assigns :storage).to eq @storage
+      xhr :get, :show, id: storage.id
+      expect(assigns :storage).to eq storage
     end
 
     it 'renders the show template' do
-      xhr :get, :show, id: @storage.id
+      xhr :get, :show, id: storage.id
       expect(response).to render_template :show
     end
   end
@@ -66,12 +65,12 @@ describe StoragesController, type: :controller do
     include_context 'Storage exists'
 
     it 'assigns @storage' do
-      xhr :get, :edit, id: @storage.id
-      expect(assigns :storage).to eq @storage
+      xhr :get, :edit, id: storage.id
+      expect(assigns :storage).to eq storage
     end
 
     it 'renders the edit template' do
-      xhr :get, :edit, id: @storage.id
+      xhr :get, :edit, id: storage.id
       expect(response).to render_template :edit
     end
   end
@@ -90,8 +89,8 @@ describe StoragesController, type: :controller do
     include_context 'Storage exists'
 
     it 'updates specific Storage from arguments' do
-      @storage.notes = 'Something different'
-      xhr :patch, :update, id: @storage.id, storage: { title: @storage.title, notes: @storage.notes }
+      storage.notes = 'Something different'
+      xhr :patch, :update, id: storage.id, storage: { title: storage.title, notes: storage.notes }
       expect(flash[:success]).to match /Updated storage/
       expect(response).to redirect_to storages_path
     end
@@ -101,7 +100,7 @@ describe StoragesController, type: :controller do
     include_context 'Storage exists'
 
     it 'deletes a specific Storage' do
-      xhr :delete, :destroy, id: @storage.id
+      xhr :delete, :destroy, id: storage.id
       expect(flash[:success]).to match /Deleted storage/
       expect(response).to redirect_to storages_path
     end
