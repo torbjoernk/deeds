@@ -13,6 +13,26 @@ describe StoragesController, type: :controller do
 
       expect(response).to render_template :index
     end
+
+    describe 'filtered by associated Archive' do
+      before :each do
+        @archive = create :archive
+        @storage = create :storage
+        @archive.storages << @storage
+        @archive.save!
+      end
+
+      specify 'renders the index template' do
+        get :index, archive_id: @archive.id
+        expect(response).to render_template :index
+      end
+
+      specify 'assigns @storages and @archive' do
+        get :index, archive_id: @archive.id
+        expect(assigns :archive).to eq @archive
+        expect(assigns :storages).to include @storage
+      end
+    end
   end
 
   describe 'GET #new via XHR' do

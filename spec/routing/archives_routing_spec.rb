@@ -12,6 +12,15 @@ describe 'routing for Archives', type: :routing do
           to route_to 'archives#show', id: archive.id.to_s
     end
 
+    specify '/archives/:id/storages routes to storages#index' do
+      archive = create :archive
+      storage = create :storage
+      storage.archives << archive
+      storage.save!
+      expect(get: "/archives/#{archive.id}/storages").
+          to route_to 'storages#index', archive_id: archive.id.to_s
+    end
+
     specify '/archives/:id/edit routes to archives#edit' do
       archive = create :archive
       expect(get: "/archives/#{archive.id}/edit", format: 'js').
