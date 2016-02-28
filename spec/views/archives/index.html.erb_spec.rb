@@ -8,9 +8,9 @@ describe 'archives/index.html.erb', type: :view do
     expect(render).to have_table 'archives'
   end
 
-  specify 'the table has four columns' do
+  specify 'the table has five columns' do
     render
-    expect(render).to have_selector 'table > thead > tr > th + th + th + th'
-    expect(render).not_to have_selector 'table > thead > tr > th + th + th + th + th'
+    expect(render).to have_selector 'table > thead > tr > th + th + th + th + th'
+    expect(render).not_to have_selector 'table > thead > tr > th + th + th + th + th + th'
   end
 end
