@@ -1,11 +1,18 @@
 require 'rails_helper'
 
 describe StoragesController, type: :controller do
+  shared_context 'Storage exists' do
+    before :each do
+      @storage = create :storage
+    end
+  end
+
   describe 'GET #index' do
+    include_context 'Storage exists'
+
     it 'assigns @storages' do
-      storage = create :storage
       get :index
-      expect(assigns :storages).to include storage
+      expect(assigns :storages).to include @storage
     end
 
     it 'renders the index template' do
@@ -17,7 +24,6 @@ describe StoragesController, type: :controller do
     describe 'filtered by associated Archive' do
       before :each do
         @archive = create :archive
-        @storage = create :storage
         @archive.storages << @storage
         @archive.save!
       end
@@ -43,29 +49,29 @@ describe StoragesController, type: :controller do
   end
 
   describe 'GET #show via XHR' do
+    include_context 'Storage exists'
+
     it 'assigns @storage' do
-      storage = create :storage
-      xhr :get, :show, id: storage.id
-      expect(assigns :storage).to eq storage
+      xhr :get, :show, id: @storage.id
+      expect(assigns :storage).to eq @storage
     end
 
     it 'renders the show template' do
-      storage = create :storage
-      xhr :get, :show, id: storage.id
+      xhr :get, :show, id: @storage.id
       expect(response).to render_template :show
     end
   end
 
   describe 'GET #edit via XHR' do
+    include_context 'Storage exists'
+
     it 'assigns @storage' do
-      storage = create :storage
-      xhr :get, :edit, id: storage.id
-      expect(assigns :storage).to eq storage
+      xhr :get, :edit, id: @storage.id
+      expect(assigns :storage).to eq @storage
     end
 
     it 'renders the edit template' do
-      storage = create :storage
-      xhr :get, :edit, id: storage.id
+      xhr :get, :edit, id: @storage.id
       expect(response).to render_template :edit
     end
   end
@@ -81,19 +87,21 @@ describe StoragesController, type: :controller do
   end
 
   describe 'PATCH #update via XHR' do
+    include_context 'Storage exists'
+
     it 'updates specific Storage from arguments' do
-      storage = create :storage
-      storage.notes = 'Something different'
-      xhr :patch, :update, id: storage.id, storage: { title: storage.title, notes: storage.notes }
+      @storage.notes = 'Something different'
+      xhr :patch, :update, id: @storage.id, storage: { title: @storage.title, notes: @storage.notes }
       expect(flash[:success]).to match /Updated storage/
       expect(response).to redirect_to storages_path
     end
   end
 
   describe 'DELETE #destroy via XHR' do
+    include_context 'Storage exists'
+
     it 'deletes a specific Storage' do
-      storage = create :storage
-      xhr :delete, :destroy, id: storage.id
+      xhr :delete, :destroy, id: @storage.id
       expect(flash[:success]).to match /Deleted storage/
       expect(response).to redirect_to storages_path
     end
