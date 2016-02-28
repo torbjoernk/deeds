@@ -4,30 +4,9 @@
   <td class="col-archive-notes"><%= archive.notes %></td>
   <td class="col-archive-actions">
     <div class="btn-group btn-group-sm">
-      <%= link_to archive_path(archive.id),
-                  class: 'btn btn-sm btn-outline-info',
-                  id: "btn-archive-show-#{archive.id}",
-                  title: 'Show Details', data: { toggle: 'tooltip' },
-                  remote: true do %>
-          <%= icon('search', class: 'fa-fw') %>
-      <% end %>
-      <%= link_to edit_archive_path(archive.id),
-                  class: 'btn btn-sm btn-outline-primary',
-                  id: "btn-archive-edit-#{archive.id}",
-                  title: 'Edit archive', data: { toggle: 'tooltip' },
-                  remote: true do %>
-          <%= icon('pencil', class: 'fa-fw') %>
-      <% end %>
-      <%= link_to archive_path(archive.id), method: :delete,
-                  class: 'btn btn-sm btn-outline-danger',
-                  id: "btn-archive-delete-#{archive.id}",
-                  title: 'Delete archive',
-                  data: {
-                      confirm: 'Do you really want to delete this item?',
-                      toggle: 'tooltip'
-                  } do %>
-          <%= icon('trash', class: 'fa-fw') %>
-      <% end %>
+      <%= link_to_show_entity archive %>
+      <%= link_to_edit_entity archive %>
+      <%= link_to_destroy_entity archive %>
     </div>
   </td>
 </tr>

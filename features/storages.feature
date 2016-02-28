@@ -16,7 +16,7 @@ Feature: Storages
 
   @javascript
   Scenario: Show details of a single Storage
-    And the User clicks on the "Show" button of the first Storage
+    When the User clicks on the "Show" button of the first Storage
     Then the User should see the Storage's details
 
   @javascript
