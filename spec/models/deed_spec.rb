@@ -56,7 +56,7 @@ describe Deed, type: :model do
     end
 
     specify 'one Content' do
-      content = build(:content)
+      content = build :content
 
       deed.content = content
 
@@ -65,8 +65,8 @@ describe Deed, type: :model do
       expect(content.deed).to eq deed
     end
 
-    specify 'many ContentTranslations through Content' do
-      content = build(:content)
+    specify 'many ContentTranslations through Content', use_db: true do
+      content = build :content
       translation = build(:content_translation)
       content.translations << translation
 
@@ -78,7 +78,7 @@ describe Deed, type: :model do
       expect(translation.deed).to eq deed
     end
 
-    specify 'many Mentions' do
+    specify 'many Mentions', use_db: true do
       deed.mentions << mention1
       deed.mentions << mention2
       deed.save!
@@ -87,7 +87,7 @@ describe Deed, type: :model do
       expect(deed.mentions).to include mention1, mention2
     end
 
-    specify 'many People through Mentions' do
+    specify 'many People through Mentions', use_db: true do
       mention1.person = build :person
       mention2.person = build :person, name: Faker::Name.name
 
@@ -99,7 +99,7 @@ describe Deed, type: :model do
       expect(deed.people).to include mention1.person, mention2.person
     end
 
-    specify 'many Places through Mentions' do
+    specify 'many Places through Mentions', use_db: true do
       mention1.place = build :place
       mention2.place = build :place, title: Faker::Name.title
 
@@ -111,7 +111,7 @@ describe Deed, type: :model do
       expect(deed.places).to include mention1.place, mention2.place
     end
 
-    specify 'many Roles through Mentions' do
+    specify 'many Roles through Mentions', use_db: true do
       mention1.role = build :role
       mention2.role = build :role, title: Faker::Name.title
 

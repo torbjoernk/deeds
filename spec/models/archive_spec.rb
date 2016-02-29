@@ -15,7 +15,7 @@ describe Archive, type: :model do
     source
   end
 
-  it 'has a valid factory' do
+  it 'has a valid factory', use_db: true do
     archive.save!
     expect(archive).to be_valid
   end
@@ -35,7 +35,7 @@ describe Archive, type: :model do
   end
 
   describe 'has association with' do
-    specify 'many Storages' do
+    specify 'many Storages', use_db: true do
       archive.save!
       archive.storages = [storage1, storage2]
 
@@ -45,7 +45,7 @@ describe Archive, type: :model do
       expect(archive.storages).to include storage1, storage2
     end
 
-    specify 'many Sources' do
+    specify 'many Sources', use_db: true do
       archive.save!
       archive.sources = [source1, source2]
 
@@ -65,12 +65,12 @@ describe Archive, type: :model do
     end
 
     describe 'uniqueness of' do
-      specify 'title' do
+      specify 'title', use_db: true do
         create(:archive)
         expect(archive).not_to be_valid
       end
 
-      specify 'abbr' do
+      specify 'abbr', use_db: true do
         create(:archive)
         expect(archive).not_to be_valid
       end

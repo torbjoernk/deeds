@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Content, type: :model do
   let(:content) { build :content }
 
-  it 'has a valid factory' do
+  it 'has a valid factory', use_db: true do
     content.save!
     expect(content).to be_valid
   end

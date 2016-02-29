@@ -3,7 +3,7 @@ require 'rails_helper'
 describe PersonRelation, type: :model do
   let(:person_relation) { build :person_relation }
 
-  it 'has a valid factory' do
+  it 'has a valid factory', use_db: true do
     person_relation.save!
     expect(person_relation).to be_valid
   end
@@ -48,7 +48,7 @@ describe PersonRelation, type: :model do
 
     describe 'uniqueness of' do
       describe 'association' do
-        specify 'between two People' do
+        specify 'between two People', use_db: true do
           person = build :person
 
           person_relation.person = person

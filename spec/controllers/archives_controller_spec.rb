@@ -5,7 +5,7 @@ describe ArchivesController, type: :controller do
     let(:archive) { create :archive }
   end
 
-  describe 'GET #index' do
+  describe 'GET #index', use_db: true do
     include_context 'Archive exists'
 
     it 'assigns @archives' do
@@ -18,7 +18,7 @@ describe ArchivesController, type: :controller do
       expect(response).to render_template :index
     end
 
-    describe 'filtered by associated Storage' do
+    describe 'filtered by associated Storage', use_db: true do
       let(:storage) do
         storage = create :storage
         archive.storages << storage
@@ -46,7 +46,7 @@ describe ArchivesController, type: :controller do
     end
   end
 
-  describe 'GET #show via XHR' do
+  describe 'GET #show via XHR', use_db: true do
     include_context 'Archive exists'
 
     it 'assigns @archive' do
@@ -60,7 +60,7 @@ describe ArchivesController, type: :controller do
     end
   end
 
-  describe 'GET #edit via XHR' do
+  describe 'GET #edit via XHR', use_db: true do
     include_context 'Archive exists'
 
     it 'assigns @archive' do
@@ -75,7 +75,7 @@ describe ArchivesController, type: :controller do
   end
 
   describe 'POST #create via XHR' do
-    it 'creates a new Archive from arguments' do
+    it 'creates a new Archive from arguments', use_db: true do
       archive = build :archive
       xhr :post, :create, archive: { title: archive.title, notes: archive.notes }
       expect(assigns :archive).to be_an Archive
@@ -84,7 +84,7 @@ describe ArchivesController, type: :controller do
     end
   end
 
-  describe 'PATCH #update via XHR' do
+  describe 'PATCH #update via XHR', use_db: true do
     include_context 'Archive exists'
 
     it 'updates specific Archive from arguments' do
@@ -95,7 +95,7 @@ describe ArchivesController, type: :controller do
     end
   end
 
-  describe 'DELETE #destroy via XHR' do
+  describe 'DELETE #destroy via XHR', use_db: true do
     include_context 'Archive exists'
 
     it 'deletes a specific Archive' do

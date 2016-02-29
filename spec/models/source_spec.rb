@@ -10,7 +10,7 @@ describe Source, type: :model do
     archive
   end
 
-  it 'has a valid factory' do
+  it 'has a valid factory', use_db: true do
     source.save!
     expect(source).to be_valid
   end
@@ -30,7 +30,7 @@ describe Source, type: :model do
   end
 
   describe 'has association with' do
-    specify 'many Archives' do
+    specify 'many Archives', use_db: true do
       source.save!
       source.archives = [archive1, archive2]
 

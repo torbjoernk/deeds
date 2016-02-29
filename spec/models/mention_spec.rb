@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Mention, type: :model do
   let(:mention) { build :mention }
 
-  it 'has a valid factory' do
+  it 'has a valid factory', use_db: true do
     mention.save!
     expect(mention).to be_valid
   end
@@ -15,7 +15,7 @@ describe Mention, type: :model do
   end
 
   describe 'has association with' do
-    specify 'one Deed' do
+    specify 'one Deed', use_db: true do
       deed = build :deed
 
       mention.deed = deed
@@ -26,7 +26,7 @@ describe Mention, type: :model do
       expect(deed.mentions).to include mention
     end
 
-    specify 'one Person' do
+    specify 'one Person', use_db: true do
       person = build :person
 
       mention.person = person
@@ -37,7 +37,7 @@ describe Mention, type: :model do
       expect(person.mentions).to include mention
     end
 
-    specify 'one Place' do
+    specify 'one Place', use_db: true do
       place = build :place
 
       mention.place = place
@@ -48,7 +48,7 @@ describe Mention, type: :model do
       expect(place.mentions).to include mention
     end
 
-    specify 'one Role' do
+    specify 'one Role', use_db: true do
       role = build :role
 
       mention.role = role

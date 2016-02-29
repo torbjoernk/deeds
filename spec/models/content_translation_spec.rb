@@ -4,7 +4,7 @@ describe ContentTranslation, type: :model do
   let(:content) { build :content }
   let(:translation) { build :content_translation }
 
-  it 'has a valid factory' do
+  it 'has a valid factory', use_db: true do
     translation.save!
     expect(translation).to be_valid
   end
@@ -24,7 +24,7 @@ describe ContentTranslation, type: :model do
   end
 
   context 'has association with' do
-    specify 'one Content' do
+    specify 'one Content', use_db: true do
       translation.content = content
       translation.save!
 
@@ -32,7 +32,7 @@ describe ContentTranslation, type: :model do
       expect(content.translations).to include translation
     end
 
-    specify 'one Deed through Content' do
+    specify 'one Deed through Content', use_db: true do
       deed = create :deed
       content.deed = deed
 

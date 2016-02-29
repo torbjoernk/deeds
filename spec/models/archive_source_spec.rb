@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ArchiveSource, type: :model do
+describe ArchiveSource, type: :model, use_db: true do
   let(:archive)        { create :archive }
   let(:source)         { create :source }
   let(:archive_source) { build :archive_source }
