@@ -1,7 +1,7 @@
 <h1>
   Archives
   <span class="btn-group">
-    <%= link_to new_archive_url,
+    <%= link_to new_archive_path,
                 class: 'btn btn-sm btn-primary',
                 id: 'btn-new-archive',
                 title: 'Add new Archive',
@@ -12,14 +12,6 @@
   </span>
 </h1>
 
-<% if @archive %>
-  <dl class="row">
-    <dt class="col-md-2">associated with Archive</dt>
-    <dd class="col-md-10">
-      <%= render partial: 'archives/oneline', locals: { archive: @archive } %>
-    </dd>
-  </dl>
-<% end %>
 <% if @storage %>
   <dl class="row">
     <dt class="col-md-2">associated with Storage</dt>
