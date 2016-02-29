@@ -7,6 +7,10 @@ Feature: Sources
   Scenario: Index table
     Then the User should see a table with sources
 
+  Scenario: Breadcrumbs
+    Then the User should see the breadcrumbs with "Home"
+    Then the User should see the breadcrumbs with "Sources"
+
   @javascript
   Scenario: Creating a new Source
     When the User clicks on the "New Source" button

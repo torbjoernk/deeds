@@ -4,13 +4,17 @@ class ArchivesController < ApplicationController
   def index
     if params.has_key? :storage_id
       @storage = Storage.find(params[:storage_id])
+      add_breadcrumb Storage.model_name.human, storages_path
       @archives = @storage.archives
     elsif params.has_key? :source_id
       @source = Source.find(params[:source_id])
+      add_breadcrumb Source.model_name.human, sources_path
       @archives = @source.archives
     else
       @archives = Archive.all
     end
+
+    add_breadcrumb Archive.model_name.plural.humanize, archives_path
   end
 
   def show

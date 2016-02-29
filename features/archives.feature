@@ -7,6 +7,10 @@ Feature: Archives
   Scenario: Index table
     Then the User should see a table with archives
 
+  Scenario: Breadcrumbs
+    Then the User should see the breadcrumbs with "Home"
+    Then the User should see the breadcrumbs with "Archives"
+
   @javascript
   Scenario: Creating a new Archive
     When the User clicks on the "New Archive" button

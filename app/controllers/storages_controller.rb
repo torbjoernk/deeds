@@ -4,10 +4,13 @@ class StoragesController < ApplicationController
   def index
     if params.has_key? :archive_id
       @archive = Archive.find(params[:archive_id])
+      add_breadcrumb Archive.model_name.human, archives_path
       @storages = @archive.storages
     else
       @storages = Storage.all
     end
+
+    add_breadcrumb Storage.model_name.plural.humanize, :storages_path
   end
 
   def new

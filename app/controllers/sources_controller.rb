@@ -4,10 +4,13 @@ class SourcesController < ApplicationController
   def index
     if params.has_key? :archive_id
       @archive = Archive.find(params[:archive_id])
+      add_breadcrumb Archive.model_name.human, archives_path
       @sources = @archive.sources
     else
       @sources = Source.all
     end
+
+    add_breadcrumb Source.model_name.plural.humanize, :sources_path
   end
 
   def show

@@ -2,3 +2,12 @@
 
 @import "font-awesome-sprockets";
 @import "font-awesome";
+
+ol.breadcrumb {
+  li {
+    @extend .breadcrumb-item;
+    &:last-child {
+      @extend .active;
+    }
+  }
+}
