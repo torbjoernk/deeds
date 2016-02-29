@@ -37,6 +37,26 @@ describe ArchivesController, type: :controller do
         expect(assigns :archives).to include archive
       end
     end
+
+    describe 'filtered by associated Source', use_db: true do
+      let(:source) do
+        source = create :source
+        archive.sources << source
+        archive.save!
+        source
+      end
+
+      specify 'renders the index template' do
+        get :index, source_id: source.id
+        expect(response).to render_template :index
+      end
+
+      specify 'assigns @archives and @source' do
+        get :index, source_id: source.id
+        expect(assigns :source).to eq source
+        expect(assigns :archives).to include archive
+      end
+    end
   end
 
   describe 'GET #new via XHR' do

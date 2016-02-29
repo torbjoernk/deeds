@@ -1,6 +1,9 @@
 require 'rails_helper'
+require_relative 'support/iconic_model'
 
 describe Storage, type: :model do
+  it_behaves_like 'an IconicModel', Storage
+
   let(:storage) { build :storage }
   let(:archive1) { build :archive }
   let(:archive2) do

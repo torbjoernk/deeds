@@ -1,4 +1,7 @@
 class Source < ActiveRecord::Base
+  include IconicModel
+  ICON = 'newspaper-o'
+
   SOURCE_TYPES = %w(original transcript print digital)
 
   has_many :archive_sources
