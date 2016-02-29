@@ -2,7 +2,12 @@ class SourcesController < ApplicationController
   after_filter { flash.discard if request.xhr? }
 
   def index
-    @sources = Source.all
+    if params.has_key? :archive_id
+      @archive = Archive.find(params[:archive_id])
+      @sources = @archive.sources
+    else
+      @sources = Source.all
+    end
   end
 
   def show
@@ -42,6 +47,6 @@ class SourcesController < ApplicationController
 
   private
   def source_params
-    params.require(:source).permit(:title, :notes, :source_type)
+    params.require(:source).permit(:title, :source_type, :notes)
   end
 end

@@ -1,0 +1,21 @@
+<tr id="source-row-<%= source.id %>">
+  <td class="col-source-title"><%= source.title %></td>
+  <td class="col-source-type"><%= source.source_type %></td>
+  <td class="col-source-notes"><%= source.notes %></td>
+  <td class="col-source-assoc">
+    <%= link_to source_archives_path(source_id: source.id),
+                class: 'btn btn-sm btn-secondary',
+                title: "show #{Archive.model_name.plural.humanize} linked",
+                data: { toggle: 'tooltip' } do %>
+      <%= source.archives.count %>
+      <%= icon('book', class: 'fa-fw') %>
+    <% end %>
+  </td>
+  <td class="col-source-actions">
+    <div class="btn-group btn-group-sm">
+      <%= link_to_show_entity source %>
+      <%= link_to_edit_entity source %>
+      <%= link_to_destroy_entity source %>
+    </div>
+  </td>
+</tr>
