@@ -19,6 +19,11 @@ Rails.application.routes.draw do
 
   resources :archives do
     resources :storages, only: :index
+    resources :sources, only: :index
+  end
+
+  resources :sources do
+    resources :archives, only: :index
   end
 
   # Example resource route with options:

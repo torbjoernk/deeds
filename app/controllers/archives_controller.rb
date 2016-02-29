@@ -5,6 +5,9 @@ class ArchivesController < ApplicationController
     if params.has_key? :storage_id
       @storage = Storage.find(params[:storage_id])
       @archives = @storage.archives
+    elsif params.has_key? :source_id
+      @source = Source.find(params[:source_id])
+      @archives = @source.archives
     else
       @archives = Archive.all
     end

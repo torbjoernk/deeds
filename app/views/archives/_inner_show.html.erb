@@ -20,6 +20,16 @@
 </div>
 <% if native %>
   <div class="row">
+    <label class="col-md-3"><strong><%= Archive.human_attribute_name :sources %></strong></label>
+    <% if archive.sources.count > 0 %>
+      <ul class="col-md-9 list-group list-group-flush" id="archive-sources-accordion" role="tablist" aria-multiselectable="true">
+        <%= render partial: 'sources/nested_show', collection: archive.sources, as: :source %>
+      </ul>
+    <% else %>
+      <div class="col-md-9">none associated</div>
+    <% end %>
+  </div>
+  <div class="row">
     <label class="col-md-3"><strong><%= Archive.human_attribute_name :storages %></strong></label>
     <ul class="col-md-9 list-group list-group-flush" id="archive-storages-accordion" role="tablist" aria-multiselectable="true">
       <%= render partial: 'storages/nested_show', collection: archive.storages, as: :storage %>
