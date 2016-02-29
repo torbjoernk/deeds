@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Place, type: :model do
   let(:place) { build :place }
 
-  it 'has a valid factory' do
+  it 'has a valid factory', use_db: true do
     place.save!
     expect(place).to be_valid
   end
@@ -22,7 +22,7 @@ describe Place, type: :model do
     let(:mention1) { build :mention }
     let(:mention2) { build :mention }
 
-    specify 'many Places' do
+    specify 'many Places', use_db: true do
       other = create :place, title: Faker::Name.title
       place.place_relations << build(:place_relation, place: place, related: other)
       place.save!
@@ -31,7 +31,7 @@ describe Place, type: :model do
       expect(place.related).to include other
     end
 
-    specify 'many Mentions' do
+    specify 'many Mentions', use_db: true do
       place.mentions << mention1
       place.mentions << mention2
       place.save!
@@ -40,7 +40,7 @@ describe Place, type: :model do
       expect(place.mentions).to include mention1, mention2
     end
 
-    specify 'many mentioned People through Mentions' do
+    specify 'many mentioned People through Mentions', use_db: true do
       mention1.person = build :person
       mention2.person = build :person, name: Faker::Name.name
 
@@ -52,7 +52,7 @@ describe Place, type: :model do
       expect(place.mentioned_people).to include mention1.person, mention2.person
     end
 
-    specify 'many Roles through Mentions' do
+    specify 'many Roles through Mentions', use_db: true do
       mention1.role = build :role
       mention2.role = build :role, title: Faker::Name.title
 
@@ -64,7 +64,7 @@ describe Place, type: :model do
       expect(place.roles).to include mention1.role, mention2.role
     end
 
-    specify 'many Deeds through Mentions' do
+    specify 'many Deeds through Mentions', use_db: true do
       deed = build :deed
       mention1.deed = deed
       mention2.deed = deed
@@ -97,7 +97,7 @@ describe Place, type: :model do
 
   describe 'methods' do
     describe '#relatives' do
-      it 'is inverse of related Places' do
+      it 'is inverse of related Places', use_db: true do
         other = create :place, title: Faker::Name.title
         other.place_relations << build(:place_relation, place: other, related: place)
 

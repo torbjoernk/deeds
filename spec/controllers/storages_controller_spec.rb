@@ -5,7 +5,7 @@ describe StoragesController, type: :controller do
     let(:storage) { create :storage }
   end
 
-  describe 'GET #index' do
+  describe 'GET #index', use_db: true do
     include_context 'Storage exists'
 
     it 'assigns @storages' do
@@ -19,7 +19,7 @@ describe StoragesController, type: :controller do
       expect(response).to render_template :index
     end
 
-    describe 'filtered by associated Archive' do
+    describe 'filtered by associated Archive', use_db: true do
       let(:archive) do
         archive = create :archive
         archive.storages << storage
@@ -47,7 +47,7 @@ describe StoragesController, type: :controller do
     end
   end
 
-  describe 'GET #show via XHR' do
+  describe 'GET #show via XHR', use_db: true do
     include_context 'Storage exists'
 
     it 'assigns @storage' do
@@ -61,7 +61,7 @@ describe StoragesController, type: :controller do
     end
   end
 
-  describe 'GET #edit via XHR' do
+  describe 'GET #edit via XHR', use_db: true do
     include_context 'Storage exists'
 
     it 'assigns @storage' do
@@ -76,7 +76,7 @@ describe StoragesController, type: :controller do
   end
 
   describe 'POST #create via XHR' do
-    it 'creates a new Storage from arguments' do
+    it 'creates a new Storage from arguments', use_db: true do
       storage = build :storage
       xhr :post, :create, storage: { title: storage.title, notes: storage.notes }
       expect(assigns :storage).to be_a Storage
@@ -85,7 +85,7 @@ describe StoragesController, type: :controller do
     end
   end
 
-  describe 'PATCH #update via XHR' do
+  describe 'PATCH #update via XHR', use_db: true do
     include_context 'Storage exists'
 
     it 'updates specific Storage from arguments' do
@@ -96,7 +96,7 @@ describe StoragesController, type: :controller do
     end
   end
 
-  describe 'DELETE #destroy via XHR' do
+  describe 'DELETE #destroy via XHR', use_db: true do
     include_context 'Storage exists'
 
     it 'deletes a specific Storage' do

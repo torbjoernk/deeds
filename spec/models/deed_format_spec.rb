@@ -3,7 +3,7 @@ require 'rails_helper'
 describe DeedFormat, type: :model do
   let(:deed_format) { build :deed_format }
 
-  it 'has a valid factory' do
+  it 'has a valid factory', use_db: true do
     deed_format.save!
     expect(deed_format).to be_valid
   end

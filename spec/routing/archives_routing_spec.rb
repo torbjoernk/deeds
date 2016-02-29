@@ -1,28 +1,27 @@
 require 'rails_helper'
 
 describe 'routing for Archives', type: :routing do
+  let(:archive) { create :archive }
+  let(:storage) { create :storage }
+
   describe 'GET' do
     specify '/archives routes to archives#index' do
       expect(get: '/archives').to route_to 'archives#index'
     end
 
-    specify '/archives/:id routes to archives#show' do
-      archive = create :archive
+    specify '/archives/:id routes to archives#show', use_db: true do
       expect(get: "/archives/#{archive.id}/", format: 'js').
           to route_to 'archives#show', id: archive.id.to_s
     end
 
-    specify '/archives/:id/storages routes to storages#index' do
-      archive = create :archive
-      storage = create :storage
+    specify '/archives/:id/storages routes to storages#index', use_db: true do
       storage.archives << archive
       storage.save!
       expect(get: "/archives/#{archive.id}/storages").
           to route_to 'storages#index', archive_id: archive.id.to_s
     end
 
-    specify '/archives/:id/edit routes to archives#edit' do
-      archive = create :archive
+    specify '/archives/:id/edit routes to archives#edit', use_db: true do
       expect(get: "/archives/#{archive.id}/edit", format: 'js').
           to route_to 'archives#edit', id: archive.id.to_s
     end
@@ -35,16 +34,14 @@ describe 'routing for Archives', type: :routing do
   end
 
   describe 'PATCH' do
-    specify '/archives/:id routes to archives#update' do
-      archive = create :archive
+    specify '/archives/:id routes to archives#update', use_db: true do
       expect(patch: "/archives/#{archive.id}", format: 'js').
           to route_to 'archives#update', id: archive.id.to_s
     end
   end
 
   describe 'DELETE' do
-    specify '/archives/:id routes to archives#destroy' do
-      archive = create :archive
+    specify '/archives/:id routes to archives#destroy', use_db: true do
       expect(delete: "/archives/#{archive.id}", format: 'js').
           to route_to 'archives#destroy', id: archive.id.to_s
     end

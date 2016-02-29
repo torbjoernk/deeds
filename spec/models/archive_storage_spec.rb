@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ArchiveStorage, type: :model do
+describe ArchiveStorage, type: :model, use_db: true do
   let(:archive) { create :archive }
   let(:storage) { create :storage }
   let(:archive_storage) { build :archive_storage }

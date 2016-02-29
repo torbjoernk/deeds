@@ -3,7 +3,7 @@ require 'rails_helper'
 describe PlaceRelation, type: :model do
   let(:place_relation) { build :place_relation }
 
-  it 'has a valid factory' do
+  it 'has a valid factory', use_db: true do
     place_relation.save!
     expect(place_relation).to be_valid
   end
@@ -48,7 +48,7 @@ describe PlaceRelation, type: :model do
 
     describe 'uniqueness of' do
       describe 'association' do
-        specify 'between two Places' do
+        specify 'between two Places', use_db: true do
           place = build :place
 
           place_relation.place = place

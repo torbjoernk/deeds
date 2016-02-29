@@ -20,7 +20,7 @@ describe 'storages/index.html.erb', type: :view do
   end
 
   describe 'when filtered for associated Archive' do
-    specify 'displays associated Archive' do
+    specify 'displays associated Archive', use_db: true do
       @archive = create :archive
       render
 

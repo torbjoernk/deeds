@@ -11,7 +11,7 @@ describe ApplicationHelper, type: :helper do
   end
 
   describe '#link_to_show_entity' do
-    describe 'creates a link-button' do
+    describe 'creates a link-button', use_db: true do
       include_examples 'link_to_entity_helpers', 'show'
 
       specify 'to show the given entity' do
@@ -26,7 +26,7 @@ describe ApplicationHelper, type: :helper do
   end
 
   describe '#link_to_edit_entity' do
-    describe 'creates a link-button' do
+    describe 'creates a link-button', use_db: true do
       include_examples 'link_to_entity_helpers', 'edit'
 
       specify 'to edit the given entity' do
@@ -41,7 +41,7 @@ describe ApplicationHelper, type: :helper do
   end
 
   describe '#link_to_destroy_entity' do
-    describe 'creates a link-button' do
+    describe 'creates a link-button', use_db: true do
       include_examples 'link_to_entity_helpers', 'destroy'
 
       specify 'to delete the given entity' do
