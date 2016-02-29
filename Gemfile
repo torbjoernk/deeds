@@ -47,6 +47,8 @@ group :development, :test do
   gem 'simplecov'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'guard-rspec', require: false
+  gem 'guard-cucumber', require: false
 end
 
 group :development do
