@@ -7,6 +7,10 @@ Feature: Storages
   Scenario: Index table
     Then the User should see a table with storages
 
+  Scenario: Breadcrumbs
+    Then the User should see the breadcrumbs with "Home"
+    Then the User should see the breadcrumbs with "Storages"
+
   @javascript
   Scenario: Creating a new Storage
     When the User clicks on the "New Storage" button
