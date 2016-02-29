@@ -1,91 +1,87 @@
 require 'rails_helper'
 
 describe Role, type: :model do
-  before :each do
-    @role = build(:role)
-  end
+  let(:role) { build :role }
 
   it 'has a valid factory' do
-    @role.save!
-    expect(@role).to be_valid
+    role.save!
+    expect(role).to be_valid
   end
 
   describe 'has attribute' do
     specify 'title as string' do
-      expect(@role.title).to be_a String
+      expect(role.title).to be_a String
     end
 
     specify 'referring as string' do
-      expect(@role.referring).to be_a String
+      expect(role.referring).to be_a String
     end
 
     specify 'notes as text' do
-      expect(@role.notes).to be_a String
+      expect(role.notes).to be_a String
     end
   end
 
   context 'has association with' do
-    before :each do
-      @mention1 = build(:mention)
-      @mention2 = build(:mention)
-    end
+    let(:mention1) { build :mention }
+    let(:mention2) { build :mention }
 
     specify 'many Mentions' do
-      @role.mentions << @mention1
-      @role.mentions << @mention2
-      @role.save!
+      role.mentions << mention1
+      role.mentions << mention2
+      role.save!
 
-      expect(@role).to be_valid
-      expect(@role.mentions).to include @mention1, @mention2
+      expect(role).to be_valid
+      expect(role.mentions).to include mention1, mention2
     end
 
     specify 'many People through Mentions' do
-      @mention1.person = build(:person)
-      @mention2.person = build(:person, name: Faker::Name.name)
+      mention1.person = build :person
+      mention2.person = build :person, name: Faker::Name.name
 
-      @role.mentions << @mention1
-      @role.mentions << @mention2
-      @role.save!
+      role.mentions << mention1
+      role.mentions << mention2
+      role.save!
 
-      expect(@role).to be_valid
-      expect(@role.people).to include @mention1.person, @mention2.person
+      expect(role).to be_valid
+      expect(role.people).to include mention1.person, mention2.person
     end
 
     specify 'many Places through Mentions' do
-      @mention1.place = build(:place)
-      @mention2.place = build(:place, title: Faker::Name.title)
+      mention1.place = build :place
+      mention2.place = build :place, title: Faker::Name.title
 
-      @role.mentions << @mention1
-      @role.mentions << @mention2
-      @role.save!
+      role.mentions << mention1
+      role.mentions << mention2
+      role.save!
 
-      expect(@role).to be_valid
-      expect(@role.places).to include @mention1.place, @mention2.place
+      expect(role).to be_valid
+      expect(role.places).to include mention1.place, mention2.place
     end
 
     specify 'many Deeds through Mentions' do
-      deed = build(:deed)
-      @mention1.deed = deed
-      @mention2.deed = deed
-      @role.mentions << @mention1
-      @role.mentions << @mention2
-      @role.save!
+      deed = build :deed
+      mention1.deed = deed
+      mention2.deed = deed
+      role.mentions << mention1
+      role.mentions << mention2
+      role.save!
 
-      expect(@role).to be_valid
-      expect(@role.deeds).to include @mention1.deed, @mention2.deed
+      expect(role).to be_valid
+      expect(role.deeds).to include mention1.deed, mention2.deed
     end
   end
 
   describe 'validates' do
     describe 'presence of' do
       it 'title' do
-        @role.title = nil
-        expect(@role).not_to be_valid
+        role.title = nil
+        expect(role).not_to be_valid
       end
 
       it 'referring' do
-        @role.referring = nil
-        expect(@role).not_to be_valid
+        role.referring = nil
+        expect(role).not_to be_valid
       end
     end
 
@@ -93,12 +89,12 @@ describe Role, type: :model do
       describe 'referring' do
         specify "within #{Role::REFERS_TO}" do
           Role::REFERS_TO.each do |valid_ref|
-            @role.referring = valid_ref
-            expect(@role).to be_valid
+            role.referring = valid_ref
+            expect(role).to be_valid
           end
 
-          @role.referring = 'not a valid referring type'
-          expect(@role).not_to be_valid
+          role.referring = 'not a valid referring type'
+          expect(role).not_to be_valid
         end
       end
     end
@@ -107,8 +103,8 @@ describe Role, type: :model do
   describe 'allows' do
     describe 'absence of' do
       it 'notes' do
-        @role.notes = nil
-        expect(@role).to be_valid
+        role.notes = nil
+        expect(role).to be_valid
       end
     end
   end

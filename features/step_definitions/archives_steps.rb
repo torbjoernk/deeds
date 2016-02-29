@@ -48,8 +48,8 @@ Then /^the User should see a table with archives$/ do
 
   within_table 'archives' do
     # exactly four columns
-    expect(page).to have_selector 'thead > tr > th + th + th + th'
-    expect(page).not_to have_selector 'thead > tr > th + th + th + th + th'
+    expect(page).to have_selector 'thead > tr > th + th + th + th + th'
+    expect(page).not_to have_selector 'thead > tr > th + th + th + th + th + th'
 
     within 'thead > tr > th:first-child' do
       expect(page).to have_text 'Title'

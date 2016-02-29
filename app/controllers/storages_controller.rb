@@ -2,7 +2,12 @@ class StoragesController < ApplicationController
   after_filter { flash.discard if request.xhr? }
 
   def index
-    @storages = Storage.all
+    if params.has_key? :archive_id
+      @archive = Archive.find(params[:archive_id])
+      @storages = @archive.storages
+    else
+      @storages = Storage.all
+    end
   end
 
   def new

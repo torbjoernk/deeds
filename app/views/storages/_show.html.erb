@@ -11,18 +11,7 @@
     </div>
     <div class="modal-body">
       <div class="container-fluid">
-        <div class="row">
-          <label class="col-md-3"><strong><%= Storage.human_attribute_name :title %></strong></label>
-          <div class="col-md-9">
-            <%= @storage.title %>
-          </div>
-        </div>
-        <div class="row">
-          <label class="col-md-3"><strong><%= Storage.human_attribute_name :notes %></strong></label>
-          <div class="col-md-9">
-            <%= @storage.notes %>
-          </div>
-        </div>
+        <%= render partial: 'storages/inner_show', locals: { storage: @storage, native: true } %>
       </div>
     </div>
   </div>

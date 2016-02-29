@@ -1,7 +1,7 @@
 <h1>
   Archives
   <span class="btn-group">
-    <%= link_to new_archive_url,
+    <%= link_to new_archive_path,
                 class: 'btn btn-sm btn-primary',
                 id: 'btn-new-archive',
                 title: 'Add new Archive',
@@ -12,6 +12,15 @@
   </span>
 </h1>
 
+<% if @storage %>
+  <dl class="row">
+    <dt class="col-md-2">associated with Storage</dt>
+    <dd class="col-md-10">
+      <%= render partial: 'storages/oneline', locals: { storage: @storage } %>
+    </dd>
+  </dl>
+<% end %>
+
 <div id="archives-table">
   <table class="table table-hover table-sm" id="archives">
     <thead>
@@ -19,6 +28,7 @@
       <th class="col-archive-title">Title</th>
       <th class="col-archive-abbr">Abbreviation</th>
       <th class="col-archive-notes">Notes</th>
+      <th class="col-archive-assoc">Associations</th>
       <th class="col-archive-actions">Actions</th>
     </tr>
     </thead>
@@ -30,4 +40,7 @@
 
 <div class="modal fade" id="archive-modal" tabindex="-1" role="dialog"
      aria-labelledby="archive-modal-label" aria-hidden="true">
+</div>
+<div class="modal fade" id="storage-modal" tabindex="-1" role="dialog"
+     aria-labelledby="storage-modal-label" aria-hidden="true">
 </div>
