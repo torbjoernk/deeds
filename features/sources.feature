@@ -11,8 +11,9 @@ Feature: Sources
   Scenario: Creating a new Source
     When the User clicks on the "New Source" button
     And enters the new Source's title
+    And enters the new Source's type
     And clicks on "Create Source"
-    Then a new Source with given title should be created
+    Then a new Source with given title and type should be created
 
   @javascript
   Scenario: Show details of a single Source

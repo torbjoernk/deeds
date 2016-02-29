@@ -15,6 +15,12 @@ When /^enters the new Source's title$/ do
   end
 end
 
+When /^enters the new Source's type$/ do
+  within '#source-modal' do
+    fill_in 'Source type', with: @new_source.source_type
+  end
+end
+
 When /^the User clicks on the "([^"]*)" button of the first Source$/ do |arg|
   within "#source-row-#{@source.id}" do
     click_on "btn-source-#{arg.downcase}-#{@source.id}"
@@ -48,13 +54,16 @@ Then /^the User should see a table with sources$/ do
 
   within_table 'sources' do
     # exactly three columns
-    expect(page).to have_selector 'thead > tr > th + th + th + th'
-    expect(page).not_to have_selector 'thead > tr > th + th + th + th + th'
+    expect(page).to have_selector 'thead > tr > th + th + th + th + th'
+    expect(page).not_to have_selector 'thead > tr > th + th + th + th + th + th'
 
     within 'thead > tr > th:first-child' do
       expect(page).to have_text 'Title'
     end
     within 'thead > tr > th:nth-child(2)' do
+      expect(page).to have_text 'Source Type'
+    end
+    within 'thead > tr > th:nth-child(3)' do
       expect(page).to have_text 'Notes'
     end
     within 'thead > tr > th:last-child' do
@@ -63,12 +72,14 @@ Then /^the User should see a table with sources$/ do
   end
 end
 
-Then /^a new Source with given title should be created$/ do
+Then /^a new Source with given title and type should be created$/ do
   expect(page).to have_text @new_source.title
+  expect(page).to have_text @new_source.source_type
 end
 
 Then /^the User should see the Source's details$/ do
   expect(find('#source-modal')).to have_text @source.title
+  expect(find('#source-modal')).to have_text @source.source_type
   expect(find('#source-modal')).to have_text @source.notes
 end
 
