@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     resources :storages, only: :index
   end
 
+  resources :sources
+
   # Example resource route with options:
   #   resources :products do
   #     member do
