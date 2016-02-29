@@ -2,22 +2,22 @@
   <a class="navbar-brand">Deeds</a>
   <ul class="nav navbar-nav">
     <li class="nav-item">
-      <%= link_to root_path, class: 'nav-link' do %>
+      <%= link_to root_path, class: "nav-link#{' active' if current_page?(controller: :application)}" do %>
         <i class="fi-list"></i> <span>Home</span>
       <% end %>
     </li>
     <li class="nav-item">
-      <%= link_to archives_path, class: 'nav-link' do %>
+      <%= link_to archives_path, class: "nav-link#{' active' if current_page?(controller: :archives)}" do %>
           <i class="fa fa-fw fa-<%= Archive::ICON %>"></i> <span>Archives</span>
       <% end %>
     </li>
     <li class="nav-item">
-      <%= link_to storages_path, class: 'nav-link' do %>
+      <%= link_to storages_path, class: "nav-link#{' active' if current_page?(controller: :storages)}" do %>
         <i class="fa fa-fw fa-<%= Storage::ICON %>"></i> <span>Storages</span>
       <% end %>
     </li>
     <li class="nav-item">
-      <%= link_to sources_path, class: 'nav-link' do %>
+      <%= link_to sources_path, class: "nav-link#{' active' if current_page?(controller: :sources)}" do %>
         <i class="fa fa-fw fa-<%= Source::ICON %>"></i> <span>Sources</span>
       <% end %>
     </li>
