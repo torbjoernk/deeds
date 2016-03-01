@@ -8,6 +8,10 @@ describe 'routing for Sources', type: :routing do
       expect(get: '/sources').to route_to 'sources#index'
     end
 
+    specify '/sources/new routes to sources#new' do
+      expect(get: '/sources/new').to route_to 'sources#new'
+    end
+
     specify '/sources/:id routes to sources#show', use_db: true do
       expect(get: "/sources/#{source.id}/", format: 'js').
           to route_to 'sources#show', id: source.id.to_s

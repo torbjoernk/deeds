@@ -20,12 +20,26 @@ class SourcesController < ApplicationController
 
   def new
     @source = Source.new
-    respond_to :js
+    respond_to do |format|
+      format.js { render 'sources/new' }
+    end
   end
 
   def edit
     @source = Source.find params[:id]
-    respond_to :js
+    if params.has_key? :sub_action
+      if params[:sub_action].to_sym == :refresh_nested
+        @free_archives = Archive.where('id NOT IN (?)',
+                                       ArchiveSource.select(:archive_id).where(source_id: @source))
+      end
+      respond_to do |format|
+        format.js { render partial: 'sources/form/refresh' }
+      end
+    else
+      respond_to do |format|
+        format.js { render 'sources/edit' }
+      end
+    end
   end
 
   def create
@@ -36,9 +50,24 @@ class SourcesController < ApplicationController
 
   def update
     @source = Source.find params[:id]
-    @source.update!(source_params)
-    flash[:success] = "Updated source with ID #{@source.id}."
-    redirect_to sources_path
+    if params.has_key? :sub_action
+      if params.has_key? :archive_id
+        @archive = Archive.find(params[:archive_id])
+        if params[:sub_action].to_sym == :deassociate
+          @source.archives.delete(@archive) if @source.archives.include? @archive
+        elsif params[:sub_action].to_sym == :associate
+          @source.archives << @archive
+          @source.save!
+        end
+        respond_to do |format|
+          format.js { redirect_to edit_source_path(@source, sub_action: :refresh_nested), status: :see_other }
+        end
+      end
+    else
+      @source.update!(source_params)
+      flash[:success] = "Updated source with ID #{@source.id}."
+      redirect_to sources_path
+    end
   end
 
   def destroy

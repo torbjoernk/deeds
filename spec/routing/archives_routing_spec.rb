@@ -14,13 +14,6 @@ describe 'routing for Archives', type: :routing do
           to route_to 'archives#show', id: archive.id.to_s
     end
 
-    specify '/archives/:id/storages routes to storages#index', use_db: true do
-      storage.archives << archive
-      storage.save!
-      expect(get: "/archives/#{archive.id}/storages").
-          to route_to 'storages#index', archive_id: archive.id.to_s
-    end
-
     specify '/archives/:id/edit routes to archives#edit', use_db: true do
       expect(get: "/archives/#{archive.id}/edit", format: 'js').
           to route_to 'archives#edit', id: archive.id.to_s

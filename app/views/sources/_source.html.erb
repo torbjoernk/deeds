@@ -3,7 +3,7 @@
   <td class="col-source-type"><%= source.source_type %></td>
   <td class="col-source-notes"><%= source.notes %></td>
   <td class="col-source-assoc">
-    <%= link_to source_archives_path(source_id: source.id),
+    <%= link_to archives_path(source_id: source.id),
                 class: 'btn btn-sm btn-secondary',
                 title: "show #{Archive.model_name.plural.humanize} linked",
                 data: { toggle: 'tooltip' } do %>
