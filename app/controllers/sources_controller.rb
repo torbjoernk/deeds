@@ -1,4 +1,6 @@
 class SourcesController < ApplicationController
+  include AssociationUpdate
+
   after_filter { flash.discard if request.xhr? }
 
   def index
@@ -53,12 +55,7 @@ class SourcesController < ApplicationController
     if params.has_key? :sub_action
       if params.has_key? :archive_id
         @archive = Archive.find(params[:archive_id])
-        if params[:sub_action].to_sym == :deassociate
-          @source.archives.delete(@archive) if @source.archives.include? @archive
-        elsif params[:sub_action].to_sym == :associate
-          @source.archives << @archive
-          @source.save!
-        end
+        update_association_for @source, 'archives', @archive, params[:sub_action].to_sym
         respond_to do |format|
           format.js { redirect_to edit_source_path(@source, sub_action: :refresh_nested),
                                   status: :see_other }

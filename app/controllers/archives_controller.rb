@@ -1,4 +1,6 @@
 class ArchivesController < ApplicationController
+  include AssociationUpdate
+
   after_filter { flash.discard if request.xhr? }
 
   def index
@@ -51,20 +53,10 @@ class ArchivesController < ApplicationController
     if params.has_key? :sub_action
       if params.has_key? :source_id
         @source = Source.find(params[:source_id])
-        if params[:sub_action].to_sym == :deassociate
-          @archive.sources.delete(@source) if @archive.sources.include? @source
-        elsif params[:sub_action].to_sym == :associate
-          @archive.sources << @source
-          @archive.save!
-        end
+        update_association_for @archive, 'sources', @source, params[:sub_action].to_sym
       elsif params.has_key? :storage_id
         @storage = Storage.find(params[:storage_id])
-        if params[:sub_action].to_sym == :deassociate
-          @archive.storages.delete(@storage) if @archive.storages.include? @storage
-        elsif params[:sub_action].to_sym == :associate
-          @archive.storages << @storage
-          @archive.save!
-        end
+        update_association_for @archive, 'storages', @storage, params[:sub_action].to_sym
       end
       respond_to do |format|
         format.js { redirect_to edit_archive_path(@archive, sub_action: :refresh_nested),
