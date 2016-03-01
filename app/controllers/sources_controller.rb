@@ -1,10 +1,13 @@
 class SourcesController < ApplicationController
+  include Common
+  include AssociationUpdate
+  include ArchiveAssociation
+
   after_filter { flash.discard if request.xhr? }
 
   def index
     if params.has_key? :archive_id
-      @archive = Archive.find(params[:archive_id])
-      add_breadcrumb Archive.model_name.human, archives_path
+      index_for_nested_archive params[:archive_id]
       @sources = @archive.sources
     else
       @sources = Source.all
@@ -20,12 +23,26 @@ class SourcesController < ApplicationController
 
   def new
     @source = Source.new
-    respond_to :js
+    respond_to do |format|
+      format.js { render 'sources/new' }
+    end
   end
 
   def edit
     @source = Source.find params[:id]
-    respond_to :js
+    if params.has_key? :sub_action
+      if params[:sub_action].to_sym == :refresh_nested
+        @free_archives = Archive.where('id NOT IN (?)',
+                                       ArchiveSource.select(:archive_id).where(source_id: @source))
+      end
+      respond_to do |format|
+        format.js { render partial: 'sources/form/refresh' }
+      end
+    else
+      respond_to do |format|
+        format.js { render 'sources/edit' }
+      end
+    end
   end
 
   def create
@@ -36,15 +53,18 @@ class SourcesController < ApplicationController
 
   def update
     @source = Source.find params[:id]
-    @source.update!(source_params)
-    flash[:success] = "Updated source with ID #{@source.id}."
-    redirect_to sources_path
+    if params.has_key? :sub_action
+      update_associated_archive_for @source, params,
+                                    edit_source_path(@source, sub_action: :refresh_nested)
+    else
+      @source.update!(source_params)
+      flash[:success] = "Updated source with ID #{@source.id}."
+      redirect_to sources_path
+    end
   end
 
   def destroy
-    @source = Source.find params[:id]
-    @source.delete
-    flash[:success] = "Deleted source with ID #{@source.id}."
+    destroy_entity_of Source, params
     redirect_to sources_path
   end
 

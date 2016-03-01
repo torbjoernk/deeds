@@ -83,14 +83,36 @@ describe ArchivesController, type: :controller do
   describe 'GET #edit via XHR', use_db: true do
     include_context 'Archive exists'
 
-    it 'assigns @archive' do
-      xhr :get, :edit, id: archive.id
-      expect(assigns :archive).to eq archive
+    describe 'without additional parameters' do
+      it 'assigns @archive' do
+        xhr :get, :edit, id: archive.id
+        expect(assigns :archive).to eq archive
+      end
+
+      it 'renders the edit template' do
+        xhr :get, :edit, id: archive.id
+        expect(response).to render_template :edit
+      end
     end
 
-    it 'renders the edit template' do
-      xhr :get, :edit, id: archive.id
-      expect(response).to render_template :edit
+    describe 'with :sub_action => :refresh_nested' do
+      let(:source) { create :source }
+      let(:storage) { create :storage }
+
+      it 'assigns @free_sources' do
+        xhr :get, :edit, id: archive.id, sub_action: :refresh_nested
+        expect(assigns :free_sources).to include source
+      end
+
+      it 'assigns @free_storages' do
+        xhr :get, :edit, id: archive.id, sub_action: :refresh_nested
+        expect(assigns :free_storages).to include storage
+      end
+
+      it 'renders the form refresh template' do
+        xhr :get, :edit, id: archive.id, sub_action: :refresh_nested
+        expect(response).to render_template 'archives/form/_refresh'
+      end
     end
   end
 
@@ -107,11 +129,83 @@ describe ArchivesController, type: :controller do
   describe 'PATCH #update via XHR', use_db: true do
     include_context 'Archive exists'
 
-    it 'updates specific Archive from arguments' do
-      archive.notes = 'Something different'
-      xhr :patch, :update, id: archive.id, archive: { title: archive.title, notes: archive.notes }
-      expect(flash[:success]).to match /Updated archive/
-      expect(response).to redirect_to archives_path
+    describe 'without additional parameters' do
+      it 'updates specific Archive from arguments' do
+        archive.notes = 'Something different'
+        xhr :patch, :update, id: archive.id, archive: { title: archive.title, notes: archive.notes }
+        expect(flash[:success]).to match /Updated archive/
+        expect(response).to redirect_to archives_path
+      end
+    end
+
+    describe 'with :sub_action => :associate' do
+      describe 'and :source_id set' do
+        let(:source) { create :source }
+
+        describe 'to an un-associated Source' do
+          it 'associates the Source to the Archive' do
+            expect(archive.sources).not_to include source
+            xhr :patch, :update, id: archive.id, sub_action: :associate, source_id: source.id
+            expect(Archive.find(archive.id).sources).to include source
+          end
+        end
+
+        describe 'to an already associated Source' do
+          it 'raises error' do
+            archive.sources << source
+            expect(Archive.find(archive.id).sources).to include source
+            expect {
+              xhr :patch, :update, id: archive.id, sub_action: :associate, source_id: source.id
+            }.to raise_error ActiveRecord::RecordInvalid
+          end
+        end
+      end
+
+      describe 'and :storage_id set' do
+        let(:storage) { create :storage }
+
+        describe 'to an un-associated Storage' do
+          it 'associates the Storage to the Archive' do
+            expect(archive.storages).not_to include storage
+            xhr :patch, :update, id: archive.id, sub_action: :associate, storage_id: storage.id
+            expect(Archive.find(archive.id).storages).to include storage
+          end
+        end
+
+        describe 'to an already associated Storage' do
+          it 'raises error' do
+            archive.storages << storage
+            expect(Archive.find(archive.id).storages).to include storage
+            expect {
+              xhr :patch, :update, id: archive.id, sub_action: :associate, storage_id: storage.id
+            }.to raise_error ActiveRecord::RecordInvalid
+          end
+        end
+      end
+    end
+
+    describe 'with :sub_action => :deassociate' do
+      describe 'and :source_id set to an associated Source' do
+        let(:source) { create :source }
+
+        specify 'removes this association' do
+          archive.sources << source
+          expect(Archive.find(archive.id).sources).to include source
+          xhr :patch, :update, id: archive.id, sub_action: :deassociate, source_id: source.id
+          expect(Archive.find(archive.id).sources).not_to include source
+        end
+      end
+
+      describe 'and :storage_id set to an associated Storage' do
+        let(:storage) { create :storage }
+
+        specify 'removes this association' do
+          archive.storages << storage
+          expect(Archive.find(archive.id).storages).to include storage
+          xhr :patch, :update, id: archive.id, sub_action: :deassociate, storage_id: storage.id
+          expect(Archive.find(archive.id).storages).not_to include storage
+        end
+      end
     end
   end
 
@@ -120,7 +214,7 @@ describe ArchivesController, type: :controller do
 
     it 'deletes a specific Archive' do
       xhr :delete, :destroy, id: archive.id
-      expect(flash[:success]).to match /Deleted archive/
+      expect(flash[:success]).to match /Deleted Archive/
       expect(response).to redirect_to archives_path
     end
   end

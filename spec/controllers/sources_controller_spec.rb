@@ -63,14 +63,30 @@ describe SourcesController, type: :controller do
   describe 'GET #edit via XHR', use_db: true do
     include_context 'Source exists'
 
-    it 'assigns @source' do
-      xhr :get, :edit, id: source.id
-      expect(assigns :source).to eq source
+    describe 'without additional parameters' do
+      it 'assigns @source' do
+        xhr :get, :edit, id: source.id
+        expect(assigns :source).to eq source
+      end
+
+      it 'renders the edit template' do
+        xhr :get, :edit, id: source.id
+        expect(response).to render_template :edit
+      end
     end
 
-    it 'renders the edit template' do
-      xhr :get, :edit, id: source.id
-      expect(response).to render_template :edit
+    describe 'with :sub_action => :refresh_nested' do
+      let(:archive) { create :archive }
+
+      it 'assigns @free_sources' do
+        xhr :get, :edit, id: source.id, sub_action: :refresh_nested
+        expect(assigns :free_archives).to include archive
+      end
+
+      it 'renders the form refresh template' do
+        xhr :get, :edit, id: source.id, sub_action: :refresh_nested
+        expect(response).to render_template 'sources/form/_refresh'
+      end
     end
   end
 
@@ -87,11 +103,52 @@ describe SourcesController, type: :controller do
   describe 'PATCH #update via XHR', use_db: true do
     include_context 'Source exists'
 
-    it 'updates specific Source from arguments' do
-      source.notes = 'Something different'
-      xhr :patch, :update, id: source.id, source: { title: source.title, notes: source.notes }
-      expect(flash[:success]).to match /Updated source/
-      expect(response).to redirect_to sources_path
+    describe 'without additional parameters' do
+      it 'updates specific Source from arguments' do
+        source.notes = 'Something different'
+        xhr :patch, :update, id: source.id, source: { title: source.title, notes: source.notes }
+        expect(flash[:success]).to match /Updated source/
+        expect(response).to redirect_to sources_path
+      end
+    end
+
+    describe 'with :sub_action => :associate' do
+      describe 'and :archive_id set' do
+        let(:archive) { create :archive }
+
+        describe 'an un-associated Archive' do
+          specify 'associates the Source to the Archive' do
+            expect(Source.find(source.id).archives).not_to include archive
+            xhr :patch, :update, id: source.id, sub_action: :associate, archive_id: archive.id
+            expect(Source.find(source.id).archives).to include archive
+          end
+        end
+
+        describe 'an already associated Archive' do
+          specify 'raises error' do
+            source.archives << archive
+            expect(Source.find(source.id).archives).to include archive
+            expect {
+              xhr :patch, :update, id: source.id, sub_action: :associate, archive_id: archive.id
+            }.to raise_error ActiveRecord::RecordInvalid
+          end
+        end
+      end
+    end
+
+    describe 'with :sub_action => :deassociate' do
+      describe 'and :archive_id' do
+        let(:archive) { create :archive }
+
+        describe 'set to an associated Archive' do
+          specify 'removes this association' do
+            source.archives << archive
+            expect(Source.find(source.id).archives).to include archive
+            xhr :patch, :update, id: source.id, sub_action: :deassociate, archive_id: archive.id
+            expect(Source.find(source.id).archives).not_to include archive
+          end
+        end
+      end
     end
   end
 
@@ -100,7 +157,7 @@ describe SourcesController, type: :controller do
 
     it 'deletes a specific Source' do
       xhr :delete, :destroy, id: source.id
-      expect(flash[:success]).to match /Deleted source/
+      expect(flash[:success]).to match /Deleted Source/
       expect(response).to redirect_to sources_path
     end
   end

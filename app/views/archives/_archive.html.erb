@@ -3,14 +3,14 @@
   <td class="col-archive-abbr"><%= archive.abbr %></td>
   <td class="col-archive-notes"><%= archive.notes %></td>
   <td class="col-storage-assoc">
-    <%= link_to archive_storages_path(archive_id: archive.id),
+    <%= link_to storages_path(archive_id: archive.id),
                 class: 'btn btn-sm btn-secondary',
                 title: "show #{Storage.model_name.plural.humanize} linked",
                 data: { toggle: 'tooltip' } do %>
       <%= archive.storages.count %>
       <%= icon('archive', class: 'fa-fw') %>
     <% end %>
-    <%= link_to archive_sources_path(archive_id: archive.id),
+    <%= link_to sources_path(archive_id: archive.id),
                 class: 'btn btn-sm btn-secondary',
                 title: "show #{Source.model_name.plural.humanize} linked",
                 data: { toggle: 'tooltip' } do %>
