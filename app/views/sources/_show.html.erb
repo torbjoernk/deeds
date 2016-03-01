@@ -1,6 +1,6 @@
 <div class="modal-dialog" role="document">
   <div class="modal-content card">
-    <h4 id="source-modal-label" class="card-header">
+    <h4 id="source-modal-label" class="card-header bg-info">
       <%= Source.model_name.human %>
       <span class="tag tag-default">ID: <%= @source.id %></span>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -12,8 +12,8 @@
         <%= render partial: 'sources/inner_show', locals: { source: @source, native: true } %>
       </div>
     </div>
-    <div class="card-footer">
-      <button type="button" class="btn btn-sm btn-default pull-right" data-dismiss="modal" aria-label="Close">
+    <div class="card-footer bg-info">
+      <button type="button" class="btn btn-sm btn-info pull-right" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
         Close
       </button>
