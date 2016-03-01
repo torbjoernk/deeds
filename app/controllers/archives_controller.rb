@@ -1,4 +1,5 @@
 class ArchivesController < ApplicationController
+  include Common
   include AssociationUpdate
 
   after_filter { flash.discard if request.xhr? }
@@ -76,9 +77,7 @@ class ArchivesController < ApplicationController
   end
 
   def destroy
-    @archive = Archive.find params[:id]
-    @archive.delete
-    flash[:success] = "Deleted archive with ID #{@archive.id}."
+    destroy_entity_of Archive, params
     redirect_to archives_path
   end
 

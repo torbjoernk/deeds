@@ -158,7 +158,7 @@ describe StoragesController, type: :controller do
 
     it 'deletes a specific Storage' do
       xhr :delete, :destroy, id: storage.id
-      expect(flash[:success]).to match /Deleted storage/
+      expect(flash[:success]).to match /Deleted Storage/
       expect(response).to redirect_to storages_path
     end
   end

@@ -157,7 +157,7 @@ describe SourcesController, type: :controller do
 
     it 'deletes a specific Source' do
       xhr :delete, :destroy, id: source.id
-      expect(flash[:success]).to match /Deleted source/
+      expect(flash[:success]).to match /Deleted Source/
       expect(response).to redirect_to sources_path
     end
   end

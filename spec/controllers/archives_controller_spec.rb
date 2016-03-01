@@ -214,7 +214,7 @@ describe ArchivesController, type: :controller do
 
     it 'deletes a specific Archive' do
       xhr :delete, :destroy, id: archive.id
-      expect(flash[:success]).to match /Deleted archive/
+      expect(flash[:success]).to match /Deleted Archive/
       expect(response).to redirect_to archives_path
     end
   end

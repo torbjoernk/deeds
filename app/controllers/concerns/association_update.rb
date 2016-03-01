@@ -6,8 +6,6 @@ module AssociationUpdate
       target.save!
     elsif action == :deassociate
       target.send(collection).delete(child) if target.send(collection).include? child
-    else
-      raise StandardError.new "Unknown action '#{action}' for association update."
     end
   end
 end
