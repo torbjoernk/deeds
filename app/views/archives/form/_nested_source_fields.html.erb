@@ -1,0 +1,66 @@
+<div class="row form-group">
+  <label class="col-md-3 form-control-label">
+    <%= Source.model_name.plural.humanize %>
+    <span class="pull-right">
+      <%= content_tag :a,
+                      icon('refresh', class: 'fa-fw'),
+                      id: 'btn-refresh-nested-fields',
+                      class: 'btn btn-sm btn-outline-default',
+                      title: 'Refresh associations',
+                      data: { toggle: 'tooltip' } %>
+    </span>
+  </label>
+  <div class="col-md-9">
+    <ul class="list-group list-group-flush">
+      <% @archive.sources.each do |source| %>
+        <li id="associated-source-<%= source.id %>" class="list-group-item form-control">
+          <%= source.title %> (<%= source.source_type %>)
+          <span class="btn-group btn-group-sm pull-right">
+            <%= link_to_show_entity source %>
+            <%= link_to archive_path(@archive.id, sub_action: :deassociate, source_id: source.id),
+                        method: :patch,
+                        remote: true,
+                        id: "btn-deassoc-source-#{source.id}",
+                        class: 'btn btn-sm btn-danger',
+                        title: 'Deassociate Source',
+                        data: { toggle: 'tooltip' } do %>
+              <%= icon('minus', class: 'fa-fw') %>
+            <% end %>
+          </span>
+        </li>
+      <% end %>
+      <li id="associate-source-add" class="list-group-item form-control">
+        <% if @free_sources.count > 0 %>
+          <div class="form-group input-group">
+            <%= text_field nil,
+                           nil,
+                           id: 'assoc-source-input',
+                           class: 'form-control pull-left',
+                           type: 'text',
+                           list: 'free-sources',
+                           placeholder: 'Search for non-associated Source' %>
+            <%= content_tag :datalist, id: 'free-sources' do %>
+              <% @free_sources.each do |source| %>
+                <%= content_tag :option,
+                                "#{source.title} (#{source.source_type})",
+                                data: {'source-id': source.id } %>
+              <% end %>
+            <% end %>
+            <%= content_tag :a,
+                            icon('search', class: 'fa-fw'),
+                            id: 'btn-show-selected-source-details',
+                            class: 'input-group-addon btn btn-outline-info',
+                            role: 'button' %>
+            <%= content_tag :a,
+                            icon('plus', class: 'fa-fw'),
+                            id: 'btn-associate-selected-source',
+                            class: 'input-group-addon btn btn-primary',
+                            role: 'button' %>
+          </div>
+        <% else %>
+          no unassociated Sources
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</div>

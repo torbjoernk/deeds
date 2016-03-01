@@ -1,0 +1,66 @@
+<div class="row form-group">
+  <label class="col-md-3 form-control-label">
+    <%= Storage.model_name.plural.humanize %>
+    <span class="pull-right">
+      <%= content_tag :a,
+                      icon('refresh', class: 'fa-fw'),
+                      id: 'btn-refresh-nested-fields',
+                      class: 'btn btn-sm btn-outline-default',
+                      title: 'Refresh associations',
+                      data: { toggle: 'tooltip' } %>
+    </span>
+  </label>
+  <div class="col-md-9">
+    <ul class="list-group list-group-flush">
+      <% @archive.storages.each do |storage| %>
+        <li id="associated-storage-<%= storage.id %>" class="list-group-item form-control">
+          <%= storage.title %>
+          <span class="btn-group btn-group-sm pull-right">
+            <%= link_to_show_entity storage %>
+            <%= link_to archive_path(@archive.id, sub_action: :deassociate, storage_id: storage.id),
+                        method: :patch,
+                        remote: true,
+                        id: "btn-deassoc-storage-#{storage.id}",
+                        class: 'btn btn-sm btn-danger',
+                        title: 'Deassociate Storage',
+                        data: { toggle: 'tooltip' } do %>
+              <%= icon('minus', class: 'fa-fw') %>
+            <% end %>
+          </span>
+        </li>
+      <% end %>
+      <li id="associate-storage-add" class="list-group-item form-control">
+        <% if @free_storages.count > 0 %>
+          <div class="form-group input-group">
+            <%= text_field nil,
+                           nil,
+                           id: 'assoc-storage-input',
+                           class: 'form-control pull-left',
+                           type: 'text',
+                           list: 'free-storages',
+                           placeholder: 'Search for non-associated Storage' %>
+            <%= content_tag :datalist, id: 'free-storages' do %>
+              <% @free_storages.each do |storage| %>
+                <%= content_tag :option,
+                                storage.title,
+                                data: {'storage-id': storage.id } %>
+              <% end %>
+            <% end %>
+            <%= content_tag :a,
+                            icon('search', class: 'fa-fw'),
+                            id: 'btn-show-selected-storage-details',
+                            class: 'input-group-addon btn btn-outline-info',
+                            role: 'button' %>
+            <%= content_tag :a,
+                            icon('plus', class: 'fa-fw'),
+                            id: 'btn-associate-selected-storage',
+                            class: 'input-group-addon btn btn-primary',
+                            role: 'button' %>
+          </div>
+        <% else %>
+          no unassociated Storages
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -29,14 +29,52 @@ class ArchivesController < ApplicationController
 
   def edit
     @archive = Archive.find params[:id]
-    respond_to :js
+    if params.has_key? :sub_action
+      if params[:sub_action].to_sym == :refresh_nested
+        @free_sources = Source.where('id NOT IN (?)',
+                                     ArchiveSource.select(:source_id).where(archive_id: @archive))
+        @free_storages = Storage.where('id NOT IN (?)',
+                                       ArchiveStorage.select(:storage_id).where(archive_id: @archive))
+      end
+      respond_to do |format|
+        format.js { render partial: 'archives/form/refresh' }
+      end
+    else
+      respond_to do |format|
+        format.js { render 'archives/edit' }
+      end
+    end
   end
 
   def update
     @archive = Archive.find params[:id]
-    @archive.update!(archive_params)
-    flash[:success] = "Updated archive with ID #{@archive.id}."
-    redirect_to archives_path
+    if params.has_key? :sub_action
+      if params.has_key? :source_id
+        @source = Source.find(params[:source_id])
+        if params[:sub_action].to_sym == :deassociate
+          @archive.sources.delete(@source) if @archive.sources.include? @source
+        elsif params[:sub_action].to_sym == :associate
+          @archive.sources << @source
+          @archive.save!
+        end
+      elsif params.has_key? :storage_id
+        @storage = Storage.find(params[:storage_id])
+        if params[:sub_action].to_sym == :deassociate
+          @archive.storages.delete(@storage) if @archive.storages.include? @storage
+        elsif params[:sub_action].to_sym == :associate
+          @archive.storages << @storage
+          @archive.save!
+        end
+      end
+      respond_to do |format|
+        format.js { redirect_to edit_archive_path(@archive, sub_action: :refresh_nested),
+                                status: :see_other }
+      end
+    else
+      @archive.update!(archive_params)
+      flash[:success] = "Updated archive with ID #{@archive.id}."
+      redirect_to archives_path
+    end
   end
 
   def create

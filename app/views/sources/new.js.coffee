@@ -7,7 +7,7 @@ $ ->
   source_modal.find('.modal-dialog').addClass('modal-lg')
 
   source_modal.html(
-    "<%= escape_javascript(render(partial: 'sources/form/scaffold')) %>"
+    "<%= escape_javascript(render partial: 'sources/form/scaffold') %>"
   )
 
   source_modal.modal('show')

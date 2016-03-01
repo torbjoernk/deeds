@@ -60,7 +60,8 @@ class SourcesController < ApplicationController
           @source.save!
         end
         respond_to do |format|
-          format.js { redirect_to edit_source_path(@source, sub_action: :refresh_nested), status: :see_other }
+          format.js { redirect_to edit_source_path(@source, sub_action: :refresh_nested),
+                                  status: :see_other }
         end
       end
     else
