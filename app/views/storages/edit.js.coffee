@@ -5,7 +5,7 @@ $ ->
   storage_modal = $('#storage-modal')
 
   storage_modal.html(
-    "<%= escape_javascript(render partial: 'storages/form/scaffold') %>"
+    "<%= escape_javascript(render(partial: 'storages/form/scaffold')) %>"
   )
 
   $.get

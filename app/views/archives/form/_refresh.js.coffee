@@ -6,8 +6,10 @@ $ ->
 
   # empty and re-fill the nested form
   nested_fields_container.empty()
-  nested_fields_container.append('<%= escape_javascript(render partial: 'archives/form/nested_source_fields') %>')
-  nested_fields_container.append('<%= escape_javascript(render partial: 'archives/form/nested_storage_fields') %>')
+  nested_fields_container.
+    append('<%= escape_javascript(render(partial: 'archives/form/nested_source_fields')) %>')
+  nested_fields_container.
+    append('<%= escape_javascript(render(partial: 'archives/form/nested_storage_fields')) %>')
 
   # refresh button
   nested_fields_container.find('#btn-refresh-nested-fields').click ->

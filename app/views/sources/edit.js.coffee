@@ -5,7 +5,7 @@ $ ->
   source_modal = $('#source-modal')
 
   source_modal.html(
-    "<%= escape_javascript(render partial: 'sources/form/scaffold') %>"
+    "<%= escape_javascript(render(partial: 'sources/form/scaffold')) %>"
   )
 
   $.get

@@ -7,7 +7,7 @@ $ ->
   storage_modal.find('.modal-dialog').addClass('modal-lg')
 
   storage_modal.html(
-    "<%= escape_javascript(render partial: 'storages/form/scaffold') %>"
+    "<%= escape_javascript(render(partial: 'storages/form/scaffold')) %>"
   )
 
   storage_modal.modal('show')

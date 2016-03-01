@@ -5,7 +5,7 @@ $ ->
   archive_modal = $('#archive-modal')
 
   archive_modal.html(
-    "<%= escape_javascript(render partial: 'archives/form/scaffold') %>"
+    "<%= escape_javascript(render(partial: 'archives/form/scaffold')) %>"
   )
 
   archive_modal.modal('show')
