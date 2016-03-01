@@ -1,18 +1,22 @@
 <div class="modal-dialog" role="document">
-  <div class="modal-content">
-    <div class="modal-header">
+  <div class="modal-content card">
+    <h4 id="archive-modal-label" class="card-header">
+      <%= Archive.model_name.human %>
+      <span class="tag tag-default">ID: <%= @archive.id %></span>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
-      <h4 class="modal-title" id="archive-modal-label">
-        <%= Archive.model_name.human %>
-        <label class="label secondary">ID: <%= @archive.id %></label>
-      </h4>
-    </div>
-    <div class="modal-body">
+    </h4>
+    <div class="card-block">
       <div class="container-fluid">
         <%= render partial: 'archives/inner_show', locals: { archive: @archive, native: true } %>
       </div>
+    </div>
+    <div class="card-footer">
+      <button type="button" class="btn btn-sm btn-default pull-right" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        Close
+      </button>
     </div>
   </div>
 </div>
