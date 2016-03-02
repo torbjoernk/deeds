@@ -36,19 +36,21 @@ gem 'breadcrumbs_on_rails'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
-  gem 'rspec-rails'#, '~> 3.0.0'
+  gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'capybara'
-  gem 'capybara-webkit'
   gem 'selenium-webdriver'
   gem 'poltergeist'
   gem 'database_cleaner'
   gem 'simplecov'
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
-  gem 'guard-rspec', require: false
-  gem 'launchy'
+
+  unless ENV['CI']
+    gem 'capybara-webkit'
+    gem 'launchy'
+    gem 'guard-rspec', require: false
+    gem 'byebug'
+  end
 end
 
 group :development do

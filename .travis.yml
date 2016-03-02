@@ -29,7 +29,6 @@ matrix:
         - CODECLIMATE=true
   allow_failures:
     - rvm: ruby-head
-  fast_finish: true
 
 before_script:
   - bundle exec rake db:migrate
@@ -49,7 +48,6 @@ before_script:
 
 script:
   - bundle exec rake spec
-  - if [[ "${TEST_RESULT}" -eq 0 ]]; then bundle exec rake cucumber; else echo "RSpec failed. Not running Cucumber."; fi
 
 notifications:
   slack:
