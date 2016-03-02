@@ -15,9 +15,7 @@ feature 'Index Page', type: :feature do
     end
 
     scenario 'and should see the breadcrumbs with "Home"' do
-      within '#breadcrumbs' do
-        expect(page).to have_text 'Home'
-      end
+      expect(page).to have_breadcrumb 'Home'
     end
   end
 end
