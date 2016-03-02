@@ -9,36 +9,33 @@ end
 
 When /^enters the new Archive's title$/ do
   @new_archive = build(:archive, title: Faker::Name.title, abbr: Faker::Lorem.characters(5))
-  expect(@new_archive.title).not_to eq @archive.title
   within '#archive-modal' do
     fill_in 'Title', with: @new_archive.title
   end
 end
 
-When /^the User clicks on the "([^"]*)" button of the first Archive$/ do |arg|
-  within "#archive-row-#{@archive.id}" do
-    click_on "btn-archive-#{arg.downcase}-#{@archive.id}"
-  end
+When /^the User clicks on the 'Show' button of the first Archive$/ do
+  find(:css, "#btn-archive-show-#{@archive.id}").click
 end
 
-When /^changes the Archive's title$/ do
+When /^the User changes the Archive's title$/ do
   @new_title = Faker::Name.title
   fill_in 'Title', with: @new_title
 end
 
+When /^the User clicks on the 'Edit' button of the first Archive$/ do
+  find(:css, "#btn-archive-edit-#{@archive.id}").click
+end
+
 When /^the User clicks on the 'Delete' button of the first Archive and accepts the confirmation$/ do
-  within "#archive-row-#{@archive.id}" do
-    accept_confirm do
-      click_on "btn-archive-delete-#{@archive.id}"
-    end
+  accept_confirm do
+    find(:css, "#btn-archive-delete-#{@archive.id}").click
   end
 end
 
 When /^the User clicks on the 'Delete' button of the first Archive and dismisses the confirmation$/ do
-  within "#archive-row-#{@archive.id}" do
-    dismiss_confirm do
-      click_on "btn-archive-delete-#{@archive.id}"
-    end
+  dismiss_confirm do
+    find(:css, "#btn-archive-delete-#{@archive.id}").click
   end
 end
 
@@ -71,8 +68,10 @@ Then /^a new Archive with given title should be created$/ do
 end
 
 Then /^the User should see the Archives's details$/ do
-  expect(find('#archive-modal')).to have_text @archive.title
-  expect(find('#archive-modal')).to have_text @archive.notes
+  within '#archive-modal' do
+    expect(page).to have_text @archive.title
+    expect(page).to have_text @archive.notes
+  end
 end
 
 Then /^the Archive's title should be changed to the new value$/ do

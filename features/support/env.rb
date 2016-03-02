@@ -68,6 +68,12 @@ if driver == :poltergeist
   Capybara.current_driver = :poltergeist
   Capybara.javascript_driver = :poltergeist
   puts 'INFO: Using Capybara with Poltergeist only'
+elsif driver == :webkit
+  require 'capybara/webkit'
+  Capybara.default_driver = :rack_test
+  Capybara.current_driver = :rack_test
+  Capybara.javascript_driver = :webkit
+  puts 'INFO: Using Capybara-Webkit only'
 elsif driver.nil?
   require 'capybara/poltergeist'
   Capybara.default_driver = :rack_test
@@ -83,3 +89,6 @@ else
   Capybara.javascript_driver = :selenium
   puts "INFO: Using Capybara with Selenium and #{driver}"
 end
+
+Capybara.default_max_wait_time = 5
+Capybara.automatic_reload = false
