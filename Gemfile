@@ -43,13 +43,11 @@ group :development, :test do
   gem 'capybara-webkit'
   gem 'selenium-webdriver'
   gem 'poltergeist'
-  gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'simplecov'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'guard-rspec', require: false
-  gem 'guard-cucumber', require: false
   gem 'launchy'
 end
 
