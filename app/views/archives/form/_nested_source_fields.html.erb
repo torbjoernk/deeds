@@ -11,7 +11,7 @@
     </span>
   </label>
   <div class="col-md-9">
-    <ul class="list-group list-group-flush">
+    <ul id="associate-sources" class="list-group list-group-flush">
       <% @archive.sources.each do |source| %>
         <li id="associated-source-<%= source.id %>" class="list-group-item form-control">
           <%= source.title %> (<%= source.source_type %>)
@@ -29,13 +29,13 @@
           </span>
         </li>
       <% end %>
-      <li id="associate-source-add" class="list-group-item form-control">
+      <li id="associate-source-add" class="list-group-item">
         <% if @free_sources.count > 0 %>
           <div class="form-group input-group">
             <%= text_field nil,
                            nil,
                            id: 'assoc-source-input',
-                           class: 'form-control pull-left',
+                           class: 'form-control form-control-sm',
                            type: 'text',
                            list: 'free-sources',
                            placeholder: 'Search for non-associated Source' %>
@@ -46,16 +46,18 @@
                                 data: {'source-id': source.id } %>
               <% end %>
             <% end %>
-            <%= content_tag :a,
-                            icon('search', class: 'fa-fw'),
-                            id: 'btn-show-selected-source-details',
-                            class: 'input-group-addon btn btn-outline-info',
-                            role: 'button' %>
-            <%= content_tag :a,
-                            icon('plus', class: 'fa-fw'),
-                            id: 'btn-associate-selected-source',
-                            class: 'input-group-addon btn btn-primary',
-                            role: 'button' %>
+            <div class="input-group-btn">
+              <%= content_tag :a,
+                              icon('search', class: 'fa-fw'),
+                              id: 'btn-show-selected-source-details',
+                              class: 'btn btn-sm btn-outline-info',
+                              role: 'button' %>
+              <%= content_tag :a,
+                              icon('plus', class: 'fa-fw'),
+                              id: 'btn-associate-selected-source',
+                              class: 'btn btn-sm btn-primary',
+                              role: 'button' %>
+            </div>
           </div>
         <% else %>
           no unassociated Sources

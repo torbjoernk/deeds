@@ -40,6 +40,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'capybara'
+  gem 'capybara-webkit'
   gem 'selenium-webdriver'
   gem 'poltergeist'
   gem 'cucumber-rails', require: false
@@ -49,6 +50,7 @@ group :development, :test do
   gem 'byebug'
   gem 'guard-rspec', require: false
   gem 'guard-cucumber', require: false
+  gem 'launchy'
 end
 
 group :development do
