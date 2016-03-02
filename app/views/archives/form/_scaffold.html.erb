@@ -2,7 +2,7 @@
   <div class="modal-content card">
     <%= form_for @archive do |f| %>
       <h4 id="archive-modal-label" class="card-header bg-primary">
-        <%= action_name.humanize %> <%= Archive.model_name.human %>
+        <%= action_name.humanize %> <%= model_name_with_icon Archive, :singular %>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

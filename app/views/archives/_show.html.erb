@@ -1,7 +1,7 @@
 <div class="modal-dialog" role="document">
   <div class="modal-content card">
     <h4 id="archive-modal-label" class="card-header bg-info">
-      <%= Archive.model_name.human %>
+      <%= model_name_with_icon Archive, :singular %>
       <span class="tag tag-default">ID: <%= @archive.id %></span>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>

@@ -1,6 +1,6 @@
 <div class="row form-group">
   <label class="col-md-3 form-control-label">
-    <%= Archive.model_name.plural.humanize %>
+    <%= model_name_with_icon Archive, :plural %>
     <span class="pull-right">
       <%= content_tag :a,
                       icon('refresh', class: 'fa-fw'),
@@ -58,7 +58,7 @@
             </div>
           </div>
         <% else %>
-          no unassociated Archives
+          no unassociated <%= model_name_with_icon Archive, :plural %>
         <% end %>
       </li>
     </ul>

@@ -1,6 +1,6 @@
 <div class="row form-group">
   <label class="col-md-3 form-control-label">
-    <%= Source.model_name.plural.humanize %>
+    <%= model_name_with_icon Source, :plural %>
     <span class="pull-right">
       <%= content_tag :a,
                       icon('refresh', class: 'fa-fw'),
@@ -60,7 +60,7 @@
             </div>
           </div>
         <% else %>
-          no unassociated Sources
+          no unassociated <%= model_name_with_icon Source, :plural %>
         <% end %>
       </li>
     </ul>
