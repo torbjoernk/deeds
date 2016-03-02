@@ -8,17 +8,17 @@
     </li>
     <li class="nav-item">
       <%= link_to archives_path, class: "nav-link#{' active' if current_page?(controller: :archives)}" do %>
-          <i class="fa fa-fw fa-<%= Archive::ICON %>"></i> <span>Archives</span>
+        <%= model_name_with_icon Archive, :plural %>
       <% end %>
     </li>
     <li class="nav-item">
       <%= link_to storages_path, class: "nav-link#{' active' if current_page?(controller: :storages)}" do %>
-        <i class="fa fa-fw fa-<%= Storage::ICON %>"></i> <span>Storages</span>
+        <%= model_name_with_icon Storage, :plural %>
       <% end %>
     </li>
     <li class="nav-item">
       <%= link_to sources_path, class: "nav-link#{' active' if current_page?(controller: :sources)}" do %>
-        <i class="fa fa-fw fa-<%= Source::ICON %>"></i> <span>Sources</span>
+        <%= model_name_with_icon Source, :plural %>
       <% end %>
     </li>
   </ul>

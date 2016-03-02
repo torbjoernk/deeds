@@ -1,4 +1,27 @@
 module ApplicationHelper
+  def icon_for(klass)
+    begin
+      "<i class=\"fa fa-fw fa-#{klass::ICON}\"></i>".html_safe
+    rescue
+      logger.warn "No icon defined for model #{klass}."
+      ''
+    end
+  end
+
+  def model_name_with_icon(klass, quantity = :singular)
+    raise StandardError.new 'Only for ActiveRecord models.' unless klass <= ActiveRecord::Base
+
+    if quantity == :singular
+      name = klass.model_name.human
+    elsif quantity == :plural
+      name = klass.model_name.plural.humanize
+    else
+      raise StandardError.new "Quantity must be either :singular or :plural, not #{quantity}."
+    end
+
+    "#{icon_for(klass)} #{name}".strip.html_safe
+  end
+
   def link_to_show_entity(entity)
     link_to url_for(entity),
             class: 'btn btn-sm btn-outline-info',

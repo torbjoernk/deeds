@@ -2,7 +2,7 @@
   <div class="modal-content card">
     <%= form_for @storage do |f| %>
       <h4 id="storage-modal-label" class="card-header bg-primary">
-        <%= action_name.humanize %> <%= Storage.model_name.human %>
+        <%= action_name.humanize %> <%= model_name_with_icon Storage, :singular %>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

@@ -1,7 +1,7 @@
 <div class="modal-dialog" role="document">
   <div class="modal-content card">
     <h4 id="source-modal-label" class="card-header bg-info">
-      <%= Source.model_name.human %>
+      <%= model_name_with_icon Source, :singular %>
       <span class="tag tag-default">ID: <%= @source.id %></span>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
