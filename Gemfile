@@ -45,12 +45,10 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'simplecov'
 
-  unless ENV['CI']
-    gem 'capybara-webkit'
-    gem 'launchy'
-    gem 'guard-rspec', require: false
-    gem 'byebug'
-  end
+  gem 'capybara-webkit'
+  gem 'launchy'
+  gem 'guard-rspec', require: false
+  gem 'byebug'
 end
 
 group :development do
