@@ -5,6 +5,44 @@ require 'spec_helper'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 
+
+driver = ENV['DRIVER'].try(:to_sym)
+WITHOUT_AJAX = true
+
+if driver == :poltergeist
+  require 'capybara/poltergeist'
+  Capybara.default_driver = :poltergeist
+  Capybara.current_driver = :poltergeist
+  Capybara.javascript_driver = :poltergeist
+  puts 'INFO: Using Capybara with Poltergeist only'
+elsif driver == :webkit
+  require 'capybara/webkit'
+  Capybara.default_driver = :rack_test
+  Capybara.current_driver = :rack_test
+  Capybara.javascript_driver = :webkit
+  puts 'INFO: Using Capybara-Webkit only'
+elsif driver.nil?
+  require 'capybara/poltergeist'
+  Capybara.default_driver = :rack_test
+  Capybara.current_driver = :rack_test
+  Capybara.javascript_driver = :poltergeist
+  puts 'INFO: Using Capybara with RackTest and Poltergeist'
+else
+  require 'selenium-webdriver'
+  Capybara.register_driver :selenium do |app|
+    Capybara::Selenium::Driver.new(app, browser: driver)
+  end
+  Capybara.default_driver = :selenium
+  Capybara.javascript_driver = :selenium
+  WITHOUT_AJAX = false
+  puts "INFO: Using Capybara with Selenium and #{driver}"
+end
+
+puts "INFO: #{WITHOUT_AJAX ? 'without' : 'with'} AJAX patch requests."
+
+Capybara.default_max_wait_time = 5
+
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end

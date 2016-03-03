@@ -33,9 +33,9 @@
   <table class="table table-hover table-sm" id="archives">
     <thead>
     <tr>
-      <th class="col-archive-title">Title</th>
-      <th class="col-archive-abbr">Abbreviation</th>
-      <th class="col-archive-notes">Notes</th>
+      <th class="col-archive-title"><%= Archive.human_attribute_name :title %></th>
+      <th class="col-archive-abbr"><%= Archive.human_attribute_name :abbr %></th>
+      <th class="col-archive-notes"><%= Archive.human_attribute_name :notes %></th>
       <th class="col-archive-assoc">Associations</th>
       <th class="col-archive-actions">Actions</th>
     </tr>
