@@ -21,7 +21,7 @@ feature 'On the Archive Page', type: :feature do
         context 'enters the new Archive\'s title' do
           before :each do
             within '#archive-modal' do
-              fill_in 'Title', with: new_archive.title
+              fill_in Archive.human_attribute_name(:title), with: new_archive.title
             end
           end
 
@@ -51,18 +51,18 @@ feature 'On the Archive Page', type: :feature do
       expect(page).to have_table 'archives'
 
       within_table 'archives' do
-        # exactly four columns
+        # exactly five columns
         expect(page).to have_selector 'thead > tr > th + th + th + th + th'
         expect(page).not_to have_selector 'thead > tr > th + th + th + th + th + th'
 
         within 'thead > tr > th:first-child' do
-          expect(page).to have_text 'Title'
+          expect(page).to have_text Archive.human_attribute_name(:title)
         end
         within 'thead > tr > th:nth-child(2)' do
-          expect(page).to have_text 'Abbreviation'
+          expect(page).to have_text Archive.human_attribute_name(:abbr)
         end
         within 'thead > tr > th:nth-child(3)' do
-          expect(page).to have_text 'Notes'
+          expect(page).to have_text Archive.human_attribute_name(:notes)
         end
         within 'thead > tr > th:last-child' do
           expect(page).to have_text 'Actions'
@@ -138,7 +138,7 @@ feature 'On the Archive Page', type: :feature do
 
             before :each do
               within '#archive-modal' do
-                fill_in 'Title', with: new_archive.title
+                fill_in Archive.human_attribute_name(:title), with: new_archive.title
               end
             end
 
