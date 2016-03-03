@@ -4,7 +4,6 @@ sudo: false
 
 rvm:
   - 2.2.2  # minimum for webconsole
-  - 2.2.4
   - 2.3.0
   - ruby-head
 
@@ -26,9 +25,11 @@ matrix:
   include:
     - rvm: 2.3.0
       env:
+        - DRIVER=poltergeist NO_FEATURES=true
+    - rvm: 2.3.0
+      env:
         - CODECLIMATE=true
-  allow_failures:
-    - rvm: ruby-head
+  fast_finish: true
 
 before_script:
   - bundle exec rake db:migrate
@@ -47,7 +48,11 @@ before_script:
     fi
 
 script:
-  - bundle exec rake spec
+  - if [[ "${NO_FEATURES}" == "true" ]]; then
+      bundle exec rspec --tag ~type:feature;
+    else
+      bundle exec rake spec;
+    fi
 
 notifications:
   slack:
