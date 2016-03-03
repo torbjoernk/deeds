@@ -195,5 +195,182 @@ feature 'On the Archive Page', type: :feature do
         end
       end
     end
+
+    context 'and is associated to a Storage', with_db: true do
+      before :each do
+        @storage = create :storage
+        @archive.storages << @storage
+        @archive.save!
+
+        visit archives_path
+      end
+
+      context 'when the User clicks on the "Edit" button of the first Archive', js: true do
+        before :each do
+          page.find(:css, "#btn-archive-edit-#{@archive.id}").click
+          expect(page).to have_selector '#archive-modal', visible: true
+
+          within '#archive-modal' do
+            within '#associate-storages' do
+              expect(page).to have_text @storage.title
+            end
+          end
+        end
+
+        scenario 'then no further Storages should be associatable' do
+          within '#associate-storages' do
+            expect(page).to have_text 'no unassociated Storages'
+          end
+        end
+
+        feature 'and the User clicks on the "de-associate" button', skip: WITHOUT_AJAX do
+          before :each do
+            within '#archive-modal' do
+              find(:css, "#btn-deassoc-storage-#{@storage.id}").click
+            end
+          end
+
+          scenario 'then the association is removed' do
+            within '#archive-modal' do
+              expect(page).not_to have_text @storage.title
+            end
+            expect(Archive.find(@archive.id).storages).not_to include @storage
+          end
+        end
+      end
+    end
+
+    context 'and a Storage exists', with_db: true do
+      before :each do
+        @storage = create :storage
+      end
+
+      context 'when the User clicks on the "Edit" button of the first Archive', js: true do
+        before :each do
+          page.find(:css, "#btn-archive-edit-#{@archive.id}").click
+          expect(page).to have_selector '#archive-modal', visible: true
+        end
+
+        scenario 'then further Storages should be associatable' do
+          within '#associate-storages' do
+            expect(page).not_to have_text 'no unassociated Storages'
+          end
+        end
+
+        context 'and the User enters the Storage\'s title' do
+          before :each do
+            within '#archive-modal' do
+              fill_in 'assoc-storage-input', with: @storage.title
+            end
+          end
+
+          feature 'and the User clicks on the "associate" button', skip: WITHOUT_AJAX do
+            before :each do
+              within '#archive-modal' do
+                find(:css, '#btn-associate-selected-storage').click
+                expect(page).to have_css '.form-control-success'
+              end
+            end
+
+            scenario 'the Storage is associated with the Archive' do
+              within '#archive-modal' do
+                expect(page).to have_text @storage.title
+                expect(page).to have_text 'no unassociated Storages'
+              end
+              expect(Archive.find(@archive.id).storages).to include @storage
+            end
+          end
+        end
+      end
+    end
+
+    context 'and is associated to a Source', with_db: true do
+      before :each do
+        @source = create :source
+        @archive.sources << @source
+        @archive.save!
+
+        visit archives_path
+      end
+
+      context 'when the User clicks on the "Edit" button of the first Archive', js: true do
+        before :each do
+          page.find(:css, "#btn-archive-edit-#{@archive.id}").click
+          expect(page).to have_selector '#archive-modal', visible: true
+
+          within '#archive-modal' do
+            within '#associate-sources' do
+              expect(page).to have_text "#{@source.title} (#{@source.source_type})"
+            end
+          end
+        end
+
+        scenario 'then no further Sources should be associatable' do
+          within '#associate-sources' do
+            expect(page).to have_text 'no unassociated Sources'
+          end
+        end
+
+        feature 'and the User clicks on the "de-associate" button', skip: WITHOUT_AJAX do
+          before :each do
+            within '#archive-modal' do
+              find(:css, "#btn-deassoc-source-#{@source.id}").click
+            end
+          end
+
+          scenario 'then the association is removed' do
+            within '#archive-modal' do
+              expect(page).not_to have_text @source.title
+              expect(page).not_to have_text @source.source_type
+            end
+            expect(Archive.find(@archive.id).sources).not_to include @source
+          end
+        end
+      end
+    end
+
+    context 'and a Source exists', with_db: true do
+      before :each do
+        @source = create :source
+      end
+
+      context 'when the User clicks on the "Edit" button of the first Archive', js: true do
+        before :each do
+          page.find(:css, "#btn-archive-edit-#{@archive.id}").click
+          expect(page).to have_selector '#archive-modal', visible: true
+        end
+
+        scenario 'then further Sources should be associatable' do
+          within '#associate-sources' do
+            expect(page).not_to have_text 'no unassociated Sources'
+          end
+        end
+
+        context 'and the User enters the Sources\'s title' do
+          before :each do
+            within '#archive-modal' do
+              fill_in 'assoc-source-input', with: "#{@source.title} (#{@source.source_type})"
+            end
+          end
+
+          feature 'and the User clicks on the "associate" button', skip: WITHOUT_AJAX do
+            before :each do
+              within '#archive-modal' do
+                find(:css, '#btn-associate-selected-source').click
+                expect(page).to have_css '.form-control-success'
+              end
+            end
+
+            scenario 'the Source is associated with the Archive' do
+              within '#archive-modal' do
+                expect(page).to have_text "#{@source.title} (#{@source.source_type})"
+                expect(page).to have_text 'no unassociated Sources'
+              end
+              expect(Archive.find(@archive.id).sources).to include @source
+            end
+          end
+        end
+      end
+    end
   end
 end
