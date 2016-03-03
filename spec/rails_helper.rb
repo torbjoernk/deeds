@@ -7,6 +7,7 @@ require 'rspec/rails'
 
 
 driver = ENV['DRIVER'].try(:to_sym)
+WITHOUT_AJAX = true
 
 if driver == :poltergeist
   require 'capybara/poltergeist'
@@ -33,8 +34,11 @@ else
   end
   Capybara.default_driver = :selenium
   Capybara.javascript_driver = :selenium
+  WITHOUT_AJAX = false
   puts "INFO: Using Capybara with Selenium and #{driver}"
 end
+
+puts "INFO: #{WITHOUT_AJAX ? 'without' : 'with'} AJAX patch requests."
 
 Capybara.default_max_wait_time = 5
 
