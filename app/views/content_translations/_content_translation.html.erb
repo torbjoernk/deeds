@@ -2,6 +2,18 @@
   <td class="col-content-translation-language"><%= content_translation.language.humanize %></td>
   <td class="col-content-translation-translation"><%= content_translation.translation %></td>
   <td class="col-content-translation-assoc">
+    <% if content_translation.content %>
+      <%= link_to url_for(content_translation.content),
+                  class: 'btn btn-sm btn-secondary',
+                  id: "btn-#{Content.model_name.to_s.downcase}-show-#{content_translation.content.id}",
+                  title: 'Show linked Content details',
+                  data: { toggle: 'tooltip' },
+                  remote: true do %>
+        <%= icon_for Content %>
+      <% end %>
+    <% else %>
+      <%= icon('info', class: 'fa-fw') %>
+    <% end %>
   </td>
   <td class="col-content-translation-actions">
     <div class="btn-group btn-group-sm">
