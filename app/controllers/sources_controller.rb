@@ -30,19 +30,7 @@ class SourcesController < ApplicationController
 
   def edit
     @source = Source.find params[:id]
-    if params.has_key? :sub_action
-      if params[:sub_action].to_sym == :refresh_nested
-        @free_archives = Archive.where('id NOT IN (?)',
-                                       ArchiveSource.select(:archive_id).where(source_id: @source))
-      end
-      respond_to do |format|
-        format.js { render partial: 'sources/form/refresh' }
-      end
-    else
-      respond_to do |format|
-        format.js { render 'sources/edit' }
-      end
-    end
+    edit_subaction 'sources/edit', 'sources/form/refresh'
   end
 
   def create
@@ -66,6 +54,13 @@ class SourcesController < ApplicationController
   def destroy
     destroy_entity_of Source, params
     redirect_to sources_path
+  end
+
+  def query_nested_collections
+    {
+        archives: Archive.where('id NOT IN (?)',
+                                ArchiveSource.select(:archive_id).where(source_id: @source))
+    }
   end
 
   private

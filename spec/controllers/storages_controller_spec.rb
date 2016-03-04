@@ -81,7 +81,7 @@ describe StoragesController, type: :controller do
 
       it 'assigns @free_sources' do
         xhr :get, :edit, id: storage.id, sub_action: :refresh_nested
-        expect(assigns :free_archives).to include archive
+        expect(assigns :unassociated).to include :archives
       end
 
       it 'renders the form refresh template' do

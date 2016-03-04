@@ -30,7 +30,7 @@
         </li>
       <% end %>
       <li id="associate-archive-add" class="list-group-item form-control">
-        <% if @free_archives.count > 0 %>
+        <% if @unassociated[:archives].count > 0 %>
           <div class="form-group input-group">
             <%= text_field nil,
                            nil,
@@ -40,7 +40,7 @@
                            list: 'free-archives',
                            placeholder: 'Search for non-associated Archive' %>
             <%= content_tag :datalist, id: 'free-archives' do %>
-              <% @free_archives.each do |archive| %>
+              <% @unassociated[:archives].each do |archive| %>
                 <%= content_tag :option, archive.title, data: {'archive-id': archive.id } %>
               <% end %>
             <% end %>
