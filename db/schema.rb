@@ -60,15 +60,6 @@ ActiveRecord::Schema.define(version: 20160201061334) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "deed_formats", force: :cascade do |t|
-    t.integer  "deed_id"
-    t.string   "material"
-    t.float    "width"
-    t.float    "height"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "deeds", force: :cascade do |t|
     t.string   "title"
     t.integer  "year"
@@ -145,9 +136,12 @@ ActiveRecord::Schema.define(version: 20160201061334) do
     t.string   "title"
     t.string   "source_type"
     t.text     "notes"
+    t.integer  "deed_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  add_index "sources", ["deed_id"], name: "index_sources_on_deed_id"
 
   create_table "storages", force: :cascade do |t|
     t.string   "title"

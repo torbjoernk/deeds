@@ -2,7 +2,7 @@ class Deed < ActiveRecord::Base
   has_one :content
   has_many :translations, through: :content, foreign_key: :translation
 
-  has_many :formats, class_name: 'DeedFormat'
+  has_many :sources, inverse_of: :deed
 
   has_many :mentions
   has_many :people, through: :mentions, class_name: 'Person'
