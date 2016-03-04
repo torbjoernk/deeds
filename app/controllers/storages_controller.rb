@@ -34,19 +34,7 @@ class StoragesController < ApplicationController
 
   def edit
     @storage = Storage.find params[:id]
-    if params.has_key? :sub_action
-      if params[:sub_action].to_sym == :refresh_nested
-        @free_archives = Archive.where('id NOT IN (?)',
-                                       ArchiveStorage.select(:archive_id).where(storage_id: @storage))
-      end
-      respond_to do |format|
-        format.js { render partial: 'storages/form/refresh' }
-      end
-    else
-      respond_to do |format|
-        format.js { render 'storages/edit' }
-      end
-    end
+    edit_subaction 'storages/edit', 'storages/form/refresh'
   end
 
   def update
@@ -64,6 +52,13 @@ class StoragesController < ApplicationController
   def destroy
     destroy_entity_of Storage, params
     redirect_to storages_path
+  end
+
+  def query_nested_collections
+    {
+        archives: Archive.where('id NOT IN (?)',
+                                ArchiveStorage.select(:archive_id).where(storage_id: @storage))
+    }
   end
 
   private

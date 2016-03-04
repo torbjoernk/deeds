@@ -20,8 +20,8 @@ $ ->
   # rich handling of adding archives
   add_archive_assoc = nested_fields_container.find('#associate-archive-add')
   archive_input = add_archive_assoc.find('input#assoc-archive-input')
-  valid_inputs = <%= raw @free_archives.to_a.map { |x| x.title }.to_json %>
-  input_id_map = <%= raw @free_archives.to_a.map { |x| {x.title => x.id} }.reduce({}, :update).to_json %>
+  valid_inputs = <%= raw @unassociated[:archives].to_a.map { |x| x.title }.to_json %>
+  input_id_map = <%= raw @unassociated[:archives].to_a.map { |x| {x.title => x.id} }.reduce({}, :update).to_json %>
 
   archive_input.change ->
     $(this).removeClass('form-control-success').removeClass('form-control-danger')
