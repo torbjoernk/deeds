@@ -21,12 +21,7 @@ class ContentsController < ApplicationController
 
   def edit
     @content = Content.find params[:id]
-    if params.has_key? :sub_action
-    else
-      respond_to do |format|
-        format.js { render 'contents/edit' }
-      end
-    end
+    edit_subaction 'contents/edit', 'contents/form/refresh'
   end
 
   def create
@@ -52,6 +47,10 @@ class ContentsController < ApplicationController
 
   private
   def content_params
+    if params.has_key? :content and params[:content].has_key? :language
+      params[:content][:language] = params[:content][:language].dehumanize
+    end
+
     params.require(:content).permit(:content, :language)
   end
 end
