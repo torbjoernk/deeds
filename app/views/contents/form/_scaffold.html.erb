@@ -10,7 +10,22 @@
       <div class="card-block">
         <div class="container-fluid">
           <%= render partial: 'contents/form/own_fields', locals: { f: f } %>
-          <div id="content-form-nested-fields">
+          <div>
+            <div class="row form-group">
+              <label class="col-md-3 form-control-label">
+                <%= model_name_with_icon ContentTranslation, :plural %>
+                <span class="pull-right">
+                  <%= content_tag :a,
+                                  icon('refresh', class: 'fa-fw'),
+                                  id: 'btn-refresh-nested-fields',
+                                  class: 'btn btn-sm btn-outline-default',
+                                  title: 'Refresh associations',
+                                  data: { toggle: 'tooltip' } %>
+                </span>
+              </label>
+              <div id="content-form-nested-fields" class="col-md-9">
+              </div>
+            </div>
           </div>
         </div>
       </div>

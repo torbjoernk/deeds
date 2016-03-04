@@ -1,5 +1,6 @@
 class ContentsController < ApplicationController
   include Common
+  include AssociationUpdate
 
   after_filter { flash.discard if request.xhr? }
 
@@ -33,6 +34,14 @@ class ContentsController < ApplicationController
   def update
     @content = Content.find params[:id]
     if params.has_key? :sub_action
+      if params.has_key? :content_translation_id
+        @content_translation = ContentTranslation.find params[:content_translation_id]
+        update_association_for @content, 'translations', @content_translation, params[:sub_action].to_sym
+        respond_to do |format|
+          format.js { redirect_to edit_content_path(@content, sub_action: :refresh_nested),
+                                  status: :see_other }
+        end
+      end
     else
       @content.update!(content_params)
       flash[:success] = "Updated content with ID #{@content.id}."
@@ -43,6 +52,12 @@ class ContentsController < ApplicationController
   def destroy
     destroy_entity_of Content, params
     redirect_to contents_path
+  end
+
+  def query_nested_collections
+    {
+        content_translations: ContentTranslation.where.not(content: @content)
+    }
   end
 
   private
