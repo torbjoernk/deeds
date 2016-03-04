@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe Content, type: :model do
+  it_behaves_like 'an IconicModel', Content
+
   let(:content) { build :content }
 
   it 'has a valid factory', use_db: true do
