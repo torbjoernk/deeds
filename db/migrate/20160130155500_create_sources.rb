@@ -4,6 +4,7 @@ class CreateSources < ActiveRecord::Migration
       t.string :title
       t.string :source_type
       t.text :notes
+      t.belongs_to :deed, index: true
 
       t.timestamps null: false
     end

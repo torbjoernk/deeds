@@ -4,6 +4,8 @@ class Source < ActiveRecord::Base
 
   SOURCE_TYPES = %w(original transcript print digital)
 
+  belongs_to :deed, inverse_of: :sources
+
   has_many :archive_sources
   has_many :archives, through: :archive_sources
 
