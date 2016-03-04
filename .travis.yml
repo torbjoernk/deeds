@@ -19,7 +19,6 @@ env:
     secure: "moIDBJT9hxtAOGwakGbOj6zurF9WK5irsKafp41AAAvgRmqesWHEdlhbuIt5UPSw4Q0xkcNeRnP9zMHTcX/SUOgivpjlJ4aNTS4GkRCM4TbD66ANxozZTqwVukKWK9XRwwIE0P8AYVua0LK9rq5mD+7X6J1lBNkrF7CHR52uo+Qr+gSihWRBMJdeoIzAfjSksVNKsYI5Rzj8H6JxCsI/8CUiJFw9Eoh44JzSxyNd5spV0LFgrRDVqxHPO1m0xo5LGqVtUlEuayNVgSLWyog2FW3hptgjIvhQLqagpRhK8ZbMLVTF4hXC2PHrVMXJ2fz+DX1te3wFcgqi4A3KvzsDoX9ov0vBdRedXwUjyVtC/kxCIrnQ3U2vySICBTY28Z04FykDwJ/CoY7tftR/QOeB8xjjRh9cgU9QZx4H7g1hWyam5dFF+//KsMyzLTbOipS+ZvM94SNbDdNv1Rz1YWWNQQX27ZSaW2+Cmw5VD6Ba6v5THppAyg+3uxyHjGx1k6a/MmvOAKCjWLa2MIZMyflPkUFqia3kOT6vfMWEUpLHSaAkT4fyNgrfUEXwBRbyvmwQgwpbzX42C2r3BBeSnbXnN+SpgXOyWVvviYEPpfvmdr06UWt84mbHISDxkoDIEVTODsxhkDiIXgb8uyM6QUw0dUw1KZ/Dt+LyQNNSOUS6Llg="
   matrix:
     - DRIVER=poltergeist
-    - DRIVER=firefox
 
 matrix:
   include:
@@ -28,13 +27,17 @@ matrix:
         - DRIVER=poltergeist NO_FEATURES=true
     - rvm: 2.3.0
       env:
+        - DRIVER=firefox
+    - rvm: 2.3.0
+      env:
         - CODECLIMATE=true
   fast_finish: true
 
 before_script:
   - bundle exec rake db:migrate
   - if [[ "${DRIVER}" == "firefox" ]]; then
-      export DISPLAY=:99.0 &&
+      firefox --version &&
+        export DISPLAY=:99.0 &&
         sh -e /etc/init.d/xvfb start &&
         sleep 3 &&
         /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x16;
@@ -53,9 +56,3 @@ script:
     else
       bundle exec rake spec;
     fi
-
-notifications:
-  slack:
-    rooms:
-      secure: "fzeAaVgxrazt+kBfLdOBqNk7i2PExOCe0rZqob8jxouS1ZZZ8tG/6OuFOSp6D2HSxEvYrDpRocKpYzJ1J7zj+3XYH2fHmO0ucA2MxWBU+NiuX9lvViKmBRtCgLAmOaeY3LGX5HOuFNyGexv2dVO5OIpfNKOBYRja2TqPCE6rUXD3+0KVOKjJrDeDNMFx4rfsM3xQEfUjLQEG4R6sfSlV40RQAP6KU24+P+ErIE/dabW5cwAlgBv0XRtXtI/2pWlLacb+MlCsSyEtpZBS164D2ataJz6IJfp5kaddGq2DqQfyVZ6njAJs235QCaZRBsPY2M4cwKX9MTeEHG6YGjJvg1fvgTtSSQ+DGZJhvY7P/Ww+jHGil4XYUR3OslBZmTJZgKM7fdJGQy+W+hg6RIIOUbL2TM92ouCQMJ0cp32bpQByxWyGjvYUK3z6Bng3+sKcUhko7lb8FA5eBwK1pfogeAmgRKYxFSQm9lzD4ScWjD8IUn4RF52XmI8bRxYh/1od0pGLjfiPgIvyXOa4ZIZ4Btj5eFiDm7jldYriF2ZKoI5YBn6nNUYgYJ8umPNgzLH9Yi819XOH1GOcDSmcJugjSBo/9mwkN1s+T9ZZphXjgyIZm9mNvVQxuVRwM4TEoHsqS8Y1/e//5aDcqvqS3OsDvdV2x+Lx3px9Gh46PLKdE0k="
-
