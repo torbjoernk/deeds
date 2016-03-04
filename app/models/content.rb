@@ -1,4 +1,7 @@
 class Content < ActiveRecord::Base
+  include IconicModel
+  ICON = 'paragraph'
+
   LANGUAGES = %w(latin old_german contemporary_german)
 
   belongs_to :deed

@@ -7,6 +7,11 @@
       <% end %>
     </li>
     <li class="nav-item">
+      <%= link_to contents_path, class: "nav-link#{' active' if current_page?(controller: :contents)}" do %>
+        <%= model_name_with_icon Content, :plural %>
+      <% end %>
+    </li>
+    <li class="nav-item">
       <%= link_to archives_path, class: "nav-link#{' active' if current_page?(controller: :archives)}" do %>
         <%= model_name_with_icon Archive, :plural %>
       <% end %>

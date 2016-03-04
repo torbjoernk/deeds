@@ -16,9 +16,7 @@ raise 'Storage not saved' unless vest.persisted?
 haa = Archive.create(
     title: 'Herzoglich Arenbergisches Archiv',
     abbr: 'HAA',
-    storages: [
-      vest
-    ]
+    storages: [vest]
 )
 raise 'Archive not saved' unless haa.persisted?
 
@@ -27,7 +25,7 @@ raise 'Storage and Archive not linked' unless vest.archives.include? haa
 haa_r3a3_original = Source.create(
     title: 'Urkunde, Reihe III, Nr. 3',
     source_type: 'original',
-    archives: [ haa ]
+    archives: [haa]
 )
 raise 'Source not saved' unless haa_r3a3_original.persisted?
 raise 'Source and Archive not linked' unless haa.sources.include? haa_r3a3_original
@@ -37,3 +35,10 @@ haa_r3a3_transcript = Source.create(
     source_type: 'transcript'
 )
 raise 'Source not saved' unless haa_r3a3_transcript.persisted?
+
+
+dummy_content = Content.create(
+    language: 'contemporary_german',
+    content: 'Hello World'
+)
+raise 'Content not saved' unless dummy_content.persisted?
