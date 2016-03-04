@@ -8,7 +8,7 @@ module ArchiveAssociation
   end
 
   protected
-  def update_associated_archive_for(target, params, redirect_path)
+  def update_associated_archive_for(target, redirect_path)
     if params.has_key? :archive_id
       @archive = Archive.find(params[:archive_id])
       update_association_for target, 'archives', @archive, params[:sub_action].to_sym

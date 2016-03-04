@@ -42,7 +42,7 @@ class SourcesController < ApplicationController
   def update
     @source = Source.find params[:id]
     if params.has_key? :sub_action
-      update_associated_archive_for @source, params,
+      update_associated_archive_for @source,
                                     edit_source_path(@source, sub_action: :refresh_nested)
     else
       @source.update!(source_params)

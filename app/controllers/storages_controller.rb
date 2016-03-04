@@ -40,7 +40,7 @@ class StoragesController < ApplicationController
   def update
     @storage = Storage.find params[:id]
     if params.has_key? :sub_action
-      update_associated_archive_for @storage, params,
+      update_associated_archive_for @storage,
                                     edit_storage_path(@storage, sub_action: :refresh_nested)
     else
       @storage.update!(storage_params)
