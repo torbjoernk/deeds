@@ -1,0 +1,16 @@
+<% native ||= false %>
+
+<div class="row">
+  <label class="col-md-3"><strong><%= ContentTranslation.human_attribute_name :language %></strong></label>
+  <div class="col-md-9">
+    <%= content_translation.language.humanize %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3"><strong><%= ContentTranslation.human_attribute_name :translation %></strong></label>
+  <div class="col-md-9">
+    <%= content_translation.translation %>
+  </div>
+</div>
+<% if native %>
+<% end %>

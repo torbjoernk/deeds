@@ -1,0 +1,13 @@
+<tr id="content-row-<%= content_translation.id %>">
+  <td class="col-content-translation-language"><%= content_translation.language.humanize %></td>
+  <td class="col-content-translation-translation"><%= content_translation.translation %></td>
+  <td class="col-content-translation-assoc">
+  </td>
+  <td class="col-content-translation-actions">
+    <div class="btn-group btn-group-sm">
+      <%= link_to_show_entity content_translation %>
+      <%= link_to_edit_entity content_translation %>
+      <%= link_to_destroy_entity content_translation %>
+    </div>
+  </td>
+</tr>

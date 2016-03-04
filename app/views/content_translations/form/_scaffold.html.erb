@@ -1,0 +1,22 @@
+<div class="modal-dialog modal-lg" role="document">
+  <div class="modal-content card">
+    <%= form_for @content_translation do |f| %>
+      <h4 id="content-translation-modal-label" class="card-header bg-primary">
+        <%= action_name.humanize %> <%= model_name_with_icon ContentTranslation, :singular %>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </h4>
+      <div class="card-block">
+        <div class="container-fluid">
+          <%= render partial: 'content_translations/form/own_fields', locals: { f: f } %>
+          <div id="content-translation-form-nested-fields">
+          </div>
+        </div>
+      </div>
+      <div class="card-footer bg-primary">
+        <%= f.submit class: 'btn btn-sm btn-primary pull-right', data: { close: '' } %>
+      </div>
+    <% end %>
+  </div>
+</div>
