@@ -42,3 +42,10 @@ dummy_content = Content.create(
     content: 'Hello World'
 )
 raise 'Content not saved' unless dummy_content.persisted?
+
+dummy_translation = ContentTranslation.create(
+    language: 'latin',
+    translation: 'Quo vadis?',
+    content: dummy_content
+)
+raise 'ContentTranslation not saved' unless dummy_translation.persisted?
