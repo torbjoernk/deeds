@@ -2,13 +2,11 @@
   <td class="col-content-language"><%= content.language.humanize %></td>
   <td class="col-content-content"><%= content.content %></td>
   <td class="col-content-assoc">
-    <%= link_to content_translations_path(content_id: content.id),
-                class: 'btn btn-sm btn-secondary',
-                title: "show #{ContentTranslation.model_name.plural.humanize} linked",
-                data: { toggle: 'tooltip' } do %>
-        <%= content.translations.count %>
-        <%= icon_for ContentTranslation %>
-    <% end %>
+    <span title="number contained <%= ContentTranslation.model_name.plural.humanize %>"
+          data-toggle="tooltip">
+      <%= content.translations.count %>
+      <%= icon_for ContentTranslation %>
+    </span>
   </td>
   <td class="col-content-actions">
     <div class="btn-group btn-group-sm">

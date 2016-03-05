@@ -14,16 +14,16 @@
             <div class="row form-group">
               <label class="col-md-3 form-control-label">
                 <%= model_name_with_icon ContentTranslation, :plural %>
-                <span class="pull-right">
-                  <%= content_tag :a,
-                                  icon('refresh', class: 'fa-fw'),
-                                  id: 'btn-refresh-nested-fields',
-                                  class: 'btn btn-sm btn-outline-default',
-                                  title: 'Refresh associations',
-                                  data: { toggle: 'tooltip' } %>
-                </span>
+                <%= content_tag :a,
+                                icon('plus', class: 'fa-fw'),
+                                id: 'btn-add-new-content-translation',
+                                class: 'btn btn-sm btn-primary pull-right',
+                                role: 'button',
+                                title: 'Add another Content Translation',
+                                data: { toggle: 'tooltip' } %>
               </label>
               <div id="content-form-nested-fields" class="col-md-9">
+                <%= render partial: 'contents/form/nested_fields', locals: { f: f } %>
               </div>
             </div>
           </div>

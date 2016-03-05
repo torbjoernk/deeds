@@ -41,8 +41,12 @@ class ContentTranslationsController < ApplicationController
   end
 
   def destroy
-    destroy_entity_of ContentTranslation, params
-    redirect_to content_translations_path
+    logger.info params.inspect
+    # destroy_entity_of ContentTranslation, params
+    respond_to do |format|
+      format.js { render partial: 'contents/form/refresh', locals: { deleted_translation_id: params[:id] } }
+      format.html { redirect_to content_translations_path }
+    end
   end
 
   private
