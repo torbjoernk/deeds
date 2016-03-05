@@ -5,3 +5,5 @@ $ ->
   $('#content-modal').html(
     "<%= escape_javascript(render(partial: 'contents/show')) %>"
   ).modal('show')
+
+  $('.collapse').collapse()

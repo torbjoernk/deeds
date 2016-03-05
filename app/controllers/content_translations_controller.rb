@@ -3,17 +3,6 @@ class ContentTranslationsController < ApplicationController
 
   after_filter { flash.discard if request.xhr? }
 
-  def index
-    @content_translations = ContentTranslation.all
-
-    add_breadcrumb ContentTranslation.model_name.plural.humanize, :contents_path
-  end
-
-  def show
-    @content_translation = ContentTranslation.find params[:id]
-    respond_to :js
-  end
-
   def new
     @content_translation = ContentTranslation.new
     respond_to :js
@@ -27,7 +16,7 @@ class ContentTranslationsController < ApplicationController
   def create
     @content_translation = ContentTranslation.create!(content_translation_params)
     flash[:success] = "Created new content translation with ID #{@content_translation.id}."
-    redirect_to content_translations_path
+    respond_to :js
   end
 
   def update
@@ -36,7 +25,7 @@ class ContentTranslationsController < ApplicationController
     else
       @content_translation.update!(content_translation_params)
       flash[:success] = "Updated content translation with ID #{@content_translation.id}."
-      redirect_to content_translations_path
+      respond_to :js
     end
   end
 
@@ -45,7 +34,6 @@ class ContentTranslationsController < ApplicationController
     # destroy_entity_of ContentTranslation, params
     respond_to do |format|
       format.js { render partial: 'contents/form/refresh', locals: { deleted_translation_id: params[:id] } }
-      format.html { redirect_to content_translations_path }
     end
   end
 
