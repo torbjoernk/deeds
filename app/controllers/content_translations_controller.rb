@@ -5,7 +5,10 @@ class ContentTranslationsController < ApplicationController
 
   def new
     @content_translation = ContentTranslation.new
-    respond_to :js
+    respond_to do |format|
+      format.html { render partial: 'content_translations/form',
+                           locals: { content_id: params[:content_id] } }
+    end
   end
 
   def edit
@@ -16,7 +19,12 @@ class ContentTranslationsController < ApplicationController
   def create
     @content_translation = ContentTranslation.create!(content_translation_params)
     flash[:success] = "Created new content translation with ID #{@content_translation.id}."
-    respond_to :js
+    respond_to do |format|
+      format.js { redirect_to edit_content_path(params[:content_id],
+                                                format: :js,
+                                                params: { created_translation: @content_translation.id }),
+                              status: :see_other }
+    end
   end
 
   def update
@@ -30,10 +38,12 @@ class ContentTranslationsController < ApplicationController
   end
 
   def destroy
-    logger.info params.inspect
-    # destroy_entity_of ContentTranslation, params
+    destroy_entity_of ContentTranslation, params
     respond_to do |format|
-      format.js { render partial: 'contents/form/refresh', locals: { deleted_translation_id: params[:id] } }
+      format.js { redirect_to edit_content_path(params[:content_id],
+                                                format: :js,
+                                                params: { deleted_translation: params[:id] }),
+                              status: :see_other }
     end
   end
 
@@ -43,6 +53,6 @@ class ContentTranslationsController < ApplicationController
       params[:content_translation][:language] = params[:content_translation][:language].dehumanize
     end
 
-    params.require(:content_translation).permit(:translation, :language)
+    params.require(:content_translation).permit(:translation, :language, :content_id)
   end
 end

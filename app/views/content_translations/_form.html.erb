@@ -1,0 +1,63 @@
+<%= form_for @content_translation,
+             url: content_content_translations_path(content_id: content_id),
+             method: :post do |t_f| %>
+  <div id="associated-content-translation-new"
+       class="card">
+    <div id="heading-translation-new"
+         class="card-header"
+         role="tab">
+      <a data-toggle="collapse"
+         data-parent="#content-content-translations-accordion"
+         href="#collapse-translation-new"
+         aria-expanded="true"
+         aria-controls="collapse-translation-new">
+        <%= model_name_with_icon ContentTranslation, :singular %>
+        <span class="tag tag-default">ID: new</span>
+      </a>
+    </div>
+    <div id="collapse-translation-new"
+         class="card-block collapse"
+         role="tabpanel"
+         aria-labelledby="heading-translation-new">
+      <div class="row form-group">
+        <%= t_f.label :language, class: 'col-md-3 form-control-label' %>
+        <div class="col-md-9">
+          <%= t_f.select :language,
+                         options_for_select(Content::LANGUAGES.map { |e| e.humanize }),
+                         {},
+                         { class: 'form-control' } %>
+        </div>
+      </div>
+      <div class="row form-group">
+        <%= t_f.label :translation, class: 'col-md-3 form-control-label' %>
+        <div class="col-md-9">
+          <%= t_f.text_area :translation, rows: 5, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-12">
+          <div class="btn-group btn-group-sm pull-right">
+            <%= content_tag :a,
+                            class: 'btn btn-sm btn-outline-primary',
+                            id: 'btn-content-translation-create-new',
+                            title: "Create #{ContentTranslation.model_name.human}",
+                            data: {
+                                toggle: 'tooltip'
+                            } do %>
+                <%= icon('save', class: 'fa-fw') %> Create Translation
+            <% end %>
+            <%= content_tag :a,
+                        class: 'btn btn-sm btn-outline-danger',
+                        id: 'btn-content-translation-delete-new',
+                        title: "Delete unsaved #{ContentTranslation.model_name.human}",
+                        data: {
+                            toggle: 'tooltip'
+                        } do %>
+                <%= icon('trash', class: 'fa-fw') %> Delete unsaved Translation
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
