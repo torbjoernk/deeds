@@ -11,8 +11,12 @@
  * file per style scope.
  */
 
-/*
- *= require framework_and_overrides
- *= require_tree .
- *= require_self
- */
+@import "00_framework_and_overrides";
+@import "01_table";
+@import "09_flash";
+
+@import "archive";
+@import "contents";
+@import "deeds";
+@import "sources";
+@import "storage";
