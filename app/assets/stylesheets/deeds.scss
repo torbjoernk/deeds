@@ -1,0 +1,31 @@
+// Place all the styles related to the deeds controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import 'framework_and_overrides';
+
+.table {
+  .col-deed-title {
+    @include make-col(4);
+  }
+  .col-deed-date {
+    @include make-col(3);
+    .col-deed-year,
+    .col-deed-month,
+    .col-deed-day {
+      @include make-col(4);
+    }
+  }
+  .col-deed-year,
+  .col-deed-month,
+  .col-deed-day {
+    @include make-col(1);
+    @extend .text-xs-center;
+  }
+  .col-deed-actions {
+    @include make-col(5);
+    .btn-toolbar {
+      @include pull-right();
+    }
+  }
+}

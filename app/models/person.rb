@@ -1,4 +1,7 @@
 class Person < ActiveRecord::Base
+  include IconicModel
+  ICON = 'user'
+
   GENDERS = %w(male female)
 
   has_many :person_relations

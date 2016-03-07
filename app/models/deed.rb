@@ -1,4 +1,7 @@
 class Deed < ActiveRecord::Base
+  include IconicModel
+  ICON = 'file-text-o'
+
   has_one :content
   has_many :translations, through: :content, foreign_key: :translation
 

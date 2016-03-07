@@ -29,7 +29,7 @@ module ApplicationHelper
             title: 'Show Details',
             data: { toggle: 'tooltip' },
             remote: true do
-      content_tag(:i, nil, class: 'fa fa-fw fa-search')
+      (content_tag(:i, nil, class: 'fa fa-fw fa-search') + 'Show').html_safe
     end
   end
 
@@ -41,7 +41,7 @@ module ApplicationHelper
             title: "Edit #{entity.class.model_name.human}",
             data: { toggle: 'tooltip' },
             remote: true do
-      content_tag(:i, nil, class: 'fa fa-fw fa-pencil')
+      (content_tag(:i, nil, class: 'fa fa-fw fa-pencil') + 'Edit').html_safe
     end
   end
 
@@ -55,7 +55,7 @@ module ApplicationHelper
               confirm: 'Do you really want to delete this item?',
               toggle: 'tooltip'
             } do
-      content_tag(:i, nil, class: 'fa fa-fw fa-trash')
+      (content_tag(:i, nil, class: 'fa fa-fw fa-trash') + 'Delete').html_safe
     end
   end
 end
