@@ -1,5 +1,5 @@
 <% content_for :form_modal_before do %>
-  <%= form_tag @storage, method: :patch %>
+  <%= form_tag @storage, method: (action_name.to_sym == :edit ? :patch : :post) %>
 <% end %>
 
 <% content_for :form_modal_title do %>

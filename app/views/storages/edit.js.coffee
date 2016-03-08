@@ -1,5 +1,4 @@
 #= depend_on jquery2
-#= depend_on bootstrap/bootstrap
 #= depend_on common/form_modal
 
 $ ->
