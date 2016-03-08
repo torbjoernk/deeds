@@ -1,14 +1,4 @@
-#= depend_on jquery2
-#= depend_on bootstrap/bootstrap
+#= depend_on common/form_modal
 
 $ ->
-  deed_modal = $('#deed-modal')
-
-  deed_modal.html(
-    "<%= escape_javascript(render(partial: 'deeds/form/scaffold')) %>"
-  )
-
-  deed_modal.modal('show')
-
-  deed_modal.find('.modal-footer').on 'click', 'input[type="submit"]', ->
-    deed_modal.modal('hide')
+  DeedsApp.display_form_modal "<%= escape_javascript(render partial: 'deeds/form/form_modal') %>"

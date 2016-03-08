@@ -1,0 +1,22 @@
+<div class="modal-dialog modal-lg" role="document">
+  <%= yield :form_modal_before %>
+  <div class="modal-content card">
+    <h4 id="form-modal-title" class="card-header bg-info">
+      <%= yield :form_modal_title %>
+    </h4>
+    <div class="card-block">
+      <div id="form-modal-content" class="container-fluid">
+        <%= yield :form_modal_content %>
+      </div>
+    </div>
+    <div id="form-modal-submit" class="card-footer bg-info">
+      <div class="btn-group pull-right" role="group">
+        <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" aria-label="Close">
+          Abort
+        </button>
+        <%= yield :form_modal_submit %>
+      </div>
+    </div>
+  </div>
+  <%= yield :form_modal_after %>
+</div>

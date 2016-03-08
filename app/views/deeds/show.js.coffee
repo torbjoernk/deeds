@@ -1,7 +1,7 @@
-#= depend_on jquery2
-#= depend_on bootstrap/bootstrap
+#= depend_on common/show_modal
 
 $ ->
-  $('#deed-modal').html(
-    "<%= escape_javascript(render(partial: 'deeds/show')) %>"
-  ).modal('show')
+  DeedsApp.display_show_modal(
+    "<%= escape_javascript(render partial: 'shared/show/title', locals: { entity: @deed }) %>",
+    "<%= escape_javascript(render partial: 'deeds/show/content', locals: { native: true }) %>"
+  )

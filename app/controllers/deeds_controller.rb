@@ -54,6 +54,6 @@ class DeedsController < ApplicationController
 
   private
   def deed_params
-    params.require(:deed).permit(:title, :year, :month, :day, :description)
+    params.require(:deed).permit(:title, :year, :month, :day, :description, :notes)
   end
 end
