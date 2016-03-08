@@ -1,5 +1,5 @@
 $ ->
-  nested_fields_container = $('#source-form-nested-fields')
+  nested_fields_container = $('#nested-fields')
 
   # hide all tooltips
   $('[data-toggle="tooltip"]').tooltip('hide')

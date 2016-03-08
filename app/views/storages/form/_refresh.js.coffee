@@ -1,5 +1,5 @@
 $ ->
-  nested_fields_container = $('#storage-form-nested-fields')
+  nested_fields_container = $('#nested-fields')
 
   # hide all tooltips
   $('[data-toggle="tooltip"]').tooltip('hide')
@@ -54,7 +54,6 @@ $ ->
         dataType: 'script'
     else
       alert 'no Archive selected'
-
 
   # reload tooltips
   nested_fields_container.find('[data-toggle="tooltip"]').tooltip()

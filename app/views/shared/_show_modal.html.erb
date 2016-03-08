@@ -1,20 +1,18 @@
 <div class="modal-dialog" role="document">
   <div class="modal-content card">
-    <h4 id="source-modal-label" class="card-header bg-info">
-      <%= model_name_with_icon Source, :singular %>
-      <span class="tag tag-default">ID: <%= @source.id %></span>
+    <h4 id="show-modal-title" class="card-header bg-info">
+      <%= yield :show_modal_title %>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
     </h4>
     <div class="card-block">
-      <div class="container-fluid">
-        <%= render partial: 'sources/inner_show', locals: { source: @source, native: true } %>
+      <div id="show-modal-content" class="container-fluid">
+        <%= yield :show_modal_content %>
       </div>
     </div>
     <div class="card-footer bg-info">
       <button type="button" class="btn btn-sm btn-info pull-right" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
         Close
       </button>
     </div>

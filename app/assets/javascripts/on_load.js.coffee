@@ -4,3 +4,4 @@
 
 $(document).on 'ready page:change', ->
   $('[data-toggle="tooltip"]').tooltip()
+  $('[data-toggle="collapse"]').collapse()
