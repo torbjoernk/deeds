@@ -9,13 +9,10 @@
       <div class="col-deed-day"><%= deed.day %></div>
     </div>
   </div>
-  <!--<div class="col-deed-desc">-->
-    <!--<%= deed.description %>-->
-  <!--</div>-->
   <div class="col-deed-actions actions">
     <div class="btn-toolbar" role="toolbar">
       <div class="btn-group btn-group-sm" role="group">
-        <% if deed.description.empty? %>
+        <% if deed.description.nil? %>
           <a class="btn btn-sm btn-secondary disabled">
             <%= icon('info', class: 'fa-fw') %>
           </a>
@@ -27,13 +24,13 @@
           </a>
         <% end %>
 
-        <% if true %>
+        <% if deed.notes.nil? %>
           <a class="btn btn-sm btn-secondary disabled">
             <%= icon('comment-o', class: 'fa-fw') %>
           </a>
         <% else %>
           <a class="btn btn-sm btn-secondary"
-             title="notes"
+             title="<%= deed.notes %>"
              data-toggle="tooltip">
             <%= icon('comment-o', class: 'fa-fw') %>
           </a>

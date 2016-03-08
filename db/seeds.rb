@@ -42,6 +42,7 @@ haa_r3a3 = Deed.create(
     title: 'Urkunde, Reihe III, Nr. 3',
     year: 1226,
     description: 'Der Abt des Klosters Knechtsteden bezeugt, dass der Prior G. und Richmodis, die verstorbene Vorsteherin des Klosters Flaesheim, von Simon von Gemen ein Landgut in Hamm erworben haben.',
+    notes: 'nur eine Notiz',
     content: dummy_content,
     sources: [haa_r3a3_original]
 )

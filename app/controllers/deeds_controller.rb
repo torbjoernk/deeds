@@ -14,6 +14,11 @@ class DeedsController < ApplicationController
     end
   end
 
+  def show
+    @deed = Deed.find params[:id]
+    respond_to :js
+  end
+
   def new
     @deed = Deed.new
     respond_to do |format|
