@@ -11,14 +11,9 @@
     .col-deed-year,
     .col-deed-month,
     .col-deed-day {
+      @extend .text-xs-center;
       @include make-col(4);
     }
-  }
-  .col-deed-year,
-  .col-deed-month,
-  .col-deed-day {
-    @include make-col(1);
-    @extend .text-xs-center;
   }
   .col-deed-actions {
     @include make-col(5);

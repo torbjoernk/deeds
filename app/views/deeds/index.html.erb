@@ -26,12 +26,19 @@
       <div class="row">
         <div class="col-deed-title col-head"><%= Deed.human_attribute_name :title %></div>
         <div class="col-deed-date col-head">
-          <span class="clearfix">Date</span>
-          <div class="col-deed-year"><%= Deed.human_attribute_name :year %></div>
-          <div class="col-deed-month"><%= Deed.human_attribute_name :month %></div>
-          <div class="col-deed-day"><%= Deed.human_attribute_name :day %></div>
+          <div class="contaner-fluid">
+            <div class="col-deed-year col-head">
+              <%= Deed.human_attribute_name :year %>
+            </div>
+            <div class="col-deed-month col-head">
+              <%= Deed.human_attribute_name :month %>
+            </div>
+            <div class="col-deed-day col-head">
+              <%= Deed.human_attribute_name :day %>
+            </div>
+          </div>
         </div>
-        <div class="col-deed-actions col-head">Actions</div>
+        <div class="col-deed-actions col-head">Associations and Actions</div>
       </div>
     </div>
     <div class="table-body">
