@@ -20,6 +20,12 @@
           </div>
 
           <%= yield %>
+
+          <%= render 'shared/show_modal' %>
+          <div class="modal fade" id="form-modal" tabindex="-1" role="dialog"
+               aria-labelledby="form-modal-title" aria-hidden="true" data-backdrop="static">
+            <%= render 'shared/form_modal' %>
+          </div>
         </div>
       </div>
       <footer id="site-footer" class="row">

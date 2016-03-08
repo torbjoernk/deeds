@@ -1,0 +1,23 @@
+<div class="modal fade" id="show-modal" tabindex="-1" role="dialog"
+     aria-labelledby="show-modal-title" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content card">
+      <h4 id="show-modal-title" class="card-header bg-info">
+        <%= yield :show_modal_title %>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </h4>
+      <div class="card-block">
+        <div id="show-modal-content" class="container-fluid">
+          <%= yield :show_modal_content %>
+        </div>
+      </div>
+      <div class="card-footer bg-info">
+        <button type="button" class="btn btn-sm btn-info pull-right" data-dismiss="modal" aria-label="Close">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

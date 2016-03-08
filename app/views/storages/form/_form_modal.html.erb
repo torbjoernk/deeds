@@ -1,0 +1,22 @@
+<% content_for :form_modal_before do %>
+  <%= form_tag @storage, method: :patch %>
+<% end %>
+
+<% content_for :form_modal_title do %>
+  <%= render 'storages/form/title' %>
+<% end %>
+
+<% content_for :form_modal_content do %>
+  <%= render 'storages/form/own_fields' %>
+  <div id="nested-fields"></div>
+<% end %>
+
+<% content_for :form_modal_submit do %>
+  <%= render 'storages/form/submit' %>
+<% end %>
+
+<% content_for :form_modal_after do %>
+  </form>
+<% end %>
+
+<%= render 'shared/form_modal' %>
