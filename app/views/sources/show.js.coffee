@@ -3,5 +3,5 @@
 $ ->
   DeedsApp.display_show_modal(
     "<%= escape_javascript(render partial: 'shared/show/title', locals: { entity: @source }) %>",
-    "<%= escape_javascript(render partial: 'sources/show/content') %>"
+    "<%= escape_javascript(render partial: 'sources/show/content', locals: { native: true }) %>"
   )
