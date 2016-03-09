@@ -1,114 +1,127 @@
-<div id="deed-row-<%= deed.id %>" class="row">
-  <div class="col-deed-title">
-    <%= deed.title %>
-  </div>
-  <div class="col-deed-date">
-    <div class="container-fluid">
-      <div class="col-deed-year"><%= deed.year %></div>
-      <div class="col-deed-month"><%= deed.month %></div>
-      <div class="col-deed-day"><%= deed.day %></div>
+<div id="deed-<%= deed.id %>" class="entity row">
+  <div class="col-info">
+    <div class="clearfix">
+      <div class="col-title">
+        <%= deed.title %>
+      </div>
+      <div class="col-deed-date">
+        <div class="container-fluid">
+          <div class="col-deed-year">
+            <span class="tag tag-default"><%= Deed.human_attribute_name :year %></span>
+            <%= deed.year ? deed.year : '?' %>
+          </div>
+          <div class="col-deed-month">
+            <span class="tag tag-default"><%= Deed.human_attribute_name :month %></span>
+            <%= deed.month ? deed.month : '?' %>
+          </div>
+          <div class="col-deed-day">
+            <span class="tag tag-default"><%= Deed.human_attribute_name :day %></span>
+            <%= deed.day ? deed.day : '?' %>
+          </div>
+        </div>
+      </div>
+      <div class="col-meta">
+        <div class="btn-toolbar" role="toolbar">
+          <div class="btn-group btn-group-sm" role="group">
+            <% if deed.notes.empty? %>
+              <a class="btn btn-sm btn-outline-secondary disabled">
+                <%= icon('comment-o', class: 'fa-fw') %>
+              </a>
+            <% else %>
+              <a class="btn btn-sm btn-secondary"
+                 title="<%= deed.notes %>"
+                 data-toggle="tooltip">
+                <%= icon('comment-o', class: 'fa-fw') %>
+              </a>
+            <% end %>
+          </div>
+
+          <div class="btn-group btn-group-sm" role="group">
+            <% if deed.content.nil? %>
+              <%= link_to nil,
+                          class: 'btn btn-sm btn-outline-secondary disabled' do %>
+                <%= icon_for Content %>
+              <% end %>
+            <% else %>
+              <%= link_to content_path(deed.content.id),
+                          class: 'btn btn-sm btn-secondary',
+                          title: "show #{Content.model_name.human}",
+                          data: { toggle: 'tooltip' },
+                          remote: true do %>
+                <%= icon_for Content %>
+              <% end %>
+            <% end %>
+            <%= link_to nil,#content_path(deed.content),
+                        class: 'btn btn-sm btn-secondary',
+                        title: "show #{ContentTranslation.model_name.plural.humanize}",
+                        data: { toggle: 'tooltip' } do %>
+              <%= deed.translations.count %>
+              <%= icon_for ContentTranslation %>
+            <% end %>
+          </div>
+
+          <div class="btn-group btn-group-sm" role="group">
+            <%= link_to sources_path(deed_id: deed.id),
+                        class: 'btn btn-sm btn-secondary',
+                        title: "show linked #{Source.model_name.plural.humanize}",
+                        data: { toggle: 'tooltip' } do %>
+              <%= deed.sources.count %>
+              <%= icon_for Source %>
+            <% end %>
+            <%= link_to nil,#references_path(deed_id: deed.id),
+                        class: 'btn btn-sm btn-secondary',
+                        title: "show linked References",
+                        data: { toggle: 'tooltip' } do %>
+              ?
+              <%= icon('external-link', class: 'fa-fw') %>
+            <% end %>
+            <%= link_to nil,#seals_path(deed_id: deed.id),
+                        class: 'btn btn-sm btn-secondary',
+                        title: "show linked Seals",
+                        data: { toggle: 'tooltip' } do %>
+              ?
+              <%= icon('bookmark-o', class: 'fa-fw') %>
+            <% end %>
+          </div>
+
+          <div class="btn-group btn-group-sm" role="group">
+            <%= link_to nil,#people_path(deed_id: deed.id),
+                        class: 'btn btn-sm btn-secondary',
+                        title: "show linked #{Person.model_name.plural.humanize}",
+                        data: { toggle: 'tooltip' } do %>
+              <%= deed.people.count %>
+              <%= icon_for Person %>
+            <% end %>
+            <%= link_to nil,#places_path(deed_id: deed.id),
+                        class: 'btn btn-sm btn-secondary',
+                        title: "show linked #{Place.model_name.plural.humanize}",
+                        data: { toggle: 'tooltip' } do %>
+              <%= deed.places.count %>
+              <%= icon_for Place %>
+            <% end %>
+            <%= link_to nil,#roles_path(deed_id: deed.id),
+                        class: 'btn btn-sm btn-secondary',
+                        title: "show linked #{Role.model_name.plural.humanize}",
+                        data: { toggle: 'tooltip' } do %>
+              <%= deed.roles.count %>
+              <%= icon_for Role %>
+            <% end %>
+          </div>
+
+          <div class="btn-group btn-group-sm actions" role="group">
+            <%= link_to_show_entity deed %>
+            <%= link_to_edit_entity deed %>
+            <%= link_to_destroy_entity deed %>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="col-deed-actions actions">
-    <div class="btn-toolbar" role="toolbar">
-      <div class="btn-group btn-group-sm" role="group">
-        <% if deed.description.nil? %>
-          <a class="btn btn-sm btn-secondary disabled">
-            <%= icon('info', class: 'fa-fw') %>
-          </a>
-        <% else %>
-          <a class="btn btn-sm btn-secondary"
-                title="<%= deed.description %>"
-                data-toggle="tooltip">
-            <%= icon('info', class: 'fa-fw') %>
-          </a>
-        <% end %>
-
-        <% if deed.notes.nil? %>
-          <a class="btn btn-sm btn-secondary disabled">
-            <%= icon('comment-o', class: 'fa-fw') %>
-          </a>
-        <% else %>
-          <a class="btn btn-sm btn-secondary"
-             title="<%= deed.notes %>"
-             data-toggle="tooltip">
-            <%= icon('comment-o', class: 'fa-fw') %>
-          </a>
-        <% end %>
-
-        <% if deed.content.nil? %>
-          <%= link_to nil,
-                      class: 'btn btn-sm btn-secondary disabled' do %>
-            <%= icon_for Content %>
-          <% end %>
-        <% else %>
-          <%= link_to content_path(deed.content.id),
-                      class: 'btn btn-sm btn-secondary',
-                      title: "show #{Content.model_name.human}",
-                      data: { toggle: 'tooltip' },
-                      remote: true do %>
-            <%= icon_for Content %>
-          <% end %>
-        <% end %>
-        <%= link_to nil,#content_path(deed.content),
-                    class: 'btn btn-sm btn-secondary',
-                    title: "show #{ContentTranslation.model_name.plural.humanize}",
-                    data: { toggle: 'tooltip' } do %>
-          <%= deed.translations.count %>
-          <%= icon_for ContentTranslation %>
-        <% end %>
-      </div>
-      <div class="btn-group btn-group-sm" role="group">
-        <%= link_to sources_path(deed_id: deed.id),
-                    class: 'btn btn-sm btn-secondary',
-                    title: "show linked #{Source.model_name.plural.humanize}",
-                    data: { toggle: 'tooltip' } do %>
-          <%= deed.sources.count %>
-          <%= icon_for Source %>
-        <% end %>
-        <%= link_to nil,#references_path(deed_id: deed.id),
-                    class: 'btn btn-sm btn-secondary',
-                    title: "show linked References",
-                    data: { toggle: 'tooltip' } do %>
-          ?
-          <%= icon('external-link', class: 'fa-fw') %>
-        <% end %>
-        <%= link_to nil,#seals_path(deed_id: deed.id),
-                    class: 'btn btn-sm btn-secondary',
-                    title: "show linked Seals",
-                    data: { toggle: 'tooltip' } do %>
-          ?
-          <%= icon('bookmark-o', class: 'fa-fw') %>
-        <% end %>
-      </div>
-      <div class="btn-group btn-group-sm" role="group">
-        <%= link_to nil,#people_path(deed_id: deed.id),
-                    class: 'btn btn-sm btn-secondary',
-                    title: "show linked #{Person.model_name.plural.humanize}",
-                    data: { toggle: 'tooltip' } do %>
-          <%= deed.people.count %>
-          <%= icon_for Person %>
-        <% end %>
-        <%= link_to nil,#places_path(deed_id: deed.id),
-                    class: 'btn btn-sm btn-secondary',
-                    title: "show linked #{Place.model_name.plural.humanize}",
-                    data: { toggle: 'tooltip' } do %>
-          <%= deed.places.count %>
-          <%= icon_for Place %>
-        <% end %>
-        <%= link_to nil,#roles_path(deed_id: deed.id),
-                    class: 'btn btn-sm btn-secondary',
-                    title: "show linked #{Role.model_name.plural.humanize}",
-                    data: { toggle: 'tooltip' } do %>
-          <%= deed.roles.count %>
-          <%= icon_for Role %>
-        <% end %>
-      </div>
-      <div class="btn-group btn-group-sm" role="group">
-        <%= link_to_show_entity deed %>
-        <%= link_to_edit_entity deed %>
-        <%= link_to_destroy_entity deed %>
-      </div>
+    <div class="col-description">
+      <% if deed.description %>
+        <%= deed.description %>
+      <% else %>
+        <em class="text-muted">no description</em>
+      <% end %>
     </div>
   </div>
 </div>

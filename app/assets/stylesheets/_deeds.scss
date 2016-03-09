@@ -3,22 +3,52 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .table {
-  .col-deed-title {
-    @include make-col(4);
-  }
-  .col-deed-date {
-    @include make-col(3);
-    .col-deed-year,
-    .col-deed-month,
-    .col-deed-day {
-      @extend .text-xs-center;
-      @include make-col(4);
+  .entity.row {
+    .col-info {
+      @include make-col(12);
+      @extend .p-r-0;
+
+      .col-title {
+        @include make-col(4);
+        @extend .p-x-0;
+      }
+
+      .col-deed-date {
+        @include make-col(3);
+        @extend .p-x-0;
+
+        .col-deed-year,
+        .col-deed-month,
+        .col-deed-day {
+          @include make-col(4);
+          @extend .p-x-0;
+        }
+      }
+
+      .col-meta {
+        @include make-col(5);
+        @extend .p-x-0;
+
+        .btn-toolbar {
+          @include pull-right();
+        }
+      }
+
+      .col-actions {
+        @include make-col(2);
+        @extend .p-l-0;
+
+        .btn-group {
+          @include pull-right();
+        }
+      }
     }
-  }
-  .col-deed-actions {
-    @include make-col(5);
-    .btn-toolbar {
-      @include pull-right();
+
+    .col-description {
+      @include make-col(11);
+      @include make-col-offset(1);
+      @extend .p-x-0;
+      @extend small;
     }
   }
 }

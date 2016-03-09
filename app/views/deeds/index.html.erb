@@ -22,26 +22,7 @@
 
 <div id="deeds-table">
   <div class="table" id="deeds">
-    <div class="table-head">
-      <div class="row">
-        <div class="col-deed-title col-head"><%= Deed.human_attribute_name :title %></div>
-        <div class="col-deed-date col-head">
-          <div class="contaner-fluid">
-            <div class="col-deed-year col-head">
-              <%= Deed.human_attribute_name :year %>
-            </div>
-            <div class="col-deed-month col-head">
-              <%= Deed.human_attribute_name :month %>
-            </div>
-            <div class="col-deed-day col-head">
-              <%= Deed.human_attribute_name :day %>
-            </div>
-          </div>
-        </div>
-        <div class="col-deed-actions col-head">Associations and Actions</div>
-      </div>
-    </div>
-    <div class="table-body">
+    <div class="table-body container-fluid">
       <%= render partial: 'deed', collection: @deeds %>
     </div>
   </div>
