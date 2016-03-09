@@ -1,23 +1,9 @@
 <h1>
   <%= model_name_with_icon Deed, :plural %>
-  <span class="btn-group">
-    <%= link_to new_deed_path,
-                class: 'btn btn-primary',
-                id: 'btn-new-deed',
-                title: 'Add new Deed',
-                data: { toggle: 'tooltip' },
-                remote: true do -%>
-      <%= icon('plus', class: 'fa-fw') %>
-    <% end -%>
-    <%= link_to deeds_path,
-                class: 'btn btn-secondary',
-                id: 'btn-refresh-table',
-                title: 'Refresh table',
-                data: { toggle: 'tooltip' },
-                remote: true do %>
-      <%= icon('refresh', class: 'fa-fw') %>
-    <% end %>
-  </span>
+  <%= render partial: 'shared/index/main_action_btn',
+             locals: { path_to_new_entity: new_deed_path,
+                       path_to_refresh: deeds_path,
+                       entity_name: Deed.model_name.human } %>
 </h1>
 
 <div id="deeds-table">

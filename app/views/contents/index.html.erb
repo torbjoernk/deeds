@@ -1,15 +1,9 @@
 <h1>
   <%= model_name_with_icon Content, :plural %>
-  <span class="btn-group">
-    <%= link_to new_content_path,
-                class: 'btn btn-sm btn-primary',
-                id: 'btn-new-content',
-                title: 'Add new Content',
-                data: { toggle: 'tooltip' },
-                remote: true do -%>
-      <%= icon('plus', class: 'fa-fw') %>
-    <% end -%>
-  </span>
+  <%= render partial: 'shared/index/main_action_btn',
+             locals: { path_to_new_entity: new_content_path,
+                       path_to_refresh: contents_path,
+                       entity_name: Content.model_name.human } %>
 </h1>
 
 <div id="contents-table">

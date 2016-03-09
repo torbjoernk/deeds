@@ -7,6 +7,11 @@ class ContentsController < ApplicationController
     @contents = Content.all
 
     add_breadcrumb Content.model_name.plural.humanize, :contents_path
+
+    respond_to do |format|
+      format.js   { render 'index' }
+      format.html { render 'index' }
+    end
   end
 
   def show

@@ -18,6 +18,11 @@ class SourcesController < ApplicationController
     end
 
     add_breadcrumb Source.model_name.plural.humanize, :sources_path
+
+    respond_to do |format|
+      format.js   { render 'index' }
+      format.html { render 'index' }
+    end
   end
 
   def show
