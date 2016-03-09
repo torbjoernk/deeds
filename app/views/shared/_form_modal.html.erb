@@ -1,8 +1,19 @@
+<% form_open = false %>
+
 <div class="modal-dialog modal-lg" role="document">
-  <%= yield :form_modal_before %>
+  <% if content_for? :form_modal_before %>
+    <%= yield :form_modal_before %>
+  <% elsif defined? entity %>
+    <%= form_tag entity, method: (action_name.to_sym == :edit ? :patch : :post) %>
+    <% form_open = true %>
+  <% end %>
   <div class="modal-content card">
     <h4 id="form-modal-title" class="card-header bg-info">
-      <%= yield :form_modal_title %>
+      <% if content_for? :form_modal_title %>
+        <%= yield :form_modal_title %>
+      <% elsif defined? entity %>
+        <%= form_modal_title entity.class %>
+      <% end %>
     </h4>
     <div class="card-block">
       <div id="form-modal-content" class="container-fluid">
@@ -14,9 +25,17 @@
         <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" aria-label="Close">
           Abort
         </button>
-        <%= yield :form_modal_submit %>
+        <% if content_for? :form_modal_submit %>
+          <%= yield :form_modal_submit %>
+        <% elsif defined? entity %>
+          <%= render partial: 'shared/form/submit', locals: { entity: entity } %>
+        <% end %>
       </div>
     </div>
   </div>
-  <%= yield :form_modal_after %>
+  <% if content_for? :form_modal_after %>
+    <%= yield :form_modal_after %>
+  <% elsif form_open %>
+    </form>
+  <% end %>
 </div>

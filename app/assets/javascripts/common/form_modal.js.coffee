@@ -21,3 +21,11 @@ DeedsApp.display_form_modal = (full_modal, callback) ->
   form_modal.modal('show')
   form_modal.on 'click', 'input[type="submit"]', ->
     form_modal.modal('hide')
+
+DeedsApp.display_form_modal_with_ajax_url = (full_modal, callback_url) ->
+  DeedsApp.display_form_modal full_modal, ->
+    $.get
+      url: callback_url,
+      data:
+        sub_action: 'refresh_nested',
+      dataType: 'script',

@@ -2,9 +2,7 @@
 #= depend_on common/form_modal
 
 $ ->
-  DeedsApp.display_form_modal "<%= escape_javascript(render partial: 'sources/form/form_modal') %>", ->
-    $.get
-      url: '<%= edit_source_path(@source.id) %>',
-      data:
-        sub_action: 'refresh_nested',
-      dataType: 'script',
+  DeedsApp.display_form_modal_with_ajax_url(
+    '<%= escape_javascript(render partial: 'sources/form/form_modal') %>',
+    '<%= edit_source_path(@source.id) %>'
+  )
