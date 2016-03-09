@@ -12,7 +12,7 @@
 <% end %>
 
 <% content_for :form_modal_submit do %>
-  <%= render 'contents/form/submit' %>
+  <%= render partial: 'shared/form/submit', locals: { entity: @content } %>
 <% end %>
 
 <% content_for :form_modal_after do %>
