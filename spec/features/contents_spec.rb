@@ -15,12 +15,12 @@ feature 'On the Content Page', type: :feature do
 
       context 'and, within the form modal,' do
         before :each do
-          expect(page).to have_selector '#content-modal', visible: true
+          expect(page).to have_selector '#form-modal', visible: true
         end
 
         context 'enters the new Contents\'s language and content' do
           before :each do
-            within '#content-modal' do
+            within '#form-modal' do
               select new_content.language.humanize, from: Content.human_attribute_name(:language)
               fill_in Content.human_attribute_name(:content), with: new_content.content
             end
@@ -94,17 +94,17 @@ feature 'On the Content Page', type: :feature do
 
         context 'then, within a modal,' do
           before :each do
-            expect(page).to have_selector '#content-modal', visible: true
+            expect(page).to have_selector '#show-modal', visible: true
           end
 
           scenario 'the User should see the Contents\'s langauge' do
-            within '#content-modal' do
+            within '#show-modal' do
               expect(page).to have_text @content.language.humanize
             end
           end
 
           scenario 'the User should see the Contents\'s content' do
-            within '#content-modal' do
+            within '#show-modal' do
               expect(page).to have_text @content.content
             end
           end
@@ -125,7 +125,7 @@ feature 'On the Content Page', type: :feature do
 
         context 'and, within the form modal,' do
           before :each do
-            expect(page).to have_selector '#content-modal', visible: true
+            expect(page).to have_selector '#form-modal', visible: true
           end
 
           context 'changes the Content\'s content' do
@@ -136,14 +136,14 @@ feature 'On the Content Page', type: :feature do
             end
 
             before :each do
-              within '#content-modal' do
+              within '#form-modal' do
                 fill_in Content.human_attribute_name(:content), with: new_content.content
               end
             end
 
             context 'and clicks on the "Update Content" button' do
               before :each do
-                within '#content-modal' do
+                within '#form-modal' do
                   click_on 'Update Content'
                 end
               end
