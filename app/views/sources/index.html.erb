@@ -30,18 +30,9 @@
 <% end %>
 
 <div id="sources-table">
-  <table class="table table-hover table-sm" id="sources">
-    <thead>
-    <tr>
-      <th class="col-source-title"><%= Source.human_attribute_name :title %></th>
-      <th class="col-source-type"><%= Source.human_attribute_name :source_type %></th>
-      <th class="col-source-notes"><%= Source.human_attribute_name :notes %></th>
-      <th class="col-source-assoc">Associations</th>
-      <th class="col-source-actions">Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <%= render partial: 'source', collection: @sources %>
-    </tbody>
-  </table>
+  <div class="table" id="sources">
+    <div class="table-body container-fluid">
+      <%= render partial: 'source', collection: @sources %>
+    </div>
+  </div>
 </div>

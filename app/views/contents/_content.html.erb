@@ -1,13 +1,56 @@
-<tr id="content-row-<%= content.id %>">
-  <td class="col-content-language"><%= content.language.humanize %></td>
-  <td class="col-content-content"><%= content.content %></td>
-  <td class="col-content-assoc">
-  </td>
-  <td class="col-content-actions">
-    <div class="btn-group btn-group-sm">
-      <%= link_to_show_entity content %>
-      <%= link_to_edit_entity content %>
-      <%= link_to_destroy_entity content %>
-    </div>
-  </td>
-</tr>
+<% content_for :entity_info, flush: true do %>
+  <div class="col-content-language">
+    <%= content.language.humanize %>
+  </div>
+<% end %>
+
+<% content_for :entity_toolbar_associations, flush: true do %>
+  <div class="btn-group btn-group-sm" role="group">
+    <% if content.notes.nil? or content.notes.empty? %>
+      <a class="btn btn-sm btn-outline-secondary disabled">
+        <%= icon('comment-o', class: 'fa-fw') %>
+      </a>
+    <% else %>
+      <a class="btn btn-sm btn-secondary"
+         title="<%= content.notes %>"
+         data-toggle="tooltip">
+        <%= icon('comment-o', class: 'fa-fw') %>
+      </a>
+    <% end %>
+  </div>
+
+  <div class="btn-group btn-group-sm" role="group">
+    <% if content.deed.nil? %>
+      <%= link_to nil,
+                  class: 'btn btn-sm btn-outline-secondary disabled' do %>
+        <%= icon_for Deed %>
+      <% end %>
+    <% else %>
+      <%= link_to deed_path(content.deed),
+                  class: 'btn btn-sm btn-secondary',
+                  title: "show #{Deed.model_name.human}",
+                  data: { toggle: 'tooltip' },
+                  remote: true do %>
+        <%= icon_for Deed %>
+      <% end %>
+    <% end %>
+    <%= link_to nil,#content_translation_path(content.content),
+                class: 'btn btn-sm btn-secondary',
+                title: "show #{ContentTranslation.model_name.plural.humanize}",
+                data: { toggle: 'tooltip' } do %>
+      <%= content.translations.count %>
+      <%= icon_for ContentTranslation %>
+    <% end %>
+  </div>
+<% end %>
+
+<% content_for :entity_description, flush: true do %>
+  <% if content.content and not content.content.empty? %>
+    <%= truncate content.content, length: 200, separator: ' ' %>
+  <% else %>
+    <em class="text-muted">no content</em>
+  <% end %>
+<% end %>
+
+<%= render partial: 'shared/index/entity',
+           locals: { entity_id: "content-#{content.id}", entity: content } %>

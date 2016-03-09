@@ -1,8 +1,28 @@
-<tr id="source-row-<%= source.id %>">
-  <td class="col-source-title"><%= source.title %></td>
-  <td class="col-source-type"><%= source.source_type %></td>
-  <td class="col-source-notes"><%= source.notes %></td>
-  <td class="col-source-assoc">
+<% content_for :entity_info, flush: true do %>
+  <div class="col-source-title">
+    <%= source.title %>
+  </div>
+  <div class="col-source-type">
+    <%= source.source_type.humanize %>
+  </div>
+<% end %>
+
+<% content_for :entity_toolbar_associations, flush: true do %>
+  <div class="btn-group btn-group-sm" role="group">
+    <% if source.notes.nil? or source.notes.empty? %>
+      <a class="btn btn-sm btn-outline-secondary disabled">
+        <%= icon('comment-o', class: 'fa-fw') %>
+      </a>
+    <% else %>
+      <a class="btn btn-sm btn-secondary"
+         title="<%= source.notes %>"
+         data-toggle="tooltip">
+        <%= icon('comment-o', class: 'fa-fw') %>
+      </a>
+    <% end %>
+  </div>
+
+  <div class="btn-group btn-group-sm" role="group">
     <%= link_to archives_path(source_id: source.id),
                 class: 'btn btn-sm btn-secondary',
                 title: "show #{Archive.model_name.plural.humanize} linked",
@@ -10,12 +30,8 @@
       <%= source.archives.count %>
       <%= icon('book', class: 'fa-fw') %>
     <% end %>
-  </td>
-  <td class="col-source-actions">
-    <div class="btn-group btn-group-sm">
-      <%= link_to_show_entity source %>
-      <%= link_to_edit_entity source %>
-      <%= link_to_destroy_entity source %>
-    </div>
-  </td>
-</tr>
+  </div>
+<% end %>
+
+<%= render partial: 'shared/index/entity',
+           locals: { entity_id: "source-#{source.id}", entity: source } %>

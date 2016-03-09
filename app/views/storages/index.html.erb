@@ -22,17 +22,9 @@
 <% end %>
 
 <div id="storages-table">
-  <table class="table table-hover table-sm" id="storages">
-    <thead>
-    <tr>
-      <th class="col-storage-title"><%= Storage.human_attribute_name :title %></th>
-      <th class="col-storage-notes"><%= Storage.human_attribute_name :notes %></th>
-      <th class="col-storage-assoc">Associations</th>
-      <th class="col-storage-actions">Actions</th>
-    </tr>
-    </thead>
-    <tbody>
+  <div class="table" id="storages">
+    <div class="table-body container-fluid">
       <%= render partial: 'storage', collection: @storages %>
-    </tbody>
-  </table>
+    </div>
+  </div>
 </div>

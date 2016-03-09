@@ -5,11 +5,8 @@
 .table {
   .entity.row {
     .col-info {
-      @include make-col(12);
-      @extend .p-r-0;
-
-      .col-title {
-        @include make-col(4);
+      .col-deed-title {
+        @include make-col(3);
         @extend .p-x-0;
       }
 
@@ -24,31 +21,6 @@
           @extend .p-x-0;
         }
       }
-
-      .col-meta {
-        @include make-col(5);
-        @extend .p-x-0;
-
-        .btn-toolbar {
-          @include pull-right();
-        }
-      }
-
-      .col-actions {
-        @include make-col(2);
-        @extend .p-l-0;
-
-        .btn-group {
-          @include pull-right();
-        }
-      }
-    }
-
-    .col-description {
-      @include make-col(11);
-      @include make-col-offset(1);
-      @extend .p-x-0;
-      @extend small;
     }
   }
 }
