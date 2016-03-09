@@ -3,6 +3,12 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+.btn {
+  i {
+    line-height: inherit !important;
+  }
+}
+
 ol.breadcrumb {
   li {
     @extend .breadcrumb-item;

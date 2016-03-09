@@ -1,4 +1,7 @@
 class Role < ActiveRecord::Base
+  include IconicModel
+  ICON = 'graduation-cap'
+
   REFERS_TO = %w(person place deed)
 
   has_many :mentions

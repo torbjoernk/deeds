@@ -20,6 +20,14 @@
     </dd>
   </dl>
 <% end %>
+<% if @deed %>
+  <dl class="row">
+    <dt class="col-md-2">associated with Deed</dt>
+    <dd class="col-md-10">
+      <%= render partial: 'deeds/oneline', locals: { archive: @deed } %>
+    </dd>
+  </dl>
+<% end %>
 
 <div id="sources-table">
   <table class="table table-hover table-sm" id="sources">

@@ -1,0 +1,22 @@
+<% content_for :form_modal_before do %>
+  <%= form_tag @content, method: (action_name.to_sym == :edit ? :patch : :post) %>
+<% end %>
+
+<% content_for :form_modal_title do %>
+  <%= render 'contents/form/title' %>
+<% end %>
+
+<% content_for :form_modal_content do %>
+  <%= render 'contents/form/own_fields' %>
+  <div id="nested-fields"></div>
+<% end %>
+
+<% content_for :form_modal_submit do %>
+  <%= render 'contents/form/submit' %>
+<% end %>
+
+<% content_for :form_modal_after do %>
+  </form>
+<% end %>
+
+<%= render 'shared/form_modal' %>

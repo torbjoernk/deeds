@@ -1,0 +1,21 @@
+.table {
+  .table-head {
+    @extend .text-xs-center;
+    @extend thead;
+    font-weight: bold;
+  }
+  .table-body {
+    .row {
+      padding-top: ($spacer-y / 2);
+      padding-bottom: ($spacer-y / 2);
+
+      &:nth-of-type(even) {
+        background-color: $table-bg-accent;
+      }
+
+      @include hover {
+        background-color: $table-bg-hover;
+      }
+    }
+  }
+}

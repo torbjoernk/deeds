@@ -1,0 +1,41 @@
+<% native ||= false %>
+<% deed ||= @deed %>
+
+<div class="row">
+  <label class="col-md-3"><strong><%= Deed.human_attribute_name :title %></strong></label>
+  <div class="col-md-9">
+    <%= deed.title %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3"><strong>Date</strong></label>
+  <div class="col-md-3">
+    <label><strong><%= Deed.human_attribute_name :year %></strong></label>
+    <%= deed.year %>
+  </div>
+  <div class="col-md-3">
+    <label><strong><%= Deed.human_attribute_name :month %></strong></label>
+    <%= deed.month %>
+  </div>
+  <div class="col-md-3">
+    <label><strong><%= Deed.human_attribute_name :day %></strong></label>
+    <%= deed.day %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3"><strong><%= Deed.human_attribute_name :description %></strong></label>
+  <div class="col-md-9">
+    <%= deed.description %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3"><strong><%= Deed.human_attribute_name :notes %></strong></label>
+  <div class="col-md-9">
+    <%= deed.notes %>
+  </div>
+</div>
+<% if native %>
+  <div class="row">
+
+  </div>
+<% end %>

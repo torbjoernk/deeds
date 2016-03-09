@@ -1,0 +1,48 @@
+<h1>
+  <%= model_name_with_icon Deed, :plural %>
+  <span class="btn-group">
+    <%= link_to new_deed_path,
+                class: 'btn btn-primary',
+                id: 'btn-new-deed',
+                title: 'Add new Deed',
+                data: { toggle: 'tooltip' },
+                remote: true do -%>
+      <%= icon('plus', class: 'fa-fw') %>
+    <% end -%>
+    <%= link_to deeds_path,
+                class: 'btn btn-secondary',
+                id: 'btn-refresh-table',
+                title: 'Refresh table',
+                data: { toggle: 'tooltip' },
+                remote: true do %>
+      <%= icon('refresh', class: 'fa-fw') %>
+    <% end %>
+  </span>
+</h1>
+
+<div id="deeds-table">
+  <div class="table" id="deeds">
+    <div class="table-head">
+      <div class="row">
+        <div class="col-deed-title col-head"><%= Deed.human_attribute_name :title %></div>
+        <div class="col-deed-date col-head">
+          <div class="contaner-fluid">
+            <div class="col-deed-year col-head">
+              <%= Deed.human_attribute_name :year %>
+            </div>
+            <div class="col-deed-month col-head">
+              <%= Deed.human_attribute_name :month %>
+            </div>
+            <div class="col-deed-day col-head">
+              <%= Deed.human_attribute_name :day %>
+            </div>
+          </div>
+        </div>
+        <div class="col-deed-actions col-head">Associations and Actions</div>
+      </div>
+    </div>
+    <div class="table-body">
+      <%= render partial: 'deed', collection: @deeds %>
+    </div>
+  </div>
+</div>

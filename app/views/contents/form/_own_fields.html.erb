@@ -1,15 +1,17 @@
-<div class="row form-group">
-  <%= f.label :language, class: 'col-md-3 form-control-label' %>
-  <div class="col-md-9">
-    <%= f.select :language,
-                 options_for_select(Content::LANGUAGES.map { |e| e.humanize },
-                                    (@content.language ? @content.language.humanize : nil)),
-                 class: 'form-control' %>
+<%= fields_for @content do |f| %>
+  <div class="row form-group">
+    <%= f.label :language, class: 'col-md-3 form-control-label' %>
+    <div class="col-md-9">
+      <%= f.select :language,
+                   options_for_select(Content::LANGUAGES.map { |e| e.humanize },
+                                      (@content.language ? @content.language.humanize : nil)),
+                   class: 'form-control' %>
+    </div>
   </div>
-</div>
-<div class="row form-group">
-  <%= f.label :content, class: 'col-md-3 form-control-label' %>
-  <div class="col-md-9">
-    <%= f.text_area :content, rows: 5, class: 'form-control' %>
+  <div class="row form-group">
+    <%= f.label :content, class: 'col-md-3 form-control-label' %>
+    <div class="col-md-9">
+      <%= f.text_area :content, rows: 5, class: 'form-control' %>
+    </div>
   </div>
-</div>
+<% end %>
