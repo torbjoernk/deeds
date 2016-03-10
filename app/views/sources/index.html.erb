@@ -1,15 +1,9 @@
 <h1>
   <%= model_name_with_icon Source, :plural %>
-  <span class="btn-group">
-    <%= link_to new_source_path,
-                class: 'btn btn-sm btn-primary',
-                id: 'btn-new-source',
-                title: 'Add new Source',
-                data: { toggle: 'tooltip' },
-                remote: true do -%>
-      <%= icon('plus', class: 'fa-fw') %>
-    <% end -%>
-  </span>
+  <%= render partial: 'shared/index/main_action_btn',
+             locals: { path_to_new_entity: new_source_path,
+                       path_to_refresh: sources_path,
+                       entity_name: Source.model_name.human } %>
 </h1>
 
 <% if @archive %>
@@ -30,18 +24,9 @@
 <% end %>
 
 <div id="sources-table">
-  <table class="table table-hover table-sm" id="sources">
-    <thead>
-    <tr>
-      <th class="col-source-title"><%= Source.human_attribute_name :title %></th>
-      <th class="col-source-type"><%= Source.human_attribute_name :source_type %></th>
-      <th class="col-source-notes"><%= Source.human_attribute_name :notes %></th>
-      <th class="col-source-assoc">Associations</th>
-      <th class="col-source-actions">Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <%= render partial: 'source', collection: @sources %>
-    </tbody>
-  </table>
+  <div class="table" id="sources">
+    <div class="table-body container-fluid">
+      <%= render partial: 'source', collection: @sources %>
+    </div>
+  </div>
 </div>

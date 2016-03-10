@@ -14,6 +14,11 @@ class StoragesController < ApplicationController
     end
 
     add_breadcrumb Storage.model_name.plural.humanize, :storages_path
+
+    respond_to do |format|
+      format.js   { render 'index' }
+      format.html { render 'index' }
+    end
   end
 
   def new
