@@ -8,7 +8,7 @@
     <% form_open = true %>
   <% end %>
   <div class="modal-content card">
-    <h4 id="form-modal-title" class="card-header bg-info">
+    <h4 id="form-modal-title" class="card-header bg-primary">
       <% if content_for? :form_modal_title %>
         <%= yield :form_modal_title %>
       <% elsif defined? entity %>
@@ -20,7 +20,7 @@
         <%= yield :form_modal_content %>
       </div>
     </div>
-    <div id="form-modal-submit" class="card-footer bg-info">
+    <div id="form-modal-submit" class="card-footer bg-primary">
       <div class="btn-group pull-right" role="group">
         <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" aria-label="Close">
           Abort
