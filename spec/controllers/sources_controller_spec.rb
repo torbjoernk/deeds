@@ -37,6 +37,26 @@ describe SourcesController, type: :controller do
         expect(assigns :sources).to include source
       end
     end
+
+    describe 'filtered by associated Deed', use_db: true do
+      let(:deed) do
+        deed = create :deed
+        deed.sources << source
+        deed.save!
+        deed
+      end
+
+      specify 'renders the index template' do
+        get :index, deed_id: deed.id
+        expect(response).to render_template :index
+      end
+
+      specify 'assigns @storages and @deed' do
+        get :index, deed_id: deed.id
+        expect(assigns :deed).to eq deed
+        expect(assigns :sources).to include source
+      end
+    end
   end
 
   describe 'GET #new via XHR' do
