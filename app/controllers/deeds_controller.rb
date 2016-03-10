@@ -40,6 +40,13 @@ class DeedsController < ApplicationController
   def update
     @deed = Deed.find params[:id]
     if params.has_key? :sub_action
+      if params[:sub_action].to_sym == :deassoc_content
+        @content = Content.find params[:content_id]
+        @deed.update!(content: nil)
+        respond_to do |format|
+          format.js { render partial: 'deeds/form/refresh' }
+        end
+      end
     else
       @deed.update!(deed_params)
       flash[:success] = "Updated deed with ID #{@deed.id}."
