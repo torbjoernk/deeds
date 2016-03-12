@@ -21,6 +21,9 @@ class ContentsController < ApplicationController
 
   def new
     @content = Content.new
+    if params.has_key? :deed_id
+      @deed = Deed.find(params[:deed_id])
+    end
     respond_to :js
   end
 
@@ -56,6 +59,6 @@ class ContentsController < ApplicationController
       params[:content][:language] = params[:content][:language].dehumanize
     end
 
-    params.require(:content).permit(:content, :language)
+    params.require(:content).permit(:content, :language, :deed_id)
   end
 end

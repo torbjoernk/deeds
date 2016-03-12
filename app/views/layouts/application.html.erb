@@ -21,14 +21,14 @@
 
           <%= yield %>
 
-          <div class="modal fade" id="show-modal" tabindex="-1" role="dialog"
-               aria-labelledby="show-modal-title" aria-hidden="true">
-            <%= render 'shared/show_modal' %>
-          </div>
-
           <div class="modal fade" id="form-modal" tabindex="-1" role="dialog"
                aria-labelledby="form-modal-title" aria-hidden="true" data-backdrop="static">
             <%= render 'shared/form_modal' %>
+          </div>
+
+          <div class="modal fade" id="show-modal" tabindex="-1" role="dialog"
+               aria-labelledby="show-modal-title" aria-hidden="true">
+            <%= render 'shared/show_modal' %>
           </div>
         </div>
       </div>
