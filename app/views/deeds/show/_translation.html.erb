@@ -1,1 +1,6 @@
-<%= @translation.translation %>
+<li class="list-group-item">
+  <%= translation.language.humanize %>
+  <span class="pull-right">
+    <%= link_to_show_entity translation %>
+  </span>
+</li>

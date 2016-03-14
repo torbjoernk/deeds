@@ -1,114 +1,228 @@
-<h1>
-  <%= icon_for Deed %>
-  <%= @deed.title %>
-</h1>
 
-<div class="row">
-  <div class="col-md-12">
-    <div class="card-deck-wrapper">
-      <div class="card-deck">
-        <div class="card">
-          <div class="card-header">
-            Date
-          </div>
-          <div class="card-block">
-            <div class="row">
-              <div class="col-md-3"><%= Deed.human_attribute_name :year %></div>
-              <div class="col-md-9"><%= @deed.year %></div>
+<div class="container-fluid">
+
+  <h1>
+    <%= icon_for Deed %>
+    <%= @deed.title %>
+
+    <span class="pull-right">
+      <%= link_to edit_deed_path(@deed),
+                  class: 'btn btn-outline-primary',
+                  id: "btn-deed-edit-#{@deed.id}",
+                  title: "Edit #{Deed.model_name.human}",
+                  data: { toggle: 'tooltip', placement: 'left' },
+                  remote: true do
+          content_tag(:i, nil, class: 'fa fa-fw fa-pencil')
+        end %>
+    </span>
+  </h1>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card-deck-wrapper">
+        <div class="card-deck">
+          <div class="card">
+            <div class="card-header">
+              Date
             </div>
-            <div class="row">
-              <div class="col-md-3"><%= Deed.human_attribute_name :month %></div>
-              <div class="col-md-9"><%= @deed.month %></div>
+            <div class="card-block">
+              <div class="row">
+                <div class="col-md-3"><%= Deed.human_attribute_name :year %></div>
+                <div class="col-md-9">
+                  <% if @deed.year %>
+                    <%= @deed.year %>
+                  <% else %>
+                    <em class="text-muted">none given</em>
+                  <% end %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3"><%= Deed.human_attribute_name :month %></div>
+                <div class="col-md-9">
+                  <% if @deed.month %>
+                    <%= @deed.month %>
+                  <% else %>
+                    <em class="text-muted">none given</em>
+                  <% end %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3"><%= Deed.human_attribute_name :day %></div>
+                <div class="col-md-9">
+                  <% if @deed.day %>
+                    <%= @deed.day %>
+                  <% else %>
+                    <em class="text-muted">none given</em>
+                  <% end %>
+                </div>
+              </div>
             </div>
-            <div class="row">
-              <div class="col-md-3"><%= Deed.human_attribute_name :day %></div>
-              <div class="col-md-9"><%= @deed.day %></div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <%= Deed.human_attribute_name :description %>
+            </div>
+            <div class="card-block">
+              <%= @deed.description %>
             </div>
           </div>
-        </div>
-        <div class="card">
-          <div class="card-header">
-            <%= Deed.human_attribute_name :description %>
-          </div>
-          <div class="card-block">
-            <%= @deed.description %>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-header">
-            <%= Deed.human_attribute_name :notes %>
-          </div>
-          <div class="card-block">
-            <%= @deed.notes %>
+          <div class="card">
+            <div class="card-header">
+              <%= notes_icon %>
+              <%= Deed.human_attribute_name :notes %>
+            </div>
+            <div class="card-block">
+              <%= @deed.notes %>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="row-spacer"></div>
+  <div class="row-spacer"></div>
 
-<div class="row">
-  <div class="col-md-12">
-    <div class="card-deck-wrapper">
-      <div class="card-deck">
-        <div class="card">
-          <div class="card-header">
-            <%= model_name_with_icon Content %> &mdash; <%= @deed.content.language.humanize %>
-          </div>
-          <div class="card-block">
-            <%= @deed.content.content %>
-          </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <%= model_name_with_icon Content %> &mdash; <%= @deed.content.language.humanize %>
         </div>
+        <div class="card-block">
+          <%= @deed.content.content %>
+        </div>
+      </div>
+    </div>
 
-        <div class="card">
-          <div class="card-header">
-            <%= model_name_with_icon ContentTranslation, :plural %>
-          </div>
-          <div class="card-block">
-            <% if @deed.translations.count > 0 %>
-              <%= render 'deeds/show/translation', collection: @deed.translations %>
-            <% else %>
-              <em class="text-muted">no translations</em>
-            <% end %>
-          </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <%= model_name_with_icon ContentTranslation, :plural %>
+          <span class="pull-right">
+            <%=  link_to nil,#new_content_translation_path
+                 class: 'btn btn-sm btn-primary',
+                 id: 'btn-new-content-translation',
+                 title: "Add new #{ContentTranslation.model_name.human}",
+                 data: { toggle: 'tooltip', 'turbolinks': false, placement: 'left' },
+                 remote: true do -%>
+              <%= icon('plus', class: 'fa-fw') %>
+            <% end -%>
+          </span>
+        </div>
+        <ul class="list-group list-group-flush">
+          <% if @deed.translations.count > 0 %>
+            <%= render partial: 'deeds/show/translation', collection: @deed.translations %>
+          <% else %>
+            <li class="list-group-item text-muted">no Translations</li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-spacer"></div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <%= model_name_with_icon Source, :plural %>
+          <span class="pull-right">
+            <%=  link_to new_source_path(deed_id: @deed.id),
+                         class: 'btn btn-sm btn-primary',
+                         id: 'btn-new-source',
+                         title: "Add new #{Source.model_name.human}",
+                         data: { toggle: 'tooltip', 'turbolinks': false, placement: 'left' },
+                         remote: true do -%>
+              <%= icon('plus', class: 'fa-fw') %>
+            <% end -%>
+          </span>
+        </div>
+        <ul class="list-group list-group-flush">
+          <% if @deed.sources.count > 0 %>
+            <%= render partial: 'deeds/show/source', collection: @deed.sources %>
+          <% else %>
+            <li class="list-group-item text-muted">no Sources</li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <%= icon('external-link', class: 'fa-fw') %>
+          References
+          <span class="pull-right">
+            <%=  link_to nil,#new_reference_path(deed_id: @deed.id),
+                         class: 'btn btn-sm btn-primary',
+                         id: 'btn-new-source',
+                         title: 'Add new Reference',
+                         data: { toggle: 'tooltip', 'turbolinks': false, placement: 'left' },
+                         remote: true do -%>
+              <%= icon('plus', class: 'fa-fw') %>
+            <% end -%>
+          </span>
+        </div>
+        <div class="card-block">
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <%= icon('bookmark-o', class: 'fa-fw') %>
+          Seals
+          <span class="pull-right">
+            <%=  link_to nil,#new_seal_path(deed_id: @deed.id),
+                         class: 'btn btn-sm btn-primary',
+                         id: 'btn-new-source',
+                         title: 'Add new Seal',
+                         data: { toggle: 'tooltip', 'turbolinks': false, placement: 'left' },
+                         remote: true do -%>
+              <%= icon('plus', class: 'fa-fw') %>
+            <% end -%>
+          </span>
+        </div>
+        <div class="card-block">
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="row-spacer"></div>
+  <div class="row-spacer"></div>
 
-<div class="row">
-  <div class="col-md-12">
-    <div class="card-deck-wrapper">
-      <div class="card-deck">
-        <div class="card">
-          <div class="card-header">
-            <%= model_name_with_icon Person, :plural %>
-          </div>
-          <div class="card-block">
-          </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <%= model_name_with_icon Person, :plural %>
         </div>
-
-        <div class="card">
-          <div class="card-header">
-            <%= model_name_with_icon Place, :plural %>
-          </div>
-          <div class="card-block">
-          </div>
+        <div class="card-block">
         </div>
+      </div>
+    </div>
 
-        <div class="card">
-          <div class="card-header">
-            <%= model_name_with_icon Role, :plural %>
-          </div>
-          <div class="card-block">
-          </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <%= model_name_with_icon Place, :plural %>
+        </div>
+        <div class="card-block">
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <%= model_name_with_icon Role, :plural %>
+        </div>
+        <div class="card-block">
         </div>
       </div>
     </div>
   </div>
+
 </div>
