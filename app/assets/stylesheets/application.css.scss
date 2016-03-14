@@ -20,3 +20,13 @@
 @import "deeds";
 @import "sources";
 @import "storage";
+
+#menu-aside {
+  @extend .p-x-0;
+  @extend .m-x-0;
+}
+
+#main-content {
+  @extend .m-x-0;
+  @extend .p-x-0;
+}
