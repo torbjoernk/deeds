@@ -22,13 +22,13 @@ module ApplicationHelper
     "#{icon_for(klass)} #{name}".strip.html_safe
   end
 
-  def link_to_show_entity(entity)
+  def link_to_show_entity(entity, remote=true)
     link_to url_for(entity),
             class: 'btn btn-sm btn-outline-info',
             id: "btn-#{entity.class.model_name.to_s.downcase}-show-#{entity.id}",
             title: 'Show Details',
             data: { toggle: 'tooltip' },
-            remote: true do
+            remote: remote do
       content_tag(:i, nil, class: 'fa fa-fw fa-search')
     end
   end

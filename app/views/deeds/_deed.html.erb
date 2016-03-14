@@ -108,6 +108,10 @@
   </div>
 <% end %>
 
+<% content_for :entity_toolbar_action_show_btn do %>
+  <%= link_to_show_entity deed, false %>
+<% end %>
+
 <% content_for :entity_description, flush: true do %>
   <% if deed.description %>
     <%= truncate deed.description, length: 200, separator: ' ' %>

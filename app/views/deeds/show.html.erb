@@ -1,0 +1,114 @@
+<h1>
+  <%= icon_for Deed %>
+  <%= @deed.title %>
+</h1>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card-deck-wrapper">
+      <div class="card-deck">
+        <div class="card">
+          <div class="card-header">
+            Date
+          </div>
+          <div class="card-block">
+            <div class="row">
+              <div class="col-md-3"><%= Deed.human_attribute_name :year %></div>
+              <div class="col-md-9"><%= @deed.year %></div>
+            </div>
+            <div class="row">
+              <div class="col-md-3"><%= Deed.human_attribute_name :month %></div>
+              <div class="col-md-9"><%= @deed.month %></div>
+            </div>
+            <div class="row">
+              <div class="col-md-3"><%= Deed.human_attribute_name :day %></div>
+              <div class="col-md-9"><%= @deed.day %></div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <%= Deed.human_attribute_name :description %>
+          </div>
+          <div class="card-block">
+            <%= @deed.description %>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <%= Deed.human_attribute_name :notes %>
+          </div>
+          <div class="card-block">
+            <%= @deed.notes %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row-spacer"></div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card-deck-wrapper">
+      <div class="card-deck">
+        <div class="card">
+          <div class="card-header">
+            <%= model_name_with_icon Content %> &mdash; <%= @deed.content.language.humanize %>
+          </div>
+          <div class="card-block">
+            <%= @deed.content.content %>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <%= model_name_with_icon ContentTranslation, :plural %>
+          </div>
+          <div class="card-block">
+            <% if @deed.translations.count > 0 %>
+              <%= render 'deeds/show/translation', collection: @deed.translations %>
+            <% else %>
+              <em class="text-muted">no translations</em>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row-spacer"></div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card-deck-wrapper">
+      <div class="card-deck">
+        <div class="card">
+          <div class="card-header">
+            <%= model_name_with_icon Person, :plural %>
+          </div>
+          <div class="card-block">
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <%= model_name_with_icon Place, :plural %>
+          </div>
+          <div class="card-block">
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <%= model_name_with_icon Role, :plural %>
+          </div>
+          <div class="card-block">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
