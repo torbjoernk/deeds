@@ -1,13 +1,4 @@
 module ApplicationHelper
-  def icon_for(klass)
-    begin
-      "<i class=\"fa fa-fw fa-#{klass::ICON}\"></i>".html_safe
-    rescue
-      logger.warn "No icon defined for model #{klass}."
-      ''
-    end
-  end
-
   def model_name_with_icon(klass, quantity = :singular)
     raise StandardError.new 'Only for ActiveRecord models.' unless klass <= ActiveRecord::Base
 
