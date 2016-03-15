@@ -1,0 +1,12 @@
+<% if defined? detail_link_path %>
+  <%= link_to detail_link_path,
+              class: 'btn btn-sm btn-info pull-left',
+              title: 'Show details',
+              data: { toggle: 'tooltip' },
+              role: 'button' do %>
+    Details
+  <% end %>
+<% end %>
+<button type="button" class="btn btn-sm btn-info pull-right" data-dismiss="modal" aria-label="Close">
+  Close
+</button>

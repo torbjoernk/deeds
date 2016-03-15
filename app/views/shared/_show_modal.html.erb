@@ -11,10 +11,8 @@
         <%= yield :show_modal_content %>
       </div>
     </div>
-    <div class="card-footer bg-info">
-      <button type="button" class="btn btn-sm btn-info pull-right" data-dismiss="modal" aria-label="Close">
-        Close
-      </button>
+    <div id="show-modal-footer" class="card-footer bg-info">
+        <%= yield :show_modal_footer %>
     </div>
   </div>
 </div>
