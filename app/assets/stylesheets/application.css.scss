@@ -25,3 +25,13 @@ div.row-spacer {
   margin-top: $spacer-y;
   margin-bottom: $spacer-y;
 }
+
+#menu-aside {
+  @extend .p-x-0;
+  @extend .m-x-0;
+}
+
+#main-content {
+  @extend .m-x-0;
+  @extend .p-x-0;
+}
