@@ -22,8 +22,9 @@
 @import "storage";
 
 div.row-spacer {
-  margin-top: $spacer-y;
-  margin-bottom: $spacer-y;
+  @extend .row;
+  margin-top: ($spacer-y / 2);
+  margin-bottom: ($spacer-y / 2);
 }
 
 #menu-aside {

@@ -6,10 +6,12 @@
                        entity_name: Deed.model_name.human } %>
 </h1>
 
-<div id="deeds-table">
-  <div class="table" id="deeds">
-    <div class="table-body container-fluid">
-      <%= render partial: 'deed', collection: @deeds %>
+<div class="row">
+  <div id="deeds-table">
+    <div class="table" id="deeds">
+      <div class="table-body container-fluid">
+        <%= render partial: 'deed', collection: @deeds %>
+      </div>
     </div>
   </div>
 </div>

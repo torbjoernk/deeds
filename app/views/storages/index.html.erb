@@ -15,10 +15,12 @@
   </dl>
 <% end %>
 
-<div id="storages-table">
-  <div class="table" id="storages">
-    <div class="table-body container-fluid">
-      <%= render partial: 'storage', collection: @storages %>
+<div class="row">
+  <div id="storages-table">
+    <div class="table" id="storages">
+      <div class="table-body container-fluid">
+        <%= render partial: 'storage', collection: @storages %>
+      </div>
     </div>
   </div>
 </div>

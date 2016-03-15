@@ -23,10 +23,12 @@
   </dl>
 <% end %>
 
-<div id="archives-table">
-  <div class="table" id="archives">
-    <div class="table-body container-fluid">
-      <%= render partial: 'archive', collection: @archives %>
+<div class="row">
+  <div id="archives-table">
+    <div class="table" id="archives">
+      <div class="table-body container-fluid">
+        <%= render partial: 'archive', collection: @archives %>
+      </div>
     </div>
   </div>
 </div>
