@@ -1,35 +1,19 @@
 <h1>
   <%= model_name_with_icon Content, :plural %>
-  <span class="btn-group">
-    <%= link_to new_content_path,
-                class: 'btn btn-sm btn-primary',
-                id: 'btn-new-content',
-                title: 'Add new Content',
-                data: { toggle: 'tooltip' },
-                remote: true do -%>
-      <%= icon('plus', class: 'fa-fw') %>
-    <% end -%>
-  </span>
+  <%= render partial: 'shared/index/main_action_btn',
+             locals: { path_to_new_entity: new_content_path,
+                       path_to_refresh: contents_path,
+                       entity_name: Content.model_name.human } %>
 </h1>
 
-<div id="contents-table">
-  <table class="table table-hover table-sm" id="contents">
-    <thead>
-    <tr>
-      <th class="col-content-language"><%= Content.human_attribute_name :language %></th>
-      <th class="col-content-content"><%= Content.human_attribute_name :content %></th>
-      <th class="col-content-assoc">Associations</th>
-      <th class="col-content-actions">Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <%= render partial: 'content', collection: @contents %>
-    </tbody>
-  </table>
-</div>
-
-<div class="modal fade" id="content-modal" tabindex="-1" role="dialog"
-     aria-labelledby="content-modal-label" aria-hidden="true">
+<div class="row">
+  <div id="contents-table">
+    <div class="table" id="contents">
+      <div class="table-body container-fluid">
+        <%= render partial: 'content', collection: @contents %>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="modal fade" id="content-translation-modal" tabindex="-1" role="dialog"
      aria-labelledby="content-translation-modal-label" aria-hidden="true">

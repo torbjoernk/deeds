@@ -30,12 +30,6 @@ haa_r3a3_original = Source.create(
 raise 'Source not saved' unless haa_r3a3_original.persisted?
 raise 'Source and Archive not linked' unless haa.sources.include? haa_r3a3_original
 
-haa_r3a3_transcript = Source.create(
-    title: 'Urkunde, Reihe III, Nr. 3',
-    source_type: 'transcript'
-)
-raise 'Source not saved' unless haa_r3a3_transcript.persisted?
-
 
 dummy_content = Content.create(
     language: 'contemporary_german',
@@ -49,3 +43,15 @@ dummy_translation = ContentTranslation.create(
     content: dummy_content
 )
 raise 'ContentTranslation not saved' unless dummy_translation.persisted?
+
+haa_r3a3 = Deed.create(
+    title: 'Urkunde, Reihe III, Nr. 3',
+    year: 1226,
+    description: 'Der Abt des Klosters Knechtsteden bezeugt, dass der Prior G. und Richmodis, die verstorbene Vorsteherin des Klosters Flaesheim, von Simon von Gemen ein Landgut in Hamm erworben haben.',
+    notes: 'nur eine Notiz',
+    content: dummy_content,
+    sources: [haa_r3a3_original]
+)
+raise 'Deed not saved' unless haa_r3a3.persisted?
+raise 'Deed and Source not linked' unless haa_r3a3_original.deed == haa_r3a3
+raise 'Deed and Content not linked' unless dummy_content.deed == haa_r3a3

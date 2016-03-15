@@ -1,0 +1,38 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ */
+
+@import "00_framework_and_overrides";
+@import "01_table";
+@import "09_flash";
+
+@import "archive";
+@import "contents";
+@import "deeds";
+@import "sources";
+@import "storage";
+
+div.row-spacer {
+  @extend .row;
+  margin-top: ($spacer-y / 2);
+  margin-bottom: ($spacer-y / 2);
+}
+
+#menu-aside {
+  @extend .p-x-0;
+  @extend .m-x-0;
+}
+
+#main-content {
+  @extend .m-x-0;
+  @extend .p-x-0;
+}

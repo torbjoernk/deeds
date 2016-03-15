@@ -1,0 +1,17 @@
+<h1>
+  <%= model_name_with_icon Deed, :plural %>
+  <%= render partial: 'shared/index/main_action_btn',
+             locals: { path_to_new_entity: new_deed_path,
+                       path_to_refresh: deeds_path,
+                       entity_name: Deed.model_name.human } %>
+</h1>
+
+<div class="row">
+  <div id="deeds-table">
+    <div class="table" id="deeds">
+      <div class="table-body container-fluid">
+        <%= render partial: 'deed', collection: @deeds %>
+      </div>
+    </div>
+  </div>
+</div>

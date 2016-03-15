@@ -1,0 +1,5 @@
+<div class="btn-toolbar" role="toolbar">
+  <%= yield :entity_toolbar_associations %>
+
+  <%= render partial: 'shared/index/entity_toolbar_actions', locals: { entity: entity } %>
+</div>

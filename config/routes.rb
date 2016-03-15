@@ -20,8 +20,10 @@ Rails.application.routes.draw do
   resources :sources
 
   resources :contents do
-    resources :content_translations, only: [:edit, :update, :new, :create, :destroy]
+    resources :content_translations
   end
+
+  resources :deeds
 
   # Example resource route with options:
   #   resources :products do

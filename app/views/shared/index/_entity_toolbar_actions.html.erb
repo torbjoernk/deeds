@@ -1,0 +1,9 @@
+<div class="btn-group btn-group-sm actions" role="group">
+  <% if content_for? :entity_toolbar_action_show_btn %>
+    <%= yield :entity_toolbar_action_show_btn %>
+  <% else %>
+    <%= link_to_show_entity entity %>
+  <% end %>
+  <%= link_to_edit_entity entity %>
+  <%= link_to_destroy_entity entity %>
+</div>

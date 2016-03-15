@@ -1,0 +1,42 @@
+@import 'frameworks/bootstrap';
+
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+.btn {
+  i {
+    line-height: inherit !important;
+  }
+}
+
+.card-header {
+  .btn.btn-sm {
+    @extend .p-y-0;
+    line-height: inherit;
+  }
+}
+
+ol.breadcrumb {
+  li {
+    @extend .breadcrumb-item;
+    &:last-child {
+      @extend .active;
+    }
+  }
+}
+
+.card {
+  > ul.list-group {
+    li.list-group-item {
+      &:first-of-type {
+        border-top: 0;
+      }
+    }
+  }
+}
+
+.modal-dialog {
+  form {
+    @extend .m-b-0;
+  }
+}

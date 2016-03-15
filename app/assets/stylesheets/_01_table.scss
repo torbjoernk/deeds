@@ -1,0 +1,34 @@
+.table {
+  .entity.row {
+    padding-top: $table-cell-padding;
+    padding-bottom: $table-cell-padding;
+
+    &:nth-of-type(even) {
+      background-color: $table-bg-accent;
+    }
+
+    @include hover {
+      background-color: $table-bg-hover;
+    }
+
+    .col-info {
+      @include make-col(12);
+      @extend .p-r-0;
+
+      .col-meta {
+        @include make-col(6);
+        @extend .p-l-0;
+
+        .btn-toolbar {
+          @include pull-right();
+        }
+      }
+    }
+
+    .col-description {
+      @include make-col(12);
+      @extend .p-l-3;
+      @extend small;
+    }
+  }
+}

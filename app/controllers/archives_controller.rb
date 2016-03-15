@@ -18,6 +18,11 @@ class ArchivesController < ApplicationController
     end
 
     add_breadcrumb Archive.model_name.plural.humanize, archives_path
+
+    respond_to do |format|
+      format.js   { render 'index' }
+      format.html { render 'index' }
+    end
   end
 
   def show

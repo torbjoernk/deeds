@@ -1,0 +1,14 @@
+// Place all the styles related to the storage controller here.
+// They will automatically be included in application.css.scss.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.table {
+  .entity.row {
+    .col-info {
+      .col-storage-title {
+        @include make-col(6);
+        @extend .p-x-0;
+      }
+    }
+  }
+}

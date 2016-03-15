@@ -1,0 +1,19 @@
+// Place all the styles related to the archive controller here.
+// They will automatically be included in application.css.scss.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.table {
+  .entity.row {
+    .col-info {
+      .col-archive-title {
+        @include make-col(5);
+        @extend .p-x-0;
+      }
+
+      .col-archive-abbr {
+        @include make-col(1);
+        @extend .p-x-0;
+      }
+    }
+  }
+}

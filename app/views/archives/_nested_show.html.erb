@@ -7,7 +7,7 @@
        aria-controls="archive-<%= archive.id %>-content"
        aria-expanded="false"
        href="#archive-<%= archive.id %>-content"
-       data-parent="#storage-archives-accordion"
+       data-parent="#archives-accordion"
        data-toggle="collapse">
       <%= icon('search', class: 'fa-fw') %>
     </a>
@@ -17,6 +17,6 @@
        aria-labelledby="archive-<%= archive.id %>"
        role="tabpanel"
        aria-expanded="false">
-    <%= render partial: 'archives/inner_show', locals: { archive: archive } %>
+    <%= render partial: 'archives/show/content', locals: { archive: archive } %>
   </div>
 </li>

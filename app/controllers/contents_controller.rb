@@ -8,6 +8,11 @@ class ContentsController < ApplicationController
     @contents = Content.all
 
     add_breadcrumb Content.model_name.plural.humanize, :contents_path
+
+    respond_to do |format|
+      format.js   { render 'index' }
+      format.html { render 'index' }
+    end
   end
 
   def show
@@ -17,6 +22,9 @@ class ContentsController < ApplicationController
 
   def new
     @content = Content.new
+    if params.has_key? :deed_id
+      @deed = Deed.find(params[:deed_id])
+    end
     respond_to :js
   end
 
@@ -80,6 +88,7 @@ class ContentsController < ApplicationController
     params.require(:content).permit(
         :content,
         :language,
+        :deed_id,
         translations_attributes: [:id, :language, :translation]
     )
   end

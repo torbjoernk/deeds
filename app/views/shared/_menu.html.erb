@@ -1,30 +1,35 @@
-<nav id="top-nav-bar" class="navbar navbar-light bg-faded">
-  <a class="navbar-brand">Deeds</a>
-  <ul class="nav navbar-nav">
-    <li class="nav-item">
-      <%= link_to root_path, class: "nav-link#{' active' if current_page?(controller: :application)}" do %>
-        <i class="fi-list"></i> <span>Home</span>
-      <% end %>
-    </li>
-    <li class="nav-item">
-      <%= link_to contents_path, class: "nav-link#{' active' if current_page?(controller: :contents)}" do %>
-        <%= model_name_with_icon Content, :plural %>
-      <% end %>
-    </li>
-    <li class="nav-item">
-      <%= link_to archives_path, class: "nav-link#{' active' if current_page?(controller: :archives)}" do %>
-        <%= model_name_with_icon Archive, :plural %>
-      <% end %>
-    </li>
-    <li class="nav-item">
-      <%= link_to storages_path, class: "nav-link#{' active' if current_page?(controller: :storages)}" do %>
-        <%= model_name_with_icon Storage, :plural %>
-      <% end %>
-    </li>
-    <li class="nav-item">
-      <%= link_to sources_path, class: "nav-link#{' active' if current_page?(controller: :sources)}" do %>
-        <%= model_name_with_icon Source, :plural %>
-      <% end %>
-    </li>
-  </ul>
-</nav>
+<ul id="nav-bar" class="nav nav-pills nav-stacked bg-faded" role="menu">
+  <li class="nav-item">
+    <a class="nav-link">Deeds</a>
+  </li>
+  <li class="nav-item">
+    <%= link_to root_path, class: "nav-link#{' active' if current_page?(controller: :application)}" do %>
+      <i class="fa fa-list fa-fw"></i> <span>Home</span>
+    <% end %>
+  </li>
+  <li class="nav-item">
+    <%= link_to deeds_path, class: "nav-link#{' active' if current_page?(controller: :deeds)}" do %>
+      <%= model_name_with_icon Deed, :plural %>
+    <% end %>
+  </li>
+  <li class="nav-item">
+    <%= link_to contents_path, class: "nav-link#{' active' if current_page?(controller: :contents)}" do %>
+      <%= model_name_with_icon Content, :plural %>
+    <% end %>
+  </li>
+  <li class="nav-item">
+    <%= link_to archives_path, class: "nav-link#{' active' if current_page?(controller: :archives)}" do %>
+      <%= model_name_with_icon Archive, :plural %>
+    <% end %>
+  </li>
+  <li class="nav-item">
+    <%= link_to storages_path, class: "nav-link#{' active' if current_page?(controller: :storages)}" do %>
+      <%= model_name_with_icon Storage, :plural %>
+    <% end %>
+  </li>
+  <li class="nav-item">
+    <%= link_to sources_path, class: "nav-link#{' active' if current_page?(controller: :sources)}" do %>
+      <%= model_name_with_icon Source, :plural %>
+    <% end %>
+  </li>
+</ul>

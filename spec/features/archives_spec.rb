@@ -10,17 +10,17 @@ feature 'On the Archive Page', type: :feature do
       let(:new_archive) { build :archive }
 
       before :each do
-        page.find(:css, '#btn-new-archive').click
+        find(:css, '#btn-new-archive').click
       end
 
       context 'and, within the form modal,' do
         before :each do
-          expect(page).to have_selector '#archive-modal', visible: true
+          expect(page).to have_selector '#form-modal', visible: true
         end
 
         context 'enters the new Archive\'s title' do
           before :each do
-            within '#archive-modal' do
+            within 'div#form-modal' do
               fill_in Archive.human_attribute_name(:title), with: new_archive.title
             end
           end
@@ -31,7 +31,7 @@ feature 'On the Archive Page', type: :feature do
             end
 
             scenario 'then a new Archive with given title should be created' do
-              within_table 'archives' do
+              within 'div#archives-table' do
                 expect(page).to have_text new_archive.title
               end
             end
@@ -48,26 +48,7 @@ feature 'On the Archive Page', type: :feature do
     end
 
     scenario 'then the User should see a table with archives' do
-      expect(page).to have_table 'archives'
-
-      within_table 'archives' do
-        # exactly five columns
-        expect(page).to have_selector 'thead > tr > th + th + th + th + th'
-        expect(page).not_to have_selector 'thead > tr > th + th + th + th + th + th'
-
-        within 'thead > tr > th:first-child' do
-          expect(page).to have_text Archive.human_attribute_name(:title)
-        end
-        within 'thead > tr > th:nth-child(2)' do
-          expect(page).to have_text Archive.human_attribute_name(:abbr)
-        end
-        within 'thead > tr > th:nth-child(3)' do
-          expect(page).to have_text Archive.human_attribute_name(:notes)
-        end
-        within 'thead > tr > th:last-child' do
-          expect(page).to have_text 'Actions'
-        end
-      end
+      expect(page).to have_selector 'div#archives-table'
     end
 
     context 'then the User should see the breadcrumbs' do
@@ -84,28 +65,28 @@ feature 'On the Archive Page', type: :feature do
       feature 'on the "Show" button of the first Archive', js: true do
         before :each do
           expect(@archive.persisted?).to be true
-          within_table 'archives' do
-            within 'tbody' do
-              expect(page).to have_css 'tr'
-              expect(page).not_to have_css 'tr + tr'
+          within 'div#archives-table' do
+            within 'div.table-body' do
+              expect(page).to have_css 'div.entity.row'
+              expect(page).not_to have_css 'div.entity.row + div.entity.row'
             end
           end
-          page.find(:css, "#btn-archive-show-#{@archive.id}").click
+          find(:css, "#btn-archive-show-#{@archive.id}").click
         end
 
         context 'then, within a modal,' do
           before :each do
-            expect(page).to have_selector '#archive-modal', visible: true
+            expect(page).to have_selector '#show-modal', visible: true
           end
 
           scenario 'the User should see the Archive\'s title' do
-            within '#archive-modal' do
+            within 'div#show-modal' do
               expect(page).to have_text @archive.title
             end
           end
 
           scenario 'the User should see the Archive\'s notes' do
-            within '#archive-modal' do
+            within 'div#show-modal' do
               expect(page).to have_text @archive.notes
             end
           end
@@ -115,18 +96,19 @@ feature 'On the Archive Page', type: :feature do
       feature 'on the "Edit" button of the first Archive', js: true do
         before :each do
           expect(@archive.persisted?).to be true
-          within_table 'archives' do
-            within 'tbody' do
-              expect(page).to have_css 'tr'
-              expect(page).not_to have_css 'tr + tr'
+          within 'div#archives-table' do
+            within 'div.table-body' do
+              expect(page).to have_css 'div.entity.row'
+              expect(page).not_to have_css 'div.entity.row + div.entity.row'
+
+              find(:css, "#btn-archive-edit-#{@archive.id}").click
             end
           end
-          page.find(:css, "#btn-archive-edit-#{@archive.id}").click
         end
 
         context 'and, within the form modal,' do
           before :each do
-            expect(page).to have_selector '#archive-modal', visible: true
+            expect(page).to have_selector 'div#form-modal', visible: true
           end
 
           context 'changes the Archive\'s title' do
@@ -137,21 +119,23 @@ feature 'On the Archive Page', type: :feature do
             end
 
             before :each do
-              within '#archive-modal' do
+              within 'div#form-modal' do
                 fill_in Archive.human_attribute_name(:title), with: new_archive.title
               end
             end
 
             context 'and clicks on the "Update Archive" button' do
               before :each do
-                within '#archive-modal' do
+                within 'div#form-modal' do
                   click_on 'Update Archive'
                 end
               end
 
               scenario 'then the Archive\'s title should be changed' do
-                within "#archive-row-#{@archive.id}" do
-                  expect(page).to have_text new_archive.title
+                within 'div#archives-table' do
+                  within "div#archive-#{@archive.id}.entity.row" do
+                    expect(page).to have_text new_archive.title
+                  end
                 end
               end
             end
@@ -162,10 +146,10 @@ feature 'On the Archive Page', type: :feature do
       feature 'on the "Delete" button of the first Archive', js: true do
         before :each do
           expect(@archive.persisted?).to be true
-          within_table 'archives' do
-            within 'tbody' do
-              expect(page).to have_css 'tr'
-              expect(page).not_to have_css 'tr + tr'
+          within 'div#archives-table' do
+            within 'div.table-body' do
+              expect(page).to have_css 'div.entity.row'
+              expect(page).not_to have_css 'div.entity.row + div.entity.row'
             end
           end
         end
@@ -173,24 +157,28 @@ feature 'On the Archive Page', type: :feature do
         context 'and confirms the confirmation' do
           before :each do
             accept_confirm do
-              page.find(:css, "#btn-archive-delete-#{@archive.id}").click
+              find(:css, "#btn-archive-delete-#{@archive.id}").click
             end
           end
 
           scenario 'then the Archive gets deleted' do
-            expect(page).not_to have_selector "#archive-row-#{@archive.id}"
+            within 'div#archives-table' do
+              expect(page).not_to have_selector "#archive-#{@archive.id}.entity.row"
+            end
           end
         end
 
         context 'and dismisses the confirmation' do
           before :each do
             dismiss_confirm do
-              page.find(:css, "#btn-archive-delete-#{@archive.id}").click
+              find(:css, "#btn-archive-delete-#{@archive.id}").click
             end
           end
 
           scenario 'then the Archive is kept' do
-            expect(page).to have_selector "#archive-row-#{@archive.id}"
+            within 'div#archives-table' do
+              expect(page).to have_selector "#archive-#{@archive.id}.entity.row"
+            end
           end
         end
       end
@@ -207,31 +195,31 @@ feature 'On the Archive Page', type: :feature do
 
       context 'when the User clicks on the "Edit" button of the first Archive', js: true do
         before :each do
-          page.find(:css, "#btn-archive-edit-#{@archive.id}").click
-          expect(page).to have_selector '#archive-modal', visible: true
+          find(:css, "#btn-archive-edit-#{@archive.id}").click
+          expect(page).to have_selector '#form-modal', visible: true
 
-          within '#archive-modal' do
-            within '#associate-storages' do
+          within 'div#form-modal' do
+            within 'ul#associate-storages' do
               expect(page).to have_text @storage.title
             end
           end
         end
 
         scenario 'then no further Storages should be associatable' do
-          within '#associate-storages' do
+          within 'ul#associate-storages' do
             expect(page).to have_text 'no unassociated Storages'
           end
         end
 
         feature 'and the User clicks on the "de-associate" button', skip: WITHOUT_AJAX do
           before :each do
-            within '#archive-modal' do
+            within 'div#form-modal' do
               find(:css, "#btn-deassoc-storage-#{@storage.id}").click
             end
           end
 
           scenario 'then the association is removed' do
-            within '#archive-modal' do
+            within 'div#form-modal' do
               expect(page).not_to have_text @storage.title
             end
             expect(Archive.find(@archive.id).storages).not_to include @storage
@@ -247,33 +235,33 @@ feature 'On the Archive Page', type: :feature do
 
       context 'when the User clicks on the "Edit" button of the first Archive', js: true do
         before :each do
-          page.find(:css, "#btn-archive-edit-#{@archive.id}").click
-          expect(page).to have_selector '#archive-modal', visible: true
+          find(:css, "#btn-archive-edit-#{@archive.id}").click
+          expect(page).to have_selector '#form-modal', visible: true
         end
 
         scenario 'then further Storages should be associatable' do
-          within '#associate-storages' do
+          within 'ul#associate-storages' do
             expect(page).not_to have_text 'no unassociated Storages'
           end
         end
 
         context 'and the User enters the Storage\'s title' do
           before :each do
-            within '#archive-modal' do
+            within 'div#form-modal' do
               fill_in 'assoc-storage-input', with: @storage.title
             end
           end
 
           feature 'and the User clicks on the "associate" button', skip: WITHOUT_AJAX do
             before :each do
-              within '#archive-modal' do
+              within 'div#form-modal' do
                 find(:css, '#btn-associate-selected-storage').click
                 expect(page).to have_css '.form-control-success'
               end
             end
 
             scenario 'the Storage is associated with the Archive' do
-              within '#archive-modal' do
+              within 'div#form-modal' do
                 expect(page).to have_text @storage.title
                 expect(page).to have_text 'no unassociated Storages'
               end
@@ -296,30 +284,30 @@ feature 'On the Archive Page', type: :feature do
       context 'when the User clicks on the "Edit" button of the first Archive', js: true do
         before :each do
           page.find(:css, "#btn-archive-edit-#{@archive.id}").click
-          expect(page).to have_selector '#archive-modal', visible: true
+          expect(page).to have_selector '#form-modal', visible: true
 
-          within '#archive-modal' do
-            within '#associate-sources' do
+          within 'div#form-modal' do
+            within 'ul#associate-sources' do
               expect(page).to have_text "#{@source.title} (#{@source.source_type})"
             end
           end
         end
 
         scenario 'then no further Sources should be associatable' do
-          within '#associate-sources' do
+          within 'ul#associate-sources' do
             expect(page).to have_text 'no unassociated Sources'
           end
         end
 
         feature 'and the User clicks on the "de-associate" button', skip: WITHOUT_AJAX do
           before :each do
-            within '#archive-modal' do
+            within 'div#form-modal' do
               find(:css, "#btn-deassoc-source-#{@source.id}").click
             end
           end
 
           scenario 'then the association is removed' do
-            within '#archive-modal' do
+            within 'div#form-modal' do
               expect(page).not_to have_text @source.title
               expect(page).not_to have_text @source.source_type
             end
@@ -336,33 +324,33 @@ feature 'On the Archive Page', type: :feature do
 
       context 'when the User clicks on the "Edit" button of the first Archive', js: true do
         before :each do
-          page.find(:css, "#btn-archive-edit-#{@archive.id}").click
-          expect(page).to have_selector '#archive-modal', visible: true
+          find(:css, "#btn-archive-edit-#{@archive.id}").click
+          expect(page).to have_selector '#form-modal', visible: true
         end
 
         scenario 'then further Sources should be associatable' do
-          within '#associate-sources' do
+          within 'ul#associate-sources' do
             expect(page).not_to have_text 'no unassociated Sources'
           end
         end
 
         context 'and the User enters the Sources\'s title' do
           before :each do
-            within '#archive-modal' do
+            within 'div#form-modal' do
               fill_in 'assoc-source-input', with: "#{@source.title} (#{@source.source_type})"
             end
           end
 
           feature 'and the User clicks on the "associate" button', skip: WITHOUT_AJAX do
             before :each do
-              within '#archive-modal' do
+              within 'div#form-modal' do
                 find(:css, '#btn-associate-selected-source').click
                 expect(page).to have_css '.form-control-success'
               end
             end
 
             scenario 'the Source is associated with the Archive' do
-              within '#archive-modal' do
+              within 'div#form-modal' do
                 expect(page).to have_text "#{@source.title} (#{@source.source_type})"
                 expect(page).to have_text 'no unassociated Sources'
               end

@@ -1,0 +1,17 @@
+<% content_for :form_modal_content do %>
+  <% if @deed %>
+    <div class="row form-group">
+      <div class="col-md-3">for Deed</div>
+      <div class="col-md-9">
+        <%= render partial: 'deeds/oneline' %>
+        <%= fields_for @content do |f| %>
+          <%= f.text_field :deed_id, hidden: true, value: @deed.id %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <%= render 'contents/form/own_fields' %>
+  <div id="nested-fields"></div>
+<% end %>
+
+<%= render partial: 'shared/form_modal', locals: { entity: @content } %>

@@ -1,15 +1,9 @@
 <h1>
   <%= model_name_with_icon Storage, :plural %>
-  <span class="btn-group">
-    <%= link_to new_storage_path,
-                class: 'btn btn-sm btn-primary',
-                id: 'btn-new-storage',
-                title: 'Add new Storage',
-                data: { toggle: 'tooltip' },
-                remote: true do -%>
-      <%= icon('plus', class: 'fa-fw') %>
-    <% end -%>
-  </span>
+  <%= render partial: 'shared/index/main_action_btn',
+             locals: { path_to_new_entity: new_storage_path,
+                       path_to_refresh: storages_path,
+                       entity_name: Storage.model_name.human } %>
 </h1>
 
 <% if @archive %>
@@ -21,25 +15,12 @@
   </dl>
 <% end %>
 
-<div id="storages-table">
-  <table class="table table-hover table-sm" id="storages">
-    <thead>
-    <tr>
-      <th class="col-storage-title"><%= Storage.human_attribute_name :title %></th>
-      <th class="col-storage-notes"><%= Storage.human_attribute_name :notes %></th>
-      <th class="col-storage-assoc">Associations</th>
-      <th class="col-storage-actions">Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-      <%= render partial: 'storage', collection: @storages %>
-    </tbody>
-  </table>
-</div>
-
-<div class="modal fade" id="storage-modal" tabindex="-1" role="dialog"
-     aria-labelledby="storage-modal-label" aria-hidden="true">
-</div>
-<div class="modal fade" id="archive-modal" tabindex="-1" role="dialog"
-     aria-labelledby="archive-modal-label" aria-hidden="true">
+<div class="row">
+  <div id="storages-table">
+    <div class="table" id="storages">
+      <div class="table-body container-fluid">
+        <%= render partial: 'storage', collection: @storages %>
+      </div>
+    </div>
+  </div>
 </div>

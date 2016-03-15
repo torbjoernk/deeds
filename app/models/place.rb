@@ -1,4 +1,7 @@
 class Place < ActiveRecord::Base
+  include IconicModel
+  ICON = 'map-marker'
+
   has_many :place_relations
   has_many :related, through: :place_relations
 

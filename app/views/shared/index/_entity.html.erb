@@ -1,0 +1,15 @@
+<div id="<%= entity_id %>" class="entity row">
+  <div class="col-info">
+    <div class="clearfix">
+      <%= yield :entity_info %>
+      <div class="col-meta">
+        <%= render partial: 'shared/index/entity_toolbar', locals: { entity: entity } %>
+      </div>
+    </div>
+    <% if content_for? :entity_description %>
+      <div class="col-description">
+        <%= yield :entity_description %>
+      </div>
+    <% end %>
+  </div>
+</div>

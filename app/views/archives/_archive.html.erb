@@ -1,8 +1,28 @@
-<tr id="archive-row-<%= archive.id %>">
-  <td class="col-archive-title"><%= archive.title %></td>
-  <td class="col-archive-abbr"><%= archive.abbr %></td>
-  <td class="col-archive-notes"><%= archive.notes %></td>
-  <td class="col-storage-assoc">
+<% content_for :entity_info, flush: true do %>
+  <div class="col-archive-title">
+    <%= archive.title %>
+  </div>
+  <div class="col-archive-abbr">
+    <%= archive.abbr %>
+  </div>
+<% end %>
+
+<% content_for :entity_toolbar_associations, flush: true do %>
+  <div class="btn-group btn-group-sm" role="group">
+    <% if archive.notes.nil? or archive.notes.empty? %>
+      <a class="btn btn-sm btn-outline-secondary disabled">
+        <%= icon('comment-o', class: 'fa-fw') %>
+      </a>
+    <% else %>
+      <a class="btn btn-sm btn-secondary"
+         title="<%= archive.notes %>"
+         data-toggle="tooltip">
+        <%= icon('comment-o', class: 'fa-fw') %>
+      </a>
+    <% end %>
+  </div>
+
+  <div class="btn-group btn-group-sm" role="group">
     <%= link_to storages_path(archive_id: archive.id),
                 class: 'btn btn-sm btn-secondary',
                 title: "show #{Storage.model_name.plural.humanize} linked",
@@ -17,12 +37,8 @@
       <%= archive.sources.count %>
       <%= icon_for Source %>
     <% end %>
-  </td>
-  <td class="col-archive-actions">
-    <div class="btn-group btn-group-sm">
-      <%= link_to_show_entity archive %>
-      <%= link_to_edit_entity archive %>
-      <%= link_to_destroy_entity archive %>
-    </div>
-  </td>
-</tr>
+  </div>
+<% end %>
+
+<%= render partial: 'shared/index/entity',
+           locals: { entity_id: "archive-#{archive.id}", entity: archive } %>

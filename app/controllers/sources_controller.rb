@@ -9,11 +9,20 @@ class SourcesController < ApplicationController
     if params.has_key? :archive_id
       index_for_nested_archive params[:archive_id]
       @sources = @archive.sources
+    elsif params.has_key? :deed_id
+      @deed = Deed.find params[:deed_id]
+      @sources = @deed.sources
+      add_breadcrumb Deed.model_name.human, deeds_path
     else
       @sources = Source.all
     end
 
     add_breadcrumb Source.model_name.plural.humanize, :sources_path
+
+    respond_to do |format|
+      format.js   { render 'index' }
+      format.html { render 'index' }
+    end
   end
 
   def show

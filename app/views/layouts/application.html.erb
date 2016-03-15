@@ -3,23 +3,36 @@
     <%= render 'shared/head' %>
   </head>
   <body>
-    <%= render 'shared/menu' %>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-2">
-
+        <div id="menu-aside" class="col-md-2">
+          <%= render 'shared/menu' %>
         </div>
-        <div class="col-md-10">
+        <div id="main-content" class="col-md-10">
           <ol id="breadcrumbs" class="breadcrumb">
             <%= render_breadcrumbs :tag => :li, :separator => '' %>
           </ol>
-          <div id="notes">
-            <% if flash %>
-              <%= render 'shared/flash' %>
-            <% end %>
+          <div class="container-fluid">
+            <div class="row">
+              <div id="notes" class="col-md-10 offset-md-1">
+                <% if flash %>
+                  <%= render 'shared/flash' %>
+                <% end %>
+              </div>
+            </div>
+
+            <%= yield %>
           </div>
 
-          <%= yield %>
+          <div class="modal fade" id="form-modal" tabindex="-1" role="dialog"
+               aria-labelledby="form-modal-title" aria-hidden="true" data-backdrop="static">
+            <%= render 'shared/form_modal' %>
+          </div>
+
+          <div class="modal fade" id="show-modal" tabindex="-1" role="dialog"
+               aria-labelledby="show-modal-title" aria-hidden="true">
+            <%= render 'shared/show_modal' %>
+          </div>
         </div>
       </div>
       <footer id="site-footer" class="row">

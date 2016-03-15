@@ -11,6 +11,11 @@ class ContentTranslationsController < ApplicationController
     end
   end
 
+  def show
+    @content_translation = ContentTranslation.find params[:id]
+    respond_to :js
+  end
+
   def edit
     @content_translation = ContentTranslation.find params[:id]
     edit_subaction 'content_translations/edit', 'content_translations/form/refresh'

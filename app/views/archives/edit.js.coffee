@@ -1,20 +1,8 @@
 #= depend_on jquery2
-#= depend_on bootstrap/bootstrap
+#= depend_on common/form_modal
 
 $ ->
-  archive_modal = $('#archive-modal')
-
-  archive_modal.html(
-    "<%= escape_javascript(render(partial: 'archives/form/scaffold')) %>"
+  DeedsApp.display_form_modal_with_ajax_url(
+    '<%= escape_javascript(render partial: 'archives/form/form_modal') %>',
+    '<%= edit_archive_path(@archive.id) %>'
   )
-
-  $.get
-    url: '<%= edit_archive_path(@archive.id) %>',
-    data:
-      sub_action: 'refresh_nested',
-    dataType: 'script',
-
-  archive_modal.modal('show')
-
-  archive_modal.find('.modal-footer').on 'click', 'input[type="submit"]', ->
-    archive_modal.modal('hide')

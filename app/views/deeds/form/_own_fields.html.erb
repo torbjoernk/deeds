@@ -1,0 +1,41 @@
+<%= fields_for @deed do |f| %>
+  <div class="row form-group">
+    <%= f.label :title, class: 'col-md-3 form-control-label' %>
+    <div class="col-md-9">
+      <%= f.text_field :title, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="row form-group">
+    <%= label_tag :date, nil, class: 'col-md-3 form-control-label' %>
+    <div class="col-md-3">
+      <div class="input-group">
+        <%= f.label :year, class: 'input-group-addon' %>
+        <%= f.text_field :year, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="input-group">
+        <%= f.label :month, class: 'input-group-addon' %>
+        <%= f.text_field :month, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="input-group">
+        <%= f.label :day, class: 'input-group-addon' %>
+        <%= f.text_field :day, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+  <div class="row form-group">
+    <%= f.label :description, class: 'col-md-3 form-control-label' %>
+    <div class="col-md-9">
+      <%= f.text_area :description, rows: 5, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="row form-group">
+    <%= f.label :notes, class: 'col-md-3 form-control-label' %>
+    <div class="col-md-9">
+      <%= f.text_area :notes, rows: 5, class: 'form-control' %>
+    </div>
+  </div>
+<% end %>

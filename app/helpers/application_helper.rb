@@ -1,13 +1,4 @@
 module ApplicationHelper
-  def icon_for(klass)
-    begin
-      "<i class=\"fa fa-fw fa-#{klass::ICON}\"></i>".html_safe
-    rescue
-      logger.warn "No icon defined for model #{klass}."
-      ''
-    end
-  end
-
   def model_name_with_icon(klass, quantity = :singular)
     raise StandardError.new 'Only for ActiveRecord models.' unless klass <= ActiveRecord::Base
 
@@ -22,13 +13,14 @@ module ApplicationHelper
     "#{icon_for(klass)} #{name}".strip.html_safe
   end
 
-  def link_to_show_entity(entity)
-    link_to url_for(entity),
+  def link_to_show_entity(entity, url=nil, remote=true)
+    url ||= url_for(entity)
+    link_to url,
             class: 'btn btn-sm btn-outline-info',
             id: "btn-#{entity.class.model_name.to_s.downcase}-show-#{entity.id}",
             title: 'Show Details',
             data: { toggle: 'tooltip' },
-            remote: true do
+            remote: remote do
       content_tag(:i, nil, class: 'fa fa-fw fa-search')
     end
   end
