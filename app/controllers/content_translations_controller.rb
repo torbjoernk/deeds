@@ -13,7 +13,9 @@ class ContentTranslationsController < ApplicationController
 
   def show
     @content_translation = ContentTranslation.find params[:id]
-    respond_to :js
+    respond_to do |format|
+      format.js { render 'contents/content_translations/show' }
+    end
   end
 
   def edit

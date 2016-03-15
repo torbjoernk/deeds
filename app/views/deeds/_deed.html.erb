@@ -50,10 +50,11 @@
         <%= icon_for Content %>
       <% end %>
     <% end %>
-    <%= link_to nil,#content_translation_path(deed.content),
+    <%= link_to content_path(deed.content.id),
                 class: 'btn btn-sm btn-secondary',
                 title: "show #{ContentTranslation.model_name.plural.humanize}",
-                data: { toggle: 'tooltip' } do %>
+                data: { toggle: 'tooltip' },
+                remote: true do %>
       <%= deed.translations.count %>
       <%= icon_for ContentTranslation %>
     <% end %>

@@ -19,7 +19,7 @@ module ApplicationHelper
             class: 'btn btn-sm btn-outline-info',
             id: "btn-#{entity.class.model_name.to_s.downcase}-show-#{entity.id}",
             title: 'Show Details',
-            data: { toggle: 'tooltip' },
+            data: { toggle: 'tooltip', placement: 'left' },
             remote: remote do
       content_tag(:i, nil, class: 'fa fa-fw fa-search')
     end
@@ -31,7 +31,7 @@ module ApplicationHelper
             class: 'btn btn-sm btn-outline-primary',
             id: "btn-#{entity.class.model_name.to_s.downcase}-edit-#{entity.id}",
             title: "Edit #{entity.class.model_name.human}",
-            data: { toggle: 'tooltip' },
+            data: { toggle: 'tooltip', placement: 'left' },
             remote: true do
       content_tag(:i, nil, class: 'fa fa-fw fa-pencil')
     end
@@ -45,7 +45,8 @@ module ApplicationHelper
         title: "Delete #{entity.class.model_name.human}",
         data: {
             confirm: 'Do you really want to delete this item?',
-            toggle: 'tooltip'
+            toggle: 'tooltip',
+            placement: 'left'
         }
     }
     defaults.merge!(options)
