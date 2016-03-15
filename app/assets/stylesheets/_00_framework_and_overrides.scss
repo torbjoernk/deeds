@@ -9,11 +9,28 @@
   }
 }
 
+.card-header {
+  .btn.btn-sm {
+    @extend .p-y-0;
+    line-height: inherit;
+  }
+}
+
 ol.breadcrumb {
   li {
     @extend .breadcrumb-item;
     &:last-child {
       @extend .active;
+    }
+  }
+}
+
+.card {
+  > ul.list-group {
+    li.list-group-item {
+      &:first-of-type {
+        border-top: 0;
+      }
     }
   }
 }

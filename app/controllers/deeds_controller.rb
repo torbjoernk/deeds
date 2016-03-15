@@ -16,7 +16,14 @@ class DeedsController < ApplicationController
 
   def show
     @deed = Deed.find params[:id]
-    respond_to :js
+    respond_to do |format|
+      format.html {
+        add_breadcrumb Deed.model_name.plural.humanize, :deeds_path
+        add_breadcrumb @deed.title, deed_path(@deed)
+        render 'deeds/show'
+      }
+      format.js   { render 'deeds/show' }
+    end
   end
 
   def new
