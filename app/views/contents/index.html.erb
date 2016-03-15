@@ -6,10 +6,12 @@
                        entity_name: Content.model_name.human } %>
 </h1>
 
-<div id="contents-table">
-  <div class="table" id="contents">
-    <div class="table-body container-fluid">
-      <%= render partial: 'content', collection: @contents %>
+<div class="row">
+  <div id="contents-table">
+    <div class="table" id="contents">
+      <div class="table-body container-fluid">
+        <%= render partial: 'content', collection: @contents %>
+      </div>
     </div>
   </div>
 </div>
