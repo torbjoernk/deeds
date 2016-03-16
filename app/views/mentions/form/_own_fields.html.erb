@@ -1,0 +1,32 @@
+<%= fields_for @mention do |f| %>
+  <div class="row form-group">
+    <%= f.label :deed, class: 'col-md-3 form-control-label' %>
+    <div class="col-md-9">
+      <%= f.collection_select :deed_id, Deed.all, :id, :title, include_blank: true %>
+    </div>
+  </div>
+  <div class="row form-group">
+    <%= f.label :person, class: 'col-md-3 form-control-label' %>
+    <div class="col-md-9">
+      <%= f.collection_select :person_id, Person.all, :id, :name, include_blank: true %>
+    </div>
+  </div>
+  <div class="row form-group">
+    <%= f.label :place, class: 'col-md-3 form-control-label' %>
+    <div class="col-md-9">
+      <%= f.collection_select :place_id, Place.all, :id, :title, include_blank: true %>
+    </div>
+  </div>
+  <div class="row form-group">
+    <%= f.label :role, class: 'col-md-3 form-control-label' %>
+    <div class="col-md-9">
+      <%= f.collection_select :role_id, Role.all, :id, :title, include_blank: true %>
+    </div>
+  </div>
+  <div class="row form-group">
+    <%= f.label :notes, class: 'col-md-3 form-control-label' %>
+    <div class="col-md-9">
+      <%= f.text_area :notes, rows: 5, class: 'form-control' %>
+    </div>
+  </div>
+<% end %>

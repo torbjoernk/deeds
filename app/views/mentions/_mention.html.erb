@@ -1,0 +1,45 @@
+<% content_for :entity_info, flush: true do %>
+  <div class="col-mention-deed">
+    <% unless mention.deed.nil? %>
+      <%= icon_for Deed %>
+      <%= mention.deed.title %>
+    <% end %>
+  </div>
+  <div class="col-mention-person">
+    <% unless mention.person.nil? %>
+      <%= icon_for Person %>
+      <%= mention.person.name %>
+    <% end %>
+  </div>
+  <div class="col-mention-place">
+    <% unless mention.place.nil? %>
+      <%= icon_for Place %>
+      <%= mention.place.title %>
+    <% end %>
+  </div>
+  <div class="col-mention-role">
+    <% unless mention.role.nil? %>
+      <%= icon_for Role %>
+      <%= mention.role.title %>
+    <% end %>
+  </div>
+<% end %>
+
+<% content_for :entity_toolbar_associations, flush: true do %>
+  <div class="btn-group btn-group-sm" role="group">
+    <% if mention.notes.nil? or mention.notes.empty? %>
+      <a class="btn btn-sm btn-outline-secondary disabled">
+        <%= icon('comment-o', class: 'fa-fw') %>
+      </a>
+    <% else %>
+      <a class="btn btn-sm btn-secondary"
+         title="<%= mention.notes %>"
+         data-toggle="tooltip">
+        <%= icon('comment-o', class: 'fa-fw') %>
+      </a>
+    <% end %>
+  </div>
+<% end %>
+
+<%= render partial: 'shared/index/entity',
+           locals: { entity_id: "mention-#{mention.id}", entity: mention } %>

@@ -1,0 +1,30 @@
+// Place all the styles related to the Places controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#mentions.table {
+  .entity.row {
+    .col-info {
+      .col-mention-deed {
+        @include make-col(2);
+        @extend .p-x-0;
+      }
+      .col-mention-person {
+        @include make-col(2);
+        @extend .p-x-0;
+      }
+      .col-mention-place {
+        @include make-col(2);
+        @extend .p-x-0;
+      }
+      .col-mention-role {
+        @include make-col(2);
+        @extend .p-x-0;
+      }
+      .col-meta {
+        @include make-col(4);
+        @extend .p-l-0;
+      }
+    }
+  }
+}

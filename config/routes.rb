@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   resources :places
   resources :people
   resources :roles
+  resources :mentions
 
   # Example resource route with options:
   #   resources :products do

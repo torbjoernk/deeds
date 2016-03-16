@@ -131,3 +131,56 @@ zeuge = Role.create(
     referring: 'deed'
 )
 raise 'Role not saved' unless zeuge.persisted?
+
+
+gottschalk_prior = Mention.create(
+    person: gottschalk,
+    place: kloster_knechtsteden,
+    role: prior,
+    deed: haa_r3a3
+)
+raise 'Mention not saved' unless gottschalk_prior.persisted?
+
+gottschalk_kaeufer = Mention.create(
+    person: gottschalk,
+    role: kaeufer,
+    deed: haa_r3a3
+)
+raise 'Mention not saved' unless gottschalk_kaeufer.persisted?
+
+richmodis_flaesheim = Mention.create(
+    person: richmodis,
+    place: kloster_flaesheim,
+    role: klostervorsteher,
+    deed: haa_r3a3
+)
+raise 'Mention not saved' unless richmodis_flaesheim.persisted?
+
+richmodis_kaeufer = Mention.create(
+    person: richmodis,
+    role: kaeufer,
+    deed: haa_r3a3
+)
+raise 'Mention not saved' unless richmodis_kaeufer.persisted?
+
+simon_landgut = Mention.create(
+    person: simon,
+    place: landgut_hamm,
+    role: besitzer,
+    deed: haa_r3a3
+)
+raise 'Mention not saved' unless simon_landgut.persisted?
+
+simon_verkaeufer = Mention.create(
+    person: simon,
+    role: verkaeufer,
+    deed: haa_r3a3
+)
+raise 'Mention not saved' unless simon_verkaeufer.persisted?
+
+velkere_zeuge = Mention.create(
+    person: velkere,
+    role: zeuge,
+    deed: haa_r3a3
+)
+raise 'Mention not saved' unless velkere_zeuge.persisted?
