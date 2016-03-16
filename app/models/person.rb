@@ -9,7 +9,7 @@ class Person < ActiveRecord::Base
 
   has_many :mentions
   has_many :roles, through: :mentions, class_name: 'Role', source: :role
-  has_many :mentioned_places, through: :mentions, class_name: 'Place', source: :place
+  has_many :places, through: :mentions, class_name: 'Place', source: :place
   has_many :deeds, through: :mentions, class_name: 'Deed', source: :deed
 
   before_save :default_values
@@ -20,6 +20,18 @@ class Person < ActiveRecord::Base
 
   def relatives
     Person.joins(:person_relations).where(person_relations: { related_id: self })
+  end
+
+  def mentioned_deeds
+    deeds.group(:title)
+  end
+
+  def mentioned_roles
+    roles.group(:title)
+  end
+
+  def mentioned_places
+    places.group(:title)
   end
 
   validates :name, presence: true

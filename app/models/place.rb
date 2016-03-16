@@ -7,11 +7,23 @@ class Place < ActiveRecord::Base
 
   has_many :mentions
   has_many :roles, through: :mentions, class_name: 'Role', source: :role
-  has_many :mentioned_people, through: :mentions, class_name: 'Person', source: :person
+  has_many :people, through: :mentions, class_name: 'Person', source: :person
   has_many :deeds, through: :mentions, class_name: 'Deed', source: :deed
 
   def relatives
     Place.joins(:place_relations).where(place_relations: { related_id: self })
+  end
+
+  def mentioned_deeds
+    deeds.group(:title)
+  end
+
+  def mentioned_roles
+    roles.group(:title)
+  end
+
+  def mentioned_people
+    people.group(:name)
   end
 
   validates :title, uniqueness: true
