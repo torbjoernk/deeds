@@ -88,17 +88,19 @@
     <div class="card">
       <div class="card-header">
         <%= model_name_with_icon Content %>
-        <% unless @deed.content.nil? %>
-          &mdash; <%= @deed.content.language.humanize %>
-        <% end %>
       </div>
-      <div class="card-block">
-        <% if @deed.content.nil? %>
-          <em class="text-muted">no Content</em>
-        <% else %>
-          <%= @deed.content.content %>
-        <% end %>
-      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <% if @deed.content.nil? %>
+            <em class="text-muted">no Content</em>
+          <% else %>
+            <%= @deed.content.language.humanize %>
+            <span class="pull-right">
+              <%= link_to_show_entity @deed.content %>
+            </span>
+          <% end %>
+        </li>
+      </ul>
     </div>
   </div>
 
@@ -251,10 +253,20 @@
 <div class="row-spacer"></div>
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-8 offset-md-2">
     <div class="card">
       <div class="card-header">
         <%= model_name_with_icon Mention, :plural %>
+        <span class="pull-right">
+          <%=  link_to new_mention_path(deed_id: @deed.id),
+                       class: 'btn btn-sm btn-primary',
+                       id: 'btn-new-source',
+                       title: 'Add new Mention',
+                       data: { toggle: 'tooltip', 'turbolinks': false, placement: 'left' },
+                       remote: true do -%>
+            <%= icon('plus', class: 'fa-fw') %>
+          <% end -%>
+        </span>
       </div>
       <ul class="list-group list-group-flush">
         <% if @deed.mentions.count > 0 %>

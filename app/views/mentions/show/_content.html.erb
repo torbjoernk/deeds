@@ -9,6 +9,9 @@
     <% else %>
       <%= icon_for Deed %>
       <%= mention.deed.title %>
+      <span class="pull-right">
+        <%= link_to_show_entity mention.deed, remote=false %>
+      </span>
     <% end %>
   </div>
 </div>
@@ -20,6 +23,9 @@
     <% else %>
       <%= icon_for Person %>
       <%= mention.person.name %>
+      <span class="pull-right">
+        <%= link_to_show_entity mention.person, remote=false %>
+      </span>
     <% end %>
   </div>
 </div>
@@ -31,6 +37,9 @@
     <% else %>
       <%= icon_for Place %>
       <%= mention.place.title %>
+      <span class="pull-right">
+        <%= link_to_show_entity mention.place, remote=false %>
+      </span>
     <% end %>
   </div>
 </div>
@@ -42,6 +51,9 @@
     <% else %>
       <%= icon_for Role %>
       <%= mention.role.title %>
+      <span class="pull-right">
+        <%= link_to_show_entity mention.role, remote=false %>
+      </span>
     <% end %>
   </div>
 </div>

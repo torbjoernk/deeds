@@ -1,26 +1,34 @@
 <% content_for :entity_info, flush: true do %>
   <div class="col-mention-deed">
     <% unless mention.deed.nil? %>
-      <%= icon_for Deed %>
-      <%= mention.deed.title %>
+      <%= link_to deed_path(mention.deed), remote: true do %>
+        <%= icon_for Deed %>
+        <%= mention.deed.title %>
+      <% end %>
     <% end %>
   </div>
   <div class="col-mention-person">
     <% unless mention.person.nil? %>
-      <%= icon_for Person %>
-      <%= mention.person.name %>
+      <%= link_to person_path(mention.person), remote: true do %>
+        <%= icon_for Person %>
+        <%= mention.person.name %>
+      <% end %>
     <% end %>
   </div>
   <div class="col-mention-place">
     <% unless mention.place.nil? %>
-      <%= icon_for Place %>
-      <%= mention.place.title %>
+      <%= link_to place_path(mention.place), remote: true do %>
+        <%= icon_for Place %>
+        <%= mention.place.title %>
+      <% end %>
     <% end %>
   </div>
   <div class="col-mention-role">
     <% unless mention.role.nil? %>
-      <%= icon_for Role %>
-      <%= mention.role.title %>
+      <%= link_to role_path(mention.role), remote: true do %>
+        <%= icon_for Role %>
+        <%= mention.role.title %>
+      <% end %>
     <% end %>
   </div>
 <% end %>

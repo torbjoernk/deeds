@@ -5,4 +5,7 @@
     <%= icon(person.gender, class: 'fa-fw') %>
   <% end %>
   <%= person.name %>
+  <span class="pull-right">
+    <%= link_to_show_entity person %>
+  </span>
 </li>
