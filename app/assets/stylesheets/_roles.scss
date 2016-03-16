@@ -1,0 +1,18 @@
+// Place all the styles related to the Places controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.table {
+  .entity.row {
+    .col-info {
+      .col-role-title {
+        @include make-col(4);
+        @extend .p-x-0;
+      }
+      .col-role-referring {
+        @include make-col(2);
+        @extend .p-x-0;
+      }
+    }
+  }
+}

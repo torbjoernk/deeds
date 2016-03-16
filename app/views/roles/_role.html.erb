@@ -1,0 +1,35 @@
+<% content_for :entity_info, flush: true do %>
+  <div class="col-role-title">
+    <%= role.title %>
+  </div>
+  <div class="col-role-referring">
+    <% case role.referring %>
+      <% when 'deed' %>
+        <%= icon_for Deed %>
+      <% when 'person' %>
+        <%= icon_for Person %>
+      <% when 'place' %>
+        <%= icon_for Place %>
+    <% end %>
+    <%= role.referring.humanize %>
+  </div>
+<% end %>
+
+<% content_for :entity_toolbar_associations, flush: true do %>
+  <div class="btn-group btn-group-sm" role="group">
+    <% if role.notes.nil? or role.notes.empty? %>
+      <a class="btn btn-sm btn-outline-secondary disabled">
+        <%= icon('comment-o', class: 'fa-fw') %>
+      </a>
+    <% else %>
+      <a class="btn btn-sm btn-secondary"
+         title="<%= role.notes %>"
+         data-toggle="tooltip">
+        <%= icon('comment-o', class: 'fa-fw') %>
+      </a>
+    <% end %>
+  </div>
+<% end %>
+
+<%= render partial: 'shared/index/entity',
+           locals: { entity_id: "role-#{role.id}", entity: role } %>

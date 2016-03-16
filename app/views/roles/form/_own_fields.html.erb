@@ -1,0 +1,22 @@
+<%= fields_for @role do |f| %>
+  <div class="row form-group">
+    <%= f.label :title, class: 'col-md-3 form-control-label' %>
+    <div class="col-md-9">
+      <%= f.text_field :title, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="row form-group">
+    <%= f.label :referring, class: 'col-md-3 form-control-label' %>
+    <div class="col-md-9">
+      <% reffers = Role::REFERS_TO.map { |ref| [ref.humanize, ref] } %>
+      <%= f.select :referring, options_for_select(reffers, @role.referring),
+                   class: 'form-control' %>
+    </div>
+  </div>
+  <div class="row form-group">
+    <%= f.label :notes, class: 'col-md-3 form-control-label' %>
+    <div class="col-md-9">
+      <%= f.text_area :notes, rows: 5, class: 'form-control' %>
+    </div>
+  </div>
+<% end %>

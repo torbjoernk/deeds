@@ -1,0 +1,33 @@
+<% native ||= false %>
+<% role ||= @role %>
+
+<div class="row">
+  <label class="col-md-3"><strong><%= Role.human_attribute_name :title %></strong></label>
+  <div class="col-md-9">
+    <%= role.title %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3"><strong><%= Role.human_attribute_name :referring %></strong></label>
+  <div class="col-md-9">
+    <% case role.referring %>
+      <% when 'deed' %>
+        <%= icon_for Deed %>
+      <% when 'person' %>
+        <%= icon_for Person %>
+      <% when 'place' %>
+        <%= icon_for Place %>
+    <% end %>
+    <%= role.referring.humanize %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3"><strong><%= Role.human_attribute_name :notes %></strong></label>
+  <div class="col-md-9">
+    <% if role.notes.nil? or role.notes.empty? %>
+      <em class="text-muted">no notes</em>
+    <% else %>
+      <%= role.notes %>
+    <% end %>
+  </div>
+</div>

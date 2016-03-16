@@ -94,3 +94,40 @@ velkere = Person.create(
     gender: 'male'
 )
 raise 'Person not saved' unless velkere.persisted?
+
+
+kaeufer = Role.create(
+    title: 'Käufer',
+    referring: 'deed'
+)
+raise 'Role not saved' unless kaeufer.persisted?
+
+prior = Role.create(
+    title: 'Prior',
+    referring: 'place'
+)
+raise 'Role not saved' unless prior.persisted?
+
+klostervorsteher = Role.create(
+    title: 'Klostervorsteher',
+    referring: 'place'
+)
+raise 'Role not saved' unless klostervorsteher.persisted?
+
+besitzer = Role.create(
+    title: 'Besitzer',
+    referring: 'place'
+)
+raise 'Role not saved' unless besitzer.persisted?
+
+verkaeufer = Role.create(
+    title: 'Verkäufer',
+    referring: 'deed'
+)
+raise 'Role not saved' unless verkaeufer.persisted?
+
+zeuge = Role.create(
+    title: 'Zeuge',
+    referring: 'deed'
+)
+raise 'Role not saved' unless zeuge.persisted?
