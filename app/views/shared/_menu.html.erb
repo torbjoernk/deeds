@@ -37,4 +37,9 @@
       <%= model_name_with_icon Place, :plural %>
     <% end %>
   </li>
+  <li class="nav-item">
+    <%= link_to people_path, class: "nav-link#{' active' if current_page?(controller: :people)}" do %>
+      <%= model_name_with_icon Person, :plural %>
+    <% end %>
+  </li>
 </ul>

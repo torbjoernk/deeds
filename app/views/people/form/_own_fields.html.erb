@@ -1,0 +1,22 @@
+<%= fields_for @person do |f| %>
+  <div class="row form-group">
+    <%= f.label :name, class: 'col-md-3 form-control-label' %>
+    <div class="col-md-9">
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="row form-group">
+    <%= f.label :gender, class: 'col-md-3 form-control-label' %>
+    <div class="col-md-9">
+      <% genders = Person::GENDERS.map { |gender| [gender.humanize, gender] } %>
+      <%= f.select :gender, options_for_select(genders, @person.gender || 'unknown'),
+                   class: 'form-control' %>
+    </div>
+  </div>
+  <div class="row form-group">
+    <%= f.label :notes, class: 'col-md-3 form-control-label' %>
+    <div class="col-md-9">
+      <%= f.text_area :notes, rows: 5, class: 'form-control' %>
+    </div>
+  </div>
+<% end %>

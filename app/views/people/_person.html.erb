@@ -1,0 +1,32 @@
+<% content_for :entity_info, flush: true do %>
+  <div class="col-people-name">
+    <%= person.name %>
+  </div>
+  <div class="col-people-gender">
+    <% if person.gender == 'unknown' %>
+      <%= icon('question', class: 'fa-fw') %>
+    <% else %>
+      <%= icon(person.gender, class: 'fa-fw') %>
+    <% end %>
+    <%= person.gender.humanize %>
+  </div>
+<% end %>
+
+<% content_for :entity_toolbar_associations, flush: true do %>
+  <div class="btn-group btn-group-sm" role="group">
+    <% if person.notes.nil? or person.notes.empty? %>
+      <a class="btn btn-sm btn-outline-secondary disabled">
+        <%= icon('comment-o', class: 'fa-fw') %>
+      </a>
+    <% else %>
+      <a class="btn btn-sm btn-secondary"
+         title="<%= person.notes %>"
+         data-toggle="tooltip">
+        <%= icon('comment-o', class: 'fa-fw') %>
+      </a>
+    <% end %>
+  </div>
+<% end %>
+
+<%= render partial: 'shared/index/entity',
+           locals: { entity_id: "person-#{person.id}", entity: person } %>

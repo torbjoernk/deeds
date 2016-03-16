@@ -70,3 +70,27 @@ landgut_hamm = Place.create(
     title: 'Landgut in Hamm'
 )
 raise 'Place not saved' unless landgut_hamm.persisted?
+
+gottschalk = Person.create(
+    name: 'Gottschalk',
+    gender: 'male'
+)
+raise 'Person not saved' unless gottschalk.persisted?
+
+richmodis = Person.create(
+    name: 'Richmodis',
+    gender: 'female'
+)
+raise 'Person not saved' unless richmodis.persisted?
+
+simon = Person.create(
+    name: 'Simon von Gemen',
+    gender: 'male'
+)
+raise 'Person not saved' unless simon.persisted?
+
+velkere = Person.create(
+    name: 'Eberhard Velkere',
+    gender: 'male'
+)
+raise 'Person not saved' unless velkere.persisted?
