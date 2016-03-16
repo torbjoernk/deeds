@@ -1,0 +1,8 @@
+<li class="list-group-item">
+  <% if person.gender == 'unknown' %>
+    <%= icon('question', class: 'fa-fw') %>
+  <% else %>
+    <%= icon(person.gender, class: 'fa-fw') %>
+  <% end %>
+  <%= person.name %>
+</li>

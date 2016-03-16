@@ -90,21 +90,28 @@
   </div>
 
   <div class="btn-group btn-group-sm" role="group">
-    <%= link_to nil,#people_path(deed_id: deed.id),
+    <%= link_to mentions_path(deed_id: deed.id),
+                class: 'btn btn-sm btn-secondary',
+                title: "show linked #{Mention.model_name.plural.humanize}",
+                data: { toggle: 'tooltip' } do %>
+      <%= deed.mentions.count %>
+      <%= icon_for Mention %>
+    <% end %>
+    <%= link_to people_path(deed_id: deed.id),
                 class: 'btn btn-sm btn-secondary',
                 title: "show linked #{Person.model_name.plural.humanize}",
                 data: { toggle: 'tooltip' } do %>
       <%= deed.people.count %>
       <%= icon_for Person %>
     <% end %>
-    <%= link_to nil,#places_path(deed_id: deed.id),
+    <%= link_to places_path(deed_id: deed.id),
                 class: 'btn btn-sm btn-secondary',
                 title: "show linked #{Place.model_name.plural.humanize}",
                 data: { toggle: 'tooltip' } do %>
       <%= deed.places.count %>
       <%= icon_for Place %>
     <% end %>
-    <%= link_to nil,#roles_path(deed_id: deed.id),
+    <%= link_to roles_path(deed_id: deed.id),
                 class: 'btn btn-sm btn-secondary',
                 title: "show linked #{Role.model_name.plural.humanize}",
                 data: { toggle: 'tooltip' } do %>

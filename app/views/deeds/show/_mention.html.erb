@@ -1,0 +1,22 @@
+<li class="list-group-item">
+  <% unless mention.person.nil? %>
+    <% if mention.person.gender == 'unknown' %>
+      <%= icon('question', class: 'fa-fw') %>
+    <% else %>
+      <%= icon(mention.person.gender, class: 'fa-fw') %>
+    <% end %>
+    <%= mention.person.name %>
+  <% end %>
+
+  <% unless mention.role.nil? %>
+    as
+    <%= icon_for Role %>
+    <%= mention.role.title %>
+  <% end %>
+
+  <% unless mention.place.nil? %>
+    of
+    <%= icon_for Place %>
+    <%= mention.place.title %>
+  <% end %>
+</li>
