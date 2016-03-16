@@ -32,4 +32,9 @@
       <%= model_name_with_icon Source, :plural %>
     <% end %>
   </li>
+  <li class="nav-item">
+    <%= link_to places_path, class: "nav-link#{' active' if current_page?(controller: :places)}" do %>
+      <%= model_name_with_icon Place, :plural %>
+    <% end %>
+  </li>
 </ul>

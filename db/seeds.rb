@@ -55,3 +55,18 @@ haa_r3a3 = Deed.create(
 raise 'Deed not saved' unless haa_r3a3.persisted?
 raise 'Deed and Source not linked' unless haa_r3a3_original.deed == haa_r3a3
 raise 'Deed and Content not linked' unless dummy_content.deed == haa_r3a3
+
+kloster_knechtsteden = Place.create(
+    title: 'Kloster Knechtsteden'
+)
+raise 'Place not saved' unless kloster_knechtsteden.persisted?
+
+kloster_flaesheim = Place.create(
+    title: 'Kloster Flaesheim'
+)
+raise 'Place not saved' unless kloster_flaesheim.persisted?
+
+landgut_hamm = Place.create(
+    title: 'Landgut in Hamm'
+)
+raise 'Place not saved' unless landgut_hamm.persisted?

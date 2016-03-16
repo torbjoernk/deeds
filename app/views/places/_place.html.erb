@@ -1,0 +1,24 @@
+<% content_for :entity_info, flush: true do %>
+  <div class="col-place-title">
+    <%= place.title %>
+  </div>
+<% end %>
+
+<% content_for :entity_toolbar_associations, flush: true do %>
+  <div class="btn-group btn-group-sm" role="group">
+    <% if place.notes.nil? or place.notes.empty? %>
+      <a class="btn btn-sm btn-outline-secondary disabled">
+        <%= icon('comment-o', class: 'fa-fw') %>
+      </a>
+    <% else %>
+      <a class="btn btn-sm btn-secondary"
+         title="<%= place.notes %>"
+         data-toggle="tooltip">
+        <%= icon('comment-o', class: 'fa-fw') %>
+      </a>
+    <% end %>
+  </div>
+<% end %>
+
+<%= render partial: 'shared/index/entity',
+           locals: { entity_id: "place-#{place.id}", entity: place } %>

@@ -1,3 +1,9 @@
+#notes {
+  .alert {
+    @extend .p-y-0;
+  }
+}
+
 .flash-notice {
   @extend .alert-info;
 }
