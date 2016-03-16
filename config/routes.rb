@@ -19,7 +19,9 @@ Rails.application.routes.draw do
 
   resources :sources
 
-  resources :contents
+  resources :contents do
+    resources :content_translations
+  end
 
   resources :deeds
 

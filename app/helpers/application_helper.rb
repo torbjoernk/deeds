@@ -13,12 +13,13 @@ module ApplicationHelper
     "#{icon_for(klass)} #{name}".strip.html_safe
   end
 
-  def link_to_show_entity(entity, remote=true)
-    link_to url_for(entity),
+  def link_to_show_entity(entity, url=nil, remote=true)
+    url ||= url_for(entity)
+    link_to url,
             class: 'btn btn-sm btn-outline-info',
             id: "btn-#{entity.class.model_name.to_s.downcase}-show-#{entity.id}",
             title: 'Show Details',
-            data: { toggle: 'tooltip' },
+            data: { toggle: 'tooltip', placement: 'left' },
             remote: remote do
       content_tag(:i, nil, class: 'fa fa-fw fa-search')
     end
@@ -30,22 +31,26 @@ module ApplicationHelper
             class: 'btn btn-sm btn-outline-primary',
             id: "btn-#{entity.class.model_name.to_s.downcase}-edit-#{entity.id}",
             title: "Edit #{entity.class.model_name.human}",
-            data: { toggle: 'tooltip' },
+            data: { toggle: 'tooltip', placement: 'left' },
             remote: true do
       content_tag(:i, nil, class: 'fa fa-fw fa-pencil')
     end
   end
 
-  def link_to_destroy_entity(entity)
-    link_to url_for(entity),
-            method: :delete,
-            class: 'btn btn-sm btn-outline-danger',
-            id: "btn-#{entity.class.model_name.to_s.downcase}-delete-#{entity.id}",
-            title: "Delete #{entity.class.model_name.human}",
-            data: {
-              confirm: 'Do you really want to delete this item?',
-              toggle: 'tooltip'
-            } do
+  def link_to_destroy_entity(entity, options={})
+    defaults = {
+        method: :delete,
+        class: 'btn btn-sm btn-outline-danger',
+        id: "btn-#{entity.class.model_name.to_s.downcase}-delete-#{entity.id}",
+        title: "Delete #{entity.class.model_name.human}",
+        data: {
+            confirm: 'Do you really want to delete this item?',
+            toggle: 'tooltip',
+            placement: 'left'
+        }
+    }
+    defaults.merge!(options)
+    link_to url_for(entity), **defaults do
       content_tag(:i, nil, class: 'fa fa-fw fa-trash')
     end
   end

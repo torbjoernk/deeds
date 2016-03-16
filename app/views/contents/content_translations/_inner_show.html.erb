@@ -1,0 +1,19 @@
+<li class="list-group-item">
+  <strong class="list-group-item-heading"
+       role="tab"
+       id="heading-translation-<%= content_translation.id %>">
+    <a data-toggle="collapse"
+       data-parent="#content-content-translations-accordion"
+       href="#collapse-translation-<%= content_translation.id %>"
+       aria-expanded="true"
+       aria-controls="collapse-translation-<%= content_translation.id %>">
+      <%= content_translation.language.humanize %>
+    </a>
+  </strong>
+  <p id="collapse-translation-<%= content_translation.id %>"
+       class="list-group-item-text collapse"
+       role="tabpanel"
+       aria-labelledby="heading-translation-<%= content_translation.id %>">
+    <%= content_translation.translation %>
+  </p>
+</li>

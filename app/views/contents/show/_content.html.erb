@@ -13,5 +13,11 @@
     <%= content.content %>
   </div>
 </div>
-<% if native %>
-<% end %>
+<div class="row">
+  <label class="col-md-3"><strong><%= Content.human_attribute_name :translations %></strong></label>
+  <ul class="col-md-9" id="content-content-translations-accordion"
+       role="tablist" aria-multiselectable="true">
+    <%= render partial: 'contents/content_translations/inner_show', collection: content.translations,
+               as: :content_translation %>
+  </ul>
+</div>

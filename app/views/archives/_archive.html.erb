@@ -28,14 +28,14 @@
                 title: "show #{Storage.model_name.plural.humanize} linked",
                 data: { toggle: 'tooltip' } do %>
       <%= archive.storages.count %>
-      <%= icon('archive', class: 'fa-fw') %>
+      <%= icon_for Storage %>
     <% end %>
     <%= link_to sources_path(archive_id: archive.id),
                 class: 'btn btn-sm btn-secondary',
                 title: "show #{Source.model_name.plural.humanize} linked",
                 data: { toggle: 'tooltip' } do %>
       <%= archive.sources.count %>
-      <%= icon('newspaper-o', class: 'fa-fw') %>
+      <%= icon_for Source %>
     <% end %>
   </div>
 <% end %>

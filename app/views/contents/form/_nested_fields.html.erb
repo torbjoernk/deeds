@@ -1,0 +1,85 @@
+<div class="container-fluid">
+  <div class="row">
+    <label class="col-md-3 form-control-label">
+      <%= model_name_with_icon ContentTranslation, :plural %>
+    </label>
+    <div id="content-content-translations-accordion" class="col-md-9" role="tablist" aria-multiselectable="true">
+      <%= f.fields_for :translations, @content.translations.to_a do |t_f| %>
+        <div id="associated-content-translation-<%= t_f.object.id %>"
+             class="card">
+          <div id="heading-translation-<%= t_f.object.id %>"
+               class="card-header"
+               role="tab">
+            <a data-toggle="collapse"
+               data-parent="#content-content-translations-accordion"
+               href="#collapse-translation-<%= t_f.object.id %>"
+               aria-expanded="true"
+               aria-controls="collapse-translation-<%= t_f.object.id %>">
+              <%= model_name_with_icon ContentTranslation, :singular %>
+              <span class="tag tag-default">ID: <%= t_f.object.id %></span>
+            </a>
+          </div>
+          <div id="collapse-translation-<%= t_f.object.id %>"
+               class="card-block collapse"
+               role="tabpanel"
+               aria-labelledby="heading-translation-<%= t_f.object.id %>">
+            <div class="row form-group">
+              <%= t_f.label :language, class: 'col-md-3 form-control-label' %>
+              <div class="col-md-9">
+                <%= t_f.select :language,
+                               options_for_select(Content::LANGUAGES.map { |e| e.humanize },
+                                                  (t_f.object.language ? t_f.object.language.humanize : nil)),
+                               {},
+                               { class: 'form-control' } %>
+              </div>
+            </div>
+            <div class="row form-group">
+              <%= t_f.label :translation, class: 'col-md-3 form-control-label' %>
+              <div class="col-md-9">
+                <%= t_f.text_area :translation, rows: 5, class: 'form-control' %>
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-md-12">
+                <div class="btn-group btn-group-sm pull-right">
+                  <%= link_to edit_content_content_translation_path(content_id: @content.id, id: t_f.object.id),
+                              remote: true,
+                              method: :delete,
+                              class: 'btn btn-sm btn-outline-primary',
+                              id: "btn-content-translation-update-#{t_f.object.id}",
+                              title: "Update #{ContentTranslation.model_name.human}",
+                              data: {
+                                  toggle: 'tooltip'
+                              } do %>
+                    <%= icon('save', class: 'fa-fw') %> Update Translation
+                  <% end %>
+                  <%= link_to content_content_translation_path(content_id: @content.id, id: t_f.object.id),
+                              remote: true,
+                              method: :delete,
+                              class: 'btn btn-sm btn-outline-danger',
+                              id: "btn-content-translation-delete-#{t_f.object.id}",
+                              title: "Delete #{ContentTranslation.model_name.human}",
+                              data: {
+                                  confirm: 'Do you really want to delete this item?',
+                                  toggle: 'tooltip'
+                              } do %>
+                    <%= icon('trash', class: 'fa-fw') %> Delete Translation
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <div class="">
+        <%= content_tag :a,
+                        icon('plus', class: 'fa-fw'),
+                        id: 'btn-add-new-content-translation',
+                        class: 'btn btn-sm btn-primary pull-right',
+                        role: 'button',
+                        title: 'Add another Content Translation',
+                        data: { toggle: 'tooltip' } %>
+      </div>
+    </div>
+  </div>
+</div>

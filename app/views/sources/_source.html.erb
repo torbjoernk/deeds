@@ -28,7 +28,7 @@
                 title: "show #{Archive.model_name.plural.humanize} linked",
                 data: { toggle: 'tooltip' } do %>
       <%= source.archives.count %>
-      <%= icon('book', class: 'fa-fw') %>
+      <%= icon_for Archive %>
     <% end %>
   </div>
 <% end %>

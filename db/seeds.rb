@@ -37,6 +37,12 @@ dummy_content = Content.create(
 )
 raise 'Content not saved' unless dummy_content.persisted?
 
+dummy_translation = ContentTranslation.create(
+    language: 'latin',
+    translation: 'Quo vadis?',
+    content: dummy_content
+)
+raise 'ContentTranslation not saved' unless dummy_translation.persisted?
 
 haa_r3a3 = Deed.create(
     title: 'Urkunde, Reihe III, Nr. 3',

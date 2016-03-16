@@ -32,4 +32,4 @@ DeedsApp.display_form_modal_with_ajax_url = (full_modal, callback_url) ->
       url: callback_url,
       data:
         sub_action: 'refresh_nested',
-      dataType: 'script',
+      dataType: 'script'

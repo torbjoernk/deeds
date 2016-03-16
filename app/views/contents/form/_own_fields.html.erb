@@ -5,7 +5,8 @@
       <%= f.select :language,
                    options_for_select(Content::LANGUAGES.map { |e| e.humanize },
                                       (@content.language ? @content.language.humanize : nil)),
-                   class: 'form-control' %>
+                   {},
+                   { class: 'form-control' } %>
     </div>
   </div>
   <div class="row form-group">

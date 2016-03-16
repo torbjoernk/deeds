@@ -6,15 +6,15 @@
     <div class="container-fluid">
       <div class="col-deed-year">
         <span class="tag tag-default"><%= Deed.human_attribute_name :year %></span>
-        <%= deed.year ? deed.year : '?' %>
+        <%= deed.year ? deed.year : '<em class="text-muted">unknown</em>'.html_safe %>
       </div>
       <div class="col-deed-month">
         <span class="tag tag-default"><%= Deed.human_attribute_name :month %></span>
-        <%= deed.month ? deed.month : '?' %>
+        <%= deed.month ? deed.month : '<em class="text-muted">unknown</em>'.html_safe %>
       </div>
       <div class="col-deed-day">
         <span class="tag tag-default"><%= Deed.human_attribute_name :day %></span>
-        <%= deed.day ? deed.day : '?' %>
+        <%= deed.day ? deed.day : '<em class="text-muted">unknown</em>'.html_safe %>
       </div>
     </div>
   </div>
@@ -41,6 +41,11 @@
                   class: 'btn btn-sm btn-outline-secondary disabled' do %>
         <%= icon_for Content %>
       <% end %>
+      <%= link_to nil,
+                  class: 'btn btn-sm btn-outline-secondary disabled' do %>
+        <%= deed.translations.count %>
+        <%= icon_for ContentTranslation %>
+      <% end %>
     <% else %>
       <%= link_to content_path(deed.content.id),
                   class: 'btn btn-sm btn-secondary',
@@ -49,13 +54,14 @@
                   remote: true do %>
         <%= icon_for Content %>
       <% end %>
-    <% end %>
-    <%= link_to nil,#content_translation_path(deed.content),
-                class: 'btn btn-sm btn-secondary',
-                title: "show #{ContentTranslation.model_name.plural.humanize}",
-                data: { toggle: 'tooltip' } do %>
-      <%= deed.translations.count %>
-      <%= icon_for ContentTranslation %>
+      <%= link_to content_path(deed.content.id),
+                  class: 'btn btn-sm btn-secondary',
+                  title: "show #{ContentTranslation.model_name.plural.humanize}",
+                  data: { toggle: 'tooltip' },
+                  remote: true do %>
+        <%= deed.translations.count %>
+        <%= icon_for ContentTranslation %>
+      <% end %>
     <% end %>
   </div>
 
@@ -108,8 +114,8 @@
   </div>
 <% end %>
 
-<% content_for :entity_toolbar_action_show_btn do %>
-  <%= link_to_show_entity deed, false %>
+<% content_for :entity_toolbar_action_show_btn, flush: true do %>
+  <%= link_to_show_entity deed, url=nil, remote=false %>
 <% end %>
 
 <% content_for :entity_description, flush: true do %>

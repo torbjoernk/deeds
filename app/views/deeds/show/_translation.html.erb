@@ -1,6 +1,8 @@
 <li class="list-group-item">
   <%= translation.language.humanize %>
   <span class="pull-right">
-    <%= link_to_show_entity translation %>
+    <%= link_to_show_entity translation,
+                            url=content_content_translation_path(id: translation.id,
+                                                                 content_id: translation.content.id) %>
   </span>
 </li>
