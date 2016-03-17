@@ -20,7 +20,15 @@
     <%= mention.place.title %>
   <% end %>
 
-  <span class="pull-right">
+  <span class="btn-group btn-group-sm pull-right">
     <%= link_to_show_entity mention %>
+    <%= link_to deed_path(@deed, sub_action: 'remove_mention', mention_id: mention.id),
+                  method: :patch,
+                  id: "btn-remove-mention-#{mention.id}",
+                  class: 'btn btn-sm btn-outline-danger',
+                  title: 'Remove Mention from Deed',
+                  data: { toggle: 'tooltip' } do %>
+      <%= icon('trash', class: 'fa-fw') %>
+    <% end %>
   </span>
 </li>

@@ -1,0 +1,7 @@
+.form-inline {
+  &.form-btn-only {
+    @extend .p-a-0;
+    @extend .m-a-0;
+    display: inline;
+  }
+}
