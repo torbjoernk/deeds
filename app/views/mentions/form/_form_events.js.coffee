@@ -7,7 +7,7 @@ $ ->
   valid_deeds = <%= raw Deed.all.map { |x| x.title }.to_json %>
   deeds_id_map = <%= raw Deed.all.map { |x| { x.title => x.id } }.reduce({}, :update).to_json %>
 
-  assoc_deed_input.on 'change', ->
+  assoc_deed_input.on 'input', ->
     $(this).removeClass('form-control-success').removeClass('.form-control-danger')
     $(this).parent().removeClass('has-success').removeClass('has-danger')
     if $(this).prop('value') in valid_deeds
@@ -33,7 +33,7 @@ $ ->
   valid_people = <%= raw Person.all.map { |x| x.name }.to_json %>
   people_id_map = <%= raw Person.all.map { |x| { x.name => x.id } }.reduce({}, :update).to_json %>
 
-  assoc_person_input.on 'change', ->
+  assoc_person_input.on 'input', ->
     $(this).removeClass('form-control-success').removeClass('.form-control-danger')
     $(this).parent().removeClass('has-success').removeClass('has-danger')
     if $(this).prop('value') in valid_people
@@ -59,7 +59,7 @@ $ ->
   valid_places = <%= raw Place.all.map { |x| x.title }.to_json %>
   places_id_map = <%= raw Place.all.map { |x| { x.title => x.id } }.reduce({}, :update).to_json %>
 
-  assoc_place_input.on 'change', ->
+  assoc_place_input.on 'input', ->
     $(this).removeClass('form-control-success').removeClass('.form-control-danger')
     $(this).parent().removeClass('has-success').removeClass('has-danger')
     if $(this).prop('value') in valid_places
@@ -85,7 +85,7 @@ $ ->
   valid_roles = <%= raw Role.all.map { |x| x.title }.to_json %>
   roles_id_map = <%= raw Role.all.map { |x| { x.title => x.id } }.reduce({}, :update).to_json %>
 
-  assoc_role_input.on 'change', ->
+  assoc_role_input.on 'input', ->
     $(this).removeClass('form-control-success').removeClass('.form-control-danger')
     $(this).parent().removeClass('has-success').removeClass('has-danger')
     if $(this).prop('value') in valid_roles

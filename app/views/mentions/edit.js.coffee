@@ -2,7 +2,12 @@
 #= depend_on common/form_modal
 
 $ ->
-  DeedsApp.display_form_modal_with_ajax_url(
-    '<%= escape_javascript(render partial: 'mentions/form/form_modal') %>',
-    '<%= edit_mention_path(@mention) %>'
+  DeedsApp.display_form_modal(
+    '<%= escape_javascript(render partial: 'mentions/form/form_modal') %>'
+  )
+  $.get(
+    url: '<%= edit_mention_path(@mention) %>'
+    dataType: 'script'
+    data:
+      sub_action: 'form_events'
   )

@@ -16,13 +16,7 @@ class MentionsController < ApplicationController
 
   def show
     @mention = Mention.find params[:id]
-    if params.has_key? 'sub_action' and params[:sub_action].to_sym == :form_events
-      respond_to do |format|
-        format.js { render partial: 'mentions/form/form_events' }
-      end
-    else
-      respond_to :js
-    end
+    respond_to :js
   end
 
   def new
@@ -38,7 +32,13 @@ class MentionsController < ApplicationController
 
   def edit
     @mention = Mention.find params[:id]
-    edit_subaction 'mentions/edit', 'mentions/form/refresh'
+    if params.has_key? 'sub_action' and params[:sub_action].to_sym == :form_events
+      respond_to do |format|
+        format.js { render partial: 'mentions/form/form_events' }
+      end
+    else
+      respond_to :js
+    end
   end
 
   def create
