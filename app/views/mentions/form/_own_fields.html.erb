@@ -2,25 +2,65 @@
   <div class="row form-group">
     <%= f.label :deed, class: 'col-md-3 form-control-label' %>
     <div class="col-md-9">
-      <%= f.collection_select :deed_id, Deed.all, :id, :title, include_blank: true %>
+      <div class="input-group">
+        <%= f.text_field :deed,
+                         class: 'form-control',
+                         list: 'deeds',
+                         placeholder: 'Search for Deed' %>
+        <%= content_tag :datalist, id: 'deeds' do %>
+          <% Deed.all.each do |deed| %>
+            <%= content_tag :option, deed.title %>
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
   <div class="row form-group">
     <%= f.label :person, class: 'col-md-3 form-control-label' %>
     <div class="col-md-9">
-      <%= f.collection_select :person_id, Person.all, :id, :name, include_blank: true %>
+      <div class="input-group">
+        <%= f.text_field :person,
+                         class: 'form-control',
+                         list: 'people',
+                         placeholder: 'Search for Person' %>
+        <%= content_tag :datalist, id: 'people' do %>
+          <% Person.all.each do |person| %>
+            <%= content_tag :option, person.name %>
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
   <div class="row form-group">
     <%= f.label :place, class: 'col-md-3 form-control-label' %>
     <div class="col-md-9">
-      <%= f.collection_select :place_id, Place.all, :id, :title, include_blank: true %>
+      <div class="input-group">
+        <%= f.text_field :place,
+                         class: 'form-control',
+                         list: 'places',
+                         placeholder: 'Search for Place' %>
+        <%= content_tag :datalist, id: 'places' do %>
+          <% Place.all.each do |place| %>
+            <%= content_tag :option, place.title %>
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
   <div class="row form-group">
     <%= f.label :role, class: 'col-md-3 form-control-label' %>
     <div class="col-md-9">
-      <%= f.collection_select :role_id, Role.all, :id, :title, include_blank: true %>
+      <div class="input-group">
+        <%= f.text_field :role,
+                         class: 'form-control',
+                         list: 'roles',
+                         placeholder: 'Search for Role' %>
+        <%= content_tag :datalist, id: 'roles' do %>
+          <% Role.all.each do |role| %>
+            <%= content_tag :option, role.title %>
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
   <div class="row form-group">

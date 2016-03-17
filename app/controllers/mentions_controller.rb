@@ -30,7 +30,8 @@ class MentionsController < ApplicationController
   end
 
   def create
-    @mention = Mention.create!(mention_params)
+    @mention = Mention.create(mention_params)
+    @mention.save!
     flash[:success] = "Created new mention with ID #{@mention.id}"
     redirect_to mentions_path
   end
@@ -49,6 +50,32 @@ class MentionsController < ApplicationController
 
   private
   def mention_params
-    params.require(:mention).permit(:deed_id, :person_id, :place_id, :role_id, :notes)
+    filtered = params.require(:mention).permit(:id, :deed, :person, :place, :role, :notes)
+
+    if filtered[:deed].to_s.empty?
+      filtered[:deed] = nil
+    else
+      filtered[:deed] = Deed.find_by! title: filtered[:deed].to_s
+    end
+
+    if filtered[:person].to_s.empty?
+      params['mention']['person'] = nil
+    else
+      filtered[:person] = Person.find_by! name: filtered[:person].to_s
+    end
+
+    if filtered[:place].to_s.empty?
+      filtered[:place] = nil
+    else
+      filtered[:place] = Place.find_by! title: filtered[:place].to_s
+    end
+
+    if filtered[:role].to_s.empty?
+      filtered[:role] = nil
+    else
+      filtered[:role] = Role.find_by! title: filtered[:role].to_s
+    end
+
+    filtered
   end
 end
