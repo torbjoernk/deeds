@@ -1,5 +1,5 @@
 <%= fields_for @mention do |f| %>
-  <div class="row form-group">
+  <div id="assoc-deed" class="row form-group">
     <%= f.label :deed, class: 'col-md-3 form-control-label' %>
     <div class="col-md-9">
       <div class="input-group">
@@ -12,10 +12,17 @@
             <%= content_tag :option, deed.title %>
           <% end %>
         <% end %>
+        <div class="input-group-btn">
+          <%= content_tag :a,
+                          icon('search', class: 'fa-fw'),
+                          id: 'btn-show-selected-deed-details',
+                          class: 'btn btn-outline-info',
+                          role: 'button' %>
+        </div>
       </div>
     </div>
   </div>
-  <div class="row form-group">
+  <div id="assoc-person" class="row form-group">
     <%= f.label :person, class: 'col-md-3 form-control-label' %>
     <div class="col-md-9">
       <div class="input-group">
@@ -28,10 +35,17 @@
             <%= content_tag :option, person.name %>
           <% end %>
         <% end %>
+        <div class="input-group-btn">
+          <%= content_tag :a,
+                          icon('search', class: 'fa-fw'),
+                          id: 'btn-show-selected-person-details',
+                          class: 'btn btn-outline-info',
+                          role: 'button' %>
+        </div>
       </div>
     </div>
   </div>
-  <div class="row form-group">
+  <div id="assoc-place" class="row form-group">
     <%= f.label :place, class: 'col-md-3 form-control-label' %>
     <div class="col-md-9">
       <div class="input-group">
@@ -44,10 +58,17 @@
             <%= content_tag :option, place.title %>
           <% end %>
         <% end %>
+        <div class="input-group-btn">
+          <%= content_tag :a,
+                          icon('search', class: 'fa-fw'),
+                          id: 'btn-show-selected-place-details',
+                          class: 'btn btn-outline-info',
+                          role: 'button' %>
+        </div>
       </div>
     </div>
   </div>
-  <div class="row form-group">
+  <div id="assoc-role" class="row form-group">
     <%= f.label :role, class: 'col-md-3 form-control-label' %>
     <div class="col-md-9">
       <div class="input-group">
@@ -60,6 +81,13 @@
             <%= content_tag :option, role.title %>
           <% end %>
         <% end %>
+        <div class="input-group-btn">
+          <%= content_tag :a,
+                          icon('search', class: 'fa-fw'),
+                          id: 'btn-show-selected-role-details',
+                          class: 'btn btn-outline-info',
+                          role: 'button' %>
+        </div>
       </div>
     </div>
   </div>
