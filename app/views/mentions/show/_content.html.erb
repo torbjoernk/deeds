@@ -21,7 +21,7 @@
     <% if mention.person.nil? %>
       <em class="text-muted">no Person referenced</em>
     <% else %>
-      <%= icon_for Person %>
+      <%= icon(mention.person.gender_icon, class: 'fa-fw') %>
       <%= mention.person.name %>
       <span class="pull-right">
         <%= link_to_show_entity mention.person, remote=false %>

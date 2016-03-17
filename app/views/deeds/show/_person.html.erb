@@ -1,9 +1,5 @@
 <li class="list-group-item">
-  <% if person.gender == 'unknown' %>
-    <%= icon('question', class: 'fa-fw') %>
-  <% else %>
-    <%= icon(person.gender, class: 'fa-fw') %>
-  <% end %>
+  <%= icon(person.gender_icon, class: 'fa-fw') %>
   <%= person.name %>
   <span class="pull-right">
     <%= link_to_show_entity person %>

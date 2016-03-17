@@ -4,6 +4,18 @@ class Person < ActiveRecord::Base
 
   GENDERS = %w(male female unknown)
 
+  def self.icon_for_gender(gender)
+    unless GENDERS.include? gender.to_s
+      raise "Gender '#{gender.to_s}' invalid."
+    end
+
+    if gender.to_s == 'unknown'
+      'question'
+    else
+      gender.to_s
+    end
+  end
+
   has_many :person_relations
   has_many :related, through: :person_relations
 
@@ -32,6 +44,14 @@ class Person < ActiveRecord::Base
 
   def mentioned_places
     places.group(:title)
+  end
+
+  def to_s
+    name
+  end
+
+  def gender_icon
+    Person.icon_for_gender(gender)
   end
 
   validates :name, presence: true

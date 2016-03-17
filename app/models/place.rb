@@ -26,6 +26,10 @@ class Place < ActiveRecord::Base
     people.group(:name)
   end
 
+  def to_s
+    title
+  end
+
   validates :title, uniqueness: true
   validates :title, presence: true
 end

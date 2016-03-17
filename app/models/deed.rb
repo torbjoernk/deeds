@@ -31,4 +31,8 @@ class Deed < ActiveRecord::Base
   def mentioned_roles
     roles.group(:title).order(:title)
   end
+
+  def to_s
+    title
+  end
 end

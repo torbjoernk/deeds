@@ -23,4 +23,8 @@ class Role < ActiveRecord::Base
   def mentioned_people
     people.group(:name)
   end
+
+  def to_s
+    title
+  end
 end

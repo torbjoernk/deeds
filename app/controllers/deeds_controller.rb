@@ -57,7 +57,7 @@ class DeedsController < ApplicationController
           @deed.mentions.delete @mention
           @deed.save!
           @mention.delete
-          flash[:success] = "Disassociated Mention with ID #{@mention.id} and deleted it."
+          flash[:success] = "Deleted mentioning '#{@mention.to_s}'."
       end
       redirect_to deed_path(@deed), format: 'html'
     else

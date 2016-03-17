@@ -3,11 +3,7 @@
     <%= person.name %>
   </div>
   <div class="col-people-gender">
-    <% if person.gender == 'unknown' %>
-      <%= icon('question', class: 'fa-fw') %>
-    <% else %>
-      <%= icon(person.gender, class: 'fa-fw') %>
-    <% end %>
+    <%= icon(person.gender_icon, class: 'fa-fw') %>
     <%= person.gender.humanize %>
   </div>
 <% end %>
