@@ -7,11 +7,15 @@
   </div>
   <div class="row form-group">
     <%= f.label :gender, class: 'col-md-3 form-control-label' %>
-    <div class="col-md-9">
-      <% genders = Person::GENDERS.map { |gender| [gender.humanize, gender] } %>
-      <%= f.select :gender, options_for_select(genders, @person.gender || 'unknown'),
-                   class: 'form-control' %>
-    </div>
+    <% Person::GENDERS.each do |gender| %>
+      <div class="col-md-3">
+        <label class="radio-inline">
+          <%= radio_button 'person', 'gender', gender %>
+          <%= icon(Person.icon_for_gender(gender), class: 'fa-fw') %>
+          <%= gender.humanize %>
+        </label>
+      </div>
+    <% end %>
   </div>
   <div class="row form-group">
     <%= f.label :notes, class: 'col-md-3 form-control-label' %>
