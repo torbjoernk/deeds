@@ -28,8 +28,16 @@ ol.breadcrumb {
 .card {
   > ul.list-group {
     li.list-group-item {
+      padding-top: ($spacer-y / 2);
+      padding-bottom: ($spacer-y / 2);
+
       &:first-of-type {
         border-top: 0;
+      }
+
+      .btn.btn-sm {
+        @extend .p-y-0;
+        line-height: inherit;
       }
     }
   }

@@ -1,0 +1,19 @@
+<% native ||= false %>
+<% place ||= @place %>
+
+<div class="row">
+  <label class="col-md-3"><strong><%= Place.human_attribute_name :title %></strong></label>
+  <div class="col-md-9">
+    <%= place.title %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3"><strong><%= Place.human_attribute_name :notes %></strong></label>
+  <div class="col-md-9">
+    <% if place.notes.nil? or place.notes.empty? %>
+      <em class="text-muted">no notes</em>
+    <% else %>
+      <%= place.notes %>
+    <% end %>
+  </div>
+</div>

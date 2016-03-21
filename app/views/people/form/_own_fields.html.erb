@@ -1,0 +1,26 @@
+<%= fields_for @person do |f| %>
+  <div class="row form-group">
+    <%= f.label :name, class: 'col-md-3 form-control-label' %>
+    <div class="col-md-9">
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="row form-group">
+    <%= f.label :gender, class: 'col-md-3 form-control-label' %>
+    <% Person::GENDERS.each do |gender| %>
+      <div class="col-md-3">
+        <label class="radio-inline">
+          <%= radio_button 'person', 'gender', gender %>
+          <%= icon(Person.icon_for_gender(gender), class: 'fa-fw') %>
+          <%= gender.humanize %>
+        </label>
+      </div>
+    <% end %>
+  </div>
+  <div class="row form-group">
+    <%= f.label :notes, class: 'col-md-3 form-control-label' %>
+    <div class="col-md-9">
+      <%= f.text_area :notes, rows: 5, class: 'form-control' %>
+    </div>
+  </div>
+<% end %>

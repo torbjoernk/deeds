@@ -1,0 +1,17 @@
+<h1>
+  <%= model_name_with_icon Role, :plural %>
+  <%= render partial: 'shared/index/main_action_btn',
+             locals: { path_to_new_entity: new_role_path,
+                       path_to_refresh: roles_path,
+                       entity_name: Role.model_name.human } %>
+</h1>
+
+<div class="row">
+  <div id="roles-table">
+    <div class="table" id="roles">
+      <div class="table-body container-fluid">
+        <%= render partial: 'role', collection: @roles %>
+      </div>
+    </div>
+  </div>
+</div>

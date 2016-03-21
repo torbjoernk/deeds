@@ -55,3 +55,132 @@ haa_r3a3 = Deed.create(
 raise 'Deed not saved' unless haa_r3a3.persisted?
 raise 'Deed and Source not linked' unless haa_r3a3_original.deed == haa_r3a3
 raise 'Deed and Content not linked' unless dummy_content.deed == haa_r3a3
+
+kloster_knechtsteden = Place.create(
+    title: 'Kloster Knechtsteden'
+)
+raise 'Place not saved' unless kloster_knechtsteden.persisted?
+
+kloster_flaesheim = Place.create(
+    title: 'Kloster Flaesheim'
+)
+raise 'Place not saved' unless kloster_flaesheim.persisted?
+
+landgut_hamm = Place.create(
+    title: 'Landgut in Hamm'
+)
+raise 'Place not saved' unless landgut_hamm.persisted?
+
+gottschalk = Person.create(
+    name: 'Gottschalk',
+    gender: 'male'
+)
+raise 'Person not saved' unless gottschalk.persisted?
+
+richmodis = Person.create(
+    name: 'Richmodis',
+    gender: 'female'
+)
+raise 'Person not saved' unless richmodis.persisted?
+
+simon = Person.create(
+    name: 'Simon von Gemen',
+    gender: 'male'
+)
+raise 'Person not saved' unless simon.persisted?
+
+velkere = Person.create(
+    name: 'Eberhard Velkere',
+    gender: 'male'
+)
+raise 'Person not saved' unless velkere.persisted?
+
+
+kaeufer = Role.create(
+    title: 'Käufer',
+    referring: 'deed'
+)
+raise 'Role not saved' unless kaeufer.persisted?
+
+prior = Role.create(
+    title: 'Prior',
+    referring: 'place'
+)
+raise 'Role not saved' unless prior.persisted?
+
+klostervorsteher = Role.create(
+    title: 'Klostervorsteher',
+    referring: 'place'
+)
+raise 'Role not saved' unless klostervorsteher.persisted?
+
+besitzer = Role.create(
+    title: 'Besitzer',
+    referring: 'place'
+)
+raise 'Role not saved' unless besitzer.persisted?
+
+verkaeufer = Role.create(
+    title: 'Verkäufer',
+    referring: 'deed'
+)
+raise 'Role not saved' unless verkaeufer.persisted?
+
+zeuge = Role.create(
+    title: 'Zeuge',
+    referring: 'deed'
+)
+raise 'Role not saved' unless zeuge.persisted?
+
+
+gottschalk_prior = Mention.create(
+    person: gottschalk,
+    place: kloster_knechtsteden,
+    role: prior,
+    deed: haa_r3a3
+)
+raise 'Mention not saved' unless gottschalk_prior.persisted?
+
+gottschalk_kaeufer = Mention.create(
+    person: gottschalk,
+    role: kaeufer,
+    deed: haa_r3a3
+)
+raise 'Mention not saved' unless gottschalk_kaeufer.persisted?
+
+richmodis_flaesheim = Mention.create(
+    person: richmodis,
+    place: kloster_flaesheim,
+    role: klostervorsteher,
+    deed: haa_r3a3
+)
+raise 'Mention not saved' unless richmodis_flaesheim.persisted?
+
+richmodis_kaeufer = Mention.create(
+    person: richmodis,
+    role: kaeufer,
+    deed: haa_r3a3
+)
+raise 'Mention not saved' unless richmodis_kaeufer.persisted?
+
+simon_landgut = Mention.create(
+    person: simon,
+    place: landgut_hamm,
+    role: besitzer,
+    deed: haa_r3a3
+)
+raise 'Mention not saved' unless simon_landgut.persisted?
+
+simon_verkaeufer = Mention.create(
+    person: simon,
+    role: verkaeufer,
+    deed: haa_r3a3
+)
+raise 'Mention not saved' unless simon_verkaeufer.persisted?
+
+velkere_zeuge = Mention.create(
+    person: velkere,
+    role: zeuge,
+    deed: haa_r3a3
+)
+raise 'Mention not saved' unless velkere_zeuge.persisted?

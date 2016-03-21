@@ -8,7 +8,11 @@
   <div class="row form-group">
     <%= f.label :source_type, class: 'col-md-3 form-control-label' %>
     <div class="col-md-9">
-      <%= f.text_field :source_type, class: 'form-control' %>
+      <% source_types = Source::SOURCE_TYPES.map { |t| [t.humanize, t] } %>
+      <%= f.select :source_type,
+                   options_for_select(source_types, @source.source_type || nil),
+                   { include_blank: true },
+                   { class: 'custom-select' } %>
     </div>
   </div>
   <div class="row form-group">

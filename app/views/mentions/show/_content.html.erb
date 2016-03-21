@@ -1,0 +1,69 @@
+<% native ||= false %>
+<% mention ||= @mention %>
+
+<div class="row">
+  <label class="col-md-3"><strong><%= Mention.human_attribute_name :deed %></strong></label>
+  <div class="col-md-9">
+    <% if mention.deed.nil? %>
+      <em class="text-muted">no Deed referenced</em>
+    <% else %>
+      <%= icon_for Deed %>
+      <%= mention.deed.title %>
+      <span class="pull-right">
+        <%= link_to_show_entity mention.deed, remote=false %>
+      </span>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3"><strong><%= Mention.human_attribute_name :person %></strong></label>
+  <div class="col-md-9">
+    <% if mention.person.nil? %>
+      <em class="text-muted">no Person referenced</em>
+    <% else %>
+      <%= icon(mention.person.gender_icon, class: 'fa-fw') %>
+      <%= mention.person.name %>
+      <span class="pull-right">
+        <%= link_to_show_entity mention.person, remote=false %>
+      </span>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3"><strong><%= Mention.human_attribute_name :place %></strong></label>
+  <div class="col-md-9">
+    <% if mention.place.nil? %>
+      <em class="text-muted">no Place referenced</em>
+    <% else %>
+      <%= icon_for Place %>
+      <%= mention.place.title %>
+      <span class="pull-right">
+        <%= link_to_show_entity mention.place, remote=false %>
+      </span>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3"><strong><%= Mention.human_attribute_name :role %></strong></label>
+  <div class="col-md-9">
+    <% if mention.role.nil? %>
+      <em class="text-muted">no Role referenced</em>
+    <% else %>
+      <%= icon_for Role %>
+      <%= mention.role.title %>
+      <span class="pull-right">
+        <%= link_to_show_entity mention.role, remote=false %>
+      </span>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3"><strong><%= Mention.human_attribute_name :notes %></strong></label>
+  <div class="col-md-9">
+    <% if mention.notes.nil? or mention.notes.empty? %>
+      <em class="text-muted">no notes</em>
+    <% else %>
+      <%= mention.notes %>
+    <% end %>
+  </div>
+</div>

@@ -13,11 +13,17 @@
 
 @import "00_framework_and_overrides";
 @import "01_table";
+@import "02_forms";
 @import "09_flash";
 
 @import "archive";
 @import "contents";
+@import "content_translations";
 @import "deeds";
+@import "mentions";
+@import "people";
+@import "places";
+@import "roles";
 @import "sources";
 @import "storage";
 

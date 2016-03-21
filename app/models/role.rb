@@ -11,4 +11,20 @@ class Role < ActiveRecord::Base
 
   validates :title, presence: true
   validates :referring, inclusion: { in: REFERS_TO }
+
+  def mentioned_deeds
+    deeds.group(:title)
+  end
+
+  def mentioned_places
+    places.group(:title)
+  end
+
+  def mentioned_people
+    people.group(:name)
+  end
+
+  def to_s
+    title
+  end
 end

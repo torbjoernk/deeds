@@ -19,4 +19,20 @@ class Deed < ActiveRecord::Base
                                     greater_than_or_equal_to: 1, less_than_or_equal_to: 12 }
   validates :day, numericality: { only_integer: true, allow_blank: true,
                                   greater_than_or_equal_to: 1, less_than_or_equal_to: 31 }
+
+  def mentioned_people
+    people.group(:name).order(:name)
+  end
+
+  def mentioned_places
+    places.group(:title).order(:title)
+  end
+
+  def mentioned_roles
+    roles.group(:title).order(:title)
+  end
+
+  def to_s
+    title
+  end
 end

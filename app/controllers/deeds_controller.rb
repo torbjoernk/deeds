@@ -22,7 +22,7 @@ class DeedsController < ApplicationController
         add_breadcrumb @deed.title, deed_path(@deed)
         render 'deeds/show'
       }
-      format.js   { render 'deeds/show' }
+      format.js { render 'deeds/show' }
     end
   end
 
@@ -47,13 +47,19 @@ class DeedsController < ApplicationController
   def update
     @deed = Deed.find params[:id]
     if params.has_key? :sub_action
-      if params[:sub_action].to_sym == :deassoc_content
-        @content = Content.find params[:content_id]
-        @deed.update!(content: nil)
-        respond_to do |format|
-          format.js { render partial: 'deeds/form/refresh' }
-        end
+      case params[:sub_action].to_sym
+        when :deassoc_content
+          @content = Content.find params[:content_id]
+          @deed.update!(content: nil)
+          flash[:success] = "Updated deed with ID #{@deed.id}."
+        when :remove_mention
+          @mention = Mention.find params[:mention_id]
+          @deed.mentions.delete @mention
+          @deed.save!
+          @mention.delete
+          flash[:success] = "Deleted mentioning '#{@mention.to_s}'."
       end
+      redirect_to deed_path(@deed), format: 'html'
     else
       @deed.update!(deed_params)
       flash[:success] = "Updated deed with ID #{@deed.id}."

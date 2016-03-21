@@ -1,0 +1,66 @@
+<% content_for :entity_info, flush: true do %>
+  <div class="col-role-title">
+    <%= role.title %>
+  </div>
+  <div class="col-role-referring">
+    <% case role.referring %>
+      <% when 'deed' %>
+        <%= icon_for Deed %>
+      <% when 'person' %>
+        <%= icon_for Person %>
+      <% when 'place' %>
+        <%= icon_for Place %>
+    <% end %>
+    <%= role.referring.humanize %>
+  </div>
+<% end %>
+
+<% content_for :entity_toolbar_associations, flush: true do %>
+  <div class="btn-group btn-group-sm" role="group">
+    <% if role.notes.nil? or role.notes.empty? %>
+      <a class="btn btn-sm btn-outline-secondary disabled">
+        <%= icon('comment-o', class: 'fa-fw') %>
+      </a>
+    <% else %>
+      <a class="btn btn-sm btn-secondary"
+         title="<%= role.notes %>"
+         data-toggle="tooltip">
+        <%= icon('comment-o', class: 'fa-fw') %>
+      </a>
+    <% end %>
+  </div>
+
+  <div class="btn-group btn-group-sm" role="group">
+    <%= link_to mentions_path(person_id: role.id),
+                class: 'btn btn-sm btn-secondary',
+                title: "show linked #{Mention.model_name.plural.humanize}",
+                data: { toggle: 'tooltip' } do %>
+      <%= role.mentions.count %>
+      <%= icon_for Mention %>
+    <% end %>
+    <%= link_to people_path(person_id: role.id),
+                class: 'btn btn-sm btn-secondary',
+                title: "show linked #{Person.model_name.plural.humanize}",
+                data: { toggle: 'tooltip' } do %>
+      <%= role.mentioned_people.length %>
+      <%= icon_for Person %>
+    <% end %>
+    <%= link_to places_path(person_id: role.id),
+                class: 'btn btn-sm btn-secondary',
+                title: "show linked #{Place.model_name.plural.humanize}",
+                data: { toggle: 'tooltip' } do %>
+      <%= role.mentioned_places.length %>
+      <%= icon_for Place %>
+    <% end %>
+    <%= link_to deeds_path(person_id: role.id),
+                class: 'btn btn-sm btn-secondary',
+                title: "show linked #{Deed.model_name.plural.humanize}",
+                data: { toggle: 'tooltip' } do %>
+      <%= role.mentioned_deeds.length %>
+      <%= icon_for Deed %>
+    <% end %>
+  </div>
+<% end %>
+
+<%= render partial: 'shared/index/entity',
+           locals: { entity_id: "role-#{role.id}", entity: role } %>
