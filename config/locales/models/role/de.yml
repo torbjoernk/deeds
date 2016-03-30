@@ -1,0 +1,15 @@
+de:
+  activerecord:
+    models:
+      role:
+        one: Rolle
+        other: Rollen
+    attributes:
+      role:
+        title: Titel
+        referring: Bezug
+        notes: Notizen
+        refers_to:
+          person: Person
+          place: Ort
+          deed: Urkunde

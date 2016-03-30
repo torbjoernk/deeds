@@ -1,6 +1,6 @@
 <% content_for :entity_info, flush: true do %>
   <div class="col-content-language">
-    <%= content.language.humanize %>
+    <%= t content.language, scope: [:activerecord, :attributes, :content, :languages] %>
   </div>
 <% end %>
 

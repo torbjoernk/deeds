@@ -1,0 +1,16 @@
+de:
+  activerecord:
+    models:
+      source:
+        one: Quelle
+        other: Quellen
+    attributes:
+      source:
+        title: Title
+        source_type: Typ
+        notes: Notizen
+        source_types:
+          original: Original
+          transcript: Abschrift
+          print: Druck
+          digital: Digital

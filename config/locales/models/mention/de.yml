@@ -1,0 +1,8 @@
+de:
+  activerecord:
+    models:
+      mention:
+        one: Nennung
+        other: Nennungen
+    attributes:
+      mention:

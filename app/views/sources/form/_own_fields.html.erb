@@ -8,7 +8,9 @@
   <div class="row form-group">
     <%= f.label :source_type, class: 'col-md-3 form-control-label' %>
     <div class="col-md-9">
-      <% source_types = Source::SOURCE_TYPES.map { |t| [t.humanize, t] } %>
+      <% source_types = Source::SOURCE_TYPES.map {
+          |typ| [t(typ, scope: [:activerecord, :attributes, :source, :source_types]), typ]
+      } %>
       <%= f.select :source_type,
                    options_for_select(source_types, @source.source_type || nil),
                    { include_blank: true },

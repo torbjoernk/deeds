@@ -3,9 +3,9 @@ module ApplicationHelper
     raise StandardError.new 'Only for ActiveRecord models.' unless klass <= ActiveRecord::Base
 
     if quantity == :singular
-      name = klass.model_name.human
+      name = klass.model_name.human(count: 1)
     elsif quantity == :plural
-      name = klass.model_name.plural.humanize
+      name = klass.model_name.human(count: 2)
     else
       raise StandardError.new "Quantity must be either :singular or :plural, not #{quantity}."
     end

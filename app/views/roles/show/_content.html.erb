@@ -18,7 +18,7 @@
       <% when 'place' %>
         <%= icon_for Place %>
     <% end %>
-    <%= role.referring.humanize %>
+    <%= t role.referring, scope: [:activerecord, :attributes, :role, :refers_to] %>
   </div>
 </div>
 <div class="row">

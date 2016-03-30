@@ -1,0 +1,10 @@
+de:
+  activerecord:
+    models:
+      content_translation:
+        one: Übersetzung
+        other: Übersetzungen
+    attributes:
+      content_translation:
+        language: Sprache
+        notes: Notizen
