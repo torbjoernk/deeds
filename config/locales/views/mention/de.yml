@@ -1,0 +1,10 @@
+de:
+  views:
+    mention:
+      actions:
+        add_new_btn_title: 'Neue Nennung hinzufügen'
+      modals:
+        edit: '%{what} bearbeiten'
+        new: 'Neue %{what} erstellen'
+      flash:
+        created_entity: 'Neue %{what} mit ID %{id} wurde erstellt.'
