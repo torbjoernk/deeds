@@ -6,7 +6,7 @@
                       icon('refresh', class: 'fa-fw'),
                       id: 'btn-refresh-nested-fields',
                       class: 'btn btn-sm btn-outline-default',
-                      title: 'Refresh associations',
+                      title: t(:refresh_associations, scope: [:views, :modals]),
                       data: { toggle: 'tooltip' } %>
     </span>
   </label>
@@ -22,7 +22,7 @@
                         remote: true,
                         id: "btn-deassoc-storage-#{storage.id}",
                         class: 'btn btn-sm btn-danger',
-                        title: 'Deassociate Storage',
+                        title: t(:delete_association, scope: [:views, :modals]),
                         data: { toggle: 'tooltip' } do %>
               <%= icon('minus', class: 'fa-fw') %>
             <% end %>
@@ -38,7 +38,7 @@
                            class: 'form-control form-control-sm',
                            type: 'text',
                            list: 'free-storages',
-                           placeholder: 'Search for non-associated Storage' %>
+                           placeholder: t(:search_for_unassociated, scope: [:views, :modals], what: Storage.model_name.human(count: 2)) %>
             <%= content_tag :datalist, id: 'free-storages' do %>
               <% @free_storages.each do |storage| %>
                 <%= content_tag :option,
@@ -60,7 +60,7 @@
             </div>
           </div>
         <% else %>
-          no unassociated <%= model_name_with_icon Storage, :plural %>
+          <%= t(:no_unassociated_found_html, scope: [:views, :modals], what: model_name_with_icon(Storage, :plural)) %>
         <% end %>
       </li>
     </ul>

@@ -1,1 +1,17 @@
 de:
+  views:
+    non_associated: 'keine verknüpft'
+    actions:
+      refresh_table_btn_title: 'Tabelle aktualisieren'
+      show_details: 'Details anzeigen'
+      edit_entity: '%{entity_name} bearbeiten'
+      delete_entity: '%{entity_name} löschen'
+    modals:
+      close: 'Schließen'
+      refresh_associations: 'Verknüpfungen aktualisieren'
+      delete_association: 'Verknüpfung entfernen'
+      search_for_unassociated: 'nach nicht verknüpften %{what} suchen'
+      no_unassociated_found_html: 'keine nicht verknüpfte %{what} gefunden'
+    flash:
+      updated_entity: '%{what} mit ID %{id} wurde aktualisiert.'
+      deleted_entity: '%{what} mit ID %{id} wurde gelöscht.'

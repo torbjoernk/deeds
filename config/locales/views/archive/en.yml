@@ -1,0 +1,5 @@
+en:
+  views:
+    archive:
+      actions:
+        add_new_btn_title: Add new Archive

@@ -7,17 +7,17 @@ class ArchivesController < ApplicationController
   def index
     if params.has_key? :storage_id
       @storage = Storage.find(params[:storage_id])
-      add_breadcrumb Storage.model_name.human, storages_path
+      add_breadcrumb Storage.model_name.human(count: 1), storages_path
       @archives = @storage.archives
     elsif params.has_key? :source_id
       @source = Source.find(params[:source_id])
-      add_breadcrumb Source.model_name.human, sources_path
+      add_breadcrumb Source.model_name.human(count: 1), sources_path
       @archives = @source.archives
     else
       @archives = Archive.all
     end
 
-    add_breadcrumb Archive.model_name.plural.humanize, archives_path
+    add_breadcrumb Archive.model_name.human(count: 2), archives_path
 
     respond_to do |format|
       format.js   { render 'index' }
@@ -70,14 +70,16 @@ class ArchivesController < ApplicationController
       end
     else
       @archive.update!(archive_params)
-      flash[:success] = "Updated archive with ID #{@archive.id}."
+      flash[:success] = t(:updated_entity, scope: [:views, :flash],
+                          what: Archive.model_name.human(count: 1), id: @archive.id)
       redirect_to archives_path
     end
   end
 
   def create
     @archive = Archive.create!(archive_params)
-    flash[:success] = "Created new archive with ID #{@archive.id}."
+    flash[:success] = t(:created_entity, scope: [:views, :archive, :flash],
+                        what: Archive.model_name.human(count: 1), id: @archive.id)
     redirect_to archives_path
   end
 
@@ -88,6 +90,6 @@ class ArchivesController < ApplicationController
 
   private
   def archive_params
-    params.require(:archive).permit(:title, :notes)
+    params.require(:archive).permit(:title, :abbr, :notes)
   end
 end

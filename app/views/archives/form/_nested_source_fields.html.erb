@@ -6,7 +6,7 @@
                       icon('refresh', class: 'fa-fw'),
                       id: 'btn-refresh-nested-fields',
                       class: 'btn btn-sm btn-outline-default',
-                      title: 'Refresh associations',
+                      title: t(:refresh_associations, scope: [:views, :modals]),
                       data: { toggle: 'tooltip' } %>
     </span>
   </label>
@@ -22,7 +22,7 @@
                         remote: true,
                         id: "btn-deassoc-source-#{source.id}",
                         class: 'btn btn-sm btn-danger',
-                        title: 'Deassociate Source',
+                        title: t(:delete_association, scope: [:views, :modals]),
                         data: { toggle: 'tooltip' } do %>
               <%= icon('minus', class: 'fa-fw') %>
             <% end %>
@@ -38,7 +38,7 @@
                            class: 'form-control form-control-sm',
                            type: 'text',
                            list: 'free-sources',
-                           placeholder: 'Search for non-associated Source' %>
+                           placeholder: t(:search_for_unassociated, scope: [:views, :modals], what: Source.model_name.human(count: 2)) %>
             <%= content_tag :datalist, id: 'free-sources' do %>
               <% @free_sources.each do |source| %>
                 <%= content_tag :option,
@@ -60,7 +60,7 @@
             </div>
           </div>
         <% else %>
-          no unassociated <%= model_name_with_icon Source, :plural %>
+          <%= t(:no_unassociated_found_html, scope: [:views, :modals], what: model_name_with_icon(Source, :plural)) %>
         <% end %>
       </li>
     </ul>

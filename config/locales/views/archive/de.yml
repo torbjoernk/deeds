@@ -1,0 +1,12 @@
+de:
+  views:
+    archive:
+      show_linked_storages: 'verknüpfte Bibliotheken'
+      show_linked_sources: 'verknüpfte Quellen'
+      actions:
+        add_new_btn_title: 'Neues Archiv hinzufügen'
+      modals:
+        edit: '%{what} bearbeiten'
+        new: 'Neues %{what} erstellen'
+      flash:
+        created_entity: 'Neues %{what} mit ID %{id} wurde erstellt.'
