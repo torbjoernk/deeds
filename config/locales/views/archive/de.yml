@@ -9,4 +9,4 @@ de:
         edit: '%{what} bearbeiten'
         new: 'Neues %{what} erstellen'
       flash:
-        created_entity: 'Neues %{what} mit ID %{id} wurde erstellt.'
+        created_entity: 'Neues Archiv mit ID %{id} wurde erstellt.'

@@ -10,4 +10,4 @@ de:
         new: 'Neuen %{what} erstellen'
         add_new_translation: 'Neue Übersetzung hinzufügen'
       flash:
-        created_entity: 'Neuer %{what} mit ID %{id} wurde erstellt.'
+        created_entity: 'Neuer Inhalt mit ID %{id} wurde erstellt.'

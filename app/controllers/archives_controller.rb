@@ -6,11 +6,11 @@ class ArchivesController < ApplicationController
 
   def index
     if params.has_key? :storage_id
-      @storage = Storage.find(params[:storage_id])
+      @storage = Storage.find by id: params[:storage_id]
       add_breadcrumb Storage.model_name.human(count: 1), storages_path
       @archives = @storage.archives
     elsif params.has_key? :source_id
-      @source = Source.find(params[:source_id])
+      @source = Source.find_by id: params[:source_id]
       add_breadcrumb Source.model_name.human(count: 1), sources_path
       @archives = @source.archives
     else
@@ -26,7 +26,7 @@ class ArchivesController < ApplicationController
   end
 
   def show
-    @archive = Archive.find params[:id]
+    @archive = Archive.find_by id: params[:id]
     respond_to :js
   end
 
@@ -36,7 +36,7 @@ class ArchivesController < ApplicationController
   end
 
   def edit
-    @archive = Archive.find params[:id]
+    @archive = Archive.find_by id: params[:id]
     if params.has_key? :sub_action
       if params[:sub_action].to_sym == :refresh_nested
         @free_sources = Source.where('id NOT IN (?)',
@@ -55,13 +55,13 @@ class ArchivesController < ApplicationController
   end
 
   def update
-    @archive = Archive.find params[:id]
+    @archive = Archive.find_by id: params[:id]
     if params.has_key? :sub_action
       if params.has_key? :source_id
-        @source = Source.find(params[:source_id])
+        @source = Source.find_by id: params[:source_id]
         update_association_for @archive, 'sources', @source, params[:sub_action].to_sym
       elsif params.has_key? :storage_id
-        @storage = Storage.find(params[:storage_id])
+        @storage = Storage.find_by id: params[:storage_id]
         update_association_for @archive, 'storages', @storage, params[:sub_action].to_sym
       end
       respond_to do |format|
@@ -78,8 +78,7 @@ class ArchivesController < ApplicationController
 
   def create
     @archive = Archive.create!(archive_params)
-    flash[:success] = t(:created_entity, scope: [:views, :archive, :flash],
-                        what: Archive.model_name.human(count: 1), id: @archive.id)
+    flash[:success] = t(:created_entity, scope: [:views, :archive, :flash], id: @archive.id)
     redirect_to archives_path
   end
 

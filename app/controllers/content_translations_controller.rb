@@ -12,20 +12,20 @@ class ContentTranslationsController < ApplicationController
   end
 
   def show
-    @content_translation = ContentTranslation.find params[:id]
+    @content_translation = ContentTranslation.find_by id: params[:id]
     respond_to do |format|
       format.js { render 'contents/content_translations/show' }
     end
   end
 
   def edit
-    @content_translation = ContentTranslation.find params[:id]
+    @content_translation = ContentTranslation.find_by id: params[:id]
     edit_subaction 'contents/content_translations/edit', 'contents/content_translations/form/refresh'
   end
 
   def create
     @content_translation = ContentTranslation.create!(content_translation_params)
-    flash[:success] = "Created new content translation with ID #{@content_translation.id}."
+    flash[:success] = t(:created_entity, scope: [:views, :archive, :flash], id: @content_translation.id)
     respond_to do |format|
       format.js { redirect_to edit_content_path(params[:content_id],
                                                 format: :js,
@@ -35,11 +35,13 @@ class ContentTranslationsController < ApplicationController
   end
 
   def update
-    @content_translation = ContentTranslation.find params[:id]
+    @content_translation = ContentTranslation.find_by id: params[:id]
     if params.has_key? :sub_action
     else
       @content_translation.update!(content_translation_params)
-      flash[:success] = "Updated content translation with ID #{@content_translation.id}."
+      flash[:success] = t(:updated_entity, scope: [:views, :flash],
+                          what: ContentTranslation.model_name.human(count: 1),
+                          id: @content_translation.id)
       respond_to :js
     end
   end
