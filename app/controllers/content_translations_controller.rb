@@ -6,7 +6,7 @@ class ContentTranslationsController < ApplicationController
   def new
     @content_translation = ContentTranslation.new
     respond_to do |format|
-      format.html { render partial: 'content_translations/form',
+      format.html { render partial: 'contents/content_translations/form',
                            locals: { content_id: params[:content_id] } }
     end
   end
@@ -20,7 +20,7 @@ class ContentTranslationsController < ApplicationController
 
   def edit
     @content_translation = ContentTranslation.find params[:id]
-    edit_subaction 'content_translations/edit', 'content_translations/form/refresh'
+    edit_subaction 'contents/content_translations/edit', 'contents/content_translations/form/refresh'
   end
 
   def create

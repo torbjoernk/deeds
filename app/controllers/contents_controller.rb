@@ -7,7 +7,7 @@ class ContentsController < ApplicationController
   def index
     @contents = Content.all
 
-    add_breadcrumb Content.model_name.plural.humanize, :contents_path
+    add_breadcrumb Content.model_name.human(count: 2), :contents_path
 
     respond_to do |format|
       format.js   { render 'index' }
@@ -16,20 +16,20 @@ class ContentsController < ApplicationController
   end
 
   def show
-    @content = Content.find params[:id]
+    @content = Content.find_by id: params[:id]
     respond_to :js
   end
 
   def new
     @content = Content.new
     if params.has_key? :deed_id
-      @deed = Deed.find(params[:deed_id])
+      @deed = Deed.find_by id: params[:deed_id]
     end
     respond_to :js
   end
 
   def edit
-    @content = Content.find params[:id]
+    @content = Content.find_by id: params[:id]
     edit_subaction 'contents/edit', 'contents/form/refresh'
   end
 
@@ -40,10 +40,10 @@ class ContentsController < ApplicationController
   end
 
   def update
-    @content = Content.find params[:id]
+    @content = Content.find_by id: params[:id]
     if params.has_key? :sub_action
       if params.has_key? :content_translation_id
-        @content_translation = ContentTranslation.find params[:content_translation_id]
+        @content_translation = ContentTranslation.find_by id: params[:content_translation_id]
         update_association_for @content, 'translations', @content_translation,
                                params[:sub_action].to_sym
         respond_to do |format|

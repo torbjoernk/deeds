@@ -7,4 +7,5 @@ de:
     attributes:
       content_translation:
         language: Sprache
+        translation: Übersetzung
         notes: Notizen

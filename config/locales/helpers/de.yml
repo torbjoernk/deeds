@@ -6,3 +6,4 @@ de:
       create: 'Erstellen'
       update: 'Speichern'
     abort: 'Abbrechen'
+    delete: 'Löschen'

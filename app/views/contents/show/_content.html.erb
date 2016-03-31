@@ -14,10 +14,10 @@
   </div>
 </div>
 <div class="row">
-  <label class="col-md-3"><strong><%= Content.human_attribute_name :translations %></strong></label>
-  <ul class="col-md-9" id="content-content-translations-accordion"
+  <label class="col-md-3"><strong><%= ContentTranslation.model_name.human(count: 2) %></strong></label>
+  <div class="col-md-9" id="content-content-translations-accordion"
        role="tablist" aria-multiselectable="true">
     <%= render partial: 'contents/content_translations/inner_show', collection: content.translations,
                as: :content_translation %>
-  </ul>
+  </div>
 </div>

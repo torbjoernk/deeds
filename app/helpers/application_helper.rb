@@ -44,7 +44,7 @@ module ApplicationHelper
         id: "btn-#{entity.class.model_name.to_s.downcase}-delete-#{entity.id}",
         title: t(:delete_entity, scope: [:views, :actions], entity_name: entity.class.model_name.human(count: 1)),
         data: {
-            confirm: t(:delete, scope: [:helpers, :confirmation]), #'Do you really want to delete this item?',
+            confirm: t(:delete, scope: [:helpers, :confirmation]),
             toggle: 'tooltip',
             placement: 'left'
         }
