@@ -30,12 +30,12 @@
       <%= collection.storages.count %>
       <%= icon_for Storage %>
     <% end %>
-    <%= link_to sources_path(collection_id: collection.id),
+    <%= link_to documents_path(collection_id: collection.id),
                 class: 'btn btn-sm btn-secondary',
-                title: t(:show_linked_sources, scope: [:views, :collection]),
+                title: t(:show_linked_documents, scope: [:views, :collection]),
                 data: { toggle: 'tooltip' } do %>
-      <%= collection.sources.count %>
-      <%= icon_for Source %>
+      <%= collection.documents.count %>
+      <%= icon_for Document %>
     <% end %>
   </div>
 <% end %>

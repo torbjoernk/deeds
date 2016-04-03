@@ -22,13 +22,13 @@ raise 'Collection not saved' unless haa.persisted?
 
 raise 'Storage and Collection not linked' unless vest.collections.include? haa
 
-haa_r3a3_original = Source.create(
+haa_r3a3_original = Document.create(
     title: 'Urkunde, Reihe III, Nr. 3',
-    source_type: 'original',
+    document_type: 'original',
     collections: [haa]
 )
-raise 'Source not saved' unless haa_r3a3_original.persisted?
-raise 'Source and Collection not linked' unless haa.sources.include? haa_r3a3_original
+raise 'Document not saved' unless haa_r3a3_original.persisted?
+raise 'Document and Collection not linked' unless haa.documents.include? haa_r3a3_original
 
 
 dummy_content = Content.create(
@@ -50,10 +50,10 @@ haa_r3a3 = Deed.create(
     description: 'Der Abt des Klosters Knechtsteden bezeugt, dass der Prior G. und Richmodis, die verstorbene Vorsteherin des Klosters Flaesheim, von Simon von Gemen ein Landgut in Hamm erworben haben.',
     notes: 'nur eine Notiz',
     content: dummy_content,
-    sources: [haa_r3a3_original]
+    documents: [haa_r3a3_original]
 )
 raise 'Deed not saved' unless haa_r3a3.persisted?
-raise 'Deed and Source not linked' unless haa_r3a3_original.deed == haa_r3a3
+raise 'Deed and Document not linked' unless haa_r3a3_original.deed == haa_r3a3
 raise 'Deed and Content not linked' unless dummy_content.deed == haa_r3a3
 
 kloster_knechtsteden = Place.create(

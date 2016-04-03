@@ -42,18 +42,18 @@ describe Deed, type: :model do
     let(:mention1) { build :mention }
     let(:mention2) { build :mention }
 
-    specify 'many Sources' do
-      source1 = build :source, source_type: 'original'
-      source2 = build :source, source_type: 'transcript'
-      deed.sources << source1
-      deed.sources << source2
+    specify 'many Documents' do
+      document1 = build :document, document_type: 'original'
+      document2 = build :document, document_type: 'transcript'
+      deed.documents << document1
+      deed.documents << document2
       deed.save!
 
       expect(deed).to be_valid
-      expect(deed.sources).to include source1
-      expect(source1.deed).to eq deed
-      expect(deed.sources).to include source2
-      expect(source2.deed).to eq deed
+      expect(deed.documents).to include document1
+      expect(document1.deed).to eq deed
+      expect(deed.documents).to include document2
+      expect(document2.deed).to eq deed
     end
 
     specify 'one Content' do

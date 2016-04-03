@@ -272,10 +272,10 @@ feature 'On the Collection Page', type: :feature do
       end
     end
 
-    context 'and is associated to a Source', with_db: true do
+    context 'and is associated to a Document', with_db: true do
       before :each do
-        @source = create :source
-        @collection.sources << @source
+        @document = create :document
+        @collection.documents << @document
         @collection.save!
 
         visit collections_path
@@ -287,39 +287,39 @@ feature 'On the Collection Page', type: :feature do
           expect(page).to have_selector '#form-modal', visible: true
 
           within 'div#form-modal' do
-            within 'ul#associate-sources' do
-              expect(page).to have_text "#{@source.title} (#{@source.source_type})"
+            within 'ul#associate-documents' do
+              expect(page).to have_text "#{@document.title} (#{@document.document_type})"
             end
           end
         end
 
-        scenario 'then no further Sources should be associatable' do
-          within 'ul#associate-sources' do
-            expect(page).to have_text 'no unassociated Sources'
+        scenario 'then no further Documents should be associatable' do
+          within 'ul#associate-documents' do
+            expect(page).to have_text 'no unassociated Documents'
           end
         end
 
         feature 'and the User clicks on the "de-associate" button', skip: WITHOUT_AJAX do
           before :each do
             within 'div#form-modal' do
-              find(:css, "#btn-deassoc-source-#{@source.id}").click
+              find(:css, "#btn-deassoc-document-#{@document.id}").click
             end
           end
 
           scenario 'then the association is removed' do
             within 'div#form-modal' do
-              expect(page).not_to have_text @source.title
-              expect(page).not_to have_text @source.source_type
+              expect(page).not_to have_text @document.title
+              expect(page).not_to have_text @document.document_type
             end
-            expect(Collection.find_by(id: @collection.id).sources).not_to include @source
+            expect(Collection.find_by(id: @collection.id).documents).not_to include @document
           end
         end
       end
     end
 
-    context 'and a Source exists', with_db: true do
+    context 'and a Document exists', with_db: true do
       before :each do
-        @source = create :source
+        @document = create :document
       end
 
       context 'when the User clicks on the "Edit" button of the first Collection', js: true do
@@ -328,33 +328,33 @@ feature 'On the Collection Page', type: :feature do
           expect(page).to have_selector '#form-modal', visible: true
         end
 
-        scenario 'then further Sources should be associatable' do
-          within 'ul#associate-sources' do
-            expect(page).not_to have_text 'no unassociated Sources'
+        scenario 'then further Documents should be associatable' do
+          within 'ul#associate-documents' do
+            expect(page).not_to have_text 'no unassociated Documents'
           end
         end
 
-        context 'and the User enters the Sources\'s title' do
+        context 'and the User enters the Document\'s title' do
           before :each do
             within 'div#form-modal' do
-              fill_in 'assoc-source-input', with: "#{@source.title} (#{@source.source_type})"
+              fill_in 'assoc-document-input', with: "#{@document.title} (#{@document.document_type})"
             end
           end
 
           feature 'and the User clicks on the "associate" button', skip: WITHOUT_AJAX do
             before :each do
               within 'div#form-modal' do
-                find(:css, '#btn-associate-selected-source').click
+                find(:css, '#btn-associate-selected-document').click
                 expect(page).to have_css '.form-control-success'
               end
             end
 
-            scenario 'the Source is associated with the Collection' do
+            scenario 'the Document is associated with the Collection' do
               within 'div#form-modal' do
-                expect(page).to have_text "#{@source.title} (#{@source.source_type})"
-                expect(page).to have_text 'no unassociated Sources'
+                expect(page).to have_text "#{@document.title} (#{@document.document_type})"
+                expect(page).to have_text 'no unassociated Documents'
               end
-              expect(Collection.find_by(id: @collection.id).sources).to include @source
+              expect(Collection.find_by(id: @collection.id).documents).to include @document
             end
           end
         end

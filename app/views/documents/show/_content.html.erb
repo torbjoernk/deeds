@@ -1,0 +1,29 @@
+<% native ||= false %>
+<% document ||= @document %>
+
+<div class="row">
+  <label class="col-md-3"><strong><%= Document.human_attribute_name :title %></strong></label>
+  <div class="col-md-9">
+    <%= document.title %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3"><strong><%= Document.human_attribute_name :document_type %></strong></label>
+  <div class="col-md-9">
+    <%= t document.document_type, scope: [:activerecord, :attributes, :document, :document_types] %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3"><strong><%= Document.human_attribute_name :notes %></strong></label>
+  <div class="col-md-9">
+    <%= document.notes %>
+  </div>
+</div>
+<% if native %>
+  <div class="row">
+    <label class="col-md-3"><strong><%= Collection.model_name.human(count: 2) %></strong></label>
+    <ul class="col-md-9 list-group list-group-flush" id="collections-accordion" role="tablist" aria-multiselectable="true">
+      <%= render partial: 'collections/nested_show', collection: document.collections, as: :collection %>
+    </ul>
+  </div>
+<% end %>

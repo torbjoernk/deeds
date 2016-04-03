@@ -15,15 +15,9 @@
 
     <ul class="nav nav-pills nav-stacked bg-faded" role="menu">
       <li class="nav-item">
-        <%= link_to contents_path, class: "nav-link#{' active' if current_page?(controller: :contents)}" do %>
-            <%= model_name_with_icon Content, :plural %>
-            <span class="tag tag-pill tag-default pull-right"><%= Content.count %></span>
-        <% end %>
-      </li>
-      <li class="nav-item">
-        <%= link_to sources_path, class: "nav-link#{' active' if current_page?(controller: :sources)}" do %>
-            <%= model_name_with_icon Source, :plural %>
-            <span class="tag tag-pill tag-default pull-right"><%= Source.count %></span>
+        <%= link_to documents_path, class: "nav-link#{' active' if current_page?(controller: :documents)}" do %>
+            <%= model_name_with_icon Document, :plural %>
+            <span class="tag tag-pill tag-default pull-right"><%= Document.count %></span>
         <% end %>
       </li>
       <li class="nav-item">

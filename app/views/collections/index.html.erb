@@ -14,11 +14,11 @@
     </dd>
   </dl>
 <% end %>
-<% if @source %>
+<% if @document %>
   <dl class="row">
-    <dt class="col-md-2">associated with Source</dt>
+    <dt class="col-md-2">associated with Document</dt>
     <dd class="col-md-10">
-      <%= render partial: 'sources/oneline', locals: { source: @source } %>
+      <%= render partial: 'documents/oneline', locals: { document: @document } %>
     </dd>
   </dl>
 <% end %>

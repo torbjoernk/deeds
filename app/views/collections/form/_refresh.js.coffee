@@ -19,43 +19,43 @@ $ ->
         sub_action: 'refresh_nested',
       dataType: 'script',
 
-  # rich handling of adding sources
-  add_source_assoc = nested_fields_container.find('#associate-source-add')
-  source_input = add_source_assoc.find('input#assoc-source-input')
-  valid_source_inputs = <%= raw @free_sources.to_a.map { |x| "#{x.title} (#{x.source_type})" }.to_json %>
-  source_input_id_map = <%= raw @free_sources.to_a.map { |x| {"#{x.title} (#{x.source_type})" => x.id} }.reduce({}, :update).to_json %>
+  # rich handling of adding documents
+  add_document_assoc = nested_fields_container.find('#associate-document-add')
+  document_input = add_document_assoc.find('input#assoc-document-input')
+  valid_document_inputs = <%= raw @free_documents.to_a.map { |x| "#{x.title} (#{x.document_type})" }.to_json %>
+  document_input_id_map = <%= raw @free_documents.to_a.map { |x| {"#{x.title} (#{x.document_type})" => x.id} }.reduce({}, :update).to_json %>
 
-  source_input.change ->
+  document_input.change ->
     $(this).removeClass('form-control-success').removeClass('form-control-danger')
     $(this).parent().removeClass('has-success').removeClass('has-danger')
-    if $(this).prop('value') in valid_source_inputs
+    if $(this).prop('value') in valid_document_inputs
       $(this).addClass('form-control-success')
       $(this).parent().addClass('has-success')
     else
       $(this).addClass('form-control-danger')
       $(this).parent().addClass('has-danger')
 
-  add_source_assoc.find('#btn-show-selected-source-details').click ->
-    value = source_input.prop('value')
-    if value in valid_source_inputs
+  add_document_assoc.find('#btn-show-selected-document-details').click ->
+    value = document_input.prop('value')
+    if value in valid_document_inputs
       $.get
-        url: '/sources/' + source_input_id_map[value]
+        url: '/documents/' + document_input_id_map[value]
         dataType: 'script'
     else
-      alert 'no Source selected'
+      alert 'no Document selected'
 
-  add_source_assoc.find('#btn-associate-selected-source').click ->
-    value = source_input.prop('value')
-    if value in valid_source_inputs
+  add_document_assoc.find('#btn-associate-selected-document').click ->
+    value = document_input.prop('value')
+    if value in valid_document_inputs
       $.ajax
         url: '<%= collection_path(@collection.id) %>'
         type: 'PATCH'
         data:
           sub_action: 'associate'
-          source_id: source_input_id_map[value]
+          document_id: document_input_id_map[value]
         dataType: 'script'
     else
-      alert 'no Source selected'
+      alert 'no Document selected'
 
   # rich handling of adding storages
   add_storage_assoc = nested_fields_container.find('#associate-storage-add')

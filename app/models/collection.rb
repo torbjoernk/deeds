@@ -5,8 +5,8 @@ class Collection < ActiveRecord::Base
   has_many :collection_storages
   has_many :storages, through: :collection_storages
 
-  has_many :collection_sources
-  has_many :sources, through: :collection_sources
+  has_many :collection_documents
+  has_many :documents, through: :collection_documents
 
   validates :title, uniqueness: true
   validates :title, presence: true

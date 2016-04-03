@@ -21,10 +21,10 @@
 </div>
 <% if native %>
   <div class="row">
-    <label class="col-md-3"><strong><%= Source.model_name.human(count: 2) %></strong></label>
-    <% if collection.sources.count > 0 %>
-      <ul class="col-md-9 list-group list-group-flush" id="collection-sources-accordion" role="tablist" aria-multiselectable="true">
-        <%= render partial: 'sources/nested_show', collection: collection.sources, as: :source %>
+    <label class="col-md-3"><strong><%= Document.model_name.human(count: 2) %></strong></label>
+    <% if collection.documents.count > 0 %>
+      <ul class="col-md-9 list-group list-group-flush" id="collection-documents-accordion" role="tablist" aria-multiselectable="true">
+        <%= render partial: 'documents/nested_show', collection: collection.documents, as: :document %>
       </ul>
     <% else %>
       <div class="col-md-9">

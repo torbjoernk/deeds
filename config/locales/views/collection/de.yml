@@ -2,7 +2,7 @@ de:
   views:
     collection:
       show_linked_storages: 'verknüpfte Bibliotheken'
-      show_linked_sources: 'verknüpfte Quellen'
+      show_linked_documents: 'verknüpfte Dokumente'
       actions:
         add_new_btn_title: 'Neue Sammlung hinzufügen'
       modals:

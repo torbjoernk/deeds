@@ -38,22 +38,22 @@ describe CollectionsController, type: :controller do
       end
     end
 
-    describe 'filtered by associated Source', use_db: true do
-      let(:source) do
-        source = create :source
-        collection.sources << source
+    describe 'filtered by associated Document', use_db: true do
+      let(:document) do
+        document = create :document
+        collection.documents << document
         collection.save!
-        source
+        document
       end
 
       specify 'renders the index template' do
-        get :index, source_id: source.id
+        get :index, document_id: document.id
         expect(response).to render_template :index
       end
 
-      specify 'assigns @collections and @source' do
-        get :index, source_id: source.id
-        expect(assigns :source).to eq source
+      specify 'assigns @collections and @document' do
+        get :index, document_id: document.id
+        expect(assigns :document).to eq document
         expect(assigns :collections).to include collection
       end
     end
@@ -96,12 +96,12 @@ describe CollectionsController, type: :controller do
     end
 
     describe 'with :sub_action => :refresh_nested' do
-      let(:source) { create :source }
+      let(:document) { create :document }
       let(:storage) { create :storage }
 
-      it 'assigns @free_sources' do
+      it 'assigns @free_documents' do
         xhr :get, :edit, id: collection.id, sub_action: :refresh_nested
-        expect(assigns :free_sources).to include source
+        expect(assigns :free_documents).to include document
       end
 
       it 'assigns @free_storages' do
@@ -139,23 +139,23 @@ describe CollectionsController, type: :controller do
     end
 
     describe 'with :sub_action => :associate' do
-      describe 'and :source_id set' do
-        let(:source) { create :source }
+      describe 'and :document_id set' do
+        let(:document) { create :document }
 
-        describe 'to an un-associated Source' do
-          it 'associates the Source to the Collection' do
-            expect(collection.sources).not_to include source
-            xhr :patch, :update, id: collection.id, sub_action: :associate, source_id: source.id
-            expect(Collection.find_by(id: collection.id).sources).to include source
+        describe 'to an un-associated Document' do
+          it 'associates the Document to the Collection' do
+            expect(collection.documents).not_to include document
+            xhr :patch, :update, id: collection.id, sub_action: :associate, document_id: document.id
+            expect(Collection.find_by(id: collection.id).documents).to include document
           end
         end
 
-        describe 'to an already associated Source' do
+        describe 'to an already associated Document' do
           it 'raises error' do
-            collection.sources << source
-            expect(Collection.find(collection.id).sources).to include source
+            collection.documents << document
+            expect(Collection.find_by(id: collection.id).documents).to include document
             expect {
-              xhr :patch, :update, id: collection.id, sub_action: :associate, source_id: source.id
+              xhr :patch, :update, id: collection.id, sub_action: :associate, document_id: document.id
             }.to raise_error ActiveRecord::RecordInvalid
           end
         end
@@ -168,14 +168,14 @@ describe CollectionsController, type: :controller do
           it 'associates the Storage to the Collection' do
             expect(collection.storages).not_to include storage
             xhr :patch, :update, id: collection.id, sub_action: :associate, storage_id: storage.id
-            expect(Collection.find(collection.id).storages).to include storage
+            expect(Collection.find_by(id: collection.id).storages).to include storage
           end
         end
 
         describe 'to an already associated Storage' do
           it 'raises error' do
             collection.storages << storage
-            expect(Collection.find(collection.id).storages).to include storage
+            expect(Collection.find_by(id: collection.id).storages).to include storage
             expect {
               xhr :patch, :update, id: collection.id, sub_action: :associate, storage_id: storage.id
             }.to raise_error ActiveRecord::RecordInvalid
@@ -185,14 +185,14 @@ describe CollectionsController, type: :controller do
     end
 
     describe 'with :sub_action => :deassociate' do
-      describe 'and :source_id set to an associated Source' do
-        let(:source) { create :source }
+      describe 'and :document_id set to an associated Document' do
+        let(:document) { create :document }
 
         specify 'removes this association' do
-          collection.sources << source
-          expect(Collection.find(collection.id).sources).to include source
-          xhr :patch, :update, id: collection.id, sub_action: :deassociate, source_id: source.id
-          expect(Collection.find(collection.id).sources).not_to include source
+          collection.documents << document
+          expect(Collection.find_by(id: collection.id).documents).to include document
+          xhr :patch, :update, id: collection.id, sub_action: :deassociate, document_id: document.id
+          expect(Collection.find_by(id: collection.id).documents).not_to include document
         end
       end
 
@@ -201,9 +201,9 @@ describe CollectionsController, type: :controller do
 
         specify 'removes this association' do
           collection.storages << storage
-          expect(Collection.find(collection.id).storages).to include storage
+          expect(Collection.find_by(id: collection.id).storages).to include storage
           xhr :patch, :update, id: collection.id, sub_action: :deassociate, storage_id: storage.id
-          expect(Collection.find(collection.id).storages).not_to include storage
+          expect(Collection.find_by(id: collection.id).storages).not_to include storage
         end
       end
     end

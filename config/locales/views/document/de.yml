@@ -1,0 +1,10 @@
+de:
+  views:
+    document:
+      actions:
+        add_new_btn_title: 'Neues Dokument hinzufügen'
+      modals:
+        edit: '%{what} bearbeiten'
+        new: 'Neues %{what} erstellen'
+      flash:
+        created_entity: 'Neues %{what} mit ID %{id} wurde erstellt.'

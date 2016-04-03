@@ -4,7 +4,7 @@ de:
       date: Datum
       show_content: 'Inhalt anzeigen'
       show_translations: 'Übersetzungen anzeigen'
-      show_linked_sources: 'verknüpfte Quellen anzeigen'
+      show_linked_documents: 'verknüpfte Dokumente anzeigen'
       show_linked_references: 'verknüpfte Referenzen anzeigen'
       show_linked_seals: 'verknüpfte Siegel anzeigen'
       show_linked_mentions: 'verknüpfte Nennungen anzeigen'
@@ -21,7 +21,7 @@ de:
       actions:
         add_new_btn_title: 'Neue Urkunde hinzufügen'
         add_new_translation: 'Neue Übersetzung hinzufügen'
-        add_new_source: 'Neue Quelle hinzufügen'
+        add_new_document: 'Neues Dokument hinzufügen'
         add_new_reference: 'Neue Referenz hinzufügen'
         add_new_seal: 'Neues Siegel hinzufügen'
         add_new_mention: 'Neue Nennung hinzufügen'

@@ -1,0 +1,26 @@
+<%= fields_for @document do |f| %>
+  <div class="row form-group">
+    <%= f.label :title, class: 'col-md-3 form-control-label' %>
+    <div class="col-md-9">
+      <%= f.text_field :title, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="row form-group">
+    <%= f.label :document_type, class: 'col-md-3 form-control-label' %>
+    <div class="col-md-9">
+      <% document_types = Document::DOCUMENT_TYPES.map {
+          |typ| [t(typ, scope: [:activerecord, :attributes, :document, :document_types]), typ]
+      } %>
+      <%= f.select :document_type,
+                   options_for_select(document_types, @document.document_type || nil),
+                   { include_blank: true },
+                   { class: 'custom-select' } %>
+    </div>
+  </div>
+  <div class="row form-group">
+    <%= f.label :notes, class: 'col-md-3 form-control-label' %>
+    <div class="col-md-9">
+      <%= f.text_area :notes, rows: 5, class: 'form-control' %>
+    </div>
+  </div>
+<% end %>

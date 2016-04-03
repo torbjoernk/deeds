@@ -1,0 +1,21 @@
+<li class="list-group-item">
+  <div id="source-<%= document.id %>" class="list-group-item-heading" role="tab">
+    <%= icon_for Document %>
+    <%= document.title %>
+    <a class="pull-right btn btn-sm collapsed"
+       aria-controls="source-<%= document.id %>-content"
+       aria-expanded="false"
+       href="#source-<%= document.id %>-content"
+       data-parent="#collection-documents-accordion"
+       data-toggle="collapse">
+      <%= icon('search', class: 'fa-fw') %>
+    </a>
+  </div>
+  <div id="document-<%= document.id %>-content"
+       class="list-group-item-text collapse"
+       aria-labelledby="document-<%= document.id %>"
+       role="tabpanel"
+       aria-expanded="false">
+    <%= render partial: 'documents/show/content', locals: { document: document } %>
+  </div>
+</li>

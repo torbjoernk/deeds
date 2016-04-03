@@ -79,7 +79,7 @@ describe StoragesController, type: :controller do
     describe 'with :sub_action => :refresh_nested' do
       let(:collection) { create :collection }
 
-      it 'assigns @free_sources' do
+      it 'assigns @free_documents' do
         xhr :get, :edit, id: storage.id, sub_action: :refresh_nested
         expect(assigns :unassociated).to include :collections
       end

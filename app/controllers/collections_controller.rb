@@ -9,10 +9,10 @@ class CollectionsController < ApplicationController
       @storage = Storage.find_by id: params[:storage_id]
       add_breadcrumb Storage.model_name.human(count: 1), storages_path
       @collections = @storage.collections
-    elsif params.has_key? :source_id
-      @source = Source.find_by id: params[:source_id]
-      add_breadcrumb Source.model_name.human(count: 1), sources_path
-      @collections = @source.collections
+    elsif params.has_key? :document_id
+      @document = Document.find_by id: params[:document_id]
+      add_breadcrumb Document.model_name.human(count: 1), documents_path
+      @collections = @document.collections
     else
       @collections = Collection.all
     end
@@ -39,8 +39,8 @@ class CollectionsController < ApplicationController
     @collection = Collection.find_by id: params[:id]
     if params.has_key? :sub_action
       if params[:sub_action].to_sym == :refresh_nested
-        @free_sources = Source.where('id NOT IN (?)',
-                                     CollectionSource.select(:source_id).where(collection_id: @collection.id))
+        @free_documents = Document.where('id NOT IN (?)',
+                                         CollectionDocument.select(:document_id).where(collection_id: @collection.id))
         @free_storages = Storage.where('id NOT IN (?)',
                                        CollectionStorage.select(:storage_id).where(collection_id: @collection.id))
       end
@@ -57,9 +57,9 @@ class CollectionsController < ApplicationController
   def update
     @collection = Collection.find_by id: params[:id]
     if params.has_key? :sub_action
-      if params.has_key? :source_id
-        @source = Source.find_by id: params[:source_id]
-        update_association_for @collection, 'sources', @source, params[:sub_action].to_sym
+      if params.has_key? :document_id
+        @document = Document.find_by id: params[:document_id]
+        update_association_for @collection, 'documents', @document, params[:sub_action].to_sym
       elsif params.has_key? :storage_id
         @storage = Storage.find_by id: params[:storage_id]
         update_association_for @collection, 'storages', @storage, params[:sub_action].to_sym

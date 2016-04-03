@@ -11,11 +11,11 @@ describe Collection, type: :model do
     expect(storage1.title).not_to eq storage.title
     storage
   end
-  let(:source1) { build :source }
-  let(:source2) do
-    source = build :source, title: Faker::Name.title
-    expect(source1.title).not_to eq source.title
-    source
+  let(:document1) { build :document }
+  let(:document2) do
+    document = build :document, title: Faker::Name.title
+    expect(document1.title).not_to eq document.title
+    document
   end
 
   it 'has a valid factory', use_db: true do
@@ -48,14 +48,14 @@ describe Collection, type: :model do
       expect(collection.storages).to include storage1, storage2
     end
 
-    specify 'many Sources', use_db: true do
+    specify 'many Documents', use_db: true do
       collection.save!
-      collection.sources = [source1, source2]
+      collection.documents = [document1, document2]
 
       expect(collection).to be_valid
       collection.save!
 
-      expect(collection.sources).to include source1, source2
+      expect(collection.documents).to include document1, document2
     end
   end
 
@@ -98,8 +98,8 @@ describe Collection, type: :model do
           expect(collection).to be_valid
         end
 
-        specify 'Source' do
-          collection.sources = []
+        specify 'Document' do
+          collection.documents = []
           expect(collection).to be_valid
         end
       end
