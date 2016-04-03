@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'routing for Storages', type: :routing do
-  let(:archive) { create :archive }
+  let(:collection) { create :collection }
   let(:storage) { create :storage }
 
   describe 'GET' do

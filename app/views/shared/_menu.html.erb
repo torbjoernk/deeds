@@ -21,21 +21,21 @@
         <% end %>
       </li>
       <li class="nav-item">
-        <%= link_to archives_path, class: "nav-link#{' active' if current_page?(controller: :archives)}" do %>
-            <%= model_name_with_icon Archive, :plural %>
-            <span class="tag tag-pill tag-default pull-right"><%= Archive.count %></span>
+        <%= link_to sources_path, class: "nav-link#{' active' if current_page?(controller: :sources)}" do %>
+            <%= model_name_with_icon Source, :plural %>
+            <span class="tag tag-pill tag-default pull-right"><%= Source.count %></span>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to collections_path, class: "nav-link#{' active' if current_page?(controller: :collections)}" do %>
+            <%= model_name_with_icon Collection, :plural %>
+            <span class="tag tag-pill tag-default pull-right"><%= Collection.count %></span>
         <% end %>
       </li>
       <li class="nav-item">
         <%= link_to storages_path, class: "nav-link#{' active' if current_page?(controller: :storages)}" do %>
             <%= model_name_with_icon Storage, :plural %>
             <span class="tag tag-pill tag-default pull-right"><%= Storage.count %></span>
-        <% end %>
-      </li>
-      <li class="nav-item">
-        <%= link_to sources_path, class: "nav-link#{' active' if current_page?(controller: :sources)}" do %>
-            <%= model_name_with_icon Source, :plural %>
-            <span class="tag tag-pill tag-default pull-right"><%= Source.count %></span>
         <% end %>
       </li>
     </ul>

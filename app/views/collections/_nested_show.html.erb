@@ -1,0 +1,22 @@
+<li class="list-group-item">
+  <div id="collection-<%= collection.id %>" class="list-group-item-heading" role="tab">
+    <%= icon_for Collection %>
+    <%= collection.title %>
+    (<%= collection.abbr %>)
+    <a class="pull-right btn btn-sm collapsed"
+       aria-controls="collection-<%= collection.id %>-content"
+       aria-expanded="false"
+       href="#collection-<%= collection.id %>-content"
+       data-parent="#collections-accordion"
+       data-toggle="collapse">
+      <%= icon('search', class: 'fa-fw') %>
+    </a>
+  </div>
+  <div id="collection-<%= collection.id %>-content"
+       class="list-group-item-text collapse"
+       aria-labelledby="collection-<%= collection.id %>"
+       role="tabpanel"
+       aria-expanded="false">
+    <%= render partial: 'collections/show/content', locals: { collection: collection } %>
+  </div>
+</li>

@@ -1,16 +1,16 @@
 class SourcesController < ApplicationController
   include Common
   include AssociationUpdate
-  include ArchiveAssociation
+  include CollectionAssociation
 
   after_filter { flash.discard if request.xhr? }
 
   def index
-    if params.has_key? :archive_id
-      index_for_nested_archive params[:archive_id]
-      @sources = @archive.sources
+    if params.has_key? :collection_id
+      index_for_nested_collection params[:collection_id]
+      @sources = @collection.sources
     elsif params.has_key? :deed_id
-      @deed = Deed.find params[:deed_id]
+      @deed = Deed.find_by id: params[:deed_id]
       @sources = @deed.sources
       add_breadcrumb Deed.model_name.human, deeds_path
     else
@@ -26,7 +26,7 @@ class SourcesController < ApplicationController
   end
 
   def show
-    @source = Source.find params[:id]
+    @source = Source.find_by id: params[:id]
     respond_to :js
   end
 
@@ -38,7 +38,7 @@ class SourcesController < ApplicationController
   end
 
   def edit
-    @source = Source.find params[:id]
+    @source = Source.find_by id: params[:id]
     edit_subaction 'sources/edit', 'sources/form/refresh'
   end
 
@@ -49,10 +49,10 @@ class SourcesController < ApplicationController
   end
 
   def update
-    @source = Source.find params[:id]
+    @source = Source.find_by id: params[:id]
     if params.has_key? :sub_action
-      update_associated_archive_for @source,
-                                    edit_source_path(@source, sub_action: :refresh_nested)
+      update_associated_collection_for @source,
+                                       edit_source_path(@source, sub_action: :refresh_nested)
     else
       @source.update!(source_params)
       flash[:success] = "Updated source with ID #{@source.id}."
@@ -67,8 +67,8 @@ class SourcesController < ApplicationController
 
   def query_nested_collections
     {
-        archives: Archive.where('id NOT IN (?)',
-                                ArchiveSource.select(:archive_id).where(source_id: @source))
+        collections: Collection.where('id NOT IN (?)',
+                                      CollectionSource.select(:collection_id).where(source_id: @source))
     }
   end
 

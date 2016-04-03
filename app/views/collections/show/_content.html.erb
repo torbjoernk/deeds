@@ -1,0 +1,47 @@
+<% native ||= false %>
+<% collection ||= @collection %>
+
+<div class="row">
+  <label class="col-md-3"><strong><%= Collection.human_attribute_name :title %></strong></label>
+  <div class="col-md-9">
+    <%= collection.title %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3"><strong><%= Collection.human_attribute_name :abbr %></strong></label>
+  <div class="col-md-9">
+    <%= collection.abbr %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3"><strong><%= Collection.human_attribute_name :notes %></strong></label>
+  <div class="col-md-9">
+    <%= collection.notes %>
+  </div>
+</div>
+<% if native %>
+  <div class="row">
+    <label class="col-md-3"><strong><%= Source.model_name.human(count: 2) %></strong></label>
+    <% if collection.sources.count > 0 %>
+      <ul class="col-md-9 list-group list-group-flush" id="collection-sources-accordion" role="tablist" aria-multiselectable="true">
+        <%= render partial: 'sources/nested_show', collection: collection.sources, as: :source %>
+      </ul>
+    <% else %>
+      <div class="col-md-9">
+        <%= t :non_associated, scope: [:views] %>
+      </div>
+    <% end %>
+  </div>
+  <div class="row">
+    <label class="col-md-3"><strong><%= Storage.model_name.human(count: 2) %></strong></label>
+    <% if collection.storages.count > 0 %>
+      <ul class="col-md-9 list-group list-group-flush" id="collection-storages-accordion" role="tablist" aria-multiselectable="true">
+        <%= render partial: 'storages/nested_show', collection: collection.storages, as: :storage %>
+      </ul>
+    <% else %>
+      <div class="col-md-9">
+        <%= t :non_associated, scope: [:views] %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

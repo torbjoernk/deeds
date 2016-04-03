@@ -21,9 +21,9 @@
 </div>
 <% if native %>
   <div class="row">
-    <label class="col-md-3"><strong><%= Archive.model_name.human(count: 2) %></strong></label>
-    <ul class="col-md-9 list-group list-group-flush" id="archives-accordion" role="tablist" aria-multiselectable="true">
-      <%= render partial: 'archives/nested_show', collection: source.archives, as: :archive %>
+    <label class="col-md-3"><strong><%= Collection.model_name.human(count: 2) %></strong></label>
+    <ul class="col-md-9 list-group list-group-flush" id="collections-accordion" role="tablist" aria-multiselectable="true">
+      <%= render partial: 'collections/nested_show', collection: source.collections, as: :collection %>
     </ul>
   </div>
 <% end %>

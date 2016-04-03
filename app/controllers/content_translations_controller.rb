@@ -25,7 +25,7 @@ class ContentTranslationsController < ApplicationController
 
   def create
     @content_translation = ContentTranslation.create!(content_translation_params)
-    flash[:success] = t(:created_entity, scope: [:views, :archive, :flash], id: @content_translation.id)
+    flash[:success] = t(:created_entity, scope: [:views, :collection, :flash], id: @content_translation.id)
     respond_to do |format|
       format.js { redirect_to edit_content_path(params[:content_id],
                                                 format: :js,

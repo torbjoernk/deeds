@@ -6,8 +6,8 @@ class Source < ActiveRecord::Base
 
   belongs_to :deed, inverse_of: :sources
 
-  has_many :archive_sources
-  has_many :archives, through: :archive_sources
+  has_many :collection_sources
+  has_many :collections, through: :collection_sources
 
   validates :title, presence: true
   validates :title, uniqueness: { scope: :source_type }

@@ -13,25 +13,25 @@
 
 ActiveRecord::Schema.define(version: 20160201061334) do
 
-  create_table "archive_sources", force: :cascade do |t|
-    t.integer  "archive_id"
+  create_table "collection_sources", force: :cascade do |t|
+    t.integer  "collection_id"
     t.integer  "source_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
-  add_index "archive_sources", ["archive_id", "source_id"], name: "index_archive_sources_on_archive_id_and_source_id", unique: true
+  add_index "collection_sources", ["collection_id", "source_id"], name: "index_collection_sources_on_collection_id_and_source_id", unique: true
 
-  create_table "archive_storages", force: :cascade do |t|
-    t.integer  "archive_id"
+  create_table "collection_storages", force: :cascade do |t|
+    t.integer  "collection_id"
     t.integer  "storage_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
-  add_index "archive_storages", ["archive_id", "storage_id"], name: "index_archive_storages_on_archive_id_and_storage_id", unique: true
+  add_index "collection_storages", ["collection_id", "storage_id"], name: "index_collection_storages_on_collection_id_and_storage_id", unique: true
 
-  create_table "archives", force: :cascade do |t|
+  create_table "collections", force: :cascade do |t|
     t.string   "title"
     t.string   "abbr"
     t.text     "notes"
@@ -39,8 +39,8 @@ ActiveRecord::Schema.define(version: 20160201061334) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "archives", ["abbr"], name: "index_archives_on_abbr", unique: true
-  add_index "archives", ["title"], name: "index_archives_on_title", unique: true
+  add_index "collections", ["abbr"], name: "index_collections_on_abbr", unique: true
+  add_index "collections", ["title"], name: "index_collections_on_title", unique: true
 
   create_table "content_translations", force: :cascade do |t|
     t.integer  "content_id"

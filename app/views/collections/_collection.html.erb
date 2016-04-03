@@ -1,0 +1,44 @@
+<% content_for :entity_info, flush: true do %>
+  <div class="col-collection-title">
+    <%= collection.title %>
+  </div>
+  <div class="col-collection-abbr">
+    <%= collection.abbr %>
+  </div>
+<% end %>
+
+<% content_for :entity_toolbar_associations, flush: true do %>
+  <div class="btn-group btn-group-sm" role="group">
+    <% if collection.notes.nil? or collection.notes.empty? %>
+      <a class="btn btn-sm btn-outline-secondary disabled">
+        <%= icon('comment-o', class: 'fa-fw') %>
+      </a>
+    <% else %>
+      <a class="btn btn-sm btn-secondary"
+         title="<%= collection.notes %>"
+         data-toggle="tooltip">
+        <%= icon('comment-o', class: 'fa-fw') %>
+      </a>
+    <% end %>
+  </div>
+
+  <div class="btn-group btn-group-sm" role="group">
+    <%= link_to storages_path(collection_id: collection.id),
+                class: 'btn btn-sm btn-secondary',
+                title: t(:show_linked_storages, scope: [:views, :collection]),
+                data: { toggle: 'tooltip' } do %>
+      <%= collection.storages.count %>
+      <%= icon_for Storage %>
+    <% end %>
+    <%= link_to sources_path(collection_id: collection.id),
+                class: 'btn btn-sm btn-secondary',
+                title: t(:show_linked_sources, scope: [:views, :collection]),
+                data: { toggle: 'tooltip' } do %>
+      <%= collection.sources.count %>
+      <%= icon_for Source %>
+    <% end %>
+  </div>
+<% end %>
+
+<%= render partial: 'shared/index/entity',
+           locals: {entity_id: "collection-#{collection.id}", entity: collection } %>

@@ -18,22 +18,22 @@ describe SourcesController, type: :controller do
       expect(response).to render_template :index
     end
 
-    describe 'filtered by associated Archive', use_db: true do
-      let(:archive) do
-        archive = create :archive
-        archive.sources << source
-        archive.save!
-        archive
+    describe 'filtered by associated Collection', use_db: true do
+      let(:collection) do
+        collection = create :collection
+        collection.sources << source
+        collection.save!
+        collection
       end
 
       specify 'renders the index template' do
-        get :index, archive_id: archive.id
+        get :index, collection_id: collection.id
         expect(response).to render_template :index
       end
 
-      specify 'assigns @storages and @archive' do
-        get :index, archive_id: archive.id
-        expect(assigns :archive).to eq archive
+      specify 'assigns @storages and @collection' do
+        get :index, collection_id: collection.id
+        expect(assigns :collection).to eq collection
         expect(assigns :sources).to include source
       end
     end
@@ -96,11 +96,11 @@ describe SourcesController, type: :controller do
     end
 
     describe 'with :sub_action => :refresh_nested' do
-      let(:archive) { create :archive }
+      let(:collection) { create :collection }
 
       it 'assigns @free_sources' do
         xhr :get, :edit, id: source.id, sub_action: :refresh_nested
-        expect(assigns :unassociated).to include :archives
+        expect(assigns :unassociated).to include :collections
       end
 
       it 'renders the form refresh template' do
@@ -133,23 +133,23 @@ describe SourcesController, type: :controller do
     end
 
     describe 'with :sub_action => :associate' do
-      describe 'and :archive_id set' do
-        let(:archive) { create :archive }
+      describe 'and :collection_id set' do
+        let(:collection) { create :collection }
 
-        describe 'an un-associated Archive' do
-          specify 'associates the Source to the Archive' do
-            expect(Source.find(source.id).archives).not_to include archive
-            xhr :patch, :update, id: source.id, sub_action: :associate, archive_id: archive.id
-            expect(Source.find(source.id).archives).to include archive
+        describe 'an un-associated Collection' do
+          specify 'associates the Source to the Collection' do
+            expect(Source.find(source.id).collections).not_to include collection
+            xhr :patch, :update, id: source.id, sub_action: :associate, collection_id: collection.id
+            expect(Source.find(source.id).collections).to include collection
           end
         end
 
-        describe 'an already associated Archive' do
+        describe 'an already associated Collection' do
           specify 'raises error' do
-            source.archives << archive
-            expect(Source.find(source.id).archives).to include archive
+            source.collections << collection
+            expect(Source.find(source.id).collections).to include collection
             expect {
-              xhr :patch, :update, id: source.id, sub_action: :associate, archive_id: archive.id
+              xhr :patch, :update, id: source.id, sub_action: :associate, collection_id: collection.id
             }.to raise_error ActiveRecord::RecordInvalid
           end
         end
@@ -157,15 +157,15 @@ describe SourcesController, type: :controller do
     end
 
     describe 'with :sub_action => :deassociate' do
-      describe 'and :archive_id' do
-        let(:archive) { create :archive }
+      describe 'and :collection_id' do
+        let(:collection) { create :collection }
 
-        describe 'set to an associated Archive' do
+        describe 'set to an associated Collection' do
           specify 'removes this association' do
-            source.archives << archive
-            expect(Source.find(source.id).archives).to include archive
-            xhr :patch, :update, id: source.id, sub_action: :deassociate, archive_id: archive.id
-            expect(Source.find(source.id).archives).not_to include archive
+            source.collections << collection
+            expect(Source.find(source.id).collections).to include collection
+            xhr :patch, :update, id: source.id, sub_action: :deassociate, collection_id: collection.id
+            expect(Source.find(source.id).collections).not_to include collection
           end
         end
       end
