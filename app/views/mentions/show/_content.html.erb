@@ -2,7 +2,7 @@
 <% mention ||= @mention %>
 
 <div class="row">
-  <label class="col-md-3"><strong><%= Mention.human_attribute_name :deed %></strong></label>
+  <label class="col-md-3"><strong><%= Deed.model_name.human %></strong></label>
   <div class="col-md-9">
     <% if mention.deed.nil? %>
       <em class="text-muted">no Deed referenced</em>
@@ -16,7 +16,7 @@
   </div>
 </div>
 <div class="row">
-  <label class="col-md-3"><strong><%= Mention.human_attribute_name :person %></strong></label>
+  <label class="col-md-3"><strong><%= Person.model_name.human %></strong></label>
   <div class="col-md-9">
     <% if mention.person.nil? %>
       <em class="text-muted">no Person referenced</em>
@@ -30,7 +30,7 @@
   </div>
 </div>
 <div class="row">
-  <label class="col-md-3"><strong><%= Mention.human_attribute_name :place %></strong></label>
+  <label class="col-md-3"><strong><%= Place.model_name.human %></strong></label>
   <div class="col-md-9">
     <% if mention.place.nil? %>
       <em class="text-muted">no Place referenced</em>
@@ -44,7 +44,7 @@
   </div>
 </div>
 <div class="row">
-  <label class="col-md-3"><strong><%= Mention.human_attribute_name :role %></strong></label>
+  <label class="col-md-3"><strong><%= Role.model_name.human %></strong></label>
   <div class="col-md-9">
     <% if mention.role.nil? %>
       <em class="text-muted">no Role referenced</em>

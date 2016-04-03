@@ -1,5 +1,5 @@
 <li class="list-group-item">
-  <%= translation.language.humanize %>
+  <%= t translation.language, scope: [:activerecord, :attributes, :content, :languages] %>
   <span class="pull-right">
     <%= link_to_show_entity translation,
                             url=content_content_translation_path(id: translation.id,

@@ -1,0 +1,10 @@
+de:
+  views:
+    place:
+      actions:
+        add_new_btn_title: 'Neuen Ort hinzufügen'
+      modals:
+        edit: '%{what} bearbeiten'
+        new: 'Neuen %{what} erstellen'
+      flash:
+        created_entity: 'Neuer %{what} mit ID %{id} wurde erstellt.'

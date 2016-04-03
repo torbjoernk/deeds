@@ -3,7 +3,7 @@
   <%= render partial: 'shared/index/main_action_btn',
              locals: { path_to_new_entity: new_archive_path,
                        path_to_refresh: archives_path,
-                       entity_name: Archive.model_name.human } %>
+                       entity_model: Archive } %>
 </h1>
 
 <% if @storage %>

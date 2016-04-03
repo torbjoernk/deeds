@@ -1,6 +1,6 @@
 <% content_for :entity_info, flush: true do %>
   <div class="col-content-language">
-    <%= content.language.humanize %>
+    <%= t content.language, scope: [:activerecord, :attributes, :content, :languages] %>
   </div>
 <% end %>
 
@@ -21,14 +21,13 @@
 
   <div class="btn-group btn-group-sm" role="group">
     <% if content.deed.nil? %>
-      <%= link_to nil,
-                  class: 'btn btn-sm btn-outline-secondary disabled' do %>
+      <%= link_to nil, class: 'btn btn-sm btn-outline-secondary disabled' do %>
         <%= icon_for Deed %>
       <% end %>
     <% else %>
       <%= link_to deed_path(content.deed),
                   class: 'btn btn-sm btn-secondary',
-                  title: "show #{Deed.model_name.human}",
+                  title: t(:show_deed, scope: [:views, :content]),
                   data: { toggle: 'tooltip' },
                   remote: true do %>
         <%= icon_for Deed %>
@@ -36,7 +35,7 @@
     <% end %>
     <%= link_to content_path(content),
                 class: 'btn btn-sm btn-secondary',
-                title: "show #{ContentTranslation.model_name.plural.humanize}",
+                title: t(:show_translations, scope: [:views, :content]),
                 data: { toggle: 'tooltip' },
                 remote: true do %>
       <%= content.translations.count %>
@@ -46,11 +45,7 @@
 <% end %>
 
 <% content_for :entity_description, flush: true do %>
-  <% if content.content and not content.content.empty? %>
-    <%= truncate content.content, length: 200, separator: ' ' %>
-  <% else %>
-    <em class="text-muted">no content</em>
-  <% end %>
+  <%= truncate content.content, length: 200, separator: ' ' %>
 <% end %>
 
 <%= render partial: 'shared/index/entity',

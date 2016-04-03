@@ -1,19 +1,18 @@
-<li class="list-group-item">
-  <strong class="list-group-item-heading"
+<div class="card">
+  <div class="card-header"
        role="tab"
-       id="heading-translation-<%= content_translation.id %>">
-    <a data-toggle="collapse"
+       id="heading-translation-<%= content_translation.id %>"
+       data-toggle="collapse"
        data-parent="#content-content-translations-accordion"
        href="#collapse-translation-<%= content_translation.id %>"
-       aria-expanded="true"
+       aria-expanded="false"
        aria-controls="collapse-translation-<%= content_translation.id %>">
-      <%= content_translation.language.humanize %>
-    </a>
-  </strong>
-  <p id="collapse-translation-<%= content_translation.id %>"
-       class="list-group-item-text collapse"
+    <%= t content_translation.language, scope: [:activerecord, :attributes, :content, :languages] %>
+  </div>
+  <div id="collapse-translation-<%= content_translation.id %>"
+       class="card-block collapse"
        role="tabpanel"
        aria-labelledby="heading-translation-<%= content_translation.id %>">
     <%= content_translation.translation %>
-  </p>
-</li>
+  </div>
+</div>

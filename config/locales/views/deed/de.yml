@@ -1,0 +1,39 @@
+de:
+  views:
+    deed:
+      date: Datum
+      show_content: 'Inhalt anzeigen'
+      show_translations: 'Übersetzungen anzeigen'
+      show_linked_sources: 'verknüpfte Quellen anzeigen'
+      show_linked_references: 'verknüpfte Referenzen anzeigen'
+      show_linked_seals: 'verknüpfte Siegel anzeigen'
+      show_linked_mentions: 'verknüpfte Nennungen anzeigen'
+      show_linked_people: 'verknüpfte Personen anzeigen'
+      show_linked_places: 'verknüpfte Orte anzeigen'
+      show_linked_roles: 'verknüpfte Rollen anzeigen'
+      no_content: 'keine Inhalt vorhanden'
+      no_translations: 'keine Übersetzungen vorhanden'
+      no_description: 'keine Beschreibung vorhanden'
+      no_people: 'keine Personen genannt'
+      no_places: 'keine Orte genannt'
+      no_roles: 'keine Rollen genannt'
+      no_mentions: 'keine Nennungen vorhanden'
+      actions:
+        add_new_btn_title: 'Neue Urkunde hinzufügen'
+        add_new_translation: 'Neue Übersetzung hinzufügen'
+        add_new_source: 'Neue Quelle hinzufügen'
+        add_new_reference: 'Neue Referenz hinzufügen'
+        add_new_seal: 'Neues Siegel hinzufügen'
+        add_new_mention: 'Neue Nennung hinzufügen'
+        add_content: 'Neuen Inhalt zur Urkunde hinzufügen'
+        remove_content: 'Inhalt der Urkunde entfernen'
+        remove_mention: 'Nennung aus Urkunde entfernen'
+      mentions:
+        as_role: 'als'
+        for_place: 'von'
+      modals:
+        edit: '%{what} bearbeiten'
+        new: 'Neue %{what} erstellen'
+      flash:
+        created_entity: 'Neue Urkunde mit ID %{id} wurde erstellt.'
+        removed_mention: 'Nennung wurde aus Urkunde entfernt.'

@@ -12,7 +12,7 @@
         <label class="radio-inline">
           <%= radio_button 'person', 'gender', gender %>
           <%= icon(Person.icon_for_gender(gender), class: 'fa-fw') %>
-          <%= gender.humanize %>
+          <%= t(gender, scope: [:activerecord, :attributes, :person, :genders]) %>
         </label>
       </div>
     <% end %>

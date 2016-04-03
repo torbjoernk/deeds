@@ -3,9 +3,9 @@ module ApplicationHelper
     raise StandardError.new 'Only for ActiveRecord models.' unless klass <= ActiveRecord::Base
 
     if quantity == :singular
-      name = klass.model_name.human
+      name = klass.model_name.human(count: 1)
     elsif quantity == :plural
-      name = klass.model_name.plural.humanize
+      name = klass.model_name.human(count: 2)
     else
       raise StandardError.new "Quantity must be either :singular or :plural, not #{quantity}."
     end
@@ -18,7 +18,7 @@ module ApplicationHelper
     link_to url,
             class: 'btn btn-sm btn-outline-info',
             id: "btn-#{entity.class.model_name.to_s.downcase}-show-#{entity.id}",
-            title: 'Show Details',
+            title: t(:show_details, scope: [:views, :actions]),
             data: { toggle: 'tooltip', placement: 'left' },
             remote: remote do
       content_tag(:i, nil, class: 'fa fa-fw fa-search')
@@ -30,7 +30,7 @@ module ApplicationHelper
             controller: entity.class.model_name.plural,
             class: 'btn btn-sm btn-outline-primary',
             id: "btn-#{entity.class.model_name.to_s.downcase}-edit-#{entity.id}",
-            title: "Edit #{entity.class.model_name.human}",
+            title: t(:edit_entity, scope: [:views, :actions], entity_name: entity.class.model_name.human(count: 1)),
             data: { toggle: 'tooltip', placement: 'left' },
             remote: true do
       content_tag(:i, nil, class: 'fa fa-fw fa-pencil')
@@ -42,9 +42,9 @@ module ApplicationHelper
         method: :delete,
         class: 'btn btn-sm btn-outline-danger',
         id: "btn-#{entity.class.model_name.to_s.downcase}-delete-#{entity.id}",
-        title: "Delete #{entity.class.model_name.human}",
+        title: t(:delete_entity, scope: [:views, :actions], entity_name: entity.class.model_name.human(count: 1)),
         data: {
-            confirm: 'Do you really want to delete this item?',
+            confirm: t(:delete, scope: [:helpers, :confirmation]),
             toggle: 'tooltip',
             placement: 'left'
         }

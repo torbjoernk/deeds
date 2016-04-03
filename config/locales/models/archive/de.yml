@@ -1,0 +1,11 @@
+de:
+  activerecord:
+    models:
+      archive:
+        one: Archiv
+        other: Archive
+    attributes:
+      archive:
+        title: Title
+        abbr: Kürzel
+        notes: Notizen

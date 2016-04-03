@@ -23,7 +23,7 @@
     <div id="form-modal-submit" class="card-footer bg-primary">
       <div class="btn-group pull-right" role="group">
         <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" aria-label="Close">
-          Abort
+          <%= t :abort, scope: [:helpers] %>
         </button>
         <% if content_for? :form_modal_submit %>
           <%= yield :form_modal_submit %>
