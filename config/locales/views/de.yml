@@ -1,6 +1,7 @@
 de:
   views:
     non_associated: 'keine verknüpft'
+    unknown: 'unbekannt'
     actions:
       refresh_table_btn_title: 'Tabelle aktualisieren'
       show_details: 'Details anzeigen'

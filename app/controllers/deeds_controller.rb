@@ -6,7 +6,7 @@ class DeedsController < ApplicationController
   def index
     @deeds = Deed.all
 
-    add_breadcrumb Deed.model_name.plural.humanize, :deeds_path
+    add_breadcrumb Deed.model_name.human(count: 2), :deeds_path
 
     respond_to do |format|
       format.js   { render 'index' }
@@ -18,7 +18,7 @@ class DeedsController < ApplicationController
     @deed = Deed.find params[:id]
     respond_to do |format|
       format.html {
-        add_breadcrumb Deed.model_name.plural.humanize, :deeds_path
+        add_breadcrumb Deed.model_name.human(count: 2), :deeds_path
         add_breadcrumb @deed.title, deed_path(@deed)
         render 'deeds/show'
       }
@@ -34,35 +34,37 @@ class DeedsController < ApplicationController
   end
 
   def edit
-    @deed = Deed.find params[:id]
+    @deed = Deed.find_by id: params[:id]
     edit_subaction 'deeds/edit', 'deeds/form/refresh'
   end
 
   def create
     @deed = Deed.create!(deed_params)
-    flash[:success] = "Created new deed with ID #{@deed.id}"
+    flash[:success] = t(:created_entity, scope: [:views, :content, :flash], id: @deed.id)
     redirect_to deeds_path
   end
 
   def update
-    @deed = Deed.find params[:id]
+    @deed = Deed.find_by id: params[:id]
     if params.has_key? :sub_action
       case params[:sub_action].to_sym
         when :deassoc_content
-          @content = Content.find params[:content_id]
+          @content = Content.find_by id: params[:content_id]
           @deed.update!(content: nil)
-          flash[:success] = "Updated deed with ID #{@deed.id}."
+          flash[:success] = t(:updated_entity, scope: [:views, :flash],
+                              what: Deed.model_name.human(count: 1), id: @deed.id)
         when :remove_mention
-          @mention = Mention.find params[:mention_id]
+          @mention = Mention.find_by id: params[:mention_id]
           @deed.mentions.delete @mention
           @deed.save!
           @mention.delete
-          flash[:success] = "Deleted mentioning '#{@mention.to_s}'."
+          flash[:success] = t(:removed_mention, scope: [:views, :deed, :flash])
       end
       redirect_to deed_path(@deed), format: 'html'
     else
       @deed.update!(deed_params)
-      flash[:success] = "Updated deed with ID #{@deed.id}."
+      flash[:success] = t(:updated_entity, scope: [:views, :flash],
+                          what: Deed.model_name.human(count: 1), id: @deed.id)
       redirect_to deeds_path
     end
   end
