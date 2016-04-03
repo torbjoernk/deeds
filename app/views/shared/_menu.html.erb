@@ -12,53 +12,59 @@
       <%= model_name_with_icon Deed, :plural %>
       <span class="tag tag-pill tag-default pull-right"><%= Deed.count %></span>
     <% end %>
-  </li>
-  <li class="nav-item">
-    <%= link_to contents_path, class: "nav-link#{' active' if current_page?(controller: :contents)}" do %>
-      <%= model_name_with_icon Content, :plural %>
-      <span class="tag tag-pill tag-default pull-right"><%= Content.count %></span>
-    <% end %>
-  </li>
-  <li class="nav-item">
-    <%= link_to archives_path, class: "nav-link#{' active' if current_page?(controller: :archives)}" do %>
-      <%= model_name_with_icon Archive, :plural %>
-      <span class="tag tag-pill tag-default pull-right"><%= Archive.count %></span>
-    <% end %>
-  </li>
-  <li class="nav-item">
-    <%= link_to storages_path, class: "nav-link#{' active' if current_page?(controller: :storages)}" do %>
-      <%= model_name_with_icon Storage, :plural %>
-      <span class="tag tag-pill tag-default pull-right"><%= Storage.count %></span>
-    <% end %>
-  </li>
-  <li class="nav-item">
-    <%= link_to sources_path, class: "nav-link#{' active' if current_page?(controller: :sources)}" do %>
-      <%= model_name_with_icon Source, :plural %>
-      <span class="tag tag-pill tag-default pull-right"><%= Source.count %></span>
-    <% end %>
-  </li>
-  <li class="nav-item">
-    <%= link_to places_path, class: "nav-link#{' active' if current_page?(controller: :places)}" do %>
-      <%= model_name_with_icon Place, :plural %>
-      <span class="tag tag-pill tag-default pull-right"><%= Place.count %></span>
-    <% end %>
-  </li>
-  <li class="nav-item">
-    <%= link_to people_path, class: "nav-link#{' active' if current_page?(controller: :people)}" do %>
-      <%= model_name_with_icon Person, :plural %>
-      <span class="tag tag-pill tag-default pull-right"><%= Person.count %></span>
-    <% end %>
-  </li>
-  <li class="nav-item">
-    <%= link_to roles_path, class: "nav-link#{' active' if current_page?(controller: :roles)}" do %>
-      <%= model_name_with_icon Role, :plural %>
-      <span class="tag tag-pill tag-default pull-right"><%= Role.count %></span>
-    <% end %>
+
+    <ul class="nav nav-pills nav-stacked bg-faded" role="menu">
+      <li class="nav-item">
+        <%= link_to contents_path, class: "nav-link#{' active' if current_page?(controller: :contents)}" do %>
+            <%= model_name_with_icon Content, :plural %>
+            <span class="tag tag-pill tag-default pull-right"><%= Content.count %></span>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to archives_path, class: "nav-link#{' active' if current_page?(controller: :archives)}" do %>
+            <%= model_name_with_icon Archive, :plural %>
+            <span class="tag tag-pill tag-default pull-right"><%= Archive.count %></span>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to storages_path, class: "nav-link#{' active' if current_page?(controller: :storages)}" do %>
+            <%= model_name_with_icon Storage, :plural %>
+            <span class="tag tag-pill tag-default pull-right"><%= Storage.count %></span>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to sources_path, class: "nav-link#{' active' if current_page?(controller: :sources)}" do %>
+            <%= model_name_with_icon Source, :plural %>
+            <span class="tag tag-pill tag-default pull-right"><%= Source.count %></span>
+        <% end %>
+      </li>
+    </ul>
   </li>
   <li class="nav-item">
     <%= link_to mentions_path, class: "nav-link#{' active' if current_page?(controller: :mentions)}" do %>
-      <%= model_name_with_icon Mention, :plural %>
-      <span class="tag tag-pill tag-default pull-right"><%= Mention.count %></span>
+        <%= model_name_with_icon Mention, :plural %>
+        <span class="tag tag-pill tag-default pull-right"><%= Mention.count %></span>
     <% end %>
+
+    <ul class="nav nav-pills nav-stacked bg-faded" role="menu">
+      <li class="nav-item">
+        <%= link_to places_path, class: "nav-link#{' active' if current_page?(controller: :places)}" do %>
+            <%= model_name_with_icon Place, :plural %>
+            <span class="tag tag-pill tag-default pull-right"><%= Place.count %></span>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to people_path, class: "nav-link#{' active' if current_page?(controller: :people)}" do %>
+            <%= model_name_with_icon Person, :plural %>
+            <span class="tag tag-pill tag-default pull-right"><%= Person.count %></span>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to roles_path, class: "nav-link#{' active' if current_page?(controller: :roles)}" do %>
+            <%= model_name_with_icon Role, :plural %>
+            <span class="tag tag-pill tag-default pull-right"><%= Role.count %></span>
+        <% end %>
+      </li>
+    </ul>
   </li>
 </ul>
