@@ -6,7 +6,7 @@
                       icon('refresh', class: 'fa-fw'),
                       id: 'btn-refresh-nested-fields',
                       class: 'btn btn-sm btn-outline-default',
-                      title: t(:refresh_associations, scope: [:views, :modals]),
+                      title: t('views.modals.refresh_associations'),
                       data: { toggle: 'tooltip' } %>
     </span>
   </label>
@@ -22,7 +22,8 @@
                         remote: true,
                         id: "btn-deassoc-collection-#{collection.id}",
                         class: 'btn btn-sm btn-danger',
-                        title: t(:deassociate_collection, scope: [:views, :document, :modals]),
+                        title: t('views.modals.remove_association',
+                                 what: Collection.model_name.human(count: 1)),
                         data: { toggle: 'tooltip' } do %>
               <%= icon('minus', class: 'fa-fw') %>
             <% end %>
@@ -38,7 +39,8 @@
                            class: 'form-control form-control-sm',
                            type: 'text',
                            list: 'free-collections',
-                           placeholder: t(:search_collections, scope: [:views, :document, :modals]) %>
+                           placeholder: t('views.modals.search_for_unassociated',
+                                          what: Collection.model_name.human(count: 2)) %>
             <%= content_tag :datalist, id: 'free-collections' do %>
               <% @unassociated[:collections].each do |collection| %>
                 <%= content_tag :option, collection.title, data: {'collection-id': collection.id } %>
@@ -58,7 +60,8 @@
             </div>
           </div>
         <% else %>
-          <%= t :no_unassociated_found_html, scope: [:views, :modals], what: Collection.model_name.human %>
+          <%= t('views.modals.no_unassociated_found_html',
+                what: Collection.model_name.human(count: 2)) %>
         <% end %>
       </li>
     </ul>

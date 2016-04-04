@@ -1,8 +1,7 @@
 de:
   views:
     collection:
-      show_linked_storages: 'verknüpfte Bibliotheken'
-      show_linked_documents: 'verknüpfte Dokumente'
+      none_selected: "keine Sammlung ausgewählt"
       actions:
         add_new_btn_title: 'Neue Sammlung hinzufügen'
       modals:

@@ -1,1 +1,4 @@
 en:
+  views:
+    storage:
+      none_selected: "no Storage selected"

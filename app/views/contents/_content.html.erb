@@ -27,7 +27,7 @@
     <% else %>
       <%= link_to deed_path(content.deed),
                   class: 'btn btn-sm btn-secondary',
-                  title: t(:show_deed, scope: [:views, :content]),
+                  title: t('views.show_linked', what: Deed.model_name.human(count: 2)),
                   data: { toggle: 'tooltip' },
                   remote: true do %>
         <%= icon_for Deed %>
@@ -35,7 +35,7 @@
     <% end %>
     <%= link_to content_path(content),
                 class: 'btn btn-sm btn-secondary',
-                title: t(:show_translations, scope: [:views, :content]),
+                title: t('views.show_linked', what: ContentTranslation.model_name.human(count: 2)),
                 data: { toggle: 'tooltip' },
                 remote: true do %>
       <%= content.translations.count %>

@@ -1,1 +1,10 @@
 en:
+  views:
+    mention:
+      as_role: "as"
+      at_place: "at"
+      in_deed: "in"
+      no_deed_referenced: "no Deed referenced"
+      no_person_referenced: "no Person referenced"
+      no_place_referenced: "no Place referenced"
+      no_role_referenced: "no Role referenced"

@@ -3,3 +3,17 @@ en:
     deed:
       flash:
         removed_mention: "Removed Mention from Deed."
+      actions:
+        add_new_document: "add new Document"
+        add_new_reference: "add new Reference"
+        add_new_seal: "add new Seal"
+        add_new_mention: "add new Mention"
+        remove_mention: "remove Mention"
+        add_content: "add Content"
+        remove_content: "remove Content"
+      no_documents: "no Documents"
+      no_people: "no People"
+      no_places: "no Places"
+      no_content: "no Content"
+      no_roles: "no Roles"
+      no_mentions: "no Mentions"

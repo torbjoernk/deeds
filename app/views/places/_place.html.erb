@@ -20,30 +20,30 @@
   </div>
 
   <div class="btn-group btn-group-sm" role="group">
-    <%= link_to mentions_path(person_id: place.id),
+    <%= link_to mentions_path(place_id: place.id),
                 class: 'btn btn-sm btn-secondary',
-                title: t(:show_linked_mentions, scope: [:views, :place]),
+                title: t('views.show_linked', what: Mention.model_name.human(count: 2)),
                 data: { toggle: 'tooltip' } do %>
       <%= place.mentions.count %>
       <%= icon_for Mention %>
     <% end %>
-    <%= link_to people_path(person_id: place.id),
+    <%= link_to people_path(place_id: place.id),
                 class: 'btn btn-sm btn-secondary',
-                title: t(:show_linked_people, scope: [:views, :place]),
+                title: t('views.show_linked', what: Person.model_name.human(count: 2)),
                 data: { toggle: 'tooltip' } do %>
       <%= place.mentioned_people.length %>
       <%= icon_for Person %>
     <% end %>
-    <%= link_to roles_path(person_id: place.id),
+    <%= link_to roles_path(place_id: place.id),
                 class: 'btn btn-sm btn-secondary',
-                title: t(:show_linked_roles, scope: [:views, :place]),
+                title: t('views.show_linked', what: Role.model_name.human(count: 2)),
                 data: { toggle: 'tooltip' } do %>
       <%= place.mentioned_roles.length %>
       <%= icon_for Role %>
     <% end %>
-    <%= link_to deeds_path(person_id: place.id),
+    <%= link_to deeds_path(place_id: place.id),
                 class: 'btn btn-sm btn-secondary',
-                title: t(:show_linked_deeds, scope: [:views, :place]),
+                title: t('views.show_linked', what: Deed.model_name.human(count: 2)),
                 data: { toggle: 'tooltip' } do %>
       <%= place.mentioned_deeds.length %>
       <%= icon_for Deed %>

@@ -8,7 +8,7 @@
 
 <% if @storage %>
   <dl class="row">
-    <dt class="col-md-2"><%= t :linked_with, scope: [:views], what: Storage.model_name.human %></dt>
+    <dt class="col-md-2"><%= t('views.linked_with', what: Storage.model_name.human) %></dt>
     <dd class="col-md-10">
       <%= render partial: 'storages/oneline', locals: { storage: @storage } %>
     </dd>
@@ -16,7 +16,7 @@
 <% end %>
 <% if @document %>
   <dl class="row">
-    <dt class="col-md-2"><%= t :linked_with, scope: [:views], what: Document.model_name.human %></dt>
+    <dt class="col-md-2"><%= t('views.linked_with', what: Document.model_name.human) %></dt>
     <dd class="col-md-10">
       <%= render partial: 'documents/oneline', locals: { document: @document } %>
     </dd>

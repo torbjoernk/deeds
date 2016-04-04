@@ -19,7 +19,7 @@ $ ->
 
   <% unless @deed.content.nil? %>
   nested_fields_container.find('#btn-deassoc-content').click ->
-    if confirm 'Do you really want to de-associate the Content?'
+    if confirm '<%= t('helpers.confirmation.delete') %>'
       $.ajax
         url: '<%= deed_path(@deed.id) %>',
         type: 'PATCH',

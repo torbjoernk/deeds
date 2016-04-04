@@ -40,7 +40,7 @@ $ ->
         url: '/collections/' + input_id_map[value]
         dataType: 'script'
     else
-      alert <%= t :no_collection_selected, scope: [:views, :document, :modals] %>
+      alert <%= t('views.collection.none_selected') %>
 
   add_collection_assoc.find('#btn-associate-selected-collection').click ->
     value = collection_input.prop('value')
@@ -53,7 +53,7 @@ $ ->
           collection_id: input_id_map[value]
         dataType: 'script'
     else
-      alert <%= t :no_collection_selected, scope: [:views, :document, :modals] %>
+      alert <%= t('views.collection.none_selected') %>
 
 
   # reload tooltips

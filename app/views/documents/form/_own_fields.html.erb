@@ -9,7 +9,7 @@
     <%= f.label :document_type, class: 'col-md-3 form-control-label' %>
     <div class="col-md-9">
       <% document_types = Document::DOCUMENT_TYPES.map {
-          |typ| [t(typ, scope: [:activerecord, :attributes, :document, :document_types]), typ]
+          |typ| [t(typ, scope: 'activerecord.attributes.document.document_types'), typ]
       } %>
       <%= f.select :document_type,
                    options_for_select(document_types, @document.document_type || nil),

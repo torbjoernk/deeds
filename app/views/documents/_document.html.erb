@@ -3,7 +3,7 @@
     <%= document.title %>
   </div>
   <div class="col-document-type">
-    <%= t document.document_type, scope: [:activemodel, :attributes, :document, :document_types] %>
+    <%= t(document.document_type, scope: 'activemodel.attributes.document.document_types') %>
   </div>
 <% end %>
 
@@ -25,7 +25,7 @@
   <div class="btn-group btn-group-sm" role="group">
     <%= link_to collections_path(document_id: document.id),
                 class: 'btn btn-sm btn-secondary',
-                title: t(:show_linked_collections, scope: [:views, :document]),
+                title: t('views.show_linked', what: Collection.model_name.human(count: 2)),
                 data: { toggle: 'tooltip' } do %>
       <%= document.collections.count %>
       <%= icon_for Collection %>
@@ -34,4 +34,4 @@
 <% end %>
 
 <%= render partial: 'shared/index/entity',
-           locals: {entity_id: "document-#{document.id}", entity: document } %>
+           locals: { entity_id: "document-#{document.id}", entity: document } %>

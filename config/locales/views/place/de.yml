@@ -1,10 +1,7 @@
 de:
   views:
     place:
-      show_linked_mentions: 'verknüpfte Nennungen'
-      show_linked_people: 'verknüpfte Personen'
-      show_linked_roles: 'verknüpfte Rollen'
-      show_linked_deeds: 'verknüpfte Urkunden'
+      none_selected: "kein Ort ausgewählt"
       actions:
         add_new_btn_title: 'Neuen Ort hinzufügen'
       modals:

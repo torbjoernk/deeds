@@ -1,1 +1,6 @@
 en:
+  views:
+    content:
+      modals:
+        add_new_translation: "add new Translation"
+      no_translations: "no Translations"

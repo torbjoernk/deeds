@@ -4,6 +4,7 @@ de:
     unknown: 'unbekannt'
     no_notes: 'keine Notizen'
     linked_with: 'verknüpft mit %{what}'
+    show_linked: "verknüpfte %{what} anzeigen"
     actions:
       refresh_table_btn_title: 'Tabelle aktualisieren'
       show_details: 'Details anzeigen'
@@ -15,7 +16,11 @@ de:
       delete_association: 'Verknüpfung entfernen'
       search_for_unassociated: 'nach nicht verknüpften %{what} suchen'
       no_unassociated_found_html: 'keine nicht verknüpfte %{what} gefunden'
+      unsaved: "nicht gespeichert"
+      remove_association: "Verknüpfung mit %{what} entfernen"
     flash:
       created_entity: '%{what} mit ID %{id} erfolgreich erstellt.'
       updated_entity: '%{what} mit ID %{id} erfolgreich aktualisiert.'
       deleted_entity: '%{what} mit ID %{id} erfolgreich gelöscht.'
+    date: "Datum"
+    no_description: "keine Beschreibung"

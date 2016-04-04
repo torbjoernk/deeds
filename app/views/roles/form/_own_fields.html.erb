@@ -8,7 +8,9 @@
   <div class="row form-group">
     <%= f.label :referring, class: 'col-md-3 form-control-label' %>
     <div class="col-md-9">
-      <% reffers = Role::REFERS_TO.map { |ref| [t(ref, scope: [:activerecord, :attributes, :role, :refers_to]), ref] } %>
+      <% reffers = Role::REFERS_TO.map {
+          |ref| [t(ref, scope: 'activerecord.attributes.role.refers_to'), ref]
+      } %>
       <%= f.select :referring,
                    options_for_select(reffers, @role.referring),
                    {},

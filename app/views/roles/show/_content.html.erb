@@ -18,14 +18,14 @@
       <% when 'place' %>
         <%= icon_for Place %>
     <% end %>
-    <%= t role.referring, scope: [:activerecord, :attributes, :role, :refers_to] %>
+    <%= t(role.referring, scope: 'activerecord.attributes.role.refers_to') %>
   </div>
 </div>
 <div class="row">
   <label class="col-md-3"><strong><%= Role.human_attribute_name :notes %></strong></label>
   <div class="col-md-9">
     <% if role.notes.nil? or role.notes.empty? %>
-      <em class="small text-muted"><%= t :no_notes, scope: [:views] %></em>
+      <em class="small text-muted"><%= t('views.no_notes') %></em>
     <% else %>
       <%= role.notes %>
     <% end %>

@@ -1,10 +1,7 @@
 de:
   views:
     role:
-      show_linked_mentions: 'verknüpfte Nennungen'
-      show_linked_people: 'verknüpfte Personen'
-      show_linked_places: 'verknüpfte Orte'
-      show_linked_deeds: 'verknüpfte Urkunden'
+      none_selected: "keine Rolle ausgewählt"
       actions:
         add_new_btn_title: 'Neue Rolle hinzufügen'
       modals:

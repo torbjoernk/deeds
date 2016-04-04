@@ -22,7 +22,7 @@
   <div class="btn-group btn-group-sm" role="group">
     <%= link_to collections_path(storage_id: storage.id),
                 class: 'btn btn-sm btn-secondary',
-                title: t(:show_linked_collections, scope: [:views, :storage]),
+                title: t('views.show_linked', what: Collection.model_name.human(count: 2)),
                 data: { toggle: 'tooltip' } do %>
       <%= storage.collections.count %>
       <%= icon_for Collection %>

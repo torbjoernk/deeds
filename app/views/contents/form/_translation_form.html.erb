@@ -4,8 +4,12 @@
     <%= t_f.label :language, class: 'col-md-3 form-control-label' %>
     <div class="col-md-7">
       <%= t_f.select :language,
-                     options_for_select(Content::LANGUAGES.map { |e| e.humanize },
-                                        (t_f.object.language ? t_f.object.language.humanize : nil)),
+                     options_for_select(
+                         Content::LANGUAGES.map {
+                             |e| [t(e, scope: 'activerecord.attributes.content.languages'), e]
+                         },
+                         (t_f.object.language ? t_f.object.language.humanize : nil)
+                     ),
                      {},
                      { class: 'form-control' } %>
     </div>

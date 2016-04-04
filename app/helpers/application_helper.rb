@@ -18,7 +18,7 @@ module ApplicationHelper
     link_to url,
             class: 'btn btn-sm btn-outline-info',
             id: "btn-#{entity.class.model_name.to_s.downcase}-show-#{entity.id}",
-            title: t(:show_details, scope: [:views, :actions]),
+            title: t('views.actions.show_details'),
             data: { toggle: 'tooltip', placement: 'left' },
             remote: remote do
       content_tag(:i, nil, class: 'fa fa-fw fa-search')
@@ -30,7 +30,8 @@ module ApplicationHelper
             controller: entity.class.model_name.plural,
             class: 'btn btn-sm btn-outline-primary',
             id: "btn-#{entity.class.model_name.to_s.downcase}-edit-#{entity.id}",
-            title: t(:edit_entity, scope: [:views, :actions], entity_name: entity.class.model_name.human(count: 1)),
+            title: t('views.actions.edit_entity',
+                     entity_name: entity.class.model_name.human(count: 1)),
             data: { toggle: 'tooltip', placement: 'left' },
             remote: true do
       content_tag(:i, nil, class: 'fa fa-fw fa-pencil')
@@ -42,9 +43,10 @@ module ApplicationHelper
         method: :delete,
         class: 'btn btn-sm btn-outline-danger',
         id: "btn-#{entity.class.model_name.to_s.downcase}-delete-#{entity.id}",
-        title: t(:delete_entity, scope: [:views, :actions], entity_name: entity.class.model_name.human(count: 1)),
+        title: t('views.actions.delete_entity',
+                 entity_name: entity.class.model_name.human(count: 1)),
         data: {
-            confirm: t(:delete, scope: [:helpers, :confirmation]),
+            confirm: t('helpers.confirmation.delete'),
             toggle: 'tooltip',
             placement: 'left'
         }

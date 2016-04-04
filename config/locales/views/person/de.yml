@@ -1,10 +1,7 @@
 de:
   views:
     person:
-      show_linked_mentions: 'verknüpfte Nennungen'
-      show_linked_places: 'verknüpfte Orte'
-      show_linked_roles: 'verknüpfte Rollen'
-      show_linked_deeds: 'verknüpfte Urkunden'
+      none_selected: "keine Person ausgewählt"
       actions:
         add_new_btn_title: 'Neue Person hinzufügen'
       modals:

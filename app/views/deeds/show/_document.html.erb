@@ -1,7 +1,7 @@
 <li class="list-group-item">
   <%= document.title %>
   &mdash;
-  <%= document.document_type.humanize %>
+  <%= t(document.document_type, scope: 'activerecord.document.attributes.document_types') %>
   <span class="pull-right">
     <%= link_to_show_entity document %>
   </span>

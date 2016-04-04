@@ -8,7 +8,7 @@
         <%= link_to edit_deed_path(@deed),
                     class: 'btn btn-outline-primary',
                     id: "btn-deed-edit-#{@deed.id}",
-                    title: t(:edit_entity, scope: [:views, :actions],
+                    title: t('views.actions.edit_entity',
                              entity_name: Deed.model_name.human(count: 1)),
                     data: { toggle: 'tooltip', placement: 'left' },
                     remote: true do
@@ -22,7 +22,7 @@
     <div class="col-md-4">
       <div class="card">
         <div class="card-header">
-          <%= t :date, scope: [:views, :deed] %>
+          <%= t('views.date') %>
         </div>
         <div class="card-block">
           <div class="row">
@@ -32,7 +32,7 @@
                 <%= @deed.year %>
               <% else %>
                 <em class="text-muted">
-                  <%= t(:unknown, scope: [:views]) %>
+                  <%= t('views.unknown') %>
                 </em>
               <% end %>
             </div>
@@ -44,7 +44,7 @@
                 <%= @deed.month %>
               <% else %>
                 <em class="text-muted">
-                  <%= t(:unknown, scope: [:views]) %>
+                  <%= t('views.unknown') %>
                 </em>
               <% end %>
             </div>
@@ -56,7 +56,7 @@
                 <%= @deed.day %>
               <% else %>
                 <em class="text-muted">
-                  <%= t(:unknown, scope: [:views]) %>
+                  <%= t('views.unknown') %>
                 </em>
               <% end %>
             </div>
@@ -74,9 +74,7 @@
           <% if @deed.description %>
             <%= @deed.description %>
           <% else %>
-            <em class="small text-muted">
-              <%= t(:no_description, scope: [:views, :deed]) %>
-            </em>
+            <em class="text-muted"><%= t('views.no_description') %></em>
           <% end %>
         </div>
       </div>
@@ -89,7 +87,11 @@
           <%= Deed.human_attribute_name :notes %>
         </div>
         <div class="card-block">
-          <%= @deed.notes %>
+          <% if @deed.notes %>
+            <%= @deed.notes %>
+          <% else %>
+            <em class="text-muted"><%= t('views.no_notes') %></em>
+          <% end %>
         </div>
       </div>
     </div>
@@ -107,10 +109,10 @@
           <li class="list-group-item">
             <% if @deed.content.nil? %>
               <em class="small text-muted">
-                <%= t :no_content, scope: [:views, :deed] %>
+                <%= t('views.deed.no_content') %>
               </em>
             <% else %>
-              <%= t @deed.content.language, scope: [:activerecord, :attributes, :content, :languages] %>
+              <%= t(@deed.content.language, scope: 'activerecord.attributes.content.languages') %>
               <span class="pull-right">
                 <%= link_to_show_entity @deed.content %>
               </span>
@@ -128,7 +130,7 @@
             <%=  link_to nil,#new_content_translation_path
                  class: 'btn btn-sm btn-primary',
                  id: 'btn-new-content-translation',
-                 title: t(:add_new_translation, scope: [:views, :deed, :actions]),
+                 title: t('views.content.modals.add_new_translation'),
                  data: { toggle: 'tooltip', 'turbolinks': false, placement: 'left' },
                  remote: true do -%>
               <%= icon('plus', class: 'fa-fw') %>
@@ -140,7 +142,7 @@
             <%= render partial: 'deeds/show/translation', collection: @deed.translations %>
           <% else %>
             <li class="list-group-item text-muted">
-              <%= t(:no_translations, scope: [:views, :deed]) %>
+              <%= t('views.content.no_translations') %>
             </li>
           <% end %>
         </ul>
@@ -159,7 +161,7 @@
             <%=  link_to new_document_path(deed_id: @deed.id),
                          class: 'btn btn-sm btn-primary',
                          id: 'btn-new-document',
-                         title: t(:add_new_document, scope: [:views, :deed, :actions]),
+                         title: t('views.deed.actions.add_new_document'),
                          data: { toggle: 'tooltip', 'turbolinks': false, placement: 'left' },
                          remote: true do -%>
               <%= icon('plus', class: 'fa-fw') %>
@@ -170,7 +172,7 @@
           <% if @deed.documents.count > 0 %>
             <%= render partial: 'deeds/show/document', collection: @deed.documents %>
           <% else %>
-            <li class="list-group-item text-muted">no Documents</li>
+            <li class="list-group-item text-muted"><%= t('views.deed.no_documents') %></li>
           <% end %>
         </ul>
       </div>
@@ -185,7 +187,7 @@
             <%=  link_to nil,#new_reference_path(deed_id: @deed.id),
                          class: 'btn btn-sm btn-primary',
                          id: 'btn-new-document',
-                         title: t(:add_new_reference, scope: [:views, :deed, :actions]),
+                         title: t('views.deed.actions.add_new_reference'),
                          data: { toggle: 'tooltip', 'turbolinks': false, placement: 'left' },
                          remote: true do -%>
               <%= icon('plus', class: 'fa-fw') %>
@@ -206,7 +208,7 @@
             <%=  link_to nil,#new_seal_path(deed_id: @deed.id),
                          class: 'btn btn-sm btn-primary',
                          id: 'btn-new-document',
-                         title: t(:add_new_seal, scope: [:views, :deed, :actions]),
+                         title: t('views.deed.actions.add_new_seal'),
                          data: { toggle: 'tooltip', 'turbolinks': false, placement: 'left' },
                          remote: true do -%>
               <%= icon('plus', class: 'fa-fw') %>
@@ -232,7 +234,7 @@
             <%= render partial: 'deeds/show/person', collection: @deed.mentioned_people %>
           <% else %>
             <li class="list-group-item text-muted">
-              <%= t(:no_people, scope: [:views, :deed]) %>
+              <%= t('views.deed.no_people') %>
             </li>
           <% end %>
         </ul>
@@ -249,7 +251,7 @@
             <%= render partial: 'deeds/show/place', collection: @deed.mentioned_places %>
           <% else %>
             <li class="list-group-item text-muted">
-              <%= t(:no_places, scope: [:views, :deed]) %>
+              <%= t('views.deed.no_places') %>
             </li>
           <% end %>
         </ul>
@@ -266,7 +268,7 @@
             <%= render partial: 'deeds/show/role', collection: @deed.mentioned_roles %>
           <% else %>
             <li class="list-group-item text-muted">
-              <%= t(:no_roles, scope: [:views, :deed]) %>
+              <%= t('views.deed.no_roles') %>
             </li>
           <% end %>
         </ul>
@@ -285,7 +287,7 @@
             <%=  link_to new_mention_path(deed_id: @deed.id),
                          class: 'btn btn-sm btn-primary',
                          id: 'btn-new-document',
-                         title: t(:add_new_mention, scope: [:views, :deed, :actions]),
+                         title: t('views.deed.actions.add_new_mention'),
                          data: { toggle: 'tooltip', 'turbolinks': false, placement: 'left' },
                          remote: true do -%>
               <%= icon('plus', class: 'fa-fw') %>
@@ -297,7 +299,7 @@
             <%= render partial: 'deeds/show/mention', collection: @deed.mentions %>
           <% else %>
             <li class="list-group-item text-muted">
-              <%= t(:no_mentions, scope: [:views, :deed]) %>
+              <%= t('views.deed.no_mentions') %>
             </li>
           <% end %>
         </ul>

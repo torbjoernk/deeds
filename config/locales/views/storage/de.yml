@@ -1,13 +1,9 @@
 de:
   views:
     storage:
-      linked_collection: 'mit Sammlung verknüpft'
-      show_linked_collections: 'verknüpfte Sammlungen'
+      none_selected: "keine Bibliothek ausgewählt"
       actions:
         add_new_btn_title: 'Neue Bibliothek hinzufügen'
       modals:
         edit: '%{what} bearbeiten'
         new: 'Neue %{what} erstellen'
-        no_collection_selected: 'keine Sammlung ausgewählt'
-        deassociate_collection: 'Verknüpfung mit Sammlung entfernen'
-        search_collections: 'Sammlung suchen'

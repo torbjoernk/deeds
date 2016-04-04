@@ -1,1 +1,9 @@
 en:
+  helpers:
+    confirmation:
+      delete: "Do you really want to delete this entity?"
+    submit:
+      update: "Update"
+      create: "Create"
+    delete: "Delete"
+    abort: "Abort"

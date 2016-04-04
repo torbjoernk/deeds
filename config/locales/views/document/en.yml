@@ -1,1 +1,4 @@
 en:
+  views:
+    document:
+      none_selected: "no Document selected"

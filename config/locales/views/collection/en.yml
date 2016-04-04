@@ -1,1 +1,4 @@
 en:
+  views:
+    collection:
+      none_selected: "no Collection selected"

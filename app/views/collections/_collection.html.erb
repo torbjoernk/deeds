@@ -25,14 +25,14 @@
   <div class="btn-group btn-group-sm" role="group">
     <%= link_to storages_path(collection_id: collection.id),
                 class: 'btn btn-sm btn-secondary',
-                title: t(:show_linked_storages, scope: [:views, :collection]),
+                title: t('views.show_linked', what: Storage.model_name.human(count: 2)),
                 data: { toggle: 'tooltip' } do %>
       <%= collection.storages.count %>
       <%= icon_for Storage %>
     <% end %>
     <%= link_to documents_path(collection_id: collection.id),
                 class: 'btn btn-sm btn-secondary',
-                title: t(:show_linked_documents, scope: [:views, :collection]),
+                title: t('views.show_linked', what: Collection.model_name.human(count: 2)),
                 data: { toggle: 'tooltip' } do %>
       <%= collection.documents.count %>
       <%= icon_for Document %>
@@ -41,4 +41,4 @@
 <% end %>
 
 <%= render partial: 'shared/index/entity',
-           locals: {entity_id: "collection-#{collection.id}", entity: collection } %>
+           locals: { entity_id: "collection-#{collection.id}", entity: collection } %>
