@@ -1,11 +1,12 @@
+---
 de:
   activerecord:
-    models:
-      storage:
-        one: "Bibliothek"
-        other: "Bibliotheken"
     attributes:
       storage:
-        title: "Titel"
-        collections: "Sammlungen"
-        notes: "Notizen"
+        collections: Sammlungen
+        notes: Notizen
+        title: Titel
+    models:
+      storage:
+        one: Bibliothek
+        other: Bibliotheken

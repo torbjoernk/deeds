@@ -1,26 +1,27 @@
+---
 de:
   views:
-    non_associated: "keine verknüpft"
-    unknown: "unbekannt"
-    no_notes: "keine Notizen"
-    linked_with: "verknüpft mit %{what}"
-    show_linked: "verknüpfte %{what} anzeigen"
     actions:
-      refresh_table_btn_title: "Tabelle aktualisieren"
-      show_details: "Details anzeigen"
-      edit_entity: "%{entity_name} bearbeiten"
       delete_entity: "%{entity_name} löschen"
-    modals:
-      close: "Schließen"
-      refresh_associations: "Verknüpfungen aktualisieren"
-      delete_association: "Verknüpfung entfernen"
-      search_for_unassociated: "nach nicht verknüpften %{what} suchen"
-      no_unassociated_found_html: "keine nicht verknüpfte %{what} gefunden"
-      unsaved: "nicht gespeichert"
-      remove_association: "Verknüpfung mit %{what} entfernen"
+      edit_entity: "%{entity_name} bearbeiten"
+      refresh_table_btn_title: Tabelle aktualisieren
+      show_details: Details anzeigen
+    date: Datum
     flash:
       created_entity: "%{what} mit ID %{id} erfolgreich erstellt."
-      updated_entity: "%{what} mit ID %{id} erfolgreich aktualisiert."
       deleted_entity: "%{what} mit ID %{id} erfolgreich gelöscht."
-    date: "Datum"
-    no_description: "keine Beschreibung"
+      updated_entity: "%{what} mit ID %{id} erfolgreich aktualisiert."
+    linked_with: verknüpft mit %{what}
+    modals:
+      close: Schließen
+      delete_association: Verknüpfung entfernen
+      no_unassociated_found_html: keine nicht verknüpfte %{what} gefunden
+      refresh_associations: Verknüpfungen aktualisieren
+      remove_association: Verknüpfung mit %{what} entfernen
+      search_for_unassociated: nach nicht verknüpften %{what} suchen
+      unsaved: nicht gespeichert
+    no_description: keine Beschreibung
+    no_notes: keine Notizen
+    non_associated: keine verknüpft
+    show_linked: verknüpfte %{what} anzeigen
+    unknown: unbekannt

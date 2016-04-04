@@ -1,14 +1,15 @@
+---
 de:
   activerecord:
-    models:
-      content:
-        one: "Inhalt"
-        other: "Inhalte"
     attributes:
       content:
-        content: "Inhalt"
-        language: "Sprache"
+        content: Inhalt
+        language: Sprache
         languages:
-          latin: "Latein"
-          old_german: "Altdeutsch"
-          contemporary_german: "Hochdeutsch"
+          contemporary_german: Hochdeutsch
+          latin: Latein
+          old_german: Altdeutsch
+    models:
+      content:
+        one: Inhalt
+        other: Inhalte

@@ -1,9 +1,10 @@
+---
 de:
   views:
     person:
-      none_selected: "keine Person ausgewählt"
       actions:
-        add_new_btn_title: "Neue Person hinzufügen"
+        add_new_btn_title: Neue Person hinzufügen
       modals:
         edit: "%{what} bearbeiten"
-        new: "Neue %{what} erstellen"
+        new: Neue %{what} erstellen
+      none_selected: keine Person ausgewählt

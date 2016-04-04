@@ -1,11 +1,12 @@
+---
 de:
   activerecord:
-    models:
-      collection:
-        one: "Sammlung"
-        other: "Sammlungen"
     attributes:
       collection:
-        title: "Titel"
-        abbr: "Kürzel"
-        notes: "Notizen"
+        abbr: Kürzel
+        notes: Notizen
+        title: Titel
+    models:
+      collection:
+        one: Sammlung
+        other: Sammlungen

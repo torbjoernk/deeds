@@ -1,9 +1,10 @@
+---
 de:
   helpers:
+    abort: Abbrechen
     confirmation:
-      delete: "Dieses Element wirklich löschen?"
+      delete: Dieses Element wirklich löschen?
+    delete: Löschen
     submit:
-      create: "Erstellen"
-      update: "Speichern"
-    abort: "Abbrechen"
-    delete: "Löschen"
+      create: Erstellen
+      update: Speichern

@@ -1,9 +1,10 @@
+---
 de:
   views:
     storage:
-      none_selected: "keine Bibliothek ausgewählt"
       actions:
-        add_new_btn_title: "Neue Bibliothek hinzufügen"
+        add_new_btn_title: Neue Bibliothek hinzufügen
       modals:
         edit: "%{what} bearbeiten"
-        new: "Neue %{what} erstellen"
+        new: Neue %{what} erstellen
+      none_selected: keine Bibliothek ausgewählt

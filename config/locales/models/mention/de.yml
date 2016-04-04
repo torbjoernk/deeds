@@ -1,13 +1,14 @@
+---
 de:
   activerecord:
-    models:
-      mention:
-        one: "Nennung"
-        other: "Nennungen"
     attributes:
       mention:
-        deed: "Urkunde"
-        person: "Person"
-        place: "Ort"
-        role: "Rolle"
-        notes: "Notizen"
+        deed: Urkunde
+        notes: Notizen
+        person: Person
+        place: Ort
+        role: Rolle
+    models:
+      mention:
+        one: Nennung
+        other: Nennungen

@@ -1,9 +1,10 @@
+---
 de:
   views:
     place:
-      none_selected: "kein Ort ausgewählt"
       actions:
-        add_new_btn_title: "Neuen Ort hinzufügen"
+        add_new_btn_title: Neuen Ort hinzufügen
       modals:
         edit: "%{what} bearbeiten"
-        new: "Neuen %{what} erstellen"
+        new: Neuen %{what} erstellen
+      none_selected: kein Ort ausgewählt

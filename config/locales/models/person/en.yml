@@ -1,15 +1,16 @@
+---
 en:
   activerecord:
-    models:
-      person:
-        one: "Person"
-        other: "People"
     attributes:
       person:
-        gender: "Gender"
+        gender: Gender
         genders:
-          female: "female"
-          male: "male"
-          unknown: "unknown"
-        name: "Name"
-        notes: "Notes"
+          female: female
+          male: male
+          unknown: unknown
+        name: Name
+        notes: Notes
+    models:
+      person:
+        one: Person
+        other: People

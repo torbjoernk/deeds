@@ -1,10 +1,11 @@
+---
 de:
   views:
     content:
-      no_translations: "keine Übersetzungen"
       actions:
-        add_new_btn_title: "Neuen Inhalt hinzufügen"
+        add_new_btn_title: Neuen Inhalt hinzufügen
       modals:
+        add_new_translation: Neue Übersetzung hinzufügen
         edit: "%{what} bearbeiten"
-        new: "Neuen %{what} erstellen"
-        add_new_translation: "Neue Übersetzung hinzufügen"
+        new: Neuen %{what} erstellen
+      no_translations: keine Übersetzungen

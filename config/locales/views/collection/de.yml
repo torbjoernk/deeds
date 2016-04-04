@@ -1,9 +1,10 @@
+---
 de:
   views:
     collection:
-      none_selected: "keine Sammlung ausgewählt"
       actions:
-        add_new_btn_title: "Neue Sammlung hinzufügen"
+        add_new_btn_title: Neue Sammlung hinzufügen
       modals:
         edit: "%{what} bearbeiten"
-        new: "Neue %{what} erstellen"
+        new: Neue %{what} erstellen
+      none_selected: keine Sammlung ausgewählt

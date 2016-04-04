@@ -1,16 +1,17 @@
+---
 de:
   activerecord:
-    models:
-      document:
-        one: "Dokument"
-        other: "Dokumente"
     attributes:
       document:
-        title: "Titel"
-        document_type: "Typ"
-        notes: "Notizen"
+        document_type: Typ
         document_types:
-          original: "Original"
-          transcript: "Abschrift"
-          print: "Druck"
-          digital: "Digital"
+          digital: Digital
+          original: Original
+          print: Druck
+          transcript: Abschrift
+        notes: Notizen
+        title: Titel
+    models:
+      document:
+        one: Dokument
+        other: Dokumente
