@@ -1,10 +1,16 @@
 de:
   views:
     document:
+      linked_collection: 'mit Sammlung verknüpft'
+      linked_deed: 'mit Urkunde verknüpft'
+      show_linked_collections: 'verknüpfte Sammlungen'
       actions:
         add_new_btn_title: 'Neues Dokument hinzufügen'
       modals:
         edit: '%{what} bearbeiten'
         new: 'Neues %{what} erstellen'
+        no_collection_selected: 'keine Sammlung ausgewählt'
+        deassociate_collection: 'Verknüpfung mit Sammlung entfernen'
+        search_collections: 'Sammlung suchen'
       flash:
-        created_entity: 'Neues %{what} mit ID %{id} wurde erstellt.'
+        created_entity: 'Neues Dokument mit ID %{id} wurde erstellt.'

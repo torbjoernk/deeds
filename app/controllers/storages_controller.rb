@@ -9,11 +9,12 @@ class StoragesController < ApplicationController
     if params.has_key? :collection_id
       index_for_nested_collection params[:collection_id]
       @storages = @collection.storages
+      add_breadcrumb Collection.model_name.human(count: 1), collections_path
     else
       @storages = Storage.all
     end
 
-    add_breadcrumb Storage.model_name.plural.humanize, :storages_path
+    add_breadcrumb Storage.model_name.human(count: 2), storages_path
 
     respond_to do |format|
       format.js   { render 'index' }
@@ -33,7 +34,7 @@ class StoragesController < ApplicationController
 
   def create
     @storage = Storage.create!(storage_params)
-    flash[:success] = "Created new storage with ID #{@storage.id}."
+    flash[:success] = t :created_entity, scope: [:views, :storage, :flash], id: @storage.id
     redirect_to storages_path
   end
 
@@ -49,7 +50,7 @@ class StoragesController < ApplicationController
                                        edit_storage_path(@storage, sub_action: :refresh_nested)
     else
       @storage.update!(storage_params)
-      flash[:success] = "Updated storage with ID #{@storage.id}."
+      flash[:success] = t :updated_entity, scope: [:views, :flash], what: Storage.model_name.human, id: @storage.id
       redirect_to storages_path
     end
   end

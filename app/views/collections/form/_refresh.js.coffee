@@ -7,7 +7,7 @@ $ ->
   # empty and re-fill the nested form
   nested_fields_container.empty()
   nested_fields_container.
-    append('<%= escape_javascript(render(partial: 'collections/form/nested_source_fields')) %>')
+    append('<%= escape_javascript(render(partial: 'collections/form/nested_document_fields')) %>')
   nested_fields_container.
     append('<%= escape_javascript(render(partial: 'collections/form/nested_storage_fields')) %>')
 

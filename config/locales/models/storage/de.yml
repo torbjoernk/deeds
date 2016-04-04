@@ -7,4 +7,5 @@ de:
     attributes:
       storage:
         title: Title
+        collections: Sammlungen
         notes: Notizen

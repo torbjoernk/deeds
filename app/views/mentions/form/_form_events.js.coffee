@@ -24,7 +24,7 @@ $ ->
         url: '/deeds/' + deeds_id_map[value]
         dataType: 'script'
     else
-      alert 'no Deed selected'
+      alert <%= t :no_deed_selected, scope: [:views, :mention, :modals] %>
 
 
   assoc_person_container = form_modal.find('#assoc-person')
@@ -50,7 +50,7 @@ $ ->
         url: '/people/' + people_id_map[value]
         dataType: 'script'
     else
-      alert 'no Person selected'
+      alert <%= t :no_person_selected, scope: [:views, :mention, :modals] %>
 
 
   assoc_place_container = form_modal.find('#assoc-place')
@@ -76,7 +76,7 @@ $ ->
         url: '/places/' + places_id_map[value]
         dataType: 'script'
     else
-      alert 'no Place selected'
+      alert <%= t :no_place_selected, scope: [:views, :mention, :modals] %>
 
 
   assoc_role_container = form_modal.find('#assoc-role')
@@ -102,4 +102,4 @@ $ ->
         url: '/roles/' + roles_id_map[value]
         dataType: 'script'
     else
-      alert 'no Role selected'
+      alert <%= t :no_role_selected, scope: [:views, :mention, :modals] %>

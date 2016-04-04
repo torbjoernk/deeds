@@ -3,7 +3,7 @@
     <%= document.title %>
   </div>
   <div class="col-document-type">
-    <%= document.document_type.humanize %>
+    <%= t document.document_type, scope: [:activemodel, :attributes, :document, :document_types] %>
   </div>
 <% end %>
 
@@ -25,7 +25,7 @@
   <div class="btn-group btn-group-sm" role="group">
     <%= link_to collections_path(document_id: document.id),
                 class: 'btn btn-sm btn-secondary',
-                title: "show #{Collection.model_name.plural.humanize} linked",
+                title: t(:show_linked_collections, scope: [:views, :document]),
                 data: { toggle: 'tooltip' } do %>
       <%= document.collections.count %>
       <%= icon_for Collection %>

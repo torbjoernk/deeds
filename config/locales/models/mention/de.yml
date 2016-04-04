@@ -6,3 +6,8 @@ de:
         other: Nennungen
     attributes:
       mention:
+        deed: Urkunde
+        person: Person
+        place: Ort
+        role: Rolle
+        notes: Notizen

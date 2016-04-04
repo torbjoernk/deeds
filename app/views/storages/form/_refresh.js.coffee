@@ -40,7 +40,7 @@ $ ->
         url: '/storages/' + input_id_map[value]
         dataType: 'script'
     else
-      alert 'no Collection selected'
+      alert <%= t :no_collection_selected, scope: [:views, :storage, :modals] %>
 
   add_collection_assoc.find('#btn-associate-selected-collection').click ->
     value = collection_input.prop('value')
@@ -53,7 +53,7 @@ $ ->
           collection_id: input_id_map[value]
         dataType: 'script'
     else
-      alert 'no Collection selected'
+      alert <%= t :no_collection_selected, scope: [:views, :storage, :modals] %>
 
   # reload tooltips
   nested_fields_container.find('[data-toggle="tooltip"]').tooltip()

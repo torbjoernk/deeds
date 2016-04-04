@@ -1,10 +1,14 @@
 de:
   views:
     person:
+      show_linked_mentions: 'verknüpfte Nennungen'
+      show_linked_places: 'verknüpfte Orte'
+      show_linked_roles: 'verknüpfte Rollen'
+      show_linked_deeds: 'verknüpfte Urkunden'
       actions:
         add_new_btn_title: 'Neue Person hinzufügen'
       modals:
         edit: '%{what} bearbeiten'
         new: 'Neue %{what} erstellen'
       flash:
-        created_entity: 'Neue %{what} mit ID %{id} wurde erstellt.'
+        created_entity: 'Neue Person mit ID %{id} wurde erstellt.'

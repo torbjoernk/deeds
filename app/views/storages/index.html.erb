@@ -8,7 +8,7 @@
 
 <% if @collection %>
   <dl class="row">
-    <dt class="col-md-2">associated with Collection</dt>
+    <dt class="col-md-2"><%= t :linked_with, scope: [:views], what: Collection.model_name.human %></dt>
     <dd class="col-md-10">
       <%= render partial: 'collections/oneline', locals: {collection: @collection } %>
     </dd>

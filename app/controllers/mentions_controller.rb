@@ -6,7 +6,7 @@ class MentionsController < ApplicationController
   def index
     @mentions = Mention.all
 
-    add_breadcrumb Mention.model_name.plural.humanize, mentions_path
+    add_breadcrumb Mention.model_name.human(count: 2), mentions_path
 
     respond_to do |format|
       format.html { render 'mentions/index' }
@@ -15,7 +15,7 @@ class MentionsController < ApplicationController
   end
 
   def show
-    @mention = Mention.find params[:id]
+    @mention = Mention.find_by id: params[:id]
     respond_to :js
   end
 
@@ -31,7 +31,7 @@ class MentionsController < ApplicationController
   end
 
   def edit
-    @mention = Mention.find params[:id]
+    @mention = Mention.find_by id: params[:id]
     if params.has_key? 'sub_action' and params[:sub_action].to_sym == :form_events
       respond_to do |format|
         format.js { render partial: 'mentions/form/form_events' }
@@ -44,14 +44,14 @@ class MentionsController < ApplicationController
   def create
     @mention = Mention.create(mention_params)
     @mention.save!
-    flash[:success] = "Created new mention with ID #{@mention.id}"
+    flash[:success] = t :created_entity, scope: [:views, :person, :flash], id: @mention.id
     redirect_to mentions_path
   end
 
   def update
-    @mention = Mention.find params[:id]
+    @mention = Mention.find_by id: params[:id]
     @mention.update!(mention_params)
-    flash[:success] = "Updated mention with ID #{@mention.id}."
+    flash[:success] = t :updated_entity, scope: [:views, :flash], what: Mention.model_name.human, id: @mention.id
     redirect_to mentions_path
   end
 

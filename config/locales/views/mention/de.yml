@@ -1,10 +1,22 @@
 de:
   views:
     mention:
+      no_deed_referenced: 'keine Urkunde verknüpft'
+      no_person_referenced: 'keine Person verknüpft'
+      no_place_referenced: 'kein Ort verknüpft'
+      no_role_referenced: 'keine Rolle verknüpft'
       actions:
         add_new_btn_title: 'Neue Nennung hinzufügen'
       modals:
         edit: '%{what} bearbeiten'
         new: 'Neue %{what} erstellen'
+        no_deed_selected: 'keine Urkunde ausgewählt'
+        no_person_selected: 'keine Person ausgewählt'
+        no_place_selected: 'kein Ort ausgewählt'
+        no_role_selected: 'keine Rolle ausgewählt'
+        search_deed: 'Urkunde suchen'
+        search_person: 'Person suchen'
+        search_place: 'Ort suchen'
+        search_role: 'Rolle suchen'
       flash:
-        created_entity: 'Neue %{what} mit ID %{id} wurde erstellt.'
+        created_entity: 'Neue Nennung mit ID %{id} wurde erstellt.'

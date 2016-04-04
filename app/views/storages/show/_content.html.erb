@@ -10,7 +10,11 @@
 <div class="row">
   <label class="col-md-3"><strong><%= Storage.human_attribute_name :notes %></strong></label>
   <div class="col-md-9">
-    <%= storage.notes %>
+    <% if storage.notes %>
+      <%= storage.notes %>
+    <% else %>
+      <span class="text-muted"><%= t :no_notes, scope: [:views] %></span>
+    <% end %>
   </div>
 </div>
 <% if native %>

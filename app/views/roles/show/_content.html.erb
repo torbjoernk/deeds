@@ -25,7 +25,7 @@
   <label class="col-md-3"><strong><%= Role.human_attribute_name :notes %></strong></label>
   <div class="col-md-9">
     <% if role.notes.nil? or role.notes.empty? %>
-      <em class="text-muted">no notes</em>
+      <em class="small text-muted"><%= t :no_notes, scope: [:views] %></em>
     <% else %>
       <%= role.notes %>
     <% end %>
