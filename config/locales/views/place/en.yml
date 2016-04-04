@@ -1,1 +1,9 @@
 en:
+  views:
+    place:
+      actions:
+        add_new_btn_title: "add new Place"
+      modals:
+        edit: "Edit %{what}"
+        new: "Create new %{what}"
+      none_selected: "no Place selected"

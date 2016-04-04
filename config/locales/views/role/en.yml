@@ -1,1 +1,9 @@
 en:
+  views:
+    role:
+      none_selected: "no Role selected"
+      actions:
+        add_new_btn_title: "add new Role"
+      modals:
+        edit: "Edit %{what}"
+        new: "Create new %{what}"

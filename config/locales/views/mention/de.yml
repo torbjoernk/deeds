@@ -4,12 +4,12 @@ de:
       as_role: "als"
       at_place: "von"
       in_deed: "in"
-      no_deed_referenced: 'keine Urkunde verknüpft'
-      no_person_referenced: 'keine Person verknüpft'
-      no_place_referenced: 'kein Ort verknüpft'
-      no_role_referenced: 'keine Rolle verknüpft'
+      no_deed_referenced: "keine Urkunde verknüpft"
+      no_person_referenced: "keine Person verknüpft"
+      no_place_referenced: "kein Ort verknüpft"
+      no_role_referenced: "keine Rolle verknüpft"
       actions:
-        add_new_btn_title: 'Neue Nennung hinzufügen'
+        add_new_btn_title: "Neue Nennung hinzufügen"
       modals:
-        edit: '%{what} bearbeiten'
-        new: 'Neue %{what} erstellen'
+        edit: "%{what} bearbeiten"
+        new: "Neue %{what} erstellen"

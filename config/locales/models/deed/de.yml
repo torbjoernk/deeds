@@ -2,13 +2,13 @@ de:
   activerecord:
     models:
       deed:
-        one: Urkunde
-        other: Urkunden
+        one: "Urkunde"
+        other: "Urkunden"
     attributes:
       deed:
-        title: Title
-        year: Jahr
-        month: Monat
-        day: Tag
-        description: Beschreibung
-        notes: Notizen
+        title: "Titel"
+        year: "Jahr"
+        month: "Monat"
+        day: "Tag"
+        description: "Beschreibung"
+        notes: "Notizen"

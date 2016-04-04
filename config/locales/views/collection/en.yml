@@ -1,4 +1,9 @@
 en:
   views:
     collection:
+      actions:
+        add_new_btn_title: "add new Collection"
+      modals:
+        edit: "Edit %{what}"
+        new: "Create new %{what}"
       none_selected: "no Collection selected"

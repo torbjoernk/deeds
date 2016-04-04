@@ -1,24 +1,24 @@
 de:
   views:
     deed:
-      no_content: 'keine Inhalt vorhanden'
+      no_content: "keine Inhalt vorhanden"
       no_documents: "keine Dokumente"
-      no_people: 'keine Personen genannt'
-      no_places: 'keine Orte genannt'
-      no_roles: 'keine Rollen genannt'
-      no_mentions: 'keine Nennungen vorhanden'
+      no_people: "keine Personen genannt"
+      no_places: "keine Orte genannt"
+      no_roles: "keine Rollen genannt"
+      no_mentions: "keine Nennungen vorhanden"
       none_selected: "keine Urkunde ausgewählt"
       actions:
-        add_new_btn_title: 'Neue Urkunde hinzufügen'
-        add_new_document: 'Neues Dokument hinzufügen'
-        add_new_reference: 'Neue Referenz hinzufügen'
-        add_new_seal: 'Neues Siegel hinzufügen'
-        add_new_mention: 'Neue Nennung hinzufügen'
-        add_content: 'Neuen Inhalt zur Urkunde hinzufügen'
-        remove_content: 'Inhalt der Urkunde entfernen'
-        remove_mention: 'Nennung aus Urkunde entfernen'
+        add_new_btn_title: "Neue Urkunde hinzufügen"
+        add_new_document: "Neues Dokument hinzufügen"
+        add_new_reference: "Neue Referenz hinzufügen"
+        add_new_seal: "Neues Siegel hinzufügen"
+        add_new_mention: "Neue Nennung hinzufügen"
+        add_content: "Neuen Inhalt zur Urkunde hinzufügen"
+        remove_content: "Inhalt der Urkunde entfernen"
+        remove_mention: "Nennung aus Urkunde entfernen"
       modals:
-        edit: '%{what} bearbeiten'
-        new: 'Neue %{what} erstellen'
+        edit: "%{what} bearbeiten"
+        new: "Neue %{what} erstellen"
       flash:
-        removed_mention: 'Nennung wurde aus Urkunde entfernt.'
+        removed_mention: "Nennung wurde aus Urkunde entfernt."

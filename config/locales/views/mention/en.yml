@@ -1,9 +1,14 @@
 en:
   views:
     mention:
+      actions:
+        add_new_btn_title: "add new Mention"
       as_role: "as"
       at_place: "at"
       in_deed: "in"
+      modals:
+        edit: "Edit %{what}"
+        new: "Create new %{what}"
       no_deed_referenced: "no Deed referenced"
       no_person_referenced: "no Person referenced"
       no_place_referenced: "no Place referenced"

@@ -1,1 +1,11 @@
 en:
+  activerecord:
+    attributes:
+      collection:
+        abbr: "Abbreviation"
+        notes: "Notes"
+        title: "Title"
+    models:
+      collection:
+        one: "Collection"
+        other: "Collections"

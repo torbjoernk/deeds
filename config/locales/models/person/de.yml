@@ -2,14 +2,14 @@ de:
   activerecord:
     models:
       person:
-        one: Person
-        other: Personen
+        one: "Person"
+        other: "Personen"
     attributes:
       person:
-        name: Name
-        gender: Geschlecht
-        notes: Notizen
+        name: "Name"
+        gender: "Geschlecht"
+        notes: "Notizen"
         genders:
-          female: weiblich
-          male: männlich
-          unknown: unbekannt
+          female: "weiblich"
+          male: "männlich"
+          unknown: "unbekannt"

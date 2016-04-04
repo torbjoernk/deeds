@@ -1,1 +1,10 @@
 en:
+  activerecord:
+    attributes:
+      place:
+        notes: "Notes"
+        title: "Title"
+    models:
+      place:
+        one: "Place"
+        other: "Places"

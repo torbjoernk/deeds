@@ -2,9 +2,9 @@ de:
   activerecord:
     models:
       place:
-        one: Ort
-        other: Orte
+        one: "Ort"
+        other: "Orte"
     attributes:
       place:
-        title: Name
-        notes: Notizen
+        title: "Name"
+        notes: "Notizen"

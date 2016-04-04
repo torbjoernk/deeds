@@ -3,7 +3,7 @@ de:
     document:
       none_selected: "kein Dokument ausgewählt"
       actions:
-        add_new_btn_title: 'Neues Dokument hinzufügen'
+        add_new_btn_title: "Neues Dokument hinzufügen"
       modals:
-        edit: '%{what} bearbeiten'
-        new: 'Neues %{what} erstellen'
+        edit: "%{what} bearbeiten"
+        new: "Neues %{what} erstellen"

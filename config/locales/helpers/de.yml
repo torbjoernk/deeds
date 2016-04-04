@@ -1,9 +1,9 @@
 de:
   helpers:
     confirmation:
-      delete: 'Dieses Element wirklich löschen?'
+      delete: "Dieses Element wirklich löschen?"
     submit:
-      create: 'Erstellen'
-      update: 'Speichern'
-    abort: 'Abbrechen'
-    delete: 'Löschen'
+      create: "Erstellen"
+      update: "Speichern"
+    abort: "Abbrechen"
+    delete: "Löschen"
