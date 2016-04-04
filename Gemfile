@@ -24,7 +24,7 @@ gem 'jbuilder'#, '~> 2.0'
 #gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'font-awesome-sass', '~> 4.5.0'
-gem 'breadcrumbs_on_rails'
+gem 'breadcrumbs_on_rails', '>=2.3.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
