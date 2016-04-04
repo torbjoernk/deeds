@@ -16,5 +16,6 @@ de:
       search_for_unassociated: 'nach nicht verknüpften %{what} suchen'
       no_unassociated_found_html: 'keine nicht verknüpfte %{what} gefunden'
     flash:
-      updated_entity: '%{what} mit ID %{id} wurde aktualisiert.'
-      deleted_entity: '%{what} mit ID %{id} wurde gelöscht.'
+      created_entity: '%{what} mit ID %{id} erfolgreich erstellt.'
+      updated_entity: '%{what} mit ID %{id} erfolgreich aktualisiert.'
+      deleted_entity: '%{what} mit ID %{id} erfolgreich gelöscht.'

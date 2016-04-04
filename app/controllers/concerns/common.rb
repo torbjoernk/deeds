@@ -17,7 +17,7 @@ module Common
   def destroy_entity_of(klass, params)
     entity = klass.find params[:id]
     entity.delete
-    flash[:success] = t(:deleted_entity, scope: [:views, :flash],
+    flash[:success] = t('views.flash.deleted_entity',
                         what: klass.model_name.human(count: 1), id: entity.id)
   end
 

@@ -35,5 +35,4 @@ de:
         edit: '%{what} bearbeiten'
         new: 'Neue %{what} erstellen'
       flash:
-        created_entity: 'Neue Urkunde mit ID %{id} wurde erstellt.'
         removed_mention: 'Nennung wurde aus Urkunde entfernt.'

@@ -8,5 +8,3 @@ de:
       modals:
         edit: '%{what} bearbeiten'
         new: 'Neue %{what} erstellen'
-      flash:
-        created_entity: 'Neue Sammlung mit ID %{id} wurde erstellt.'

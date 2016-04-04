@@ -18,5 +18,3 @@ de:
         search_person: 'Person suchen'
         search_place: 'Ort suchen'
         search_role: 'Rolle suchen'
-      flash:
-        created_entity: 'Neue Nennung mit ID %{id} wurde erstellt.'

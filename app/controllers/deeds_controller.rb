@@ -15,7 +15,7 @@ class DeedsController < ApplicationController
   end
 
   def show
-    @deed = Deed.find params[:id]
+    @deed = Deed.find_by id: params[:id]
     respond_to do |format|
       format.html {
         add_breadcrumb Deed.model_name.human(count: 2), :deeds_path
@@ -40,7 +40,8 @@ class DeedsController < ApplicationController
 
   def create
     @deed = Deed.create!(deed_params)
-    flash[:success] = t(:created_entity, scope: [:views, :content, :flash], id: @deed.id)
+    flash[:success] = t('views.flash.created_entity',
+                        what: Deed.model_name.human(count: 1), id: @deed.id)
     redirect_to deeds_path
   end
 
@@ -51,19 +52,21 @@ class DeedsController < ApplicationController
         when :deassoc_content
           @content = Content.find_by id: params[:content_id]
           @deed.update!(content: nil)
-          flash[:success] = t(:updated_entity, scope: [:views, :flash],
+          flash[:success] = t('views.flash.updated_entity',
                               what: Deed.model_name.human(count: 1), id: @deed.id)
         when :remove_mention
           @mention = Mention.find_by id: params[:mention_id]
           @deed.mentions.delete @mention
           @deed.save!
           @mention.delete
-          flash[:success] = t(:removed_mention, scope: [:views, :deed, :flash])
+          flash[:success] = t('views.deed.flash.removed_mention')
+        else
+          raise StandardError.new "Wrong sub_action key: #{params[:sub_action]}"
       end
       redirect_to deed_path(@deed), format: 'html'
     else
       @deed.update!(deed_params)
-      flash[:success] = t(:updated_entity, scope: [:views, :flash],
+      flash[:success] = t('views.flash.updated_entity',
                           what: Deed.model_name.human(count: 1), id: @deed.id)
       redirect_to deeds_path
     end

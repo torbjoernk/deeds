@@ -44,14 +44,16 @@ class MentionsController < ApplicationController
   def create
     @mention = Mention.create(mention_params)
     @mention.save!
-    flash[:success] = t :created_entity, scope: [:views, :person, :flash], id: @mention.id
+    flash[:success] = t('views.flash.created_entity',
+                        what: Mention.model_name.human, id: @mention.id)
     redirect_to mentions_path
   end
 
   def update
     @mention = Mention.find_by id: params[:id]
     @mention.update!(mention_params)
-    flash[:success] = t :updated_entity, scope: [:views, :flash], what: Mention.model_name.human, id: @mention.id
+    flash[:success] = t('views.flash.updated_entity',
+                        what: Mention.model_name.human, id: @mention.id)
     redirect_to mentions_path
   end
 

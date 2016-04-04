@@ -3,5 +3,3 @@ de:
     content_translation:
       modals:
         unsaved: 'ungesichert'
-      flash:
-        created_entity: 'Neue Übersetzung mit ID %{id} wurde erstellt.'

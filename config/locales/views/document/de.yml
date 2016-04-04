@@ -12,5 +12,3 @@ de:
         no_collection_selected: 'keine Sammlung ausgewählt'
         deassociate_collection: 'Verknüpfung mit Sammlung entfernen'
         search_collections: 'Sammlung suchen'
-      flash:
-        created_entity: 'Neues Dokument mit ID %{id} wurde erstellt.'

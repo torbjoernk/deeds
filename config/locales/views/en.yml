@@ -1,1 +1,6 @@
 en:
+  views:
+    flash:
+      created_entity: "%{what} with ID ${id} successfully created."
+      updated_entity: "%{what} with ID %{id} successfully updated."
+      deleted_entity: "%{what} with ID %{id} successfully deleted."

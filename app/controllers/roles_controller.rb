@@ -31,14 +31,16 @@ class RolesController < ApplicationController
 
   def create
     @role = Role.create!(role_params)
-    flash[:success] = t :created_entity, scope: [:views, :role, :flash], id: @role.id
+    flash[:success] = t('views.flash.created_entity',
+                        what: Role.model_name.human(count: 1), id: @role.id)
     redirect_to roles_path
   end
 
   def update
     @role = Role.find_by id: params[:id]
     @role.update!(role_params)
-    flash[:success] = t :updated_entity, scope: [:views, :flash], what: Role.model_name.human, id: @role.id
+    flash[:success] = t('views.flash.updated_entity',
+                        what: Role.model_name.human(count: 1), id: @role.id)
     redirect_to roles_path
   end
 

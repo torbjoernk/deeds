@@ -31,14 +31,16 @@ class PlacesController < ApplicationController
 
   def create
     @place = Place.create!(place_params)
-    flash[:success] = t :created_entity, scope: [:views, :place, :flash], id: @place.id
+    flash[:success] = t('views.flash.created_entity',
+                        what: Place.model_name.human(count: 1), id: @place.id)
     redirect_to places_path
   end
 
   def update
     @place = Place.find_by id: params[:id]
     @place.update!(place_params)
-    flash[:success] = t :updated_entity, scope: [:views, :flash], what: Place.model_name.human, id: @place.id
+    flash[:success] = t('views.flash.updated_entity',
+                        what: Place.model_name.human(count: 1), id: @place.id)
     redirect_to places_path
   end
 

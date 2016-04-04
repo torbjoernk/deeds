@@ -10,5 +10,3 @@ de:
       modals:
         edit: '%{what} bearbeiten'
         new: 'Neuen %{what} erstellen'
-      flash:
-        created_entity: 'Neuer Ort mit ID %{id} wurde erstellt.'

@@ -10,5 +10,3 @@ de:
       modals:
         edit: '%{what} bearbeiten'
         new: 'Neue %{what} erstellen'
-      flash:
-        created_entity: 'Neue Rolle mit ID %{id} wurde erstellt.'

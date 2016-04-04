@@ -31,14 +31,14 @@ class PeopleController < ApplicationController
 
   def create
     @person = Person.create!(person_params)
-    flash[:success] = t :created_entity, scope: [:views, :person, :flash], id: @person.id
+    flash[:success] = t('views.flash.created_entity', what: Person.model_name.human, id: @person.id)
     redirect_to people_path
   end
 
   def update
     @person = Person.find_by id: params[:id]
     @person.update!(person_params)
-    flash[:success] = t :updated_entity, scope: [:views, :flash], what: Person.model_name.human, id: @person.id
+    flash[:success] = t('views.flash.updated_entity', what: Person.model_name.human, id: @person.id)
     redirect_to people_path
   end
 
