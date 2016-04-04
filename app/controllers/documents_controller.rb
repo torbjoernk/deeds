@@ -32,6 +32,9 @@ class DocumentsController < ApplicationController
 
   def new
     @document = Document.new
+    if params.has_key? :deed_id
+      @deed = Deed.find_by id: params[:deed_id]
+    end
     respond_to do |format|
       format.js { render 'documents/new' }
     end
@@ -77,6 +80,6 @@ class DocumentsController < ApplicationController
 
   private
   def document_params
-    params.require(:document).permit(:title, :document_type, :notes)
+    params.require(:document).permit(:title, :document_type, :notes, :deed_id)
   end
 end

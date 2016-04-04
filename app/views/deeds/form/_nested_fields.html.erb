@@ -13,7 +13,7 @@
   <div id="deed-content" class="col-md-9">
     <% if @deed.content.nil? %>
       <div class="form-control text-muted clearfix">
-        no Content associated
+        <%= t('views.deed.no_content') %>
         <div class="btn-group btn-group-sm pull-right">
           <%= link_to new_content_path(deed_id: @deed.id),
                       class: 'btn btn-sm btn-primary',

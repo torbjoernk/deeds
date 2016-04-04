@@ -19,6 +19,7 @@ en:
       remove_association: "remove association with %{what}"
       search_for_unassociated: "Search for unassociated %{what}"
       unsaved: "not saved"
+      for_deed: "for Deed"
     no_description: "no description"
     no_notes: "no notes"
     non_associated: "no linked"

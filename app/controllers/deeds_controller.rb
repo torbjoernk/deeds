@@ -50,8 +50,8 @@ class DeedsController < ApplicationController
     if params.has_key? :sub_action
       case params[:sub_action].to_sym
         when :deassoc_content
-          @content = Content.find_by id: params[:content_id]
-          @deed.update!(content: nil)
+          @content = Content.find_by!(id: params[:content_id])
+          @content.delete
           flash[:success] = t('views.flash.updated_entity',
                               what: Deed.model_name.human(count: 1), id: @deed.id)
         when :remove_mention
@@ -63,7 +63,9 @@ class DeedsController < ApplicationController
         else
           raise StandardError.new "Wrong sub_action key: #{params[:sub_action]}"
       end
-      redirect_to deed_path(@deed), format: 'html'
+      respond_to do |format|
+        format.js { render partial: 'deeds/form/refresh' }
+      end
     else
       @deed.update!(deed_params)
       flash[:success] = t('views.flash.updated_entity',
