@@ -40,9 +40,11 @@ class CollectionsController < ApplicationController
     if params.has_key? :sub_action
       if params[:sub_action].to_sym == :refresh_nested
         @free_documents = Document.where('id NOT IN (?)',
-                                         CollectionDocument.select(:document_id).where(collection_id: @collection.id))
+                                         CollectionDocument.select(:document_id)
+                                             .where(collection_id: @collection.id))
         @free_storages = Storage.where('id NOT IN (?)',
-                                       CollectionStorage.select(:storage_id).where(collection_id: @collection.id))
+                                       CollectionStorage.select(:storage_id)
+                                           .where(collection_id: @collection.id))
       end
       respond_to do |format|
         format.js { render partial: 'collections/form/refresh' }
@@ -70,7 +72,7 @@ class CollectionsController < ApplicationController
       end
     else
       @collection.update!(collection_params)
-      flash[:success] = t(:updated_entity, scope: [:views, :flash],
+      flash[:success] = t('views.flash.updated_entity',
                           what: Collection.model_name.human(count: 1), id: @collection.id)
       redirect_to collections_path
     end
@@ -78,7 +80,8 @@ class CollectionsController < ApplicationController
 
   def create
     @collection = Collection.create!(collection_params)
-    flash[:success] = t(:created_entity, scope: [:views, :collection, :flash], id: @collection.id)
+    flash[:success] = t('views.flash.created_entity',
+                        what: Collection.model_name.human(count: 1), id: @collection.id)
     redirect_to collections_path
   end
 

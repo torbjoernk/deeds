@@ -35,7 +35,8 @@ class ContentsController < ApplicationController
 
   def create
     @content = Content.create!(content_params)
-    flash[:success] = t(:created_entity, scope: [:views, :content, :flash], id: @content.id)
+    flash[:success] = t('views.flash.created_entity',
+                        what: Content.model_name.human(count: 1), id: @content.id)
     redirect_to contents_path
   end
 
@@ -54,7 +55,7 @@ class ContentsController < ApplicationController
     else
       puts content_params.inspect
       @content.update!(content_params)
-      flash[:success] = t(:updated_entity, scope: [:views, :flash],
+      flash[:success] = t('views.flash.updated_entity',
                           what: Content.model_name.human(count: 1), id: @content.id)
       redirect_to contents_path
     end

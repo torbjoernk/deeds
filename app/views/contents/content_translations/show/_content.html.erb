@@ -1,2 +1,2 @@
-<h4><%= @content_translation.language.humanize %></h4>
+<h4><%= t(@content_translation.language, scope: 'activerecord.attributes.content.languages') %></h4>
 <p><%= @content_translation.translation %></p>

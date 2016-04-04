@@ -1,1 +1,14 @@
 en:
+  activerecord:
+    attributes:
+      deed:
+        day: "Day"
+        description: "Description"
+        month: "Month"
+        notes: "Notes"
+        title: "Title"
+        year: "Year"
+    models:
+      deed:
+        one: "Deed"
+        other: "Deeds"

@@ -10,13 +10,18 @@
 <div class="row">
   <label class="col-md-3"><strong><%= Storage.human_attribute_name :notes %></strong></label>
   <div class="col-md-9">
-    <%= storage.notes %>
+    <% if storage.notes %>
+      <%= storage.notes %>
+    <% else %>
+      <span class="text-muted"><%= t('views.no_notes') %></span>
+    <% end %>
   </div>
 </div>
 <% if native %>
   <div class="row">
     <label class="col-md-3"><strong><%= Storage.human_attribute_name :collections %></strong></label>
-    <ul class="col-md-9 list-group list-group-flush" id="collections-accordion" role="tablist" aria-multiselectable="true">
+    <ul class="col-md-9 list-group list-group-flush" id="collections-accordion" role="tablist"
+        aria-multiselectable="true">
       <%= render partial: 'collections/nested_show', collection: storage.collections, as: :collection %>
     </ul>
   </div>

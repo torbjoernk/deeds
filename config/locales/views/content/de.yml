@@ -1,13 +1,11 @@
+---
 de:
   views:
     content:
-      show_deed: 'Urkunde anzeigen'
-      show_translations: 'Übersetzungen anzeigen'
       actions:
-        add_new_btn_title: 'Neuen Inhalt hinzufügen'
+        add_new_btn_title: Neuen Inhalt hinzufügen
       modals:
-        edit: '%{what} bearbeiten'
-        new: 'Neuen %{what} erstellen'
-        add_new_translation: 'Neue Übersetzung hinzufügen'
-      flash:
-        created_entity: 'Neuer Inhalt mit ID %{id} wurde erstellt.'
+        add_new_translation: Neue Übersetzung hinzufügen
+        edit: "%{what} bearbeiten"
+        new: Neuen %{what} erstellen
+      no_translations: keine Übersetzungen

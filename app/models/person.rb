@@ -6,7 +6,7 @@ class Person < ActiveRecord::Base
 
   def self.icon_for_gender(gender)
     unless GENDERS.include? gender.to_s
-      raise "Gender '#{gender.to_s}' invalid."
+      raise StandardError.new "Gender '#{gender.to_s}' invalid."
     end
 
     if gender.to_s == 'unknown'

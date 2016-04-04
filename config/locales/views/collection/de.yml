@@ -1,12 +1,10 @@
+---
 de:
   views:
     collection:
-      show_linked_storages: 'verknüpfte Bibliotheken'
-      show_linked_documents: 'verknüpfte Dokumente'
       actions:
-        add_new_btn_title: 'Neue Sammlung hinzufügen'
+        add_new_btn_title: Neue Sammlung hinzufügen
       modals:
-        edit: '%{what} bearbeiten'
-        new: 'Neue %{what} erstellen'
-      flash:
-        created_entity: 'Neue Sammlung mit ID %{id} wurde erstellt.'
+        edit: "%{what} bearbeiten"
+        new: Neue %{what} erstellen
+      none_selected: keine Sammlung ausgewählt

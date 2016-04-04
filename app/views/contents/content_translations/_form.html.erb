@@ -11,7 +11,7 @@
          aria-expanded="true"
          aria-controls="collapse-translation-new">
       <%= model_name_with_icon ContentTranslation, :singular %>
-      <span class="tag tag-warning pull-right"><%= t(:unsaved, scope: [:views, :content_translation, :modals]) %></span>
+      <span class="tag tag-warning pull-right"><%= t('views.modals.unsaved') %></span>
     </div>
     <div id="collapse-translation-new"
          class="card-block collapse"
@@ -21,9 +21,11 @@
         <%= t_f.label :language, class: 'col-md-3 form-control-label' %>
         <div class="col-md-9">
           <%= t_f.select :language,
-                         options_for_select(Content::LANGUAGES.map {
-                             |e| [t(e, scope: [:activerecord, :attributes, :content, :languages]), e]
-                         }),
+                         options_for_select(
+                             Content::LANGUAGES.map {
+                                 |e| [t(e, scope: 'activerecord.attributes.content.languages'), e]
+                             }
+                         ),
                          {},
                          { class: 'custom-select' } %>
         </div>
@@ -40,22 +42,22 @@
             <%= content_tag :a,
                             class: 'btn btn-sm btn-outline-primary',
                             id: 'btn-content-translation-create-new',
-                            title: t(:create, scope: [:helpers, :submit]),
+                            title: t('helpers.submit.create'),
                             data: {
                                 toggle: 'tooltip'
                             } do %>
                 <%= icon('save', class: 'fa-fw') %>
-                <%= t(:create, scope: [:helpers, :submit]) %>
+                <%= t('helpers.submit.create') %>
             <% end %>
             <%= content_tag :a,
                         class: 'btn btn-sm btn-outline-danger',
                         id: 'btn-content-translation-abort-new',
-                        title: t(:abort, scope: [:helpers]),
+                        title: t('helpers.abort'),
                         data: {
                             toggle: 'tooltip'
                         } do %>
                 <%= icon('trash', class: 'fa-fw') %>
-                <%= t(:abort, scope: [:helpers]) %>
+                <%= t('helpers.abort') %>
             <% end %>
           </div>
         </div>

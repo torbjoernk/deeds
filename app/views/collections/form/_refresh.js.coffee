@@ -7,7 +7,7 @@ $ ->
   # empty and re-fill the nested form
   nested_fields_container.empty()
   nested_fields_container.
-    append('<%= escape_javascript(render(partial: 'collections/form/nested_source_fields')) %>')
+    append('<%= escape_javascript(render(partial: 'collections/form/nested_document_fields')) %>')
   nested_fields_container.
     append('<%= escape_javascript(render(partial: 'collections/form/nested_storage_fields')) %>')
 
@@ -42,7 +42,7 @@ $ ->
         url: '/documents/' + document_input_id_map[value]
         dataType: 'script'
     else
-      alert 'no Document selected'
+      alert '<%= t('views.document.none_selected') %>'
 
   add_document_assoc.find('#btn-associate-selected-document').click ->
     value = document_input.prop('value')
@@ -55,7 +55,7 @@ $ ->
           document_id: document_input_id_map[value]
         dataType: 'script'
     else
-      alert 'no Document selected'
+      alert '<%= t('views.document.none_selected') %>'
 
   # rich handling of adding storages
   add_storage_assoc = nested_fields_container.find('#associate-storage-add')
@@ -80,7 +80,7 @@ $ ->
         url: '/storages/' + storage_input_id_map[value]
         dataType: 'script'
     else
-      alert 'no Storage selected'
+      alert '<%= t('views.storage.none_selected') %>'
 
   add_storage_assoc.find('#btn-associate-selected-storage').click ->
     value = storage_input.prop('value')
@@ -93,7 +93,7 @@ $ ->
           storage_id: storage_input_id_map[value]
         dataType: 'script'
     else
-      alert 'no Storage selected'
+      alert '<%= t('views.storage.none_selected') %>'
 
   # reload tooltips
   nested_fields_container.find('[data-toggle="tooltip"]').tooltip()

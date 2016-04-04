@@ -3,11 +3,6 @@
     <a class="nav-link">Deeds</a>
   </li>
   <li class="nav-item">
-    <%= link_to root_path, class: "nav-link#{' active' if current_page?(controller: :application)}" do %>
-      <i class="fa fa-list fa-fw"></i> <span>Home</span>
-    <% end %>
-  </li>
-  <li class="nav-item">
     <%= link_to deeds_path, class: "nav-link#{' active' if current_page?(controller: :deeds)}" do %>
       <%= model_name_with_icon Deed, :plural %>
       <span class="tag tag-pill tag-default pull-right"><%= Deed.count %></span>

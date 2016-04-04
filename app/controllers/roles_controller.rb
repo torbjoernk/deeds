@@ -6,7 +6,7 @@ class RolesController < ApplicationController
   def index
     @roles = Role.all
 
-    add_breadcrumb Role.model_name.plural.humanize, roles_path
+    add_breadcrumb Role.model_name.human(count: 2), roles_path
 
     respond_to do |format|
       format.html { render 'roles/index' }
@@ -15,7 +15,7 @@ class RolesController < ApplicationController
   end
 
   def show
-    @role = Role.find params[:id]
+    @role = Role.find_by id: params[:id]
     respond_to :js
   end
 
@@ -25,20 +25,22 @@ class RolesController < ApplicationController
   end
 
   def edit
-    @role = Role.find params[:id]
+    @role = Role.find_by id: params[:id]
     edit_subaction 'roles/edit', 'roles/form/refresh'
   end
 
   def create
     @role = Role.create!(role_params)
-    flash[:success] = "Created new role with ID #{@role.id}"
+    flash[:success] = t('views.flash.created_entity',
+                        what: Role.model_name.human(count: 1), id: @role.id)
     redirect_to roles_path
   end
 
   def update
-    @role = Role.find params[:id]
+    @role = Role.find_by id: params[:id]
     @role.update!(role_params)
-    flash[:success] = "Updated role with ID #{@role.id}."
+    flash[:success] = t('views.flash.updated_entity',
+                        what: Role.model_name.human(count: 1), id: @role.id)
     redirect_to roles_path
   end
 

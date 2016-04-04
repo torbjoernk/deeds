@@ -6,23 +6,24 @@
                       icon('refresh', class: 'fa-fw'),
                       id: 'btn-refresh-nested-fields',
                       class: 'btn btn-sm btn-outline-default',
-                      title: 'Refresh associations',
+                      title: t('views.modals.refresh_associations'),
                       data: { toggle: 'tooltip' } %>
     </span>
   </label>
   <div class="col-md-9">
     <ul id="associate-collections" class="list-group list-group-flush">
-      <% document.collections.each do |collection| %>
+      <% @document.collections.each do |collection| %>
         <li id="associated-collection-<%= collection.id %>" class="list-group-item form-control">
           <%= collection.title %>
           <span class="btn-group btn-group-sm pull-right">
             <%= link_to_show_entity collection %>
-            <%= link_to document_path(document.id, sub_action: :deassociate, collection_id: collection.id),
+            <%= link_to document_path(@document.id, sub_action: :deassociate, collection_id: collection.id),
                         method: :patch,
                         remote: true,
                         id: "btn-deassoc-collection-#{collection.id}",
                         class: 'btn btn-sm btn-danger',
-                        title: 'Deassociate Collection',
+                        title: t('views.modals.remove_association',
+                                 what: Collection.model_name.human(count: 1)),
                         data: { toggle: 'tooltip' } do %>
               <%= icon('minus', class: 'fa-fw') %>
             <% end %>
@@ -38,7 +39,8 @@
                            class: 'form-control form-control-sm',
                            type: 'text',
                            list: 'free-collections',
-                           placeholder: 'Search for non-associated Collection' %>
+                           placeholder: t('views.modals.search_for_unassociated',
+                                          what: Collection.model_name.human(count: 2)) %>
             <%= content_tag :datalist, id: 'free-collections' do %>
               <% @unassociated[:collections].each do |collection| %>
                 <%= content_tag :option, collection.title, data: {'collection-id': collection.id } %>
@@ -58,7 +60,8 @@
             </div>
           </div>
         <% else %>
-          no unassociated <%= model_name_with_icon Collection, :plural %>
+          <%= t('views.modals.no_unassociated_found_html',
+                what: Collection.model_name.human(count: 2)) %>
         <% end %>
       </li>
     </ul>

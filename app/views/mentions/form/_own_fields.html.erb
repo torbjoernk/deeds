@@ -6,7 +6,8 @@
         <%= f.text_field :deed,
                          class: 'form-control',
                          list: 'deeds',
-                         placeholder: 'Search for Deed' %>
+                         placeholder: t('views.modals.search_for_unassociated',
+                                        what: Deed.model_name.human(count: 2)) %>
         <%= content_tag :datalist, id: 'deeds' do %>
           <% Deed.all.each do |deed| %>
             <%= content_tag :option, deed.title %>
@@ -29,7 +30,8 @@
         <%= f.text_field :person,
                          class: 'form-control',
                          list: 'people',
-                         placeholder: 'Search for Person' %>
+                         placeholder: t('views.modals.search_for_unassociated',
+                                        what: Person.model_name.human(count: 2)) %>
         <%= content_tag :datalist, id: 'people' do %>
           <% Person.all.each do |person| %>
             <%= content_tag :option, person.name %>
@@ -52,7 +54,8 @@
         <%= f.text_field :place,
                          class: 'form-control',
                          list: 'places',
-                         placeholder: 'Search for Place' %>
+                         placeholder: t('views.modals.search_for_unassociated',
+                                        what: Place.model_name.human(count: 2)) %>
         <%= content_tag :datalist, id: 'places' do %>
           <% Place.all.each do |place| %>
             <%= content_tag :option, place.title %>
@@ -75,7 +78,8 @@
         <%= f.text_field :role,
                          class: 'form-control',
                          list: 'roles',
-                         placeholder: 'Search for Role' %>
+                         placeholder: t('views.modals.search_for_unassociated',
+                                        what: Role.model_name.human(count: 2)) %>
         <%= content_tag :datalist, id: 'roles' do %>
           <% Role.all.each do |role| %>
             <%= content_tag :option, role.title %>

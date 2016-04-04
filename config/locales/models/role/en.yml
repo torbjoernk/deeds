@@ -1,1 +1,15 @@
 en:
+  activerecord:
+    attributes:
+      role:
+        notes: "Notes"
+        referring: "Referring"
+        refers_to:
+          deed: "Deed"
+          person: "Person"
+          place: "Place"
+        title: "Title"
+    models:
+      role:
+        one: "Role"
+        other: "Roles"

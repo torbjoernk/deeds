@@ -13,7 +13,7 @@ class StoragesController < ApplicationController
       @storages = Storage.all
     end
 
-    add_breadcrumb Storage.model_name.plural.humanize, :storages_path
+    add_breadcrumb Storage.model_name.human(count: 2), storages_path
 
     respond_to do |format|
       format.js   { render 'index' }
@@ -33,7 +33,8 @@ class StoragesController < ApplicationController
 
   def create
     @storage = Storage.create!(storage_params)
-    flash[:success] = "Created new storage with ID #{@storage.id}."
+    flash[:success] = t('views.flash.created_entity',
+                        what: Storage.model_name.human(count: 1), id: @storage.id)
     redirect_to storages_path
   end
 
@@ -49,7 +50,8 @@ class StoragesController < ApplicationController
                                        edit_storage_path(@storage, sub_action: :refresh_nested)
     else
       @storage.update!(storage_params)
-      flash[:success] = "Updated storage with ID #{@storage.id}."
+      flash[:success] = t('views.flash.created_entity',
+                          what: Storage.model_name.human(count: 1), id: @storage.id)
       redirect_to storages_path
     end
   end
@@ -62,7 +64,8 @@ class StoragesController < ApplicationController
   def query_nested_collections
     {
         collections: Collection.where('id NOT IN (?)',
-                                      CollectionStorage.select(:collection_id).where(storage_id: @storage))
+                                      CollectionStorage.select(:collection_id)
+                                          .where(storage_id: @storage))
     }
   end
 

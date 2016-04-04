@@ -1,1 +1,24 @@
 en:
+  views:
+    deed:
+      actions:
+        add_content: "add Content"
+        add_new_btn_title: "add new Deed"
+        add_new_document: "add new Document"
+        add_new_mention: "add new Mention"
+        add_new_reference: "add new Reference"
+        add_new_seal: "add new Seal"
+        remove_content: "remove Content"
+        remove_mention: "remove Mention"
+      flash:
+        removed_mention: "Removed Mention from Deed."
+      modals:
+        edit: "Edit %{what}"
+        new: "Create new %{what}"
+      no_content: "no Content"
+      no_documents: "no Documents"
+      no_mentions: "no Mentions"
+      no_people: "no People"
+      no_places: "no Places"
+      no_roles: "no Roles"
+      none_selected: "no Deed selected"

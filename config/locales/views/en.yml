@@ -1,1 +1,26 @@
 en:
+  views:
+    actions:
+      delete_entity: "delete %{entity_name}"
+      edit_entity: "edit %{entity_name}"
+      refresh_table_btn_title: "refresh table"
+      show_details: "show Details"
+    date: "Date"
+    flash:
+      created_entity: "%{what} with ID ${id} successfully created."
+      deleted_entity: "%{what} with ID %{id} successfully deleted."
+      updated_entity: "%{what} with ID %{id} successfully updated."
+    linked_with: "linked with %{what}"
+    modals:
+      close: "Close"
+      delete_association: "delete association"
+      no_unassociated_found_html: "no unassociated %{what} found"
+      refresh_associations: "refresh associations"
+      remove_association: "remove association with %{what}"
+      search_for_unassociated: "Search for unassociated %{what}"
+      unsaved: "not saved"
+    no_description: "no description"
+    no_notes: "no notes"
+    non_associated: "no linked"
+    show_linked: "show linked %{what}"
+    unknown: "unknown"

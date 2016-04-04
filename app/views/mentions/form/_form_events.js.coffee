@@ -24,7 +24,7 @@ $ ->
         url: '/deeds/' + deeds_id_map[value]
         dataType: 'script'
     else
-      alert 'no Deed selected'
+      alert <%= t('views.deed.none_selected') %>
 
 
   assoc_person_container = form_modal.find('#assoc-person')
@@ -50,7 +50,7 @@ $ ->
         url: '/people/' + people_id_map[value]
         dataType: 'script'
     else
-      alert 'no Person selected'
+      alert <%= t('views.person.none_selected') %>
 
 
   assoc_place_container = form_modal.find('#assoc-place')
@@ -76,7 +76,7 @@ $ ->
         url: '/places/' + places_id_map[value]
         dataType: 'script'
     else
-      alert 'no Place selected'
+      alert <%= t('views.place.none_selected') %>
 
 
   assoc_role_container = form_modal.find('#assoc-role')
@@ -102,4 +102,4 @@ $ ->
         url: '/roles/' + roles_id_map[value]
         dataType: 'script'
     else
-      alert 'no Role selected'
+      alert <%= t('views.role.none_selected') %>

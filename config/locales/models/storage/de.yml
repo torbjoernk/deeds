@@ -1,10 +1,12 @@
+---
 de:
   activerecord:
+    attributes:
+      storage:
+        collections: Sammlungen
+        notes: Notizen
+        title: Titel
     models:
       storage:
         one: Bibliothek
         other: Bibliotheken
-    attributes:
-      storage:
-        title: Title
-        notes: Notizen

@@ -1,10 +1,10 @@
+---
 de:
   views:
     person:
       actions:
-        add_new_btn_title: 'Neue Person hinzufügen'
+        add_new_btn_title: Neue Person hinzufügen
       modals:
-        edit: '%{what} bearbeiten'
-        new: 'Neue %{what} erstellen'
-      flash:
-        created_entity: 'Neue %{what} mit ID %{id} wurde erstellt.'
+        edit: "%{what} bearbeiten"
+        new: Neue %{what} erstellen
+      none_selected: keine Person ausgewählt

@@ -1,1 +1,11 @@
 en:
+  activerecord:
+    attributes:
+      storage:
+        collections: "Collection"
+        notes: "Notes"
+        title: "Title"
+    models:
+      storage:
+        one: "Storage"
+        other: "Storages"

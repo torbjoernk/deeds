@@ -1,1 +1,11 @@
 en:
+  activerecord:
+    attributes:
+      content_translation:
+        language: "Language"
+        notes: "Notes"
+        translation: "Translation"
+    models:
+      content_translation:
+        one: "Translation"
+        other: "Translations"

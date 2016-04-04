@@ -6,7 +6,7 @@ class PeopleController < ApplicationController
   def index
     @people = Person.all
 
-    add_breadcrumb Person.model_name.plural.humanize, people_path
+    add_breadcrumb Person.model_name.human(count: 2), people_path
 
     respond_to do |format|
       format.html { render 'people/index' }
@@ -15,7 +15,7 @@ class PeopleController < ApplicationController
   end
 
   def show
-    @person = Person.find params[:id]
+    @person = Person.find_by id: params[:id]
     respond_to :js
   end
 
@@ -25,20 +25,20 @@ class PeopleController < ApplicationController
   end
 
   def edit
-    @person = Person.find params[:id]
+    @person = Person.find_by id: params[:id]
     edit_subaction 'people/edit', 'people/form/refresh'
   end
 
   def create
     @person = Person.create!(person_params)
-    flash[:success] = "Created new person with ID #{@person.id}"
+    flash[:success] = t('views.flash.created_entity', what: Person.model_name.human, id: @person.id)
     redirect_to people_path
   end
 
   def update
-    @person = Person.find params[:id]
+    @person = Person.find_by id: params[:id]
     @person.update!(person_params)
-    flash[:success] = "Updated person with ID #{@person.id}."
+    flash[:success] = t('views.flash.updated_entity', what: Person.model_name.human, id: @person.id)
     redirect_to people_path
   end
 

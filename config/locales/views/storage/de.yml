@@ -1,10 +1,10 @@
+---
 de:
   views:
     storage:
       actions:
-        add_new_btn_title: 'Neue Bibliothek hinzufügen'
+        add_new_btn_title: Neue Bibliothek hinzufügen
       modals:
-        edit: '%{what} bearbeiten'
-        new: 'Neue %{what} erstellen'
-      flash:
-        created_entity: 'Neue %{what} mit ID %{id} wurde erstellt.'
+        edit: "%{what} bearbeiten"
+        new: Neue %{what} erstellen
+      none_selected: keine Bibliothek ausgewählt

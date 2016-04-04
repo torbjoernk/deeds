@@ -7,9 +7,4 @@ class ApplicationController < ActionController::Base
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
   end
-
-  add_breadcrumb 'Home', :root_path
-
-  def index
-  end
 end

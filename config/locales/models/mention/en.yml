@@ -1,1 +1,13 @@
 en:
+  activerecord:
+    attributes:
+      mention:
+        deed: "Deed"
+        notes: "Notes"
+        person: "Person"
+        place: "Place"
+        role: "Role"
+    models:
+      mention:
+        one: "Mention"
+        other: "Mentions"

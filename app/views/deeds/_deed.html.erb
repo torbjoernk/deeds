@@ -6,15 +6,18 @@
     <div class="container-fluid">
       <div class="col-deed-year">
         <span class="tag tag-default"><%= Deed.human_attribute_name :year %></span>
-        <%= deed.year ? deed.year : "<em class=\"small text-muted\">#{t(:unknown, scope: [:views])}</em>".html_safe %>
+        <%= deed.year ? deed.year
+                      : "<em class=\"small text-muted\">#{t('views.unknown')}</em>".html_safe %>
       </div>
       <div class="col-deed-month">
         <span class="tag tag-default"><%= Deed.human_attribute_name :month %></span>
-        <%= deed.month ? deed.month : "<em class=\"small text-muted\">#{t(:unknown, scope: [:views])}</em>".html_safe %>
+        <%= deed.month ? deed.month
+                       : "<em class=\"small text-muted\">#{t('views.unknown')}</em>".html_safe %>
       </div>
       <div class="col-deed-day">
         <span class="tag tag-default"><%= Deed.human_attribute_name :day %></span>
-        <%= deed.day ? deed.day : "<em class=\"small text-muted\">#{t(:unknown, scope: [:views])}</em>".html_safe %>
+        <%= deed.day ? deed.day
+                     : "<em class=\"small text-muted\">#{t('views.unknown')}</em>".html_safe %>
       </div>
     </div>
   </div>
@@ -49,14 +52,14 @@
     <% else %>
       <%= link_to content_path(deed.content.id),
                   class: 'btn btn-sm btn-secondary',
-                  title: t(:show_content, scope: [:views, :deed]),
+                  title: t('views.show_linked', what: Content.model_name.human(count: 2)),
                   data: { toggle: 'tooltip' },
                   remote: true do %>
         <%= icon_for Content %>
       <% end %>
       <%= link_to content_path(deed.content.id),
                   class: 'btn btn-sm btn-secondary',
-                  title: t(:show_translations, scope: [:views, :deed]),
+                  title: t('views.show_linked', what: ContentTranslation.model_name.human(count: 2)),
                   data: { toggle: 'tooltip' },
                   remote: true do %>
         <%= deed.translations.count %>
@@ -68,21 +71,21 @@
   <div class="btn-group btn-group-sm" role="group">
     <%= link_to documents_path(deed_id: deed.id),
                 class: 'btn btn-sm btn-secondary',
-                title: t(:show_linked_documents, scope: [:views, :deed]),
+                title: t('views.show_linked', what: Document.model_name.human(count: 2)),
                 data: { toggle: 'tooltip' } do %>
       <%= deed.documents.count %>
       <%= icon_for Document %>
     <% end %>
     <%= link_to nil,#references_path(deed_id: deed.id),
                 class: 'btn btn-sm btn-secondary',
-                title: t(:show_linked_references, scope: [:views, :deed]),
+                title: t('views.show_linked', what: 'References'),
                 data: { toggle: 'tooltip' } do %>
       ?
       <%= icon('external-link', class: 'fa-fw') %>
     <% end %>
     <%= link_to nil,#seals_path(deed_id: deed.id),
                 class: 'btn btn-sm btn-secondary',
-                title: t(:show_linked_seals, scope: [:views, :deed]),
+                title: t('views.show_linked', what: 'Seals'),
                 data: { toggle: 'tooltip' } do %>
       ?
       <%= icon('bookmark-o', class: 'fa-fw') %>
@@ -92,28 +95,28 @@
   <div class="btn-group btn-group-sm" role="group">
     <%= link_to mentions_path(deed_id: deed.id),
                 class: 'btn btn-sm btn-secondary',
-                title: t(:show_linked_mentions, scope: [:views, :deed]),
+                title: t('views.show_linked', what: Mention.model_name.human(count: 2)),
                 data: { toggle: 'tooltip' } do %>
       <%= deed.mentions.count %>
       <%= icon_for Mention %>
     <% end %>
     <%= link_to people_path(deed_id: deed.id),
                 class: 'btn btn-sm btn-secondary',
-                title: t(:show_linked_people, scope: [:views, :deed]),
+                title: t('views.show_linked', what: Person.model_name.human(count: 2)),
                 data: { toggle: 'tooltip' } do %>
       <%= deed.people.count %>
       <%= icon_for Person %>
     <% end %>
     <%= link_to places_path(deed_id: deed.id),
                 class: 'btn btn-sm btn-secondary',
-                title: t(:show_linked_places, scope: [:views, :deed]),
+                title: t('views.show_linked', what: Place.model_name.human(count: 2)),
                 data: { toggle: 'tooltip' } do %>
       <%= deed.places.count %>
       <%= icon_for Place %>
     <% end %>
     <%= link_to roles_path(deed_id: deed.id),
                 class: 'btn btn-sm btn-secondary',
-                title: t(:show_linked_roles, scope: [:views, :deed]),
+                title: t('views.show_linked', what: Role.model_name.human(count: 2)),
                 data: { toggle: 'tooltip' } do %>
       <%= deed.roles.count %>
       <%= icon_for Role %>
@@ -130,7 +133,7 @@
     <%= truncate deed.description, length: 200, separator: ' ' %>
   <% else %>
     <em class="small text-muted">
-      <%= t(:no_description, scope: [:views, :deed]) %>
+      <%= t('views.no_description') %>
     </em>
   <% end %>
 <% end %>

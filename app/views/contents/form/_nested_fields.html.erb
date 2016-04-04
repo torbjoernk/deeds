@@ -2,7 +2,8 @@
   <label class="col-md-3 form-control-label">
     <%= model_name_with_icon ContentTranslation, :plural %>
   </label>
-  <div id="content-content-translations-accordion" class="col-md-9" role="tablist" aria-multiselectable="true">
+  <div id="content-content-translations-accordion" class="col-md-9" role="tablist"
+       aria-multiselectable="true">
     <% @content.translations.each do |translation| %>
       <%= fields_for :translations, translation do |t_f| %>
         <div id="associated-content-translation-<%= t_f.object.id %>"
@@ -17,7 +18,7 @@
                aria-controls="collapse-translation-<%= t_f.object.id %>">
             <%= model_name_with_icon ContentTranslation, :singular %>
             &mdash;
-            <%= t(t_f.object.language, scope: [:activerecord, :attributes, :content, :languages]) %>
+            <%= t(t_f.object.language, scope: 'activerecord.attributes.content.languages') %>
             <span class="tag tag-default pull-right">ID: <%= t_f.object.id %></span>
           </div>
           <div id="collapse-translation-<%= t_f.object.id %>"
@@ -30,9 +31,12 @@
                 <%= t_f.select :language,
                                options_for_select(
                                    Content::LANGUAGES.map {
-                                       |e| [t(e, scope: [:activerecord, :attributes, :content, :languages]), e]
+                                       |e| [t(e,
+                                              scope: 'activerecord.attributes.content.languages'),
+                                            e]
                                    },
-                                   t_f.object.language ? t_f.object.language.humanize : nil),
+                                   t_f.object.language ? t_f.object.language.humanize : nil
+                               ),
                                {},
                                { class: 'custom-select' } %>
               </div>
@@ -46,30 +50,32 @@
             <div class="row form-group">
               <div class="col-md-12">
                 <div class="btn-group btn-group-sm pull-right">
-                  <%= link_to edit_content_content_translation_path(content_id: @content.id, id: t_f.object.id),
+                  <%= link_to edit_content_content_translation_path(content_id: @content.id,
+                                                                    id: t_f.object.id),
                               remote: true,
                               method: :delete,
                               class: 'btn btn-sm btn-outline-primary',
                               id: "btn-content-translation-update-#{t_f.object.id}",
-                              title: t(:update, scope: [:helpers, :submit]),
+                              title: t('helpers.submit.update'),
                               data: {
                                   toggle: 'tooltip'
                               } do %>
                     <%= icon('save', class: 'fa-fw') %>
-                    <%= t :update, scope: [:helpers, :submit] %>
+                    <%= t('helpers.submit.update') %>
                   <% end %>
-                  <%= link_to content_content_translation_path(content_id: @content.id, id: t_f.object.id),
+                  <%= link_to content_content_translation_path(content_id: @content.id,
+                                                               id: t_f.object.id),
                               remote: true,
                               method: :delete,
                               class: 'btn btn-sm btn-outline-danger',
                               id: "btn-content-translation-delete-#{t_f.object.id}",
-                              title: t(:delete, scope: [:helpers]),
+                              title: t('helpers.delete'),
                               data: {
-                                  confirm: t(:delete, scope: [:helpers, :confirmation]),
+                                  confirm: t('helpers.confirmation.delete'),
                                   toggle: 'tooltip'
                               } do %>
                     <%= icon('trash', class: 'fa-fw') %>
-                    <%= t :delete, scope: [:helpers] %>
+                    <%= t('helpers.delete') %>
                   <% end %>
                 </div>
               </div>
@@ -84,7 +90,7 @@
                       id: 'btn-add-new-content-translation',
                       class: 'btn btn-sm btn-primary pull-right',
                       role: 'button',
-                      title: t(:add_new_translation, scope: [:views, :content, :modals]),
+                      title: t('views.content.modals.add_new_translation'),
                       data: { toggle: 'tooltip' } %>
     </div>
   </div>

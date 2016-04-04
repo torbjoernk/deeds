@@ -7,7 +7,7 @@
        href="#collapse-translation-<%= content_translation.id %>"
        aria-expanded="false"
        aria-controls="collapse-translation-<%= content_translation.id %>">
-    <%= t content_translation.language, scope: [:activerecord, :attributes, :content, :languages] %>
+    <%= t(content_translation.language, scope: 'activerecord.attributes.content.languages') %>
   </div>
   <div id="collapse-translation-<%= content_translation.id %>"
        class="card-block collapse"

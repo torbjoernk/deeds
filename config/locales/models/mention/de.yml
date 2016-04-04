@@ -1,8 +1,14 @@
+---
 de:
   activerecord:
+    attributes:
+      mention:
+        deed: Urkunde
+        notes: Notizen
+        person: Person
+        place: Ort
+        role: Rolle
     models:
       mention:
         one: Nennung
         other: Nennungen
-    attributes:
-      mention:

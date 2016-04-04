@@ -1,10 +1,16 @@
+---
 de:
   views:
     mention:
       actions:
-        add_new_btn_title: 'Neue Nennung hinzufügen'
+        add_new_btn_title: Neue Nennung hinzufügen
+      as_role: als
+      at_place: von
+      in_deed: in
       modals:
-        edit: '%{what} bearbeiten'
-        new: 'Neue %{what} erstellen'
-      flash:
-        created_entity: 'Neue %{what} mit ID %{id} wurde erstellt.'
+        edit: "%{what} bearbeiten"
+        new: Neue %{what} erstellen
+      no_deed_referenced: keine Urkunde verknüpft
+      no_person_referenced: keine Person verknüpft
+      no_place_referenced: kein Ort verknüpft
+      no_role_referenced: keine Rolle verknüpft

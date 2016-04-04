@@ -10,9 +10,9 @@ class Mention < ActiveRecord::Base
   def to_s
     out = []
     out << "#{person.to_s}" unless person.nil?
-    out << "as #{role.to_s}" unless role.nil?
-    out << "of #{place.to_s}" unless place.nil?
-    out << "in #{deed.to_s}" unless deed.nil?
+    out << "#{t('views.mention.as_role')} #{role.to_s}" unless role.nil?
+    out << "#{t('views.mention.at_place')} #{place.to_s}" unless place.nil?
+    out << "#{t('views.mention.in_deed')} #{deed.to_s}" unless deed.nil?
     out.join(' ')
   end
 end

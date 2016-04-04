@@ -11,14 +11,14 @@
   <label class="col-md-3"><strong><%= Person.human_attribute_name :gender %></strong></label>
   <div class="col-md-9">
     <%= icon(person.gender_icon, class: 'fa-fw') %>
-    <%= person.gender.humanize %>
+    <%= t(person.gender, scope: 'activerecord.attributes.person.genders') %>
   </div>
 </div>
 <div class="row">
   <label class="col-md-3"><strong><%= Person.human_attribute_name :notes %></strong></label>
   <div class="col-md-9">
     <% if person.notes.nil? or person.notes.empty? %>
-      <em class="text-muted">no notes</em>
+      <em class="text-muted"><%= t('views.no_notes') %></em>
     <% else %>
       <%= person.notes %>
     <% end %>

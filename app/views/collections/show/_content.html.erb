@@ -23,25 +23,25 @@
   <div class="row">
     <label class="col-md-3"><strong><%= Document.model_name.human(count: 2) %></strong></label>
     <% if collection.documents.count > 0 %>
-      <ul class="col-md-9 list-group list-group-flush" id="collection-documents-accordion" role="tablist" aria-multiselectable="true">
-        <%= render partial: 'documents/nested_show', collection: collection.documents, as: :document %>
+      <ul class="col-md-9 list-group list-group-flush" id="collection-documents-accordion"
+          role="tablist" aria-multiselectable="true">
+        <%= render partial: 'documents/nested_show',
+                   collection: collection.documents, as: :document %>
       </ul>
     <% else %>
-      <div class="col-md-9">
-        <%= t :non_associated, scope: [:views] %>
-      </div>
+      <div class="col-md-9"><%= t('views.non_associated') %></div>
     <% end %>
   </div>
   <div class="row">
     <label class="col-md-3"><strong><%= Storage.model_name.human(count: 2) %></strong></label>
     <% if collection.storages.count > 0 %>
-      <ul class="col-md-9 list-group list-group-flush" id="collection-storages-accordion" role="tablist" aria-multiselectable="true">
-        <%= render partial: 'storages/nested_show', collection: collection.storages, as: :storage %>
+      <ul class="col-md-9 list-group list-group-flush" id="collection-storages-accordion"
+          role="tablist" aria-multiselectable="true">
+        <%= render partial: 'storages/nested_show',
+                   collection: collection.storages, as: :storage %>
       </ul>
     <% else %>
-      <div class="col-md-9">
-        <%= t :non_associated, scope: [:views] %>
-      </div>
+      <div class="col-md-9"><%= t('views.non_associated') %></div>
     <% end %>
   </div>
 <% end %>

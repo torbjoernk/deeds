@@ -6,7 +6,7 @@ class PlacesController < ApplicationController
   def index
     @places = Place.all
 
-    add_breadcrumb Place.model_name.plural.humanize, places_path
+    add_breadcrumb Place.model_name.human(count: 2), places_path
 
     respond_to do |format|
       format.html { render 'places/index' }
@@ -15,7 +15,7 @@ class PlacesController < ApplicationController
   end
 
   def show
-    @place = Place.find params[:id]
+    @place = Place.find_by id: params[:id]
     respond_to :js
   end
 
@@ -25,20 +25,22 @@ class PlacesController < ApplicationController
   end
 
   def edit
-    @place = Place.find params[:id]
+    @place = Place.find_by id: params[:id]
     edit_subaction 'places/edit', 'places/form/refresh'
   end
 
   def create
     @place = Place.create!(place_params)
-    flash[:success] = "Created new place with ID #{@place.id}"
+    flash[:success] = t('views.flash.created_entity',
+                        what: Place.model_name.human(count: 1), id: @place.id)
     redirect_to places_path
   end
 
   def update
-    @place = Place.find params[:id]
+    @place = Place.find_by id: params[:id]
     @place.update!(place_params)
-    flash[:success] = "Updated place with ID #{@place.id}."
+    flash[:success] = t('views.flash.updated_entity',
+                        what: Place.model_name.human(count: 1), id: @place.id)
     redirect_to places_path
   end
 

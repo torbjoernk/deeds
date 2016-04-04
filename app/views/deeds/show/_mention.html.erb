@@ -9,13 +9,13 @@
   <% end %>
 
   <% unless mention.role.nil? %>
-    <%= t(:as_role, scope: [:views, :deed, :mentions]) %>
+    <%= t('views.mention.as_role') %>
     <%= icon_for Role %>
     <%= mention.role.title %>
   <% end %>
 
   <% unless mention.place.nil? %>
-    <%= t(:for_place, scope: [:views, :deed, :mentions]) %>
+    <%= t('views.mention.at_place') %>
     <%= icon_for Place %>
     <%= mention.place.title %>
   <% end %>
@@ -26,7 +26,7 @@
                   method: :patch,
                   id: "btn-remove-mention-#{mention.id}",
                   class: 'btn btn-sm btn-outline-danger',
-                  title: t(:remove_mention, scope: [:views, :deed, :actions]),
+                  title: t('views.deed.actions.remove_mention'),
                   data: { toggle: 'tooltip' } do %>
       <%= icon('trash', class: 'fa-fw') %>
     <% end %>

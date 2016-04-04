@@ -1,1 +1,16 @@
 en:
+  activerecord:
+    attributes:
+      document:
+        document_type: "Type"
+        document_types:
+          digital: "Digital"
+          original: "Original"
+          print: "Print"
+          transcript: "Transcript"
+        notes: "Notes"
+        title: "Title"
+    models:
+      document:
+        one: "Document"
+        other: "Documents"

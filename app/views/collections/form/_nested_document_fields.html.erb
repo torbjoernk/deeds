@@ -6,7 +6,7 @@
                       icon('refresh', class: 'fa-fw'),
                       id: 'btn-refresh-nested-fields',
                       class: 'btn btn-sm btn-outline-default',
-                      title: t(:refresh_associations, scope: [:views, :modals]),
+                      title: t('views.modals.refresh_associations'),
                       data: { toggle: 'tooltip' } %>
     </span>
   </label>
@@ -22,7 +22,7 @@
                         remote: true,
                         id: "btn-deassoc-document-#{document.id}",
                         class: 'btn btn-sm btn-danger',
-                        title: t(:delete_association, scope: [:views, :modals]),
+                        title: t('views.modals.delete_association'),
                         data: { toggle: 'tooltip' } do %>
               <%= icon('minus', class: 'fa-fw') %>
             <% end %>
@@ -38,7 +38,8 @@
                            class: 'form-control form-control-sm',
                            type: 'text',
                            list: 'free-documents',
-                           placeholder: t(:search_for_unassociated, scope: [:views, :modals], what: Document.model_name.human(count: 2)) %>
+                           placeholder: t('views.modals.search_for_unassociated',
+                                          what: Document.model_name.human(count: 2)) %>
             <%= content_tag :datalist, id: 'free-documents' do %>
               <% @free_documents.each do |document| %>
                 <%= content_tag :option,
@@ -60,7 +61,8 @@
             </div>
           </div>
         <% else %>
-          <%= t(:no_unassociated_found_html, scope: [:views, :modals], what: model_name_with_icon(Document, :plural)) %>
+          <%= t('views.modals.no_unassociated_found_html',
+                what: model_name_with_icon(Document, :plural)) %>
         <% end %>
       </li>
     </ul>

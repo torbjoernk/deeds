@@ -1,1 +1,10 @@
 en:
+  views:
+    content:
+      actions:
+        add_new_btn_title: "add new Content"
+      modals:
+        add_new_translation: "add new Translation"
+        edit: "Edit %{what}"
+        new: "Create new %{what}"
+      no_translations: "no Translations"

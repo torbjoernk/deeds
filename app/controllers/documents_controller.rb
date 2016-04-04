@@ -12,12 +12,12 @@ class DocumentsController < ApplicationController
     elsif params.has_key? :deed_id
       @deed = Deed.find_by id: params[:deed_id]
       @documents = @deed.documents
-      add_breadcrumb Deed.model_name.human, deeds_path
+      add_breadcrumb Deed.model_name.human(count: 1), deeds_path
     else
       @documents = Document.all
     end
 
-    add_breadcrumb Document.model_name.plural.humanize, :documents_path
+    add_breadcrumb Document.model_name.human(count: 2), documents_path
 
     respond_to do |format|
       format.js   { render 'index' }
@@ -44,7 +44,8 @@ class DocumentsController < ApplicationController
 
   def create
     @document = Document.create!(document_params)
-    flash[:success] = "Created new document with ID #{@document.id}"
+    flash[:success] = t('views.flash.created_entity',
+                        what: Document.model_name.human, id: @document.id)
     redirect_to documents_path
   end
 
@@ -55,7 +56,8 @@ class DocumentsController < ApplicationController
                                        edit_document_path(@document, sub_action: :refresh_nested)
     else
       @document.update!(document_params)
-      flash[:success] = "Updated document with ID #{@document.id}."
+      flash[:success] = t('views.flash.updated_entity',
+                          what: Document.model_name.human, id: @document.id)
       redirect_to documents_path
     end
   end
@@ -68,7 +70,8 @@ class DocumentsController < ApplicationController
   def query_nested_collections
     {
         collections: Collection.where('id NOT IN (?)',
-                                      CollectionDocument.select(:collection_id).where(document_id: @document.id))
+                                      CollectionDocument.select(:collection_id)
+                                          .where(document_id: @document.id))
     }
   end
 

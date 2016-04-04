@@ -1,1 +1,9 @@
 en:
+  views:
+    storage:
+      actions:
+        add_new_btn_title: "add new Storage"
+      modals:
+        edit: "Edit %{what}"
+        new: "Create new %{what}"
+      none_selected: "no Storage selected"

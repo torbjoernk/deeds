@@ -1,1 +1,9 @@
 en:
+  views:
+    document:
+      actions:
+        add_new_btn_title: "add new Document"
+      modals:
+        edit: "Edit %{what}"
+        new: "Create new %{what}"
+      none_selected: "no Document selected"
