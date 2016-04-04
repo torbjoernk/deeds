@@ -9,7 +9,6 @@ class DocumentsController < ApplicationController
     if params.has_key? :collection_id
       index_for_nested_collection params[:collection_id]
       @documents = @collection.documents
-      add_breadcrumb Collection.model_name.human(count: 1), collections_path
     elsif params.has_key? :deed_id
       @deed = Deed.find_by id: params[:deed_id]
       @documents = @deed.documents

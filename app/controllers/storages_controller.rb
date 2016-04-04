@@ -9,7 +9,6 @@ class StoragesController < ApplicationController
     if params.has_key? :collection_id
       index_for_nested_collection params[:collection_id]
       @storages = @collection.storages
-      add_breadcrumb Collection.model_name.human(count: 1), collections_path
     else
       @storages = Storage.all
     end
