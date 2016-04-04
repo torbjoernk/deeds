@@ -49,6 +49,8 @@ group :development, :test do
   gem 'launchy'
   gem 'guard-rspec', require: false
   gem 'byebug'
+
+  gem 'i18n-tasks', '~> 0.9.5'
 end
 
 group :development do
