@@ -13,25 +13,25 @@
 
 ActiveRecord::Schema.define(version: 20160201061334) do
 
-  create_table "archive_sources", force: :cascade do |t|
-    t.integer  "archive_id"
-    t.integer  "source_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "collection_documents", force: :cascade do |t|
+    t.integer  "collection_id"
+    t.integer  "document_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
-  add_index "archive_sources", ["archive_id", "source_id"], name: "index_archive_sources_on_archive_id_and_source_id", unique: true
+  add_index "collection_documents", ["collection_id", "document_id"], name: "index_collection_documents_on_collection_id_and_document_id", unique: true
 
-  create_table "archive_storages", force: :cascade do |t|
-    t.integer  "archive_id"
+  create_table "collection_storages", force: :cascade do |t|
+    t.integer  "collection_id"
     t.integer  "storage_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
-  add_index "archive_storages", ["archive_id", "storage_id"], name: "index_archive_storages_on_archive_id_and_storage_id", unique: true
+  add_index "collection_storages", ["collection_id", "storage_id"], name: "index_collection_storages_on_collection_id_and_storage_id", unique: true
 
-  create_table "archives", force: :cascade do |t|
+  create_table "collections", force: :cascade do |t|
     t.string   "title"
     t.string   "abbr"
     t.text     "notes"
@@ -39,8 +39,8 @@ ActiveRecord::Schema.define(version: 20160201061334) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "archives", ["abbr"], name: "index_archives_on_abbr", unique: true
-  add_index "archives", ["title"], name: "index_archives_on_title", unique: true
+  add_index "collections", ["abbr"], name: "index_collections_on_abbr", unique: true
+  add_index "collections", ["title"], name: "index_collections_on_title", unique: true
 
   create_table "content_translations", force: :cascade do |t|
     t.integer  "content_id"
@@ -72,6 +72,17 @@ ActiveRecord::Schema.define(version: 20160201061334) do
   end
 
   add_index "deeds", ["title", "year", "month", "day"], name: "index_deeds_on_title_and_year_and_month_and_day", unique: true
+
+  create_table "documents", force: :cascade do |t|
+    t.string   "title"
+    t.string   "document_type"
+    t.text     "notes"
+    t.integer  "deed_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "documents", ["deed_id"], name: "index_documents_on_deed_id"
 
   create_table "mentions", force: :cascade do |t|
     t.integer  "deed_id"
@@ -131,17 +142,6 @@ ActiveRecord::Schema.define(version: 20160201061334) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  create_table "sources", force: :cascade do |t|
-    t.string   "title"
-    t.string   "source_type"
-    t.text     "notes"
-    t.integer  "deed_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "sources", ["deed_id"], name: "index_sources_on_deed_id"
 
   create_table "storages", force: :cascade do |t|
     t.string   "title"

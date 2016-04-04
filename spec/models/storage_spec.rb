@@ -5,12 +5,12 @@ describe Storage, type: :model do
   it_behaves_like 'an IconicModel', Storage
 
   let(:storage) { build :storage }
-  let(:archive1) { build :archive }
-  let(:archive2) do
-    archive = build :archive, title: Faker::Name.title, abbr: Faker::Lorem.characters(5)
-    expect(archive1.title).not_to eq archive.title
-    expect(archive1.abbr).not_to eq archive.abbr
-    archive
+  let(:collection1) { build :collection }
+  let(:collection2) do
+    collection = build :collection, title: Faker::Name.title, abbr: Faker::Lorem.characters(5)
+    expect(collection1.title).not_to eq collection.title
+    expect(collection1.abbr).not_to eq collection.abbr
+    collection
   end
 
   it 'has a valid factory', use_db: true do
@@ -29,12 +29,12 @@ describe Storage, type: :model do
   end
 
   describe 'has association with' do
-    specify 'many Archives', use_db: true do
+    specify 'many collections', use_db: true do
       storage.save!
-      storage.archives = [archive1, archive2]
+      storage.collections = [collection1, collection2]
       storage.save!
 
-      expect(storage.archives).to include archive1, archive2
+      expect(storage.collections).to include collection1, collection2
     end
   end
 

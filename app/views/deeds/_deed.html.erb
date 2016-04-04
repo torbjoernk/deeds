@@ -66,12 +66,12 @@
   </div>
 
   <div class="btn-group btn-group-sm" role="group">
-    <%= link_to sources_path(deed_id: deed.id),
+    <%= link_to documents_path(deed_id: deed.id),
                 class: 'btn btn-sm btn-secondary',
-                title: t(:show_linked_sources, scope: [:views, :deed]),
+                title: t(:show_linked_documents, scope: [:views, :deed]),
                 data: { toggle: 'tooltip' } do %>
-      <%= deed.sources.count %>
-      <%= icon_for Source %>
+      <%= deed.documents.count %>
+      <%= icon_for Document %>
     <% end %>
     <%= link_to nil,#references_path(deed_id: deed.id),
                 class: 'btn btn-sm btn-secondary',

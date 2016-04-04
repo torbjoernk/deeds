@@ -1,0 +1,34 @@
+<h1>
+  <%= model_name_with_icon Document, :plural %>
+  <%= render partial: 'shared/index/main_action_btn',
+             locals: { path_to_new_entity: new_document_path,
+                       path_to_refresh: documents_path,
+                       entity_model: Document } %>
+</h1>
+
+<% if @collection %>
+  <dl class="row">
+    <dt class="col-md-2">associated with Collection</dt>
+    <dd class="col-md-10">
+      <%= render partial: 'collections/oneline', locals: {collection: @collection } %>
+    </dd>
+  </dl>
+<% end %>
+<% if @deed %>
+  <dl class="row">
+    <dt class="col-md-2">associated with Deed</dt>
+    <dd class="col-md-10">
+      <%= render partial: 'deeds/oneline', locals: { deed: @deed } %>
+    </dd>
+  </dl>
+<% end %>
+
+<div class="row">
+  <div id="documents-table">
+    <div class="table" id="documents">
+      <div class="table-body container-fluid">
+        <%= render partial: 'document', collection: @documents %>
+      </div>
+    </div>
+  </div>
+</div>

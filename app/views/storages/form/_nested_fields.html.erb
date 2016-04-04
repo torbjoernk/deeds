@@ -1,6 +1,6 @@
 <div class="row form-group">
   <label class="col-md-3 form-control-label">
-    <%= model_name_with_icon Archive, :plural %>
+    <%= model_name_with_icon Collection, :plural %>
     <span class="pull-right">
       <%= content_tag :a,
                       icon('refresh', class: 'fa-fw'),
@@ -11,54 +11,54 @@
     </span>
   </label>
   <div class="col-md-9">
-    <ul id="associate-archives" class="list-group list-group-flush">
-      <% @storage.archives.each do |archive| %>
-        <li id="associated-archive-<%= archive.id %>" class="list-group-item form-control">
-          <%= archive.title %>
+    <ul id="associate-collections" class="list-group list-group-flush">
+      <% @storage.collections.each do |collection| %>
+        <li id="associated-collection-<%= collection.id %>" class="list-group-item form-control">
+          <%= collection.title %>
           <span class="btn-group btn-group-sm pull-right">
-            <%= link_to_show_entity archive %>
-            <%= link_to storage_path(@storage.id, sub_action: :deassociate, archive_id: archive.id),
+            <%= link_to_show_entity collection %>
+            <%= link_to storage_path(@storage.id, sub_action: :deassociate, collection_id: collection.id),
                         method: :patch,
                         remote: true,
-                        id: "btn-deassoc-archive-#{archive.id}",
+                        id: "btn-deassoc-collection-#{collection.id}",
                         class: 'btn btn-sm btn-danger',
-                        title: 'Deassociate Archive',
+                        title: 'Deassociate Collection',
                         data: { toggle: 'tooltip' } do %>
               <%= icon('minus', class: 'fa-fw') %>
             <% end %>
           </span>
         </li>
       <% end %>
-      <li id="associate-archive-add" class="list-group-item form-control">
-        <% if @unassociated[:archives].count > 0 %>
+      <li id="associate-collection-add" class="list-group-item form-control">
+        <% if @unassociated[:collections].count > 0 %>
           <div class="form-group input-group">
             <%= text_field nil,
                            nil,
-                           id: 'assoc-archive-input',
+                           id: 'assoc-collection-input',
                            class: 'form-control form-control-sm',
                            type: 'text',
-                           list: 'free-archives',
-                           placeholder: 'Search for non-associated Archive' %>
-            <%= content_tag :datalist, id: 'free-archives' do %>
-              <% @unassociated[:archives].each do |archive| %>
-                <%= content_tag :option, archive.title, data: {'archive-id': archive.id } %>
+                           list: 'free-collections',
+                           placeholder: 'Search for non-associated Collection' %>
+            <%= content_tag :datalist, id: 'free-collections' do %>
+              <% @unassociated[:collections].each do |collection| %>
+                <%= content_tag :option, collection.title, data: {'collection-id': collection.id } %>
               <% end %>
             <% end %>
             <div class="input-group-btn">
               <%= content_tag :a,
                               icon('search', class: 'fa-fw'),
-                              id: 'btn-show-selected-archive-details',
+                              id: 'btn-show-selected-collection-details',
                               class: 'btn btn-sm btn-outline-info',
                               role: 'button' %>
               <%= content_tag :a,
                               icon('plus', class: 'fa-fw'),
-                              id: 'btn-associate-selected-archive',
+                              id: 'btn-associate-selected-collection',
                               class: 'btn btn-sm btn-primary',
                               role: 'button' %>
             </div>
           </div>
         <% else %>
-          no unassociated Archives
+          no unassociated Collections
         <% end %>
       </li>
     </ul>

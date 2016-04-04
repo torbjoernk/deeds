@@ -15,9 +15,9 @@ Rails.application.routes.draw do
   #   resources :products
   resources :storages
 
-  resources :archives
+  resources :collections
 
-  resources :sources
+  resources :documents
 
   resources :contents do
     resources :content_translations

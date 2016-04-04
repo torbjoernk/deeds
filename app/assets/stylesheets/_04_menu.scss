@@ -1,0 +1,7 @@
+ul.nav {
+  li {
+    ul.nav {
+      @extend .m-l-2;
+    }
+  }
+}

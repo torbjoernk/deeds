@@ -1,14 +1,14 @@
 class StoragesController < ApplicationController
   include Common
   include AssociationUpdate
-  include ArchiveAssociation
+  include CollectionAssociation
 
   after_filter { flash.discard if request.xhr? }
 
   def index
-    if params.has_key? :archive_id
-      index_for_nested_archive params[:archive_id]
-      @storages = @archive.storages
+    if params.has_key? :collection_id
+      index_for_nested_collection params[:collection_id]
+      @storages = @collection.storages
     else
       @storages = Storage.all
     end
@@ -27,7 +27,7 @@ class StoragesController < ApplicationController
   end
 
   def show
-    @storage = Storage.find params[:id]
+    @storage = Storage.find_by id: params[:id]
     respond_to :js
   end
 
@@ -38,15 +38,15 @@ class StoragesController < ApplicationController
   end
 
   def edit
-    @storage = Storage.find params[:id]
+    @storage = Storage.find_by id: params[:id]
     edit_subaction 'storages/edit', 'storages/form/refresh'
   end
 
   def update
-    @storage = Storage.find params[:id]
+    @storage = Storage.find_by id: params[:id]
     if params.has_key? :sub_action
-      update_associated_archive_for @storage,
-                                    edit_storage_path(@storage, sub_action: :refresh_nested)
+      update_associated_collection_for @storage,
+                                       edit_storage_path(@storage, sub_action: :refresh_nested)
     else
       @storage.update!(storage_params)
       flash[:success] = "Updated storage with ID #{@storage.id}."
@@ -61,8 +61,8 @@ class StoragesController < ApplicationController
 
   def query_nested_collections
     {
-        archives: Archive.where('id NOT IN (?)',
-                                ArchiveStorage.select(:archive_id).where(storage_id: @storage))
+        collections: Collection.where('id NOT IN (?)',
+                                      CollectionStorage.select(:collection_id).where(storage_id: @storage))
     }
   end
 

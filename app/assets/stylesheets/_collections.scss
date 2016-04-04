@@ -1,0 +1,15 @@
+.table {
+  .entity.row {
+    .col-info {
+      .col-collection-title {
+        @include make-col(5);
+        @extend .p-x-0;
+      }
+
+      .col-collection-abbr {
+        @include make-col(1);
+        @extend .p-x-0;
+      }
+    }
+  }
+}

@@ -177,10 +177,10 @@ feature 'On the Storage Page', type: :feature do
       end
     end
 
-    context 'and is associated to an Archive', with_db: true do
+    context 'and is associated to an Collection', with_db: true do
       before :each do
-        @archive = create :archive
-        @storage.archives << @archive
+        collection = create :collection
+        @storage.collections << collection
         @storage.save!
 
         visit storages_path
@@ -192,38 +192,38 @@ feature 'On the Storage Page', type: :feature do
           expect(page).to have_selector 'div#form-modal', visible: true
 
           within 'div#form-modal' do
-            within 'ul#associate-archives' do
-              expect(page).to have_text @archive.title
+            within 'ul#associate-collections' do
+              expect(page).to have_text collection.title
             end
           end
         end
 
-        scenario 'then no further Archives should be associatable' do
-          within 'ul#associate-archives' do
-            expect(page).to have_text 'no unassociated Archives'
+        scenario 'then no further Collections should be associatable' do
+          within 'ul#associate-collections' do
+            expect(page).to have_text 'no unassociated Collections'
           end
         end
 
         feature 'and the User clicks on the "de-associate" button', skip: WITHOUT_AJAX do
           before :each do
             within 'div#form-modal' do
-              find(:css, "#btn-deassoc-archive-#{@archive.id}").click
+              find(:css, "#btn-deassoc-collection-#{collection.id}").click
             end
           end
 
           scenario 'then the association is removed' do
             within 'div#form-modal' do
-              expect(page).not_to have_text @archive.title
+              expect(page).not_to have_text collection.title
             end
-            expect(Storage.find(@storage.id).archives).not_to include @archive
+            expect(Storage.find(@storage.id).collections).not_to include collection
           end
         end
       end
     end
 
-    context 'and an Archive exists', with_db: true do
+    context 'and an Collection exists', with_db: true do
       before :each do
-        @archive = create :archive
+        collection = create :collection
       end
 
       context 'when the User clicks on the "Edit" button of the first Storage', js: true do
@@ -232,33 +232,33 @@ feature 'On the Storage Page', type: :feature do
           expect(page).to have_selector 'div#form-modal', visible: true
         end
 
-        scenario 'then further Archives should be associatable' do
-          within 'ul#associate-archives' do
-            expect(page).not_to have_text 'no unassociated Archives'
+        scenario 'then further Collections should be associatable' do
+          within 'ul#associate-collections' do
+            expect(page).not_to have_text 'no unassociated Collections'
           end
         end
 
-        context 'and the User enters the Archive\'s title' do
+        context 'and the User enters the Collection\'s title' do
           before :each do
             within 'div#form-modal' do
-              fill_in 'assoc-archive-input', with: @archive.title
+              fill_in 'assoc-collection-input', with: collection.title
             end
           end
 
           feature 'and the User clicks on the "associate" button', skip: WITHOUT_AJAX do
             before :each do
               within 'div#form-modal' do
-                find(:css, '#btn-associate-selected-archive').click
+                find(:css, '#btn-associate-selected-collection').click
                 expect(page).to have_css '.form-control-success'
               end
             end
 
-            scenario 'the Archive is associated with the Storage' do
+            scenario 'the Collection is associated with the Storage' do
               within 'div#form-modal' do
-                expect(page).to have_text @archive.title
-                expect(page).to have_text 'no unassociated Archives'
+                expect(page).to have_text collection.title
+                expect(page).to have_text 'no unassociated Collections'
               end
-              expect(Storage.find(@storage.id).archives).to include @archive
+              expect(Storage.find(@storage.id).collections).to include collection
             end
           end
         end

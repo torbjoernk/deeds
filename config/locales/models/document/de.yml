@@ -1,0 +1,16 @@
+de:
+  activerecord:
+    models:
+      document:
+        one: Dokument
+        other: Dokumente
+    attributes:
+      document:
+        title: Title
+        document_type: Typ
+        notes: Notizen
+        document_types:
+          original: Original
+          transcript: Abschrift
+          print: Druck
+          digital: Digital

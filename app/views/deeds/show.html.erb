@@ -154,12 +154,12 @@
     <div class="col-md-4">
       <div class="card">
         <div class="card-header">
-          <%= model_name_with_icon Source, :plural %>
+          <%= model_name_with_icon Document, :plural %>
           <span class="pull-right">
-            <%=  link_to new_source_path(deed_id: @deed.id),
+            <%=  link_to new_document_path(deed_id: @deed.id),
                          class: 'btn btn-sm btn-primary',
-                         id: 'btn-new-source',
-                         title: t(:add_new_source, scope: [:views, :deed, :actions]),
+                         id: 'btn-new-document',
+                         title: t(:add_new_document, scope: [:views, :deed, :actions]),
                          data: { toggle: 'tooltip', 'turbolinks': false, placement: 'left' },
                          remote: true do -%>
               <%= icon('plus', class: 'fa-fw') %>
@@ -167,10 +167,10 @@
           </span>
         </div>
         <ul class="list-group list-group-flush">
-          <% if @deed.sources.count > 0 %>
-            <%= render partial: 'deeds/show/source', collection: @deed.sources %>
+          <% if @deed.documents.count > 0 %>
+            <%= render partial: 'deeds/show/document', collection: @deed.documents %>
           <% else %>
-            <li class="list-group-item text-muted">no Sources</li>
+            <li class="list-group-item text-muted">no Documents</li>
           <% end %>
         </ul>
       </div>
@@ -184,7 +184,7 @@
           <span class="pull-right">
             <%=  link_to nil,#new_reference_path(deed_id: @deed.id),
                          class: 'btn btn-sm btn-primary',
-                         id: 'btn-new-source',
+                         id: 'btn-new-document',
                          title: t(:add_new_reference, scope: [:views, :deed, :actions]),
                          data: { toggle: 'tooltip', 'turbolinks': false, placement: 'left' },
                          remote: true do -%>
@@ -205,7 +205,7 @@
           <span class="pull-right">
             <%=  link_to nil,#new_seal_path(deed_id: @deed.id),
                          class: 'btn btn-sm btn-primary',
-                         id: 'btn-new-source',
+                         id: 'btn-new-document',
                          title: t(:add_new_seal, scope: [:views, :deed, :actions]),
                          data: { toggle: 'tooltip', 'turbolinks': false, placement: 'left' },
                          remote: true do -%>
@@ -284,7 +284,7 @@
           <span class="pull-right">
             <%=  link_to new_mention_path(deed_id: @deed.id),
                          class: 'btn btn-sm btn-primary',
-                         id: 'btn-new-source',
+                         id: 'btn-new-document',
                          title: t(:add_new_mention, scope: [:views, :deed, :actions]),
                          data: { toggle: 'tooltip', 'turbolinks': false, placement: 'left' },
                          remote: true do -%>

@@ -20,12 +20,12 @@
   </div>
 
   <div class="btn-group btn-group-sm" role="group">
-    <%= link_to archives_path(storage_id: storage.id),
+    <%= link_to collections_path(storage_id: storage.id),
                 class: 'btn btn-sm btn-secondary',
-                title: "show #{Archive.model_name.plural.humanize} linked",
+                title: "show #{Collection.model_name.plural.humanize} linked",
                 data: { toggle: 'tooltip' } do %>
-      <%= storage.archives.count %>
-      <%= icon_for Archive %>
+      <%= storage.collections.count %>
+      <%= icon_for Collection %>
     <% end %>
   </div>
 <% end %>

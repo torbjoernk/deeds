@@ -13,13 +13,13 @@ describe 'storages/index.html.erb', type: :view do
     expect(render).to have_link 'btn-new-storage', href: new_storage_path
   end
 
-  describe 'when filtered for associated Archive' do
-    specify 'displays associated Archive', use_db: true do
-      @archive = create :archive
+  describe 'when filtered for associated Collection' do
+    specify 'displays associated Collection', use_db: true do
+      collection = create :collection
       render
 
-      expect(render).to have_text 'associated with Archive'
-      expect(render).to have_text @archive.title
+      expect(render).to have_text 'associated with Collection'
+      expect(render).to have_text collection.title
     end
   end
 end

@@ -6,11 +6,11 @@
                        entity_model: Storage } %>
 </h1>
 
-<% if @archive %>
+<% if @collection %>
   <dl class="row">
-    <dt class="col-md-2">associated with Archive</dt>
+    <dt class="col-md-2">associated with Collection</dt>
     <dd class="col-md-10">
-      <%= render partial: 'archives/oneline', locals: { archive: @archive } %>
+      <%= render partial: 'collections/oneline', locals: {collection: @collection } %>
     </dd>
   </dl>
 <% end %>
