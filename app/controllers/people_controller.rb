@@ -4,7 +4,14 @@ class PeopleController < ApplicationController
   after_filter { flash.discard if request.xhr? }
 
   def index
-    @people = Person.all
+    if params.has_key? :deed_id
+      @deed = Deed.find_by id: params[:deed_id]
+      add_breadcrumb Deed.model_name.human(count: 1), deeds_path
+      add_breadcrumb @deed.title, deed_path(@deed)
+      @people = @deed.people
+    else
+      @people = Person.all
+    end
 
     add_breadcrumb Person.model_name.human(count: 2), people_path
 

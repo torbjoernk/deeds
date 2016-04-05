@@ -6,6 +6,40 @@
                        entity_model: Mention } %>
 </h1>
 
+
+<% if @person %>
+  <dl class="row">
+    <dt class="col-md-2"><%= t('views.linked_with', what: Person.model_name.human) %></dt>
+    <dd class="col-md-10">
+      <%= render partial: 'people/oneline', locals: { person: @person } %>
+    </dd>
+  </dl>
+<% end %>
+<% if @place %>
+  <dl class="row">
+    <dt class="col-md-2"><%= t('views.linked_with', what: Place.model_name.human) %></dt>
+    <dd class="col-md-10">
+      <%= render partial: 'places/oneline', locals: { place: @place } %>
+    </dd>
+  </dl>
+<% end %>
+<% if @role %>
+  <dl class="row">
+    <dt class="col-md-2"><%= t('views.linked_with', what: Role.model_name.human) %></dt>
+    <dd class="col-md-10">
+      <%= render partial: 'roles/oneline', locals: { role: @role } %>
+    </dd>
+  </dl>
+<% end %>
+<% if @deed %>
+  <dl class="row">
+    <dt class="col-md-2"><%= t('views.linked_with', what: Deed.model_name.human) %></dt>
+    <dd class="col-md-10">
+      <%= render partial: 'deeds/oneline', locals: { deed: @deed } %>
+    </dd>
+  </dl>
+<% end %>
+
 <div class="row">
   <div id="mentions-table">
     <div class="table" id="mentions">

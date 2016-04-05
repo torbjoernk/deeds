@@ -4,7 +4,14 @@ class RolesController < ApplicationController
   after_filter { flash.discard if request.xhr? }
 
   def index
-    @roles = Role.all
+    if params.has_key? :deed_id
+      @deed = Deed.find_by id: params[:deed_id]
+      add_breadcrumb Deed.model_name.human(count: 1), deeds_path
+      add_breadcrumb @deed.title, deed_path(@deed)
+      @roles = @deed.roles
+    else
+      @roles = Role.all
+    end
 
     add_breadcrumb Role.model_name.human(count: 2), roles_path
 

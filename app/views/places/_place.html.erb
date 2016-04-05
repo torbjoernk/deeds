@@ -27,20 +27,18 @@
       <%= place.mentions.count %>
       <%= icon_for Mention %>
     <% end %>
-    <%= link_to people_path(place_id: place.id),
-                class: 'btn btn-sm btn-secondary',
-                title: t('views.show_linked', what: Person.model_name.human(count: 2)),
-                data: { toggle: 'tooltip' } do %>
+    <span class="btn btn-sm btn-secondary"
+          title="<%= t('views.number_linked', what: Person.model_name.human(count: 2)) %>"
+          data-toggle="tooltip">
       <%= place.mentioned_people.length %>
       <%= icon_for Person %>
-    <% end %>
-    <%= link_to roles_path(place_id: place.id),
-                class: 'btn btn-sm btn-secondary',
-                title: t('views.show_linked', what: Role.model_name.human(count: 2)),
-                data: { toggle: 'tooltip' } do %>
+    </span>
+    <span class="btn btn-sm btn-secondary"
+          title="<%= t('views.number_linked', what: Role.model_name.human(count: 2)) %>"
+          data-toggle="tooltip">
       <%= place.mentioned_roles.length %>
       <%= icon_for Role %>
-    <% end %>
+    </span>
     <%= link_to deeds_path(place_id: place.id),
                 class: 'btn btn-sm btn-secondary',
                 title: t('views.show_linked', what: Deed.model_name.human(count: 2)),

@@ -27,3 +27,4 @@ en:
     non_associated: "no linked"
     show_linked: "show linked %{what}"
     unknown: "unknown"
+    number_linked: "Number linked %{what}"
