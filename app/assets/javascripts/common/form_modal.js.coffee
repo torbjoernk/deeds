@@ -9,6 +9,7 @@ DeedsApp.display_form_modal = (title, content, submit, callback) ->
   form_modal.find('#form-modal-submit').html(submit)
   if callback?
     callback(form_modal)
+  $('#show-modal').modal('hide')
   form_modal.modal('show')
   form_modal.find('[data-toggle="toolip"]').tooltip()
   form_modal.on 'click', 'input[type="submit"]', ->
@@ -19,6 +20,7 @@ DeedsApp.display_form_modal = (full_modal, callback) ->
   form_modal.html(full_modal)
   if callback?
     callback(form_modal)
+  $('#show-modal').modal('hide')
   form_modal.modal('show')
   form_modal.find('[data-toggle="toolip"]').tooltip()
   form_modal.on 'click', 'input[type="submit"]', ->

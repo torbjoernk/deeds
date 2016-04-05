@@ -60,10 +60,6 @@
 <div class="row">
   <label class="col-md-3"><strong><%= Mention.human_attribute_name :notes %></strong></label>
   <div class="col-md-9">
-    <% if mention.notes.nil? or mention.notes.empty? %>
-      <em class="text-muted"><%= t('views.no_notes') %></em>
-    <% else %>
-      <%= mention.notes %>
-    <% end %>
+    <%= render partial: 'shared/show/entity_notes', locals: { notes: mention.notes } %>
   </div>
 </div>

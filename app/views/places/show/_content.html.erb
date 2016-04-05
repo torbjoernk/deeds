@@ -10,10 +10,6 @@
 <div class="row">
   <label class="col-md-3"><strong><%= Place.human_attribute_name :notes %></strong></label>
   <div class="col-md-9">
-    <% if place.notes.nil? or place.notes.empty? %>
-      <em class="text-muted"><%= t('views.no_notes') %></em>
-    <% else %>
-      <%= place.notes %>
-    <% end %>
+    <%= render partial: 'shared/show/entity_notes', locals: { notes: place.notes } %>
   </div>
 </div>

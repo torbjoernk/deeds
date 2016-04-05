@@ -1,12 +1,26 @@
-<% if defined? detail_link_path %>
-  <%= link_to detail_link_path,
-              class: 'btn btn-sm btn-info pull-left',
-              title: 'Show details',
-              data: { toggle: 'tooltip' },
-              role: 'button' do %>
-    Details
+<div class="btn-group btn-group-sm">
+  <% if defined? detail_link_path %>
+    <%= link_to detail_link_path,
+                class: 'btn btn-sm btn-info',
+                title: 'Show details',
+                data: { toggle: 'tooltip' },
+                role: 'button' do %>
+      <%= icon('search', class: 'fa-fw') %>
+      <%= t('views.actions.btn_details') %>
+    <% end %>
   <% end %>
-<% end %>
+  <% if defined? edit_link_path %>
+    <%= link_to edit_link_path,
+                class: 'btn btn-sm btn-primary',
+                title: 'Show details',
+                data: { toggle: 'tooltip' },
+                remote: true,
+                role: 'button' do %>
+      <%= icon('pencil', class: 'fa-fw') %>
+      <%= t('views.actions.btn_edit') %>
+    <% end %>
+  <% end %>
+</div>
 <button type="button" class="btn btn-sm btn-info pull-right" data-dismiss="modal" aria-label="Close">
   <%= t('views.modals.close') %>
 </button>

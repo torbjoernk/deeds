@@ -6,6 +6,8 @@ de:
       edit_entity: "%{entity_name} bearbeiten"
       refresh_table_btn_title: Tabelle aktualisieren
       show_details: Details anzeigen
+      btn_details: "Details"
+      btn_edit: "Bearbeiten"
     date: Datum
     flash:
       created_entity: "%{what} mit ID %{id} erfolgreich erstellt."

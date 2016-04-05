@@ -24,10 +24,6 @@
 <div class="row">
   <label class="col-md-3"><strong><%= Role.human_attribute_name :notes %></strong></label>
   <div class="col-md-9">
-    <% if role.notes.nil? or role.notes.empty? %>
-      <em class="small text-muted"><%= t('views.no_notes') %></em>
-    <% else %>
-      <%= role.notes %>
-    <% end %>
+    <%= render partial: 'shared/show/entity_notes', locals: { notes: role.notes } %>
   </div>
 </div>

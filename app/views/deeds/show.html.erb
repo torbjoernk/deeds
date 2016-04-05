@@ -87,11 +87,7 @@
           <%= Deed.human_attribute_name :notes %>
         </div>
         <div class="card-block">
-          <% if @deed.notes %>
-            <%= @deed.notes %>
-          <% else %>
-            <em class="text-muted"><%= t('views.no_notes') %></em>
-          <% end %>
+          <%= render partial: 'shared/show/entity_notes', locals: { notes: @deed.notes } %>
         </div>
       </div>
     </div>
