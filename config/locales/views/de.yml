@@ -20,6 +20,7 @@ de:
       remove_association: Verknüpfung mit %{what} entfernen
       search_for_unassociated: nach nicht verknüpften %{what} suchen
       unsaved: nicht gespeichert
+      for_deed: für Urkunde
     no_description: keine Beschreibung
     no_notes: keine Notizen
     non_associated: keine verknüpft

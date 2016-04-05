@@ -37,7 +37,11 @@ class ContentsController < ApplicationController
     @content = Content.create!(content_params)
     flash[:success] = t('views.flash.created_entity',
                         what: Content.model_name.human(count: 1), id: @content.id)
-    redirect_to contents_path
+    if @content.deed
+      redirect_to deed_path(@content.deed)
+    else
+      redirect_to contents_path
+    end
   end
 
   def update

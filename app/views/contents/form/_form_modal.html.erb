@@ -1,7 +1,7 @@
 <% content_for :form_modal_content do %>
   <% if @deed %>
     <div class="row form-group">
-      <div class="col-md-3">for Deed</div>
+      <div class="col-md-3"><%= t('views.modals.for_deed') %></div>
       <div class="col-md-9">
         <%= render partial: 'deeds/oneline' %>
         <%= fields_for @content do |f| %>

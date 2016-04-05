@@ -21,6 +21,10 @@ class MentionsController < ApplicationController
 
   def new
     @mention = Mention.new
+    if params.has_key? :deed_id
+      @deed = Deed.find_by id: params[:deed_id]
+      @mention.deed = @deed
+    end
     if params.has_key? 'sub_action' and params[:sub_action].to_sym == :form_events
       respond_to do |format|
         format.js { render partial: 'mentions/form/form_events' }

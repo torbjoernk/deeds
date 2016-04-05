@@ -1,4 +1,15 @@
 <% content_for :form_modal_content do %>
+  <% if @deed %>
+    <div class="row form-group">
+      <div class="col-md-3"><%= t('views.modals.for_deed') %></div>
+      <div class="col-md-9">
+        <%= render partial: 'deeds/oneline' %>
+        <%= fields_for @document do |f| %>
+            <%= f.text_field :deed_id, hidden: true, value: @deed.id %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
   <%= render 'documents/form/own_fields' %>
   <div id="nested-fields"></div>
 <% end %>
