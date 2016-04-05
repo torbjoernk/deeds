@@ -4,7 +4,8 @@ module CollectionAssociation
   protected
   def index_for_nested_collection(collection_id)
     @collection = Collection.find_by id: collection_id
-    add_breadcrumb Collection.model_name.human, collections_path
+    add_breadcrumb Collection.model_name.human(count: 1), collections_path
+    add_breadcrumb @collection.title
   end
 
   protected

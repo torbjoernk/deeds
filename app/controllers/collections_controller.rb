@@ -8,10 +8,12 @@ class CollectionsController < ApplicationController
     if params.has_key? :storage_id
       @storage = Storage.find_by id: params[:storage_id]
       add_breadcrumb Storage.model_name.human(count: 1), storages_path
+      add_breadcrumb @storage.title
       @collections = @storage.collections
     elsif params.has_key? :document_id
       @document = Document.find_by id: params[:document_id]
       add_breadcrumb Document.model_name.human(count: 1), documents_path
+      add_breadcrumb @document.title
       @collections = @document.collections
     else
       @collections = Collection.all

@@ -45,10 +45,9 @@ dummy_translation = ContentTranslation.create(
 raise 'ContentTranslation not saved' unless dummy_translation.persisted?
 
 haa_r3a3 = Deed.create(
-    title: 'Urkunde, Reihe III, Nr. 3',
+    title: 'Urkunde Reihe III, Nr. 3',
     year: 1226,
     description: 'Der Abt des Klosters Knechtsteden bezeugt, dass der Prior G. und Richmodis, die verstorbene Vorsteherin des Klosters Flaesheim, von Simon von Gemen ein Landgut in Hamm erworben haben.',
-    notes: 'nur eine Notiz',
     content: dummy_content,
     documents: [haa_r3a3_original]
 )

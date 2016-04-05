@@ -12,7 +12,8 @@ class DocumentsController < ApplicationController
     elsif params.has_key? :deed_id
       @deed = Deed.find_by id: params[:deed_id]
       @documents = @deed.documents
-      add_breadcrumb Deed.model_name.human(count: 1), deeds_path
+      add_breadcrumb Deed.model_name.human(count: 2), deeds_path
+      add_breadcrumb @deed.title, deed_path(@deed)
     else
       @documents = Document.all
     end
