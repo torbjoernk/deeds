@@ -4,5 +4,6 @@ $ ->
   DeedsApp.display_show_modal(
     "<%= escape_javascript(render partial: 'shared/show/title', locals: { entity: @role }) %>",
     "<%= escape_javascript(render partial: 'roles/show/content', locals: { native: true }) %>",
-    "<%= escape_javascript(render partial: 'shared/show/footer') %>"
+    "<%= escape_javascript(render partial: 'shared/show/footer',
+                                  locals: { edit_link_path: edit_role_path(@role) }) %>"
   )

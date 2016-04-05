@@ -5,6 +5,8 @@ en:
       edit_entity: "edit %{entity_name}"
       refresh_table_btn_title: "refresh table"
       show_details: "show Details"
+      btn_details: "Details"
+      btn_edit: "Edit"
     date: "Date"
     flash:
       created_entity: "%{what} with ID ${id} successfully created."

@@ -20,8 +20,7 @@ class ContentTranslationsController < ApplicationController
 
   def edit
     @content_translation = ContentTranslation.find_by id: params[:id]
-    edit_subaction 'contents/content_translations/edit',
-                   'contents/content_translations/form/refresh'
+    redirect_to edit_content_path @content_translation.content
   end
 
   def create
