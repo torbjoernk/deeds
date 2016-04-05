@@ -1740,7 +1740,6 @@ var Modal = (function ($) {
       this._isShown = false;
       this._isBodyOverflowing = false;
       this._ignoreBackdropClick = false;
-      this._originalBodyPadding = 0;
       this._scrollbarWidth = 0;
     }
 
@@ -1848,7 +1847,6 @@ var Modal = (function ($) {
         this._isShown = null;
         this._isBodyOverflowing = null;
         this._ignoreBackdropClick = null;
-        this._originalBodyPadding = null;
         this._scrollbarWidth = null;
       }
 
@@ -2074,18 +2072,40 @@ var Modal = (function ($) {
     }, {
       key: '_setScrollbar',
       value: function _setScrollbar() {
-        var bodyPadding = parseInt($(Selector.FIXED_CONTENT).css('padding-right') || 0, 10);
-
-        this._originalBodyPadding = document.body.style.paddingRight || '';
+        var _this13 = this;
 
         if (this._isBodyOverflowing) {
-          document.body.style.paddingRight = bodyPadding + this._scrollbarWidth + 'px';
+          // Adjust fixed content padding
+          $(Selector.FIXED_CONTENT).map(function (index, element) {
+            var padding = $(element).css('padding-right');
+            $(element).data('padding-right', padding);
+            $(element).css('padding-right', parseFloat(padding || 0, 10) + _this13._scrollbarWidth + 'px');
+          });
+          // Adjust body padding
+          // Note: document.body.style.paddingRight returns the actual value
+          //   while $().css('padding-right') returns the calculated value
+          $('body').data('padding-right', document.body.style.paddingRight || '');
+          var padding = parseFloat($('body').css('padding-right') || 0, 10);
+          document.body.style.paddingRight = padding + this._scrollbarWidth + 'px';
         }
       }
     }, {
       key: '_resetScrollbar',
       value: function _resetScrollbar() {
-        document.body.style.paddingRight = this._originalBodyPadding;
+        // Restore fixed content padding
+        $(Selector.FIXED_CONTENT).map(function (index, element) {
+          var padding = $(element).data('padding-right');
+          if (typeof padding !== 'undefined') {
+            $(element).css('padding-right', padding);
+            $(element).removeData('padding-right');
+          }
+        });
+        // Restore body padding
+        var padding = $('body').data('padding-right');
+        if (typeof padding !== 'undefined') {
+          document.body.style.paddingRight = $('body').data('padding-right');
+          $('body').removeData('padding-right');
+        }
       }
     }, {
       key: '_getScrollbarWidth',
@@ -2139,7 +2159,7 @@ var Modal = (function ($) {
   })();
 
   $(document).on(Event.CLICK_DATA_API, Selector.DATA_TOGGLE, function (event) {
-    var _this13 = this;
+    var _this14 = this;
 
     var target = undefined;
     var selector = Util.getSelectorFromElement(this);
@@ -2161,8 +2181,8 @@ var Modal = (function ($) {
       }
 
       $target.one(Event.HIDDEN, function () {
-        if ($(_this13).is(':visible')) {
-          _this13.focus();
+        if ($(_this14).is(':visible')) {
+          _this14.focus();
         }
       });
     });
@@ -2290,7 +2310,7 @@ var ScrollSpy = (function ($) {
       // public
 
       value: function refresh() {
-        var _this14 = this;
+        var _this15 = this;
 
         var autoMethod = this._scrollElement !== this._scrollElement.window ? OffsetMethod.POSITION : OffsetMethod.OFFSET;
 
@@ -2322,8 +2342,8 @@ var ScrollSpy = (function ($) {
         }).sort(function (a, b) {
           return a[0] - b[0];
         }).forEach(function (item) {
-          _this14._offsets.push(item[0]);
-          _this14._targets.push(item[1]);
+          _this15._offsets.push(item[0]);
+          _this15._targets.push(item[1]);
         });
       }
     }, {
@@ -2578,7 +2598,7 @@ var Tab = (function ($) {
       // public
 
       value: function show() {
-        var _this15 = this;
+        var _this16 = this;
 
         if (this._element.parentNode && this._element.parentNode.nodeType === Node.ELEMENT_NODE && $(this._element).hasClass(ClassName.ACTIVE)) {
           return;
@@ -2620,7 +2640,7 @@ var Tab = (function ($) {
 
         var complete = function complete() {
           var hiddenEvent = $.Event(Event.HIDDEN, {
-            relatedTarget: _this15._element
+            relatedTarget: _this16._element
           });
 
           var shownEvent = $.Event(Event.SHOWN, {
@@ -2628,7 +2648,7 @@ var Tab = (function ($) {
           });
 
           $(previous).trigger(hiddenEvent);
-          $(_this15._element).trigger(shownEvent);
+          $(_this16._element).trigger(shownEvent);
         };
 
         if (target) {
@@ -2971,7 +2991,7 @@ var Tooltip = (function ($) {
     }, {
       key: 'show',
       value: function show() {
-        var _this16 = this;
+        var _this17 = this;
 
         var showEvent = $.Event(this.constructor.Event.SHOW);
 
@@ -3021,13 +3041,13 @@ var Tooltip = (function ($) {
           $(tip).addClass(ClassName.IN);
 
           var complete = function complete() {
-            var prevHoverState = _this16._hoverState;
-            _this16._hoverState = null;
+            var prevHoverState = _this17._hoverState;
+            _this17._hoverState = null;
 
-            $(_this16.element).trigger(_this16.constructor.Event.SHOWN);
+            $(_this17.element).trigger(_this17.constructor.Event.SHOWN);
 
             if (prevHoverState === HoverState.OUT) {
-              _this16._leave(null, _this16);
+              _this17._leave(null, _this17);
             }
           };
 
@@ -3042,18 +3062,18 @@ var Tooltip = (function ($) {
     }, {
       key: 'hide',
       value: function hide(callback) {
-        var _this17 = this;
+        var _this18 = this;
 
         var tip = this.getTipElement();
         var hideEvent = $.Event(this.constructor.Event.HIDE);
         var complete = function complete() {
-          if (_this17._hoverState !== HoverState.IN && tip.parentNode) {
+          if (_this18._hoverState !== HoverState.IN && tip.parentNode) {
             tip.parentNode.removeChild(tip);
           }
 
-          _this17.element.removeAttribute('aria-describedby');
-          $(_this17.element).trigger(_this17.constructor.Event.HIDDEN);
-          _this17.cleanupTether();
+          _this18.element.removeAttribute('aria-describedby');
+          $(_this18.element).trigger(_this18.constructor.Event.HIDDEN);
+          _this18.cleanupTether();
 
           if (callback) {
             callback();
@@ -3147,18 +3167,18 @@ var Tooltip = (function ($) {
     }, {
       key: '_setListeners',
       value: function _setListeners() {
-        var _this18 = this;
+        var _this19 = this;
 
         var triggers = this.config.trigger.split(' ');
 
         triggers.forEach(function (trigger) {
           if (trigger === 'click') {
-            $(_this18.element).on(_this18.constructor.Event.CLICK, _this18.config.selector, $.proxy(_this18.toggle, _this18));
+            $(_this19.element).on(_this19.constructor.Event.CLICK, _this19.config.selector, $.proxy(_this19.toggle, _this19));
           } else if (trigger !== Trigger.MANUAL) {
-            var eventIn = trigger === Trigger.HOVER ? _this18.constructor.Event.MOUSEENTER : _this18.constructor.Event.FOCUSIN;
-            var eventOut = trigger === Trigger.HOVER ? _this18.constructor.Event.MOUSELEAVE : _this18.constructor.Event.FOCUSOUT;
+            var eventIn = trigger === Trigger.HOVER ? _this19.constructor.Event.MOUSEENTER : _this19.constructor.Event.FOCUSIN;
+            var eventOut = trigger === Trigger.HOVER ? _this19.constructor.Event.MOUSELEAVE : _this19.constructor.Event.FOCUSOUT;
 
-            $(_this18.element).on(eventIn, _this18.config.selector, $.proxy(_this18._enter, _this18)).on(eventOut, _this18.config.selector, $.proxy(_this18._leave, _this18));
+            $(_this19.element).on(eventIn, _this19.config.selector, $.proxy(_this19._enter, _this19)).on(eventOut, _this19.config.selector, $.proxy(_this19._leave, _this19));
           }
         });
 
