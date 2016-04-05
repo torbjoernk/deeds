@@ -23,6 +23,12 @@
   </div>
 
   <div class="btn-group btn-group-sm" role="group">
+    <%= link_to deed_path(document.deed),
+                class: 'btn btn-sm btn-secondary',
+                title: t('views.show_linked', what: Deed.model_name.human(count: 1)),
+                data: { toggle: 'tooltip' } do %>
+      <%= icon_for Deed %>
+    <% end %>
     <%= link_to collections_path(document_id: document.id),
                 class: 'btn btn-sm btn-secondary',
                 title: t('views.show_linked', what: Collection.model_name.human(count: 2)),

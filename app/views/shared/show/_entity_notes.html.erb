@@ -1,0 +1,5 @@
+<% if notes.nil? or notes.empty? %>
+  <em class="text-muted"><%= t('views.no_notes') %></em>
+<% else %>
+  <%= notes %>
+<% end %>

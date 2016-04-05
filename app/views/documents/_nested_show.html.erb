@@ -1,14 +1,12 @@
 <li class="list-group-item">
-  <div id="source-<%= document.id %>" class="list-group-item-heading" role="tab">
-    <%= icon_for Document %>
-    <%= document.title %>
-    <a class="pull-right btn btn-sm collapsed"
-       aria-controls="source-<%= document.id %>-content"
+  <div id="document-<%= document.id %>" class="list-group-item-heading" role="tab">
+    <a aria-controls="document-<%= document.id %>-content"
        aria-expanded="false"
-       href="#source-<%= document.id %>-content"
-       data-parent="#collection-documents-accordion"
+       href="#document-<%= document.id %>-content"
+       data-parent="#documents-accordion"
        data-toggle="collapse">
-      <%= icon('search', class: 'fa-fw') %>
+      <%= icon_for Document %>
+      <%= document.title %> &mdash; <%= t(document.document_type, scope: 'activerecord.attributes.document.document_types') %>
     </a>
   </div>
   <div id="document-<%= document.id %>-content"

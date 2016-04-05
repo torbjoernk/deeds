@@ -30,5 +30,12 @@
       @extend .p-l-3;
       @extend small;
     }
+
+    .btn-group {
+      .btn {
+
+        i {}
+      }
+    }
   }
 }
