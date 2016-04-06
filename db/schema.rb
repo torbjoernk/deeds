@@ -154,7 +154,7 @@ ActiveRecord::Schema.define(version: 20160406143225) do
 
   create_table "references", force: :cascade do |t|
     t.string   "title"
-    t.string   "medium"
+    t.string   "container"
     t.integer  "year"
     t.string   "place"
     t.string   "authors"

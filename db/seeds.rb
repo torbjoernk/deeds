@@ -193,12 +193,20 @@ velkere_zeuge = Mention.create(
 )
 raise 'Mention not saved' unless velkere_zeuge.persisted?
 
-sealbook_westfalen = Reference.create(
-    title: 'Die Westfälischen Siegel des Mittelalters - Mit Unterstützung der Landstände der Provinz',
-    medium: 'sealbook',
-    year: 1900,
-    place: 'Münster',
-    seals: [reitersiegel_otto]
+
+pennings_h = Reference.create(
+    title: 'Die Anfänge des Stiftes Flaesheim',
+    authors: 'Pennings, Heinrich',
+    container: 'Vestische Zeitschrift 36, S. 1-56',
+    year: 1929,
+    notes: 'leicht gekürzter Wiederabdruck in: Grochtmann, Hermann (Hrsg.), Flaesheim. Zur 800-Jahrfeier (1166-1966), Münster, o.J.[1966], S. 116-146'
 )
-raise 'Reference not saved' unless sealbook_westfalen.persisted?
-raise 'Reference and Seal not linked' unless sealbook_westfalen.seals.include? reitersiegel_otto
+raise 'Reference not saved' unless pennings_h.persisted?
+
+pennings_1 = Reference.create(
+    title: 'Geschichte der Stadt Recklinghausen und ihrer Umgebung, Bnd. 1',
+    authors: 'Pennings, Heinrich',
+    place: 'Recklinghausen',
+    year: 1930
+)
+raise 'Reference not saved' unless pennings_1.persisted?
