@@ -1,0 +1,12 @@
+<p class="card-text">
+  <span class="clearfix">
+    <%= seal.title %>
+    <span class="pull-right">
+      <%= link_to_show_entity seal %>
+    </span>
+  </span>
+  <span class="card-text small">
+    <%= t(seal.material, scope: 'activerecord.attributes.seal.materials') %>,
+    <%= t(seal.attachment_type, scope: 'activerecord.attributes.seal.attachment_types') %>
+  </span>
+</p>

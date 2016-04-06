@@ -1,4 +1,4 @@
-de:
+en:
   activerecord:
     model:
       seal:
@@ -8,3 +8,11 @@ de:
       seal:
         title: Title
         notes: Notes
+        material: Material
+        attachment_type: Attachment
+        materials:
+          wax: Wax
+        attachment_types:
+          silk: Silk thread
+          hinging: hinging
+          broken: broken off

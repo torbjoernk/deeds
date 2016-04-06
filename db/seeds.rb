@@ -45,7 +45,9 @@ dummy_translation = ContentTranslation.create(
 raise 'ContentTranslation not saved' unless dummy_translation.persisted?
 
 reitersiegel_otto = Seal.create(
-    title: 'Reitersiegel des Grafen Otto von Dale'
+    title: 'Reitersiegel des Grafen Otto von Dale',
+    material: 'wax',
+    attachment_type: 'hinging'
 )
 raise 'Seal not saved' unless reitersiegel_otto.persisted?
 
@@ -55,18 +57,12 @@ haa_r3a3 = Deed.create(
     description: 'Der Abt des Klosters Knechtsteden bezeugt, dass der Prior G. und Richmodis, die verstorbene Vorsteherin des Klosters Flaesheim, von Simon von Gemen ein Landgut in Hamm erworben haben.',
     content: dummy_content,
     documents: [haa_r3a3_original],
-    attached_seals: [
-        AttachedSeal.create(
-            seal: reitersiegel_otto,
-            material: 'wax',
-            attachment_type: 'hinging'
-        )
-    ]
+    seal: reitersiegel_otto
 )
 raise 'Deed not saved' unless haa_r3a3.persisted?
 raise 'Deed and Document not linked' unless haa_r3a3_original.deed == haa_r3a3
 raise 'Deed and Content not linked' unless dummy_content.deed == haa_r3a3
-raise 'Deed and Seal not linked' unless reitersiegel_otto.deeds.include? haa_r3a3
+raise 'Deed and Seal not linked' unless reitersiegel_otto.deed == haa_r3a3
 
 kloster_knechtsteden = Place.create(
     title: 'Kloster Knechtsteden'

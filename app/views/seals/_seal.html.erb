@@ -2,6 +2,20 @@
   <div class="col-seal-title">
     <%= seal.title %>
   </div>
+  <div class="col-seal-material">
+    <% if seal.material.nil? or seal.material.empty? %>
+      <em class="small text-muted"><%= t('views.seal.no_material') %></em>
+    <% else %>
+      <%= t(seal.material, scope: 'activerecord.attributes.seal.materials') %>
+    <% end %>
+  </div>
+  <div class="col-seal-attachment">
+    <% if seal.attachment_type.nil? or seal.attachment_type.empty? %>
+      <em class="small text-muted"><%= t('views.seal.no_attachment_type') %></em>
+    <% else %>
+      <%= t(seal.attachment_type, scope: 'activerecord.attributes.seal.attachment_types') %>
+    <% end %>
+  </div>
 <% end %>
 
 <% content_for :entity_toolbar_associations, flush: true do %>
@@ -20,12 +34,19 @@
   </div>
 
   <div class="btn-group btn-group-sm" role="group">
-    <%= link_to deeds_path(seal_id: seal.id),
-                class: 'btn btn-sm btn-secondary',
-                title: t('views.show_linked', what: Deed.model_name.human(count: 2)),
-                data: { toggle: 'tooltip' } do %>
-      <%= seal.deeds.count %>
-      <%= icon_for Deed %>
+    <% if seal.deed.nil? %>
+      <%= link_to nil,
+                  class: 'btn btn-sm btn-outline-secondary disabled' do %>
+        <%= icon_for Deed %>
+      <% end %>
+    <% else %>
+      <%= link_to deed_path(seal.deed),
+                  class: 'btn btn-sm btn-secondary',
+                  title: t('views.show_linked', what: Deed.model_name.human(count: 1)),
+                  data: { toggle: 'tooltip' },
+                  remote: true do %>
+        <%= icon_for Deed %>
+      <% end %>
     <% end %>
   </div>
 <% end %>

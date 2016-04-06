@@ -7,6 +7,18 @@
   </div>
 </div>
 <div class="row">
+  <label class="col-md-3"><strong><%= Seal.human_attribute_name :material %></strong></label>
+  <div class="col-md-9">
+    <%= t(seal.material, scope: 'activerecord.attributes.seal.materials') %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3"><strong><%= Seal.human_attribute_name :attachment_type %></strong></label>
+  <div class="col-md-9">
+    <%= t(seal.attachment_type, scope: 'activerecord.attributes.seal.attachment_types') %>
+  </div>
+</div>
+<div class="row">
   <label class="col-md-3"><strong><%= Seal.human_attribute_name :notes %></strong></label>
   <div class="col-md-9">
     <%= render partial: 'shared/show/entity_notes', locals: { notes: seal.notes } %>

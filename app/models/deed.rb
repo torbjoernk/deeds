@@ -7,8 +7,7 @@ class Deed < ActiveRecord::Base
 
   has_many :documents, inverse_of: :deed
 
-  has_many :attached_seals
-  has_many :seals, through: :attached_seals
+  has_one :seal
 
   has_many :mentions
   has_many :people, through: :mentions, class_name: 'Person'

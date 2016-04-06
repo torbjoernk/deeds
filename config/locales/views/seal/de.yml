@@ -7,3 +7,5 @@ de:
         edit: "%{what} bearbeiten"
         new: "Neues %{what} erstellen"
       none_selected: "kein Siegel ausgewählt"
+      no_material: "Material unbekannt"
+      no_attachment_type: "Befestigung unbekannt"

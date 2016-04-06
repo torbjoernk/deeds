@@ -7,3 +7,5 @@ en:
         edit: "Edit %{what}"
         new: "Create new %{what}"
       none_selected: "no Seal selected"
+      no_attachment_type: "attachment unknown"
+      no_material: "material unknown"

@@ -8,3 +8,11 @@ de:
       seal:
         title: Titel
         notes: Notizen
+        material: Material
+        attachment_type: Befestigung
+        materials:
+          wax: Wachs
+        attachment_types:
+          silk: Seidenfaden
+          hinging: hängend
+          broken: abgebrochen

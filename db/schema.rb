@@ -11,19 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160406052003) do
-
-  create_table "attached_seals", force: :cascade do |t|
-    t.string   "material"
-    t.string   "attachment_type"
-    t.text     "notes"
-    t.integer  "deed_id"
-    t.integer  "seal_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
-  add_index "attached_seals", ["deed_id", "seal_id"], name: "index_attached_seals_on_deed_id_and_seal_id", unique: true
+ActiveRecord::Schema.define(version: 20160406050120) do
 
   create_table "collection_documents", force: :cascade do |t|
     t.integer  "collection_id"
@@ -159,10 +147,15 @@ ActiveRecord::Schema.define(version: 20160406052003) do
 
   create_table "seals", force: :cascade do |t|
     t.string   "title"
+    t.string   "material"
+    t.string   "attachment_type"
     t.text     "notes"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "deed_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
+
+  add_index "seals", ["deed_id"], name: "index_seals_on_deed_id"
 
   create_table "storages", force: :cascade do |t|
     t.string   "title"

@@ -1,23 +1,23 @@
 <div class="row form-group">
   <label class="col-md-3 form-control-label">
-    <%= model_name_with_icon Content, :singular %>
+    <%= model_name_with_icon Seal, :singular %>
     <span class="pull-right">
       <%= content_tag :a,
                       icon('refresh', class: 'fa-fw'),
-                      id: 'btn-refresh-nested-fields',
+                      id: 'btn-refresh-nested-seal-fields',
                       class: 'btn btn-sm btn-outline-default',
                       title: t('views.modals.refresh_associations'),
                       data: { toggle: 'tooltip' } %>
     </span>
   </label>
-  <div id="deed-content" class="col-md-9">
-    <% if @deed.content.nil? %>
+  <div id="deed-seal" class="col-md-9">
+    <% if @deed.seal.nil? %>
       <div class="form-control text-muted clearfix">
-        <%= t('views.deed.no_content') %>
+        <em class="text-muted"><%= t('views.deed.no_seal') %></em>
         <div class="btn-group btn-group-sm pull-right">
-          <%= link_to new_content_path(deed_id: @deed.id),
+          <%= link_to new_seal_path(deed_id: @deed.id),
                       class: 'btn btn-sm btn-primary',
-                      title: t('views.deed.actions.add_content'),
+                      title: t('views.deed.actions.add_seal'),
                       data: { toggle: 'tooltip' },
                       remote: true do %>
             <%= icon('plus', class: 'fa-fw') %>
@@ -27,20 +27,21 @@
     <% else %>
       <div class="form-control">
         <div class="btn-group btn-group-sm pull-right">
-          <%= link_to_show_entity @deed.content %>
+          <%= link_to_show_entity @deed.seal %>
           <%= content_tag :a,
                           icon('trash', class: 'fa-fw'),
-                          id: 'btn-deassoc-content',
+                          id: 'btn-deassoc-seal',
                           class: 'btn btn-sm btn-danger',
-                          title: t('views.deed.actions.remove_content'),
+                          title: t('views.deed.actions.remove_seal'),
                           data: { toggle: 'tooltip' } %>
         </div>
-        <%= icon_for Content %>
-        <%= t(@deed.content.language, scope: 'activerecord.attributes.content.languages') %>
+        <%= icon_for Seal %>
+        <%= @deed.seal.title %>
         <br />
         <div class="p-l-2">
           <em>
-            <%= truncate @deed.content.content, length: 100, separator: ' ' %>
+            <%= t(@deed.seal.material, scope: 'activerecord.attributes.seal.materials') %>,
+            <%= t(@deed.seal.attachment_type, scope: 'activerecord.attributes.seal.attachment_types') %>
           </em>
         </div>
       </div>

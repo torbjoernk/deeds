@@ -4,14 +4,7 @@ class DeedsController < ApplicationController
   after_filter { flash.discard if request.xhr? }
 
   def index
-    if params.has_key? :seal_id
-      @seal = Seal.find_by id: params[:seal_id]
-      add_breadcrumb Seal.model_name.human(count: 1), :seals_path
-      add_breadcrumb @seal.title
-      @deeds = @seal.deeds
-    else
-      @deeds = Deed.all
-    end
+    @deeds = Deed.all
 
     add_breadcrumb Deed.model_name.human(count: 2), :deeds_path
 
@@ -61,6 +54,11 @@ class DeedsController < ApplicationController
           @content.delete
           flash[:success] = t('views.flash.updated_entity',
                               what: Deed.model_name.human(count: 1), id: @deed.id)
+        when :deassoc_seal
+          @seal = Seal.find_by!(id: params[:seal_id])
+          @seal.delete
+          flash[:success] = t('views.flash.updated_entity',
+                              what: Deed.model_name.human(count: 1), id: @deed.id)
         when :remove_mention
           @mention = Mention.find_by id: params[:mention_id]
           @deed.mentions.delete @mention
@@ -70,6 +68,7 @@ class DeedsController < ApplicationController
         else
           raise StandardError.new "Wrong sub_action key: #{params[:sub_action]}"
       end
+      @unassociated = query_nested_collections
       respond_to do |format|
         format.js { render partial: 'deeds/form/refresh' }
       end
