@@ -1,0 +1,15 @@
+de:
+  views:
+    reference:
+      actions:
+        add_new_btn_title: "Neue Referenz hinzufügen"
+      modals:
+        edit: "%{what} bearbeiten"
+        new: "Neue %{what} erstellen"
+      none_selected: "keine Referenz ausgewählt"
+      no_authors: "keine Autoren"
+      no_medium: "Medium unbekannt"
+      no_year: "Jahr unbekannt"
+      no_place: "unbekannter Ort"
+      no_deeds: "keine Urkunden referenziert"
+      no_seals: "keine Siegel referenziert"

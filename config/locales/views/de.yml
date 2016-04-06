@@ -23,9 +23,11 @@ de:
       search_for_unassociated: nach nicht verknüpften %{what} suchen
       unsaved: nicht gespeichert
       for_deed: für Urkunde
+      for_seal: "für Siegel"
     no_description: keine Beschreibung
     no_notes: keine Notizen
     non_associated: keine verknüpft
     show_linked: verknüpfte %{what} anzeigen
     unknown: unbekannt
     number_linked: "Anzahl verknüpfter %{what}"
+    no_references: "keine Referenzen angegeben"

@@ -6,6 +6,15 @@
                        entity_model: Seal } %>
 </h1>
 
+<% if @reference %>
+  <dl class="row">
+    <dt class="col-md-2"><%= t('views.linked_with', what: Reference.model_name.human) %></dt>
+    <dd class="col-md-10">
+      <%= render partial: 'references/oneline', locals: { reference: @reference } %>
+    </dd>
+  </dl>
+<% end %>
+
 <div class="row">
   <div id="seals-table">
     <div class="table" id="seals">

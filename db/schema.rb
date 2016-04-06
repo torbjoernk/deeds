@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160406112027) do
+ActiveRecord::Schema.define(version: 20160406143225) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "name"
@@ -82,6 +82,14 @@ ActiveRecord::Schema.define(version: 20160406112027) do
   add_index "deeds", ["seal_id"], name: "index_deeds_on_seal_id"
   add_index "deeds", ["title", "year", "month", "day"], name: "index_deeds_on_title_and_year_and_month_and_day", unique: true
 
+  create_table "deeds_references", force: :cascade do |t|
+    t.integer "deed_id"
+    t.integer "reference_id"
+  end
+
+  add_index "deeds_references", ["deed_id"], name: "index_deeds_references_on_deed_id"
+  add_index "deeds_references", ["reference_id"], name: "index_deeds_references_on_reference_id"
+
   create_table "documents", force: :cascade do |t|
     t.string   "title"
     t.string   "document_type"
@@ -143,6 +151,25 @@ ActiveRecord::Schema.define(version: 20160406112027) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "references", force: :cascade do |t|
+    t.string   "title"
+    t.string   "medium"
+    t.integer  "year"
+    t.string   "place"
+    t.string   "authors"
+    t.text     "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "references_seals", force: :cascade do |t|
+    t.integer "reference_id"
+    t.integer "seal_id"
+  end
+
+  add_index "references_seals", ["reference_id"], name: "index_references_seals_on_reference_id"
+  add_index "references_seals", ["seal_id"], name: "index_references_seals_on_seal_id"
 
   create_table "roles", force: :cascade do |t|
     t.string   "title"

@@ -1,9 +1,0 @@
-de:
-  views:
-    author:
-      actions:
-        add_new_btn_title: "Neuen Autor hinzufügen"
-      modals:
-        edit: "%{what} bearbeiten"
-        new: "Neuen %{what} erstellen"
-      none_selected: "kein Autor ausgewählt"

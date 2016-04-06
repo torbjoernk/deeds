@@ -1,0 +1,20 @@
+---
+de:
+  activerecord:
+    attributes:
+      reference:
+        title: Titel
+        medium: Medium
+        year: Jahr
+        place: Ort
+        authors: Autoren
+        notes: Notizen
+        mediums:
+          book: Buch
+          sealbook: Siegelbuch
+          deedbook: Urkundenbuch
+          periodical: Zeitschrift
+    models:
+      reference:
+        one: Referenz
+        other: Referenzen

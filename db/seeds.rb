@@ -193,7 +193,12 @@ velkere_zeuge = Mention.create(
 )
 raise 'Mention not saved' unless velkere_zeuge.persisted?
 
-pachurka_d = Author.create(
-    name: 'Pachurka, Daniel'
+sealbook_westfalen = Reference.create(
+    title: 'Die Westfälischen Siegel des Mittelalters - Mit Unterstützung der Landstände der Provinz',
+    medium: 'sealbook',
+    year: 1900,
+    place: 'Münster',
+    seals: [reitersiegel_otto]
 )
-raise 'Author not saved' unless pachurka_d.persisted?
+raise 'Reference not saved' unless sealbook_westfalen.persisted?
+raise 'Reference and Seal not linked' unless sealbook_westfalen.seals.include? reitersiegel_otto

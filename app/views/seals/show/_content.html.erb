@@ -24,3 +24,18 @@
     <%= render partial: 'shared/show/entity_notes', locals: { notes: seal.notes } %>
   </div>
 </div>
+
+<% if native %>
+  <div class="row">
+    <label class="col-md-3"><strong><%= Reference.model_name.human(count: 2) %></strong></label>
+    <ul class="col-md-9 list-group list-group-flush">
+      <% if seal.references.count > 0 %>
+        <%= render partial: 'references/nested_show', collection: seal.references, as: :reference %>
+      <% else %>
+        <li class="list-group-item">
+          <em class="text-muted"><%= t('views.no_references') %></em>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

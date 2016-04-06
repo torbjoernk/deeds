@@ -14,8 +14,10 @@ de:
         remove_seal: "Siegel entfernen"
         add_seal: "Neues Siegel zur Urkunde hinzufügen"
         add_new_content: "Neuen Inhalt hinzufügen"
+        remove_reference: "Referenz entfernen"
       flash:
         removed_mention: Nennung wurde aus Urkunde entfernt.
+        removed_reference: "Referenz für Urkunde entfernt."
       modals:
         edit: "%{what} bearbeiten"
         new: Neue %{what} erstellen
@@ -28,3 +30,4 @@ de:
       none_selected: keine Urkunde ausgewählt
       no_seal: "nicht besiegelt"
       show_linked_seal: "befestigtes Siegel anzeigen"
+      no_references: "keine Referenzen"

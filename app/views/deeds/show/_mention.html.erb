@@ -27,7 +27,8 @@
                   id: "btn-remove-mention-#{mention.id}",
                   class: 'btn btn-sm btn-outline-danger',
                   title: t('views.deed.actions.remove_mention'),
-                  data: { toggle: 'tooltip' } do %>
+                  data: { toggle: 'tooltip',
+                          confirm: t('helpers.confirmation.delete') } do %>
       <%= icon('trash', class: 'fa-fw') %>
     <% end %>
   </span>

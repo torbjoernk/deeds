@@ -63,15 +63,9 @@
     </ul>
   </li>
   <li class="nav-item">
-    References
-
-    <ul class="nav nav-pulls nav-stacked bg-faded" role="menu">
-      <li class="nav-item">
-        <%= link_to authors_path, class: "nav-link#{' active' if current_page?(controller: :authors)}" do %>
-          <%= model_name_with_icon Author, :plural %>
-          <span class="tag tag-pill tag-default pull-right"><%= Author.count %></span>
-        <% end %>
-      </li>
-    </ul>
+    <%= link_to references_path, class: "nav-link#{' active' if current_page?(controller: :references)}" do %>
+      <%= model_name_with_icon Reference, :plural %>
+      <span class="tag tag-pill tag-default pull-right"><%= Reference.count %></span>
+    <% end %>
   </li>
 </ul>

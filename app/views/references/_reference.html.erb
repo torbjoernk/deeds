@@ -1,0 +1,69 @@
+<% content_for :entity_info, flush: true do %>
+  <div class="col-reference-title">
+    <%= reference.title %>
+  </div>
+  <div class="col-reference-authors">
+    <% if reference.authors.nil? or reference.authors.empty? %>
+      <em class="small text-muted"><%= t('views.reference.no_authors') %></em>
+    <% else %>
+      <%= reference.authors %>
+    <% end %>
+  </div>
+  <div class="col-reference-medium">
+    <% if reference.medium.nil? or reference.medium.empty? %>
+      <em class="small text-muted"><%= t('views.reference.no_medium') %></em>
+    <% else %>
+      <%= t(reference.medium, scope: 'activerecord.attributes.reference.mediums') %>
+    <% end %>
+  </div>
+  <div class="col-reference-year">
+    <% if reference.year.nil? %>
+      <em class="small text-muted"><%= t('views.reference.no_year') %></em>
+    <% else %>
+      <%= reference.year %>
+    <% end %>
+  </div>
+  <div class="col-reference-place">
+    <% if reference.place.nil? or reference.place.empty? %>
+      <em class="small text-muted"><%= t('views.reference.no_place') %></em>
+    <% else %>
+      <%= reference.place %>
+    <% end %>
+  </div>
+<% end %>
+
+<% content_for :entity_toolbar_associations, flush: true do %>
+  <div class="btn-group btn-group-sm" role="group">
+    <% if reference.notes.nil? or reference.notes.empty? %>
+      <a class="btn btn-sm btn-outline-secondary disabled">
+        <%= icon('comment-o', class: 'fa-fw') %>
+      </a>
+    <% else %>
+      <a class="btn btn-sm btn-secondary"
+         title="<%= reference.notes %>"
+         data-toggle="tooltip">
+        <%= icon('comment-o', class: 'fa-fw') %>
+      </a>
+    <% end %>
+  </div>
+
+  <div class="btn-group btn-group-sm" role="group">
+    <%= link_to deeds_path(reference_id: reference.id),
+                class: 'btn btn-sm btn-secondary',
+                title: t('views.show_linked', what: Deed.model_name.human(count: 2)),
+                data: { toggle: 'tooltip' } do %>
+      <%= reference.deeds.count %>
+      <%= icon_for Deed %>
+    <% end %>
+    <%= link_to seals_path(reference_id: reference.id),
+                class: 'btn btn-sm btn-secondary',
+                title: t('views.show_linked', what: Seal.model_name.human(count: 2)),
+                data: { toggle: 'tooltip' } do %>
+      <%= reference.seals.count %>
+      <%= icon_for Seal %>
+    <% end %>
+  </div>
+<% end %>
+
+<%= render partial: 'shared/index/entity',
+           locals: { entity_id: "reference-#{reference.id}", entity: reference } %>

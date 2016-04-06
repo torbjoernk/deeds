@@ -1,0 +1,15 @@
+en:
+  views:
+    reference:
+      actions:
+        add_new_btn_title: "add new Reference"
+      modals:
+        edit: "Edit %{what}"
+        new: "Create new %{what}"
+      none_selected: "no Reference selected"
+      no_authors: "no Authors"
+      no_medium: "no medium"
+      no_year: "unknown Year"
+      no_place: "unknown Place"
+      no_deeds: "no Deeds referenced"
+      no_seals: "no Seals referenced"

@@ -1,0 +1,9 @@
+<div class="oneline oneline-reference">
+  <%= icon_for Reference %>
+  <span class="reference-title">
+    <%= @reference.to_s %>
+  </span>
+  <div class="reference-actions btn-group btn-group-sm">
+    <%= link_to_show_entity @reference %>
+  </div>
+</div>
