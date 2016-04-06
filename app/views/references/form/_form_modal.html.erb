@@ -1,0 +1,27 @@
+<% content_for :form_modal_content do %>
+  <% if @deed %>
+    <div class="row form-group">
+      <div class="col-md-3"><%= t('views.modals.for_deed') %></div>
+      <div class="col-md-9">
+        <%= render partial: 'deeds/oneline' %>
+        <%= fields_for @reference do |f| %>
+          <%= f.text_field :deed_id, hidden: true, value: @deed.id %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <% if @seal %>
+    <div class="row form-group">
+      <div class="col-md-3"><%= t('views.modals.for_seal') %></div>
+      <div class="col-md-9">
+        <%= render partial: 'seals/oneline' %>
+        <%= fields_for @reference do |f| %>
+          <%= f.text_field :seal_id, hidden: true, value: @seal.id %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <%= render 'references/form/own_fields' %>
+<% end %>
+
+<%= render partial: 'shared/form_modal', locals: { entity: @reference } %>

@@ -104,7 +104,7 @@
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
             <% if @deed.content.nil? %>
-              <em class="small text-muted"><%= t('views.deed.no_content') %></em>
+              <em class="text-muted"><%= t('views.deed.no_content') %></em>
               <span class="pull-right">
                 <%=  link_to new_content_path(deed_id: @deed.id),
                              class: 'btn btn-sm btn-primary',
@@ -188,8 +188,8 @@
           <%= model_name_with_icon Seal, :plural %>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <% if @deed.seal.nil? %>
+          <% if @deed.seal.nil? %>
+            <li class="list-group-item">
               <em class="text-muted"><%= t('views.deed.no_seal') %></em>
               <span class="pull-right">
                 <%=  link_to new_seal_path(deed_id: @deed.id),
@@ -201,10 +201,10 @@
                   <%= icon('plus', class: 'fa-fw') %>
                 <% end -%>
               </span>
-            <% else %>
-              <%= render partial: 'seals/nested_show', locals: { seal: @deed.seal } %>
-            <% end %>
-          </li>
+            </li>
+          <% else %>
+            <%= render partial: 'seals/nested_show', locals: { seal: @deed.seal } %>
+          <% end %>
         </ul>
       </div>
     </div>
@@ -212,10 +212,9 @@
     <div class="col-md-4">
       <div class="card">
         <div class="card-header">
-          <%= icon('external-link', class: 'fa-fw') %>
-          References
+          <%= model_name_with_icon Reference, :plural %>
           <span class="pull-right">
-            <%=  link_to nil,#new_reference_path(deed_id: @deed.id),
+            <%=  link_to new_reference_path(deed_id: @deed.id),
                          class: 'btn btn-sm btn-primary',
                          id: 'btn-new-reference',
                          title: t('views.deed.actions.add_new_reference'),
@@ -225,8 +224,13 @@
             <% end -%>
           </span>
         </div>
-        <div class="card-block">
-        </div>
+        <ul class="list-group list-group-flush">
+          <% if @deed.references.count > 0 %>
+            <%= render partial: 'deeds/show/reference', collection: @deed.references %>
+          <% else %>
+            <li class="list-group-item text-muted"><%= t('views.deed.no_references') %></li>
+          <% end %>
+        </ul>
       </div>
     </div>
   </div>

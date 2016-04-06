@@ -4,7 +4,14 @@ class SealsController < ApplicationController
   after_filter { flash.discard if request.xhr? }
 
   def index
-    @seals = Seal.all
+    if params.has_key? :reference_id
+      @reference = Reference.find_by id: params[:reference_id]
+      add_breadcrumb Reference.model_name.human(count: 1)
+      add_breadcrumb @reference.title
+      @seals = @reference.seals
+    else
+      @seals = Seal.all
+    end
 
     add_breadcrumb Seal.model_name.human(count: 2), :seals_path
 

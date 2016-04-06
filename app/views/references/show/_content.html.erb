@@ -1,0 +1,66 @@
+<% reference ||= @reference %>
+
+<div class="row">
+  <label class="col-md-3"><strong><%= Reference.human_attribute_name :title %></strong></label>
+  <div class="col-md-9">
+    <%= reference.title %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3"><strong><%= Reference.human_attribute_name :authors %></strong></label>
+  <div class="col-md-9">
+    <%= reference.authors %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3"><strong><%= Reference.human_attribute_name :medium %></strong></label>
+  <div class="col-md-9">
+    <%= t(reference.medium, scope: 'activerecord.attributes.reference.mediums') %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3"><strong><%= Reference.human_attribute_name :year %></strong></label>
+  <div class="col-md-9">
+    <%= reference.year %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3"><strong><%= Reference.human_attribute_name :place %></strong></label>
+  <div class="col-md-9">
+    <%= reference.place %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3"><strong><%= Reference.human_attribute_name :notes %></strong></label>
+  <div class="col-md-9">
+    <%= render partial: 'shared/show/entity_notes', locals: { notes: reference.notes } %>
+  </div>
+</div>
+
+<% if native %>
+  <div class="row">
+    <label class="col-md-3"><strong><%= Deed.model_name.human(count: 2) %></strong></label>
+    <ul class="col-md-9 list-group list-group-flush">
+      <% if reference.deeds.count > 0 %>
+        <%= render partial: 'deeds/nested_show', collection: reference.deeds, as: :deed %>
+      <% else %>
+        <li class="list-group-item">
+          <em class="text-muted"><%= t('views.reference.no_deeds') %></em>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="row">
+    <label class="col-md-3"><strong><%= Seal.model_name.human(count: 2) %></strong></label>
+    <ul class="col-md-9 list-group list-group-flush">
+      <% if reference.seals.count > 0 %>
+        <%= render partial: 'seals/nested_show', collection: reference.seals, as: :seal %>
+      <% else %>
+        <li class="list-group-item">
+          <em class="text-muted"><%= t('views.reference.no_seals') %></em>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

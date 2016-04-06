@@ -4,7 +4,14 @@ class DeedsController < ApplicationController
   after_filter { flash.discard if request.xhr? }
 
   def index
-    @deeds = Deed.all
+    if params.has_key? :reference_id
+      @reference = Reference.find_by id: params[:reference_id]
+      add_breadcrumb Reference.model_name.human(count: 1)
+      add_breadcrumb @reference.title
+      @deeds = @reference.deeds
+    else
+      @deeds = Deed.all
+    end
 
     add_breadcrumb Deed.model_name.human(count: 2), :deeds_path
 
@@ -54,23 +61,36 @@ class DeedsController < ApplicationController
           @content.delete
           flash[:success] = t('views.flash.updated_entity',
                               what: Deed.model_name.human(count: 1), id: @deed.id)
+          target = 'deeds/form/refresh'
+
         when :deassoc_seal
           @seal = Seal.find_by!(id: params[:seal_id])
           @seal.delete
           flash[:success] = t('views.flash.updated_entity',
                               what: Deed.model_name.human(count: 1), id: @deed.id)
+          target = 'deeds/form/refresh'
+
         when :remove_mention
           @mention = Mention.find_by id: params[:mention_id]
           @deed.mentions.delete @mention
           @deed.save!
           @mention.delete
           flash[:success] = t('views.deed.flash.removed_mention')
+          target = 'deeds/show'
+
+        when :remove_reference
+          @reference = Reference.find_by id: params[:reference_id]
+          @deed.references.delete @reference
+          @deed.save!
+          flash[:success] = t('views.deed.flash.removed_reference')
+          target = 'deeds/show'
         else
           raise StandardError.new "Wrong sub_action key: #{params[:sub_action]}"
       end
       @unassociated = query_nested_collections
       respond_to do |format|
-        format.js { render partial: 'deeds/form/refresh' }
+        format.js   { render partial: target }
+        format.html { redirect_to deed_path(@deed) }
       end
     else
       @deed.update!(deed_params)

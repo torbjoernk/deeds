@@ -1,0 +1,33 @@
+// Place all the styles related to the authors controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#references.table {
+  .entity.row {
+    .col-info {
+      .col-reference-title {
+        @include make-col(4);
+        @extend .p-x-0;
+      }
+      .col-reference-authors {
+        @include make-col(2);
+        @extend .p-x-0;
+      }
+      .col-reference-medium {
+        @include make-col(1);
+        @extend .p-x-0;
+      }
+      .col-reference-place {
+        @include make-col(1);
+        @extend .p-x-0;
+      }
+      .col-reference-year {
+        @include make-col(1);
+        @extend .p-x-0;
+      }
+      .col-meta {
+        @include make-col(3);
+      }
+    }
+  }
+}

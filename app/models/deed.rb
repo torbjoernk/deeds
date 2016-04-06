@@ -14,6 +14,8 @@ class Deed < ActiveRecord::Base
   has_many :roles, through: :mentions, class_name: 'Role'
   has_many :places, through: :mentions, class_name: 'Place'
 
+  has_and_belongs_to_many :references
+
   validates :title, presence: true
   validates :title, uniqueness: { scope: [:year, :month, :day] }
   validates :year, numericality: { only_integer: true, allow_blank: true }

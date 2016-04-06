@@ -1,0 +1,34 @@
+<h1>
+  <%= model_name_with_icon Reference, :plural %>
+  <%= render partial: 'shared/index/main_action_btn',
+             locals: { path_to_new_entity: new_reference_path,
+                       path_to_refresh: references_path,
+                       entity_model: Reference } %>
+</h1>
+
+<% if @deed %>
+  <dl class="row">
+    <dt class="col-md-2"><%= t('views.linked_with', what: Deed.model_name.human) %></dt>
+    <dd class="col-md-10">
+      <%= render partial: 'deeds/oneline', locals: { deed: @deed } %>
+    </dd>
+  </dl>
+<% end %>
+<% if @seal %>
+  <dl class="row">
+    <dt class="col-md-2"><%= t('views.linked_with', what: Seal.model_name.human) %></dt>
+    <dd class="col-md-10">
+      <%= render partial: 'seals/oneline', locals: { seal: @seal } %>
+    </dd>
+  </dl>
+<% end %>
+
+<div class="row">
+  <div id="references-table">
+    <div class="table" id="references">
+      <div class="table-body container-fluid">
+        <%= render partial: 'reference', collection: @references %>
+      </div>
+    </div>
+  </div>
+</div>

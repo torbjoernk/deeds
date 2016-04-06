@@ -62,4 +62,10 @@
       </li>
     </ul>
   </li>
+  <li class="nav-item">
+    <%= link_to references_path, class: "nav-link#{' active' if current_page?(controller: :references)}" do %>
+      <%= model_name_with_icon Reference, :plural %>
+      <span class="tag tag-pill tag-default pull-right"><%= Reference.count %></span>
+    <% end %>
+  </li>
 </ul>

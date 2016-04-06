@@ -76,12 +76,12 @@
       <%= deed.documents.count %>
       <%= icon_for Document %>
     <% end %>
-    <%= link_to nil,#references_path(deed_id: deed.id),
+    <%= link_to references_path(deed_id: deed.id),
                 class: 'btn btn-sm btn-secondary',
-                title: t('views.show_linked', what: 'References'),
+                title: t('views.show_linked', what: Reference.model_name.human(count: 2)),
                 data: { toggle: 'tooltip' } do %>
-      ?
-      <%= icon('external-link', class: 'fa-fw') %>
+      <%= deed.references.count %>
+      <%= icon_for Reference %>
     <% end %>
     <% if deed.seal.nil? %>
       <%= link_to nil,

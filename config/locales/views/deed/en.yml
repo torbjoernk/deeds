@@ -13,8 +13,10 @@ en:
         remove_seal: "remove Seal"
         add_seal: "add new Seal"
         add_new_content: "add new Content"
+        remove_reference: "remove Reference"
       flash:
         removed_mention: "Removed Mention from Deed."
+        removed_reference: "Reference for Deed removed"
       modals:
         edit: "Edit %{what}"
         new: "Create new %{what}"
@@ -27,3 +29,4 @@ en:
       none_selected: "no Deed selected"
       no_seal: "no Seals attached"
       show_linked_seal: "show attached Seal"
+      no_references: "no References"

@@ -36,9 +36,7 @@ class DocumentsController < ApplicationController
     if params.has_key? :deed_id
       @deed = Deed.find_by id: params[:deed_id]
     end
-    respond_to do |format|
-      format.js { render 'documents/new' }
-    end
+    respond_to :js
   end
 
   def edit

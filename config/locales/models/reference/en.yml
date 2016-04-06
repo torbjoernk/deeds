@@ -1,0 +1,20 @@
+---
+en:
+  activerecord:
+    attributes:
+      reference:
+        title: Title
+        medium: Medium
+        year: Year
+        place: Place
+        authors: Authors
+        notes: Notes
+        mediums:
+          book: Book
+          sealbook: Book of Seals
+          deedbook: Book of Deeds
+          periodical: Periodical
+    models:
+      reference:
+        one: Referenc
+        other: References

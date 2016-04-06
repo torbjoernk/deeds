@@ -48,6 +48,13 @@
         <%= icon_for Deed %>
       <% end %>
     <% end %>
+    <%= link_to references_path(seal_id: seal.id),
+                class: 'btn btn-sm btn-secondary',
+                title: t('views.show_linked', what: Reference.model_name.human(count: 2)),
+                data: { toggle: 'tooltip' } do %>
+      <%= seal.references.count %>
+      <%= icon_for Reference %>
+    <% end %>
   </div>
 <% end %>
 

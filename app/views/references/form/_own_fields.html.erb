@@ -1,0 +1,44 @@
+<%= fields_for @reference do |f| %>
+  <div class="row form-group">
+    <%= f.label :title, class: 'col-md-3 form-control-label' %>
+    <div class="col-md-9">
+      <%= f.text_field :title, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="row form-group">
+    <%= f.label :authors, class: 'col-md-3 form-control-label' %>
+    <div class="col-md-9">
+      <%= f.text_field :authors, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="row form-group">
+    <%= f.label :medium, class: 'col-md-3 form-control-label' %>
+    <div class="col-md-9">
+      <% mediums = Reference::MEDIUMS.map {
+          |e| [t(e, scope: 'activerecord.attributes.reference.mediums'), e]
+      } %>
+      <%= f.select :medium,
+                   options_for_select(mediums, @reference.medium || nil),
+                   { include_blank: true },
+                   { class: 'custom-select' } %>
+    </div>
+  </div>
+  <div class="row form-group">
+    <%= f.label :year, class: 'col-md-3 form-control-label' %>
+    <div class="col-md-9">
+      <%= f.number_field :year, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="row form-group">
+    <%= f.label :place, class: 'col-md-3 form-control-label' %>
+    <div class="col-md-9">
+      <%= f.text_field :place, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="row form-group">
+    <%= f.label :notes, class: 'col-md-3 form-control-label' %>
+    <div class="col-md-9">
+      <%= f.text_area :notes, rows: 5, class: 'form-control' %>
+    </div>
+  </div>
+<% end %>
