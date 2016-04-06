@@ -1,5 +1,5 @@
 <% content_for :entity_info, flush: true do %>
-  <div class="col-role-title">
+  <div class="col-role-title" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
     <%= role.title %>
   </div>
   <div class="col-role-referring">
@@ -38,20 +38,18 @@
       <%= role.mentions.count %>
       <%= icon_for Mention %>
     <% end %>
-    <%= link_to people_path(role_id: role.id),
-                class: 'btn btn-sm btn-secondary',
-                title: t('views.show_linked', what: Person.model_name.human(count: 2)),
-                data: { toggle: 'tooltip' } do %>
+    <span class="btn btn-sm btn-secondary"
+          title="<%= t('views.number_linked', what: Person.model_name.human(count: 2)) %>"
+          data-toggle="tooltip">
       <%= role.mentioned_people.length %>
       <%= icon_for Person %>
-    <% end %>
-    <%= link_to places_path(role_id: role.id),
-                class: 'btn btn-sm btn-secondary',
-                title: t('views.show_linked', what: Place.model_name.human(count: 2)),
-                data: { toggle: 'tooltip' } do %>
+    </span>
+    <span class="btn btn-sm btn-secondary"
+          title="<%= t('views.number_linked', what: Place.model_name.human(count: 2)) %>"
+          data-toggle="tooltip">
       <%= role.mentioned_places.length %>
       <%= icon_for Place %>
-    <% end %>
+    </span>
     <%= link_to deeds_path(role_id: role.id),
                 class: 'btn btn-sm btn-secondary',
                 title: t('views.show_linked', what: Deed.model_name.human(count: 2)),

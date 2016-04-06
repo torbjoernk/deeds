@@ -4,7 +4,29 @@ class MentionsController < ApplicationController
   after_filter { flash.discard if request.xhr? }
 
   def index
-    @mentions = Mention.all
+    if params.has_key? :person_id
+      @person = Person.find_by id: params[:person_id]
+      add_breadcrumb Person.model_name.human(count: 1), people_path
+      add_breadcrumb @person.name
+      @mentions = @person.mentions
+    elsif params.has_key? :place_id
+      @place = Place.find_by id: params[:place_id]
+      add_breadcrumb Place.model_name.human(count: 1), places_path
+      add_breadcrumb @place.title
+      @mentions = @place.mentions
+    elsif params.has_key? :role_id
+      @role = Role.find_by id: params[:role_id]
+      add_breadcrumb Role.model_name.human(count: 1), roles_path
+      add_breadcrumb @role.title
+      @mentions = @role.mentions
+    elsif params.has_key? :deed_id
+      @deed = Deed.find_by id: params[:deed_id]
+      add_breadcrumb Deed.model_name.human(count: 1), deeds_path
+      add_breadcrumb @deed.title, deed_path(@deed)
+      @mentions = @deed.mentions
+    else
+      @mentions = Mention.all
+    end
 
     add_breadcrumb Mention.model_name.human(count: 2), mentions_path
 
