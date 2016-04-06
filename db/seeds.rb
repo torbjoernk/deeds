@@ -57,12 +57,13 @@ haa_r3a3 = Deed.create(
     description: 'Der Abt des Klosters Knechtsteden bezeugt, dass der Prior G. und Richmodis, die verstorbene Vorsteherin des Klosters Flaesheim, von Simon von Gemen ein Landgut in Hamm erworben haben.',
     content: dummy_content,
     documents: [haa_r3a3_original],
-    seal: reitersiegel_otto
+    seals: [reitersiegel_otto]
 )
 raise 'Deed not saved' unless haa_r3a3.persisted?
 raise 'Deed and Document not linked' unless haa_r3a3_original.deed == haa_r3a3
 raise 'Deed and Content not linked' unless dummy_content.deed == haa_r3a3
 raise 'Deed and Seal not linked' unless reitersiegel_otto.deed == haa_r3a3
+raise 'Deed and Seal not linked' unless haa_r3a3.seals.include? reitersiegel_otto
 
 kloster_knechtsteden = Place.create(
     title: 'Kloster Knechtsteden'

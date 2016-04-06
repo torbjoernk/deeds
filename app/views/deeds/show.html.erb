@@ -186,24 +186,24 @@
       <div class="card">
         <div class="card-header">
           <%= model_name_with_icon Seal, :plural %>
+          <span class="pull-right">
+            <%=  link_to new_seal_path(deed_id: @deed.id),
+                         class: 'btn btn-sm btn-primary',
+                         id: 'btn-new-seal',
+                         title: t('views.deed.actions.add_new_seal'),
+                         data: { toggle: 'tooltip', 'turbolinks': false, placement: 'left' },
+                         remote: true do -%>
+              <%= icon('plus', class: 'fa-fw') %>
+            <% end -%>
+          </span>
         </div>
         <ul class="list-group list-group-flush">
-          <% if @deed.seal.nil? %>
+          <% if @deed.seals.count > 0 %>
+            <%= render partial: 'deeds/show/seal', collection: @deed.seals %>
+          <% else %>
             <li class="list-group-item">
               <em class="text-muted"><%= t('views.deed.no_seal') %></em>
-              <span class="pull-right">
-                <%=  link_to new_seal_path(deed_id: @deed.id),
-                             class: 'btn btn-sm btn-primary',
-                             id: 'btn-new-seal',
-                             title: t('views.deed.actions.add_new_seal'),
-                             data: { toggle: 'tooltip', 'turbolinks': false, placement: 'left' },
-                             remote: true do -%>
-                  <%= icon('plus', class: 'fa-fw') %>
-                <% end -%>
-              </span>
             </li>
-          <% else %>
-            <%= render partial: 'seals/nested_show', locals: { seal: @deed.seal } %>
           <% end %>
         </ul>
       </div>
