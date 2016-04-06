@@ -4,7 +4,14 @@ class DeedsController < ApplicationController
   after_filter { flash.discard if request.xhr? }
 
   def index
-    @deeds = Deed.all
+    if params.has_key? :seal_id
+      @seal = Seal.find_by id: params[:seal_id]
+      add_breadcrumb Seal.model_name.human(count: 1), :seals_path
+      add_breadcrumb @seal.title
+      @deeds = @seal.deeds
+    else
+      @deeds = Deed.all
+    end
 
     add_breadcrumb Deed.model_name.human(count: 2), :deeds_path
 

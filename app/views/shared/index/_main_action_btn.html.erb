@@ -2,7 +2,7 @@
   <%= link_to path_to_new_entity,
               class: 'btn btn-primary',
               id: "btn-new-#{entity_model.model_name.to_s.downcase}",
-              title: t("views.#{entity_model.model_name.to_s.downcase.to_sym}.actions.add_new_btn_title"),
+              title: t("views.#{entity_model.model_name.to_s.downcase}.actions.add_new_btn_title"),
               data: { toggle: 'tooltip', 'turbolinks': false },
               remote: true do -%>
     <%= icon('plus', class: 'fa-fw') %>

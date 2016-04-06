@@ -1,0 +1,9 @@
+en:
+  views:
+    seal:
+      actions:
+        add_new_btn_title: "add new Seal"
+      modals:
+        edit: "Edit %{what}"
+        new: "Create new %{what}"
+      none_selected: "no Seal selected"

@@ -182,7 +182,7 @@
           <span class="pull-right">
             <%=  link_to nil,#new_reference_path(deed_id: @deed.id),
                          class: 'btn btn-sm btn-primary',
-                         id: 'btn-new-document',
+                         id: 'btn-new-reference',
                          title: t('views.deed.actions.add_new_reference'),
                          data: { toggle: 'tooltip', 'turbolinks': false, placement: 'left' },
                          remote: true do -%>
@@ -198,12 +198,11 @@
     <div class="col-md-4">
       <div class="card">
         <div class="card-header">
-          <%= icon('bookmark-o', class: 'fa-fw') %>
-          Seals
+          <%= model_name_with_icon Seal, :plural %>
           <span class="pull-right">
-            <%=  link_to nil,#new_seal_path(deed_id: @deed.id),
+            <%=  link_to new_seal_path(deed_id: @deed.id),
                          class: 'btn btn-sm btn-primary',
-                         id: 'btn-new-document',
+                         id: 'btn-new-seal',
                          title: t('views.deed.actions.add_new_seal'),
                          data: { toggle: 'tooltip', 'turbolinks': false, placement: 'left' },
                          remote: true do -%>
@@ -211,8 +210,13 @@
             <% end -%>
           </span>
         </div>
-        <div class="card-block">
-        </div>
+        <ul class="list-group list-group-flush">
+          <% if @deed.attached_seals.count > 0 %>
+            <%= render partial: 'deeds/show/attached_seal', collection: @deed.attached_seals %>
+          <% else %>
+            <li class="list-group-item text-muted"><%= t('views.deed.no_seals') %></li>
+          <% end %>
+        </ul>
       </div>
     </div>
   </div>

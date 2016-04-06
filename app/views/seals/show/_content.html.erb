@@ -1,0 +1,14 @@
+<% seal ||= @seal %>
+
+<div class="row">
+  <label class="col-md-3"><strong><%= Seal.human_attribute_name :title %></strong></label>
+  <div class="col-md-9">
+    <%= seal.title %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3"><strong><%= Seal.human_attribute_name :notes %></strong></label>
+  <div class="col-md-9">
+    <%= render partial: 'shared/show/entity_notes', locals: { notes: seal.notes } %>
+  </div>
+</div>

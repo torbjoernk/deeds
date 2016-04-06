@@ -6,6 +6,16 @@
                        entity_model: Deed } %>
 </h1>
 
+<% if @seal %>
+  <dl class="row">
+    <dt class="col-md-2"><%= t('views.linked_with', what: Seal.model_name.human) %></dt>
+    <dd class="col-md-10">
+      <%= render partial: 'seals/oneline', locals: { deed: @seal } %>
+    </dd>
+  </dl>
+<% end %>
+
+
 <div class="row">
   <div id="deeds-table">
     <div class="table" id="deeds">

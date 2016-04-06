@@ -1,0 +1,10 @@
+de:
+  activerecord:
+    models:
+      seal:
+        one: Siegel
+        other: Siegel
+    attributes:
+      seal:
+        title: Titel
+        notes: Notizen
