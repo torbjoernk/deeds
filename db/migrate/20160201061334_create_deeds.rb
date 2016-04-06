@@ -8,8 +8,6 @@ class CreateDeeds < ActiveRecord::Migration
       t.text :description
       t.text :notes
 
-      t.belongs_to :seal, index: true
-
       t.timestamps null: false
     end
 

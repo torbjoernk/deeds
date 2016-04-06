@@ -1,0 +1,22 @@
+<li class="list-group-item">
+  <div class="clearfix">
+    <%= seal.title %>
+    <span class="btn-group btn-group-sm pull-right">
+      <%= link_to_show_entity seal %>
+      <%= link_to deed_path(@deed, sub_action: 'remove_seal', seal_id: seal.id),
+                  method: :patch,
+                  id: "btn-remove-seal-#{seal.id}",
+                  class: 'btn btn-sm btn-outline-danger',
+                  title: t('views.deed.actions.remove_seal'),
+                  data: { toggle: 'tooltip',
+                          confirm: t('helpers.confirmation.delete'),
+                          placement: 'left' } do %>
+        <%= icon('trash', class: 'fa-fw') %>
+      <% end %>
+    </span>
+  </div>
+  <div class="card-text small">
+    <%= t(seal.material, scope: 'activerecord.attributes.seal.materials') %>,
+    <%= t(seal.attachment_type, scope: 'activerecord.attributes.seal.attachment_types') %>
+  </div>
+</li>

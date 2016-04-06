@@ -2,13 +2,10 @@ class Reference < ActiveRecord::Base
   include IconicModel
   ICON = 'external-link'
 
-  MEDIUMS = %w(book sealbook deedbook periodical)
-
   has_and_belongs_to_many :deeds
   has_and_belongs_to_many :seals
 
   validates :title, presence: true
-  validates :medium, inclusion: MEDIUMS, allow_blank: true
 
   def to_s
     out = []
@@ -16,8 +13,8 @@ class Reference < ActiveRecord::Base
       out << authors
     end
     out << title
-    unless medium.nil? or medium.empty?
-      out << I18n.t(medium, scope: 'activerecord.attributes.reference.mediums')
+    unless container.nil? or container.empty?
+      out << "#{I18n.t('views.reference.container_prefix')} #{container}"
     end
     unless place.nil? or place.empty?
       out << place

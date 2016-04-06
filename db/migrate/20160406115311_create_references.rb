@@ -2,7 +2,7 @@ class CreateReferences < ActiveRecord::Migration
   def change
     create_table :references do |t|
       t.string :title
-      t.string :medium
+      t.string :container
       t.integer :year
       t.string :place
       t.string :authors

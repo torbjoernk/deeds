@@ -13,7 +13,7 @@
         @include make-col(2);
         @extend .p-x-0;
       }
-      .col-reference-medium {
+      .col-reference-container {
         @include make-col(1);
         @extend .p-x-0;
       }

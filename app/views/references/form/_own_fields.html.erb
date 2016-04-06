@@ -12,15 +12,9 @@
     </div>
   </div>
   <div class="row form-group">
-    <%= f.label :medium, class: 'col-md-3 form-control-label' %>
+    <%= f.label :container, class: 'col-md-3 form-control-label' %>
     <div class="col-md-9">
-      <% mediums = Reference::MEDIUMS.map {
-          |e| [t(e, scope: 'activerecord.attributes.reference.mediums'), e]
-      } %>
-      <%= f.select :medium,
-                   options_for_select(mediums, @reference.medium || nil),
-                   { include_blank: true },
-                   { class: 'custom-select' } %>
+      <%= f.text_field :container, class: 'form-control' %>
     </div>
   </div>
   <div class="row form-group">

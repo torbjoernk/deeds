@@ -9,12 +9,8 @@
       <%= reference.authors %>
     <% end %>
   </div>
-  <div class="col-reference-medium">
-    <% if reference.medium.nil? or reference.medium.empty? %>
-      <em class="small text-muted"><%= t('views.reference.no_medium') %></em>
-    <% else %>
-      <%= t(reference.medium, scope: 'activerecord.attributes.reference.mediums') %>
-    <% end %>
+  <div class="col-reference-container">
+    <%= reference.container %>
   </div>
   <div class="col-reference-year">
     <% if reference.year.nil? %>

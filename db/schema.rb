@@ -74,12 +74,10 @@ ActiveRecord::Schema.define(version: 20160406143225) do
     t.integer  "day"
     t.text     "description"
     t.text     "notes"
-    t.integer  "seal_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
-  add_index "deeds", ["seal_id"], name: "index_deeds_on_seal_id"
   add_index "deeds", ["title", "year", "month", "day"], name: "index_deeds_on_title_and_year_and_month_and_day", unique: true
 
   create_table "deeds_references", force: :cascade do |t|
@@ -154,7 +152,7 @@ ActiveRecord::Schema.define(version: 20160406143225) do
 
   create_table "references", force: :cascade do |t|
     t.string   "title"
-    t.string   "medium"
+    t.string   "container"
     t.integer  "year"
     t.string   "place"
     t.string   "authors"
