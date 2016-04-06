@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160201061334) do
+ActiveRecord::Schema.define(version: 20160406052003) do
+
+  create_table "attached_seals", force: :cascade do |t|
+    t.string   "material"
+    t.string   "attachment_type"
+    t.text     "notes"
+    t.integer  "deed_id"
+    t.integer  "seal_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "attached_seals", ["deed_id", "seal_id"], name: "index_attached_seals_on_deed_id_and_seal_id", unique: true
 
   create_table "collection_documents", force: :cascade do |t|
     t.integer  "collection_id"
@@ -67,10 +79,12 @@ ActiveRecord::Schema.define(version: 20160201061334) do
     t.integer  "day"
     t.text     "description"
     t.text     "notes"
+    t.integer  "seal_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
+  add_index "deeds", ["seal_id"], name: "index_deeds_on_seal_id"
   add_index "deeds", ["title", "year", "month", "day"], name: "index_deeds_on_title_and_year_and_month_and_day", unique: true
 
   create_table "documents", force: :cascade do |t|
@@ -138,6 +152,13 @@ ActiveRecord::Schema.define(version: 20160201061334) do
   create_table "roles", force: :cascade do |t|
     t.string   "title"
     t.string   "referring"
+    t.text     "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "seals", force: :cascade do |t|
+    t.string   "title"
     t.text     "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
