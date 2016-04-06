@@ -25,6 +25,8 @@ Rails.application.routes.draw do
 
   resources :deeds
 
+  resources :seals
+
   resources :places
   resources :people
   resources :roles

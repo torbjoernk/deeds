@@ -104,9 +104,17 @@
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
             <% if @deed.content.nil? %>
-              <em class="small text-muted">
-                <%= t('views.deed.no_content') %>
-              </em>
+              <em class="small text-muted"><%= t('views.deed.no_content') %></em>
+              <span class="pull-right">
+                <%=  link_to new_content_path(deed_id: @deed.id),
+                             class: 'btn btn-sm btn-primary',
+                             id: 'btn-new-content',
+                             title: t('views.deed.actions.add_new_content'),
+                             data: { toggle: 'tooltip', 'turbolinks': false, placement: 'left' },
+                             remote: true do -%>
+                  <%= icon('plus', class: 'fa-fw') %>
+                <% end -%>
+              </span>
             <% else %>
               <%= t(@deed.content.language, scope: 'activerecord.attributes.content.languages') %>
               <span class="pull-right">
@@ -177,34 +185,40 @@
     <div class="col-md-4">
       <div class="card">
         <div class="card-header">
-          <%= icon('external-link', class: 'fa-fw') %>
-          References
-          <span class="pull-right">
-            <%=  link_to nil,#new_reference_path(deed_id: @deed.id),
-                         class: 'btn btn-sm btn-primary',
-                         id: 'btn-new-document',
-                         title: t('views.deed.actions.add_new_reference'),
-                         data: { toggle: 'tooltip', 'turbolinks': false, placement: 'left' },
-                         remote: true do -%>
-              <%= icon('plus', class: 'fa-fw') %>
-            <% end -%>
-          </span>
+          <%= model_name_with_icon Seal, :plural %>
         </div>
-        <div class="card-block">
-        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <% if @deed.seal.nil? %>
+              <em class="text-muted"><%= t('views.deed.no_seal') %></em>
+              <span class="pull-right">
+                <%=  link_to new_seal_path(deed_id: @deed.id),
+                             class: 'btn btn-sm btn-primary',
+                             id: 'btn-new-seal',
+                             title: t('views.deed.actions.add_new_seal'),
+                             data: { toggle: 'tooltip', 'turbolinks': false, placement: 'left' },
+                             remote: true do -%>
+                  <%= icon('plus', class: 'fa-fw') %>
+                <% end -%>
+              </span>
+            <% else %>
+              <%= render partial: 'seals/nested_show', locals: { seal: @deed.seal } %>
+            <% end %>
+          </li>
+        </ul>
       </div>
     </div>
 
     <div class="col-md-4">
       <div class="card">
         <div class="card-header">
-          <%= icon('bookmark-o', class: 'fa-fw') %>
-          Seals
+          <%= icon('external-link', class: 'fa-fw') %>
+          References
           <span class="pull-right">
-            <%=  link_to nil,#new_seal_path(deed_id: @deed.id),
+            <%=  link_to nil,#new_reference_path(deed_id: @deed.id),
                          class: 'btn btn-sm btn-primary',
-                         id: 'btn-new-document',
-                         title: t('views.deed.actions.add_new_seal'),
+                         id: 'btn-new-reference',
+                         title: t('views.deed.actions.add_new_reference'),
                          data: { toggle: 'tooltip', 'turbolinks': false, placement: 'left' },
                          remote: true do -%>
               <%= icon('plus', class: 'fa-fw') %>

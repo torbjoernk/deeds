@@ -57,7 +57,6 @@ class ContentsController < ApplicationController
         end
       end
     else
-      puts content_params.inspect
       @content.update!(content_params)
       flash[:success] = t('views.flash.updated_entity',
                           what: Content.model_name.human(count: 1), id: @content.id)

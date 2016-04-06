@@ -1,0 +1,25 @@
+// Place all the styles related to the contents controller here.
+// They will automatically be included in application.css.scss.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#seals.table {
+  .entity.row {
+    .col-info {
+      .col-seal-title {
+        @include make-col(4);
+        @extend .p-x-0;
+      }
+      .col-seal-material {
+        @include make-col(2);
+        @extend .p-x-0;
+      }
+      .col-seal-attachment {
+        @include make-col(2);
+        @extend .p-x-0;
+      }
+      .col-meta {
+        @include make-col(4);
+      }
+    }
+  }
+}

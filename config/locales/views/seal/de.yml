@@ -1,0 +1,11 @@
+de:
+  views:
+    seal:
+      actions:
+        add_new_btn_title: "Neues Siegel hinzufügen"
+      modals:
+        edit: "%{what} bearbeiten"
+        new: "Neues %{what} erstellen"
+      none_selected: "kein Siegel ausgewählt"
+      no_material: "Material unbekannt"
+      no_attachment_type: "Befestigung unbekannt"

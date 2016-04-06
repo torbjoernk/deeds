@@ -1,0 +1,49 @@
+<div class="row form-group">
+  <label class="col-md-3 form-control-label">
+    <%= model_name_with_icon Content, :singular %>
+    <span class="pull-right">
+      <%= content_tag :a,
+                      icon('refresh', class: 'fa-fw'),
+                      id: 'btn-refresh-nested-content-fields',
+                      class: 'btn btn-sm btn-outline-default',
+                      title: t('views.modals.refresh_associations'),
+                      data: { toggle: 'tooltip' } %>
+    </span>
+  </label>
+  <div id="deed-content" class="col-md-9">
+    <% if @deed.content.nil? %>
+      <div class="form-control text-muted clearfix">
+        <em class="text-muted"><%= t('views.deed.no_content') %></em>
+        <div class="btn-group btn-group-sm pull-right">
+          <%= link_to new_content_path(deed_id: @deed.id),
+                      class: 'btn btn-sm btn-primary',
+                      title: t('views.deed.actions.add_content'),
+                      data: { toggle: 'tooltip' },
+                      remote: true do %>
+            <%= icon('plus', class: 'fa-fw') %>
+          <% end %>
+        </div>
+      </div>
+    <% else %>
+      <div class="form-control">
+        <div class="btn-group btn-group-sm pull-right">
+          <%= link_to_show_entity @deed.content %>
+          <%= content_tag :a,
+                          icon('trash', class: 'fa-fw'),
+                          id: 'btn-deassoc-content',
+                          class: 'btn btn-sm btn-danger',
+                          title: t('views.deed.actions.remove_content'),
+                          data: { toggle: 'tooltip' } %>
+        </div>
+        <%= icon_for Content %>
+        <%= t(@deed.content.language, scope: 'activerecord.attributes.content.languages') %>
+        <br />
+        <div class="p-l-2">
+          <em>
+            <%= truncate @deed.content.content, length: 100, separator: ' ' %>
+          </em>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -83,12 +83,19 @@
       ?
       <%= icon('external-link', class: 'fa-fw') %>
     <% end %>
-    <%= link_to nil,#seals_path(deed_id: deed.id),
-                class: 'btn btn-sm btn-secondary',
-                title: t('views.show_linked', what: 'Seals'),
-                data: { toggle: 'tooltip' } do %>
-      ?
-      <%= icon('bookmark-o', class: 'fa-fw') %>
+    <% if deed.seal.nil? %>
+      <%= link_to nil,
+                  class: 'btn btn-sm btn-outline-secondary disabled' do %>
+        <%= icon_for Seal %>
+      <% end %>
+    <% else %>
+      <%= link_to seal_path(deed.seal),
+                  class: 'btn btn-sm btn-secondary',
+                  title: t('views.deed.show_linked_seal'),
+                  data: { toggle: 'tooltip' },
+                  remote: true do %>
+        <%= icon_for Seal %>
+      <% end %>
     <% end %>
   </div>
 

@@ -11,6 +11,9 @@ de:
         add_new_seal: Neues Siegel hinzufügen
         remove_content: Inhalt der Urkunde entfernen
         remove_mention: Nennung aus Urkunde entfernen
+        remove_seal: "Siegel entfernen"
+        add_seal: "Neues Siegel zur Urkunde hinzufügen"
+        add_new_content: "Neuen Inhalt hinzufügen"
       flash:
         removed_mention: Nennung wurde aus Urkunde entfernt.
       modals:
@@ -23,3 +26,5 @@ de:
       no_places: keine Orte genannt
       no_roles: keine Rollen genannt
       none_selected: keine Urkunde ausgewählt
+      no_seal: "nicht besiegelt"
+      show_linked_seal: "befestigtes Siegel anzeigen"

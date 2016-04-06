@@ -1,0 +1,17 @@
+<h1>
+  <%= model_name_with_icon Seal, :plural %>
+  <%= render partial: 'shared/index/main_action_btn',
+             locals: { path_to_new_entity: new_seal_path,
+                       path_to_refresh: seals_path,
+                       entity_model: Seal } %>
+</h1>
+
+<div class="row">
+  <div id="seals-table">
+    <div class="table" id="seals">
+      <div class="table-body container-fluid">
+        <%= render partial: 'seal', collection: @seals %>
+      </div>
+    </div>
+  </div>
+</div>

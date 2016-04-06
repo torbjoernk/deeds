@@ -3,6 +3,7 @@
 #= depend_on pre_load
 
 DeedsApp.display_form_modal = (title, content, submit, callback) ->
+  $('[data-toggle="tooltip"]').tooltip('hide')
   form_modal = $('#form-modal')
   form_modal.find('#form-modal-title').html(title)
   form_modal.find('#form-modal-content').html(content)
@@ -16,6 +17,7 @@ DeedsApp.display_form_modal = (title, content, submit, callback) ->
     form_modal.modal('hide')
 
 DeedsApp.display_form_modal = (full_modal, callback) ->
+  $('[data-toggle="tooltip"]').tooltip('hide')
   form_modal = $('#form-modal')
   form_modal.html(full_modal)
   if callback?

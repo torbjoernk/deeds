@@ -1,0 +1,10 @@
+<li class="list-group-item">
+  <%= attached_seal.seal.title %>
+  &mdash;
+  <%= t(attached_seal.material, scope: 'activerecord.attached_seal.attributes.materials') %>
+  &mdash;
+  <%= t(attached_seal.attachment_type, scope: 'activerecord.attached_seal.attributes.attachment_types') %>
+  <span class="pull-right">
+    <%= link_to_show_entity attached_seal.seal %>
+  </span>
+</li>

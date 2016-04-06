@@ -1,0 +1,38 @@
+<%= fields_for @seal do |f| %>
+  <div class="row form-group">
+    <%= f.label :title, class: 'col-md-3 form-control-label' %>
+    <div class="col-md-9">
+      <%= f.text_field :title, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="row form-group">
+    <%= f.label :material, class: 'col-md-3 form-control-label' %>
+    <div class="col-md-9">
+      <% materials = Seal::MATERIALS.map {
+          |e| [t(e, scope: 'activerecord.attributes.seal.materials'), e]
+      } %>
+      <%= f.select :material,
+                   options_for_select(materials, @seal.material || nil),
+                   { include_blank: true },
+                   { class: 'custom-select' } %>
+    </div>
+  </div>
+  <div class="row form-group">
+    <%= f.label :attachment_type, class: 'col-md-3 form-control-label' %>
+    <div class="col-md-9">
+      <% attachment_types = Seal::ATTACHMENT_TYPES.map {
+          |e| [t(e, scope: 'activerecord.attributes.seal.attachment_types'), e]
+      } %>
+      <%= f.select :attachment_type,
+                   options_for_select(attachment_types, @seal.attachment_type || nil),
+                   { include_blank: true },
+                   { class: 'custom-select' } %>
+    </div>
+  </div>
+  <div class="row form-group">
+    <%= f.label :notes, class: 'col-md-3 form-control-label' %>
+    <div class="col-md-9">
+      <%= f.text_area :notes, rows: 5, class: 'form-control' %>
+    </div>
+  </div>
+<% end %>

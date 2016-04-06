@@ -27,6 +27,12 @@
             <span class="tag tag-pill tag-default pull-right"><%= Storage.count %></span>
         <% end %>
       </li>
+      <li class="nav-item">
+        <%= link_to seals_path, class: "nav-link#{' active' if current_page?(controller: :seals)}" do %>
+          <%= model_name_with_icon Seal, :plural %>
+          <span class="tag tag-pill tag-default pull-right"><%= Seal.count %></span>
+        <% end %>
+      </li>
     </ul>
   </li>
   <li class="nav-item">

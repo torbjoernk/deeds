@@ -54,6 +54,11 @@ class DeedsController < ApplicationController
           @content.delete
           flash[:success] = t('views.flash.updated_entity',
                               what: Deed.model_name.human(count: 1), id: @deed.id)
+        when :deassoc_seal
+          @seal = Seal.find_by!(id: params[:seal_id])
+          @seal.delete
+          flash[:success] = t('views.flash.updated_entity',
+                              what: Deed.model_name.human(count: 1), id: @deed.id)
         when :remove_mention
           @mention = Mention.find_by id: params[:mention_id]
           @deed.mentions.delete @mention
@@ -63,6 +68,7 @@ class DeedsController < ApplicationController
         else
           raise StandardError.new "Wrong sub_action key: #{params[:sub_action]}"
       end
+      @unassociated = query_nested_collections
       respond_to do |format|
         format.js { render partial: 'deeds/form/refresh' }
       end

@@ -55,6 +55,5 @@ $ ->
     else
       alert <%= t('views.collection.none_selected') %>
 
-
   # reload tooltips
   nested_fields_container.find('[data-toggle="tooltip"]').tooltip()
