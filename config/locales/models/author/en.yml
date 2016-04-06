@@ -1,0 +1,14 @@
+en:
+  activerecord:
+    attributes:
+      content:
+        content: "Content"
+        language: "Language"
+        languages:
+          contemporary_german: "Contemporary German"
+          latin: "Latin"
+          old_german: "Old German"
+    models:
+      content:
+        one: "Content"
+        other: "Contents"

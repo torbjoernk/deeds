@@ -1,0 +1,27 @@
+<% content_for :entity_info, flush: true do %>
+  <div class="col-author-name">
+    <%= author.name %>
+  </div>
+<% end %>
+
+<% content_for :entity_toolbar_associations, flush: true do %>
+  <div class="btn-group btn-group-sm" role="group">
+    <% if author.notes.nil? or author.notes.empty? %>
+      <a class="btn btn-sm btn-outline-secondary disabled">
+        <%= icon('comment-o', class: 'fa-fw') %>
+      </a>
+    <% else %>
+      <a class="btn btn-sm btn-secondary"
+         title="<%= author.notes %>"
+         data-toggle="tooltip">
+        <%= icon('comment-o', class: 'fa-fw') %>
+      </a>
+    <% end %>
+  </div>
+
+  <div class="btn-group btn-group-sm" role="group">
+  </div>
+<% end %>
+
+<%= render partial: 'shared/index/entity',
+           locals: { entity_id: "author-#{author.id}", entity: author } %>

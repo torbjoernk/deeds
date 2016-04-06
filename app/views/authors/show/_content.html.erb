@@ -1,0 +1,14 @@
+<% author ||= @author %>
+
+<div class="row">
+  <label class="col-md-3"><strong><%= Author.human_attribute_name :name %></strong></label>
+  <div class="col-md-9">
+    <%= author.name %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3"><strong><%= Author.human_attribute_name :notes %></strong></label>
+  <div class="col-md-9">
+    <%= render partial: 'shared/show/entity_notes', locals: { notes: author.notes } %>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+---
+de:
+  activerecord:
+    attributes:
+      author:
+        name: Name
+        notes: Notizen
+    models:
+      author:
+        one: Autor
+        other: Autoren

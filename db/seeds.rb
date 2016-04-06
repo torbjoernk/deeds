@@ -192,3 +192,8 @@ velkere_zeuge = Mention.create(
     deed: haa_r3a3
 )
 raise 'Mention not saved' unless velkere_zeuge.persisted?
+
+pachurka_d = Author.create(
+    name: 'Pachurka, Daniel'
+)
+raise 'Author not saved' unless pachurka_d.persisted?

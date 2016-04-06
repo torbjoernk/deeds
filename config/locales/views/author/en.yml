@@ -1,0 +1,9 @@
+en:
+  views:
+    author:
+      actions:
+        add_new_btn_title: "add new Author"
+      modals:
+        edit: "Edit %{what}"
+        new: "Create new %{what}"
+      none_selected: "no Author selected"

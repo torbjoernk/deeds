@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160406050120) do
+ActiveRecord::Schema.define(version: 20160406112027) do
+
+  create_table "authors", force: :cascade do |t|
+    t.string   "name"
+    t.text     "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "collection_documents", force: :cascade do |t|
     t.integer  "collection_id"
