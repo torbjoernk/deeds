@@ -166,7 +166,7 @@ zeuge = Role.create(
 raise 'Role not saved' unless zeuge.persisted?
 
 
-gottschalk_prior = MentionEntry.create(
+gottschalk_prior = Mention::MentionEntry.create(
     person: gottschalk,
     place: kloster_knechtsteden,
     role: prior,
@@ -174,14 +174,14 @@ gottschalk_prior = MentionEntry.create(
 )
 raise 'MentionEntry not saved' unless gottschalk_prior.persisted?
 
-gottschalk_kaeufer = MentionEntry.create(
+gottschalk_kaeufer = Mention::MentionEntry.create(
     person: gottschalk,
     role: kaeufer,
     deed: haa_r3n3
 )
 raise 'MentionEntry not saved' unless gottschalk_kaeufer.persisted?
 
-richmodis_flaesheim = MentionEntry.create(
+richmodis_flaesheim = Mention::MentionEntry.create(
     person: richmodis,
     place: kloster_flaesheim,
     role: klostervorsteher,
@@ -189,14 +189,14 @@ richmodis_flaesheim = MentionEntry.create(
 )
 raise 'MentionEntry not saved' unless richmodis_flaesheim.persisted?
 
-richmodis_kaeufer = MentionEntry.create(
+richmodis_kaeufer = Mention::MentionEntry.create(
     person: richmodis,
     role: kaeufer,
     deed: haa_r3n3
 )
 raise 'MentionEntry not saved' unless richmodis_kaeufer.persisted?
 
-simon_landgut = MentionEntry.create(
+simon_landgut = Mention::MentionEntry.create(
     person: simon,
     place: landgut_hamm,
     role: besitzer,
@@ -204,14 +204,14 @@ simon_landgut = MentionEntry.create(
 )
 raise 'MentionEntry not saved' unless simon_landgut.persisted?
 
-simon_verkaeufer = MentionEntry.create(
+simon_verkaeufer = Mention::MentionEntry.create(
     person: simon,
     role: verkaeufer,
     deed: haa_r3n3
 )
 raise 'MentionEntry not saved' unless simon_verkaeufer.persisted?
 
-velkere_zeuge = MentionEntry.create(
+velkere_zeuge = Mention::MentionEntry.create(
     person: velkere,
     role: zeuge,
     deed: haa_r3n3

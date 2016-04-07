@@ -31,30 +31,30 @@
   </div>
 
   <div class="btn-group btn-group-sm" role="group">
-    <%= link_to mention_entries_path(role_id: role.id),
+    <%= link_to mention_mention_entries_path(role_id: role.id),
                 class: 'btn btn-sm btn-secondary',
-                title: t('views.show_linked', what: MentionEntry.model_name.human(count: 2)),
+                title: t('views.show_linked', what: Mention::MentionEntry.model_name.human(count: 2)),
                 data: { toggle: 'tooltip' } do %>
       <%= role.mention_entries.count %>
-      <%= icon_for MentionEntry %>
+      <%= icon_for Mention::MentionEntry %>
     <% end %>
     <span class="btn btn-sm btn-secondary"
           title="<%= t('views.number_linked', what: Person.model_name.human(count: 2)) %>"
           data-toggle="tooltip">
-      <%= role.mention_entryed_people.length %>
+      <%= role.mentioned_people.length %>
       <%= icon_for Person %>
     </span>
     <span class="btn btn-sm btn-secondary"
           title="<%= t('views.number_linked', what: Place.model_name.human(count: 2)) %>"
           data-toggle="tooltip">
-      <%= role.mention_entryed_places.length %>
+      <%= role.mentioned_places.length %>
       <%= icon_for Place %>
     </span>
     <%= link_to deeds_path(role_id: role.id),
                 class: 'btn btn-sm btn-secondary',
                 title: t('views.show_linked', what: Deed.model_name.human(count: 2)),
                 data: { toggle: 'tooltip' } do %>
-      <%= role.mention_entryed_deeds.length %>
+      <%= role.mentioned_deeds.length %>
       <%= icon_for Deed %>
     <% end %>
   </div>

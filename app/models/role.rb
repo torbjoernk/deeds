@@ -4,7 +4,7 @@ class Role < ActiveRecord::Base
 
   REFERS_TO = %w(person place deed)
 
-  has_many :mention_entries
+  has_many :mention_entries, class_name: Mention::MentionEntry
   has_many :people, through: :mention_entries
   has_many :places, through: :mention_entries
   has_many :deeds, through: :mention_entries
@@ -12,15 +12,15 @@ class Role < ActiveRecord::Base
   validates :title, presence: true
   validates :referring, inclusion: { in: REFERS_TO }
 
-  def mention_entryed_deeds
+  def mentioned_deeds
     deeds.group(:title)
   end
 
-  def mention_entryed_places
+  def mentioned_places
     places.group(:title)
   end
 
-  def mention_entryed_people
+  def mentioned_people
     people.group(:name)
   end
 

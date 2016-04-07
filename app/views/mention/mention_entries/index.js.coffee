@@ -1,4 +1,4 @@
-#= depend_on jquery2
+#= depend_on jquery2.js
 #= depend_on bootstrap/bootstrap
 
 $ ->

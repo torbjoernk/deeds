@@ -58,7 +58,7 @@
   </div>
 </div>
 <div class="row">
-  <label class="col-md-3"><strong><%= MentionEntry.human_attribute_name :notes %></strong></label>
+  <label class="col-md-3"><strong><%= Mention::MentionEntry.human_attribute_name :notes %></strong></label>
   <div class="col-md-9">
     <%= render partial: 'shared/show/entity_notes', locals: { notes: mention_entry.notes } %>
   </div>

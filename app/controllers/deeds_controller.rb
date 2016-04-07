@@ -71,7 +71,7 @@ class DeedsController < ApplicationController
           target = 'deeds/form/refresh'
 
         when :remove_mention_entry
-          @mention_entry = MentionEntry.find_by id: params[:mention_entry_id]
+          @mention_entry = Mention::MentionEntry.find_by id: params[:mention_entry_id]
           @deed.mention_entries.delete @mention_entry
           @deed.save!
           @mention_entry.delete

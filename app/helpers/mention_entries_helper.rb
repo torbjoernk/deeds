@@ -1,2 +1,4 @@
-module MentionEntriesHelper
-end
+# module Mention
+  module MentionEntriesHelper
+  end
+# end

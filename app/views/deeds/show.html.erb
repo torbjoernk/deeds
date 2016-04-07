@@ -245,7 +245,7 @@
         </div>
         <ul class="list-group list-group-flush">
           <% if @deed.people.count > 0 %>
-            <%= render partial: 'deeds/show/person', collection: @deed.mention_entryed_people %>
+            <%= render partial: 'deeds/show/person', collection: @deed.mentioned_people %>
           <% else %>
             <li class="list-group-item text-muted">
               <%= t('views.deed.no_people') %>
@@ -262,7 +262,7 @@
         </div>
         <ul class="list-group list-group-flush">
           <% if @deed.people.count > 0 %>
-            <%= render partial: 'deeds/show/place', collection: @deed.mention_entryed_places %>
+            <%= render partial: 'deeds/show/place', collection: @deed.mentioned_places %>
           <% else %>
             <li class="list-group-item text-muted">
               <%= t('views.deed.no_places') %>
@@ -279,7 +279,7 @@
         </div>
         <ul class="list-group list-group-flush">
           <% if @deed.people.count > 0 %>
-            <%= render partial: 'deeds/show/role', collection: @deed.mention_entryed_roles %>
+            <%= render partial: 'deeds/show/role', collection: @deed.mentioned_roles %>
           <% else %>
             <li class="list-group-item text-muted">
               <%= t('views.deed.no_roles') %>
@@ -296,9 +296,9 @@
     <div class="col-md-8 offset-md-2">
       <div class="card">
         <div class="card-header">
-          <%= model_name_with_icon MentionEntry, :plural %>
+          <%= model_name_with_icon Mention::MentionEntry, :plural %>
           <span class="pull-right">
-            <%=  link_to new_mention_entry_path(deed_id: @deed.id),
+            <%=  link_to new_mention_mention_entry_path(deed_id: @deed.id),
                          class: 'btn btn-sm btn-primary',
                          id: 'btn-new-document',
                          title: t('views.deed.actions.add_new_mention_entry'),

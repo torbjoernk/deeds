@@ -9,7 +9,7 @@ class Deed < ActiveRecord::Base
 
   has_many :seals
 
-  has_many :mention_entries
+  has_many :mention_entries, class_name: Mention::MentionEntry
   has_many :people, through: :mention_entries, class_name: 'Person'
   has_many :roles, through: :mention_entries, class_name: 'Role'
   has_many :places, through: :mention_entries, class_name: 'Place'
@@ -24,15 +24,15 @@ class Deed < ActiveRecord::Base
   validates :day, numericality: { only_integer: true, allow_blank: true,
                                   greater_than_or_equal_to: 1, less_than_or_equal_to: 31 }
 
-  def mention_entryed_people
+  def mentioned_people
     people.group(:name).order(:name)
   end
 
-  def mention_entryed_places
+  def mentioned_places
     places.group(:title).order(:title)
   end
 
-  def mention_entryed_roles
+  def mentioned_roles
     roles.group(:title).order(:title)
   end
 
