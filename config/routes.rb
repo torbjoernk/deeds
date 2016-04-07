@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   resources :places
   resources :people
   resources :roles
-  resources :mentions
+  resources :mention_entries
 
   resources :references
 

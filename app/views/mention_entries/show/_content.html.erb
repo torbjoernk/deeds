@@ -1,0 +1,65 @@
+<% native ||= false %>
+<% mention_entry ||= @mention_entry %>
+
+<div class="row">
+  <label class="col-md-3"><strong><%= Deed.model_name.human %></strong></label>
+  <div class="col-md-9">
+    <% if mention_entry.deed.nil? %>
+      <em class="text-muted"><%= t('views.mention_entry.no_deed_referenced') %></em>
+    <% else %>
+      <%= icon_for Deed %>
+      <%= mention_entry.deed.title %>
+      <span class="pull-right">
+        <%= link_to_show_entity mention_entry.deed, remote=false %>
+      </span>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3"><strong><%= Person.model_name.human %></strong></label>
+  <div class="col-md-9">
+    <% if mention_entry.person.nil? %>
+      <em class="text-muted"><%= t('views.mention_entry.no_person_referenced') %></em>
+    <% else %>
+      <%= icon(mention_entry.person.gender_icon, class: 'fa-fw') %>
+      <%= mention_entry.person.name %>
+      <span class="pull-right">
+        <%= link_to_show_entity mention_entry.person, remote=false %>
+      </span>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3"><strong><%= Place.model_name.human %></strong></label>
+  <div class="col-md-9">
+    <% if mention_entry.place.nil? %>
+      <em class="text-muted"><%= t('views.mention_entry.no_place_referenced') %></em>
+    <% else %>
+      <%= icon_for Place %>
+      <%= mention_entry.place.title %>
+      <span class="pull-right">
+        <%= link_to_show_entity mention_entry.place, remote=false %>
+      </span>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3"><strong><%= Role.model_name.human %></strong></label>
+  <div class="col-md-9">
+    <% if mention_entry.role.nil? %>
+      <em class="text-muted"><%= t('views.mention_entry.no_role_referenced') %></em>
+    <% else %>
+      <%= icon_for Role %>
+      <%= mention_entry.role.title %>
+      <span class="pull-right">
+        <%= link_to_show_entity mention_entry.role, remote=false %>
+      </span>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <label class="col-md-3"><strong><%= MentionEntry.human_attribute_name :notes %></strong></label>
+  <div class="col-md-9">
+    <%= render partial: 'shared/show/entity_notes', locals: { notes: mention_entry.notes } %>
+  </div>
+</div>

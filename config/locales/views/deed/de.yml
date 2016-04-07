@@ -6,24 +6,24 @@ de:
         add_content: Neuen Inhalt zur Urkunde hinzufügen
         add_new_btn_title: Neue Urkunde hinzufügen
         add_new_document: Neues Dokument hinzufügen
-        add_new_mention: Neue Nennung hinzufügen
+        add_new_mention_entry: Neue Nennung hinzufügen
         add_new_reference: Neue Referenz hinzufügen
         add_new_seal: Neues Siegel hinzufügen
         remove_content: Inhalt der Urkunde entfernen
-        remove_mention: Nennung aus Urkunde entfernen
+        remove_mention_entry: Nennung aus Urkunde entfernen
         remove_seal: "Siegel entfernen"
         add_seal: "Neues Siegel zur Urkunde hinzufügen"
         add_new_content: "Neuen Inhalt hinzufügen"
         remove_reference: "Referenz entfernen"
       flash:
-        removed_mention: Nennung wurde aus Urkunde entfernt.
+        removed_mention_entry: Nennung wurde aus Urkunde entfernt.
         removed_reference: "Referenz für Urkunde entfernt."
       modals:
         edit: "%{what} bearbeiten"
         new: Neue %{what} erstellen
       no_content: keine Inhalt vorhanden
       no_documents: keine Dokumente
-      no_mentions: keine Nennungen vorhanden
+      no_mention_entries: keine Nennungen vorhanden
       no_people: keine Personen genannt
       no_places: keine Orte genannt
       no_roles: keine Rollen genannt

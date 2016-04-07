@@ -1,7 +1,7 @@
 ---
 de:
   views:
-    mention:
+    mentionentry:
       actions:
         add_new_btn_title: Neue Nennung hinzufügen
       as_role: als

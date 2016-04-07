@@ -166,57 +166,57 @@ zeuge = Role.create(
 raise 'Role not saved' unless zeuge.persisted?
 
 
-gottschalk_prior = Mention.create(
+gottschalk_prior = MentionEntry.create(
     person: gottschalk,
     place: kloster_knechtsteden,
     role: prior,
     deed: haa_r3n3
 )
-raise 'Mention not saved' unless gottschalk_prior.persisted?
+raise 'MentionEntry not saved' unless gottschalk_prior.persisted?
 
-gottschalk_kaeufer = Mention.create(
+gottschalk_kaeufer = MentionEntry.create(
     person: gottschalk,
     role: kaeufer,
     deed: haa_r3n3
 )
-raise 'Mention not saved' unless gottschalk_kaeufer.persisted?
+raise 'MentionEntry not saved' unless gottschalk_kaeufer.persisted?
 
-richmodis_flaesheim = Mention.create(
+richmodis_flaesheim = MentionEntry.create(
     person: richmodis,
     place: kloster_flaesheim,
     role: klostervorsteher,
     deed: haa_r3n3
 )
-raise 'Mention not saved' unless richmodis_flaesheim.persisted?
+raise 'MentionEntry not saved' unless richmodis_flaesheim.persisted?
 
-richmodis_kaeufer = Mention.create(
+richmodis_kaeufer = MentionEntry.create(
     person: richmodis,
     role: kaeufer,
     deed: haa_r3n3
 )
-raise 'Mention not saved' unless richmodis_kaeufer.persisted?
+raise 'MentionEntry not saved' unless richmodis_kaeufer.persisted?
 
-simon_landgut = Mention.create(
+simon_landgut = MentionEntry.create(
     person: simon,
     place: landgut_hamm,
     role: besitzer,
     deed: haa_r3n3
 )
-raise 'Mention not saved' unless simon_landgut.persisted?
+raise 'MentionEntry not saved' unless simon_landgut.persisted?
 
-simon_verkaeufer = Mention.create(
+simon_verkaeufer = MentionEntry.create(
     person: simon,
     role: verkaeufer,
     deed: haa_r3n3
 )
-raise 'Mention not saved' unless simon_verkaeufer.persisted?
+raise 'MentionEntry not saved' unless simon_verkaeufer.persisted?
 
-velkere_zeuge = Mention.create(
+velkere_zeuge = MentionEntry.create(
     person: velkere,
     role: zeuge,
     deed: haa_r3n3
 )
-raise 'Mention not saved' unless velkere_zeuge.persisted?
+raise 'MentionEntry not saved' unless velkere_zeuge.persisted?
 
 
 pennings_h = Reference.create(

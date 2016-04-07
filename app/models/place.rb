@@ -5,24 +5,24 @@ class Place < ActiveRecord::Base
   has_many :place_relations
   has_many :related, through: :place_relations
 
-  has_many :mentions
-  has_many :roles, through: :mentions, class_name: 'Role', source: :role
-  has_many :people, through: :mentions, class_name: 'Person', source: :person
-  has_many :deeds, through: :mentions, class_name: 'Deed', source: :deed
+  has_many :mention_entries
+  has_many :roles, through: :mention_entries, class_name: 'Role', source: :role
+  has_many :people, through: :mention_entries, class_name: 'Person', source: :person
+  has_many :deeds, through: :mention_entries, class_name: 'Deed', source: :deed
 
   def relatives
     Place.joins(:place_relations).where(place_relations: { related_id: self })
   end
 
-  def mentioned_deeds
+  def mention_entryed_deeds
     deeds.group(:title)
   end
 
-  def mentioned_roles
+  def mention_entryed_roles
     roles.group(:title)
   end
 
-  def mentioned_people
+  def mention_entryed_people
     people.group(:name)
   end
 

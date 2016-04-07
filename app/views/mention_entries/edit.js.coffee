@@ -3,10 +3,10 @@
 
 $ ->
   DeedsApp.display_form_modal(
-    '<%= escape_javascript(render partial: 'mentions/form/form_modal') %>'
+    '<%= escape_javascript(render partial: 'mention_entries/form/form_modal') %>'
   )
   $.get(
-    url: '<%= edit_mention_path(@mention) %>'
+    url: '<%= edit_mention_entry_path(@mention_entry) %>'
     dataType: 'script'
     data:
       sub_action: 'form_events'

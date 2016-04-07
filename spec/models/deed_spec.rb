@@ -39,8 +39,8 @@ describe Deed, type: :model do
   end
 
   describe 'has association with' do
-    let(:mention1) { build :mention }
-    let(:mention2) { build :mention }
+    let(:mention_entry1) { build :mention_entry }
+    let(:mention_entry2) { build :mention_entry }
 
     specify 'many Documents' do
       document1 = build :document, document_type: 'original'
@@ -79,49 +79,49 @@ describe Deed, type: :model do
       expect(translation.deed).to eq deed
     end
 
-    specify 'many Mentions', use_db: true do
-      deed.mentions << mention1
-      deed.mentions << mention2
+    specify 'many MentionEntries', use_db: true do
+      deed.mention_entries << mention_entry1
+      deed.mention_entries << mention_entry2
       deed.save!
 
       expect(deed).to be_valid
-      expect(deed.mentions).to include mention1, mention2
+      expect(deed.mention_entries).to include mention1, mention2
     end
 
-    specify 'many People through Mentions', use_db: true do
-      mention1.person = build :person
-      mention2.person = build :person, name: Faker::Name.name
+    specify 'many People through MentionEntries', use_db: true do
+      mention_entry1.person = build :person
+      mention_entry2.person = build :person, name: Faker::Name.name
 
-      deed.mentions << mention1
-      deed.mentions << mention2
+      deed.mention_entries << mention_entry1
+      deed.mention_entries << mention_entry2
       deed.save!
 
       expect(deed).to be_valid
-      expect(deed.people).to include mention1.person, mention2.person
+      expect(deed.people).to include mention_entry1.person, mention_entry2.person
     end
 
-    specify 'many Places through Mentions', use_db: true do
-      mention1.place = build :place
-      mention2.place = build :place, title: Faker::Name.title
+    specify 'many Places through MentionEntries', use_db: true do
+      mention_entry1.place = build :place
+      mention_entry2.place = build :place, title: Faker::Name.title
 
-      deed.mentions << mention1
-      deed.mentions << mention2
+      deed.mention_entries << mention_entry1
+      deed.mention_entries << mention_entry2
       deed.save!
 
       expect(deed).to be_valid
-      expect(deed.places).to include mention1.place, mention2.place
+      expect(deed.places).to include mention_entry1.place, mention_entry2.place
     end
 
-    specify 'many Roles through Mentions', use_db: true do
-      mention1.role = build :role
-      mention2.role = build :role, title: Faker::Name.title
+    specify 'many Roles through MentionEntries', use_db: true do
+      mention_entry1.role = build :role
+      mention_entry2.role = build :role, title: Faker::Name.title
 
-      deed.mentions << mention1
-      deed.mentions << mention2
+      deed.mention_entries << mention_entry1
+      deed.mention_entries << mention_entry2
       deed.save!
 
       expect(deed).to be_valid
-      expect(deed.roles).to include mention1.role, mention2.role
+      expect(deed.roles).to include mention_entry1.role, mention_entry2.role
     end
   end
 

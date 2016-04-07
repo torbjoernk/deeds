@@ -1,9 +1,9 @@
 <h1>
-  <%= model_name_with_icon Mention, :plural %>
+  <%= model_name_with_icon MentionEntry, :plural %>
   <%= render partial: 'shared/index/main_action_btn',
-             locals: { path_to_new_entity: new_mention_path,
-                       path_to_refresh: mentions_path,
-                       entity_model: Mention } %>
+             locals: { path_to_new_entity: new_mention_entry_path,
+                       path_to_refresh: mention_entries_path,
+                       entity_model: MentionEntry } %>
 </h1>
 
 
@@ -41,10 +41,10 @@
 <% end %>
 
 <div class="row">
-  <div id="mentions-table">
-    <div class="table" id="mentions">
+  <div id="mention_entries-table">
+    <div class="table" id="mention_entries">
       <div class="table-body container-fluid">
-        <%= render partial: 'mention', collection: @mentions %>
+        <%= render partial: 'mention_entry', collection: @mention_entries %>
       </div>
     </div>
   </div>

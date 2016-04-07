@@ -1,6 +1,6 @@
-class CreateMentions < ActiveRecord::Migration
+class CreateMentionEntries < ActiveRecord::Migration
   def change
-    create_table :mentions do |t|
+    create_table :mention_entries do |t|
       t.belongs_to :deed
       t.belongs_to :person
       t.belongs_to :role

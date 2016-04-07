@@ -1,8 +1,8 @@
 en:
   views:
-    mention:
+    mentionentry:
       actions:
-        add_new_btn_title: "add new Mention"
+        add_new_btn_title: "add new MentionEntry"
       as_role: "as"
       at_place: "at"
       in_deed: "in"

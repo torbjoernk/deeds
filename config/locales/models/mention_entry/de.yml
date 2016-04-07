@@ -2,13 +2,13 @@
 de:
   activerecord:
     attributes:
-      mention:
+      mention_entry:
         deed: Urkunde
         notes: Notizen
         person: Person
         place: Ort
         role: Rolle
     models:
-      mention:
+      mention_entry:
         one: Nennung
         other: Nennungen

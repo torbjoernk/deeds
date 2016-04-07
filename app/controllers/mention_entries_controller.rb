@@ -1,4 +1,4 @@
-class MentionsController < ApplicationController
+class MentionEntriesController < ApplicationController
   include Common
 
   after_filter { flash.discard if request.xhr? }
@@ -8,48 +8,48 @@ class MentionsController < ApplicationController
       @person = Person.find_by id: params[:person_id]
       add_breadcrumb Person.model_name.human(count: 1), people_path
       add_breadcrumb @person.name
-      @mentions = @person.mentions
+      @mention_entries = @person.mention_entry_entries
     elsif params.has_key? :place_id
       @place = Place.find_by id: params[:place_id]
       add_breadcrumb Place.model_name.human(count: 1), places_path
       add_breadcrumb @place.title
-      @mentions = @place.mentions
+      @mention_entries = @place.mention_entry_entries
     elsif params.has_key? :role_id
       @role = Role.find_by id: params[:role_id]
       add_breadcrumb Role.model_name.human(count: 1), roles_path
       add_breadcrumb @role.title
-      @mentions = @role.mentions
+      @mention_entries = @role.mention_entry_entries
     elsif params.has_key? :deed_id
       @deed = Deed.find_by id: params[:deed_id]
       add_breadcrumb Deed.model_name.human(count: 1), deeds_path
       add_breadcrumb @deed.title, deed_path(@deed)
-      @mentions = @deed.mentions
+      @mention_entries = @deed.mention_entry_entries
     else
-      @mentions = Mention.all
+      @mention_entries = MentionEntry.all
     end
 
-    add_breadcrumb Mention.model_name.human(count: 2), mentions_path
+    add_breadcrumb MentionEntry.model_name.human(count: 2), mention_entries_path
 
     respond_to do |format|
-      format.html { render 'mentions/index' }
-      format.js   { render 'mentions/index' }
+      format.html { render 'mention_entries/index' }
+      format.js   { render 'mention_entries/index' }
     end
   end
 
   def show
-    @mention = Mention.find_by id: params[:id]
+    @mention_entry = MentionEntry.find_by id: params[:id]
     respond_to :js
   end
 
   def new
-    @mention = Mention.new
+    @mention_entry = MentionEntry.new
     if params.has_key? :deed_id
       @deed = Deed.find_by id: params[:deed_id]
-      @mention.deed = @deed
+      @mention_entry.deed = @deed
     end
     if params.has_key? 'sub_action' and params[:sub_action].to_sym == :form_events
       respond_to do |format|
-        format.js { render partial: 'mentions/form/form_events' }
+        format.js { render partial: 'mention_entries/form/form_events' }
       end
     else
       respond_to :js
@@ -57,10 +57,10 @@ class MentionsController < ApplicationController
   end
 
   def edit
-    @mention = Mention.find_by id: params[:id]
+    @mention_entry = MentionEntry.find_by id: params[:id]
     if params.has_key? 'sub_action' and params[:sub_action].to_sym == :form_events
       respond_to do |format|
-        format.js { render partial: 'mentions/form/form_events' }
+        format.js { render partial: 'mention_entries/form/form_events' }
       end
     else
       respond_to :js
@@ -68,28 +68,28 @@ class MentionsController < ApplicationController
   end
 
   def create
-    @mention = Mention.create(mention_params)
+    @mention_entry = MentionEntry.create(mention_entry_params)
     flash[:success] = t('views.flash.created_entity',
-                        what: Mention.model_name.human, id: @mention.id)
-    redirect_to mentions_path
+                        what: MentionEntry.model_name.human, id: @mention_entry.id)
+    redirect_to mention_entries_path
   end
 
   def update
-    @mention = Mention.find_by id: params[:id]
-    @mention.update!(mention_params)
+    @mention_entry = MentionEntry.find_by id: params[:id]
+    @mention_entry.update!(mention_entry_params)
     flash[:success] = t('views.flash.updated_entity',
-                        what: Mention.model_name.human, id: @mention.id)
-    redirect_to mentions_path
+                        what: MentionEntry.model_name.human, id: @mention_entry.id)
+    redirect_to mention_entries_path
   end
 
   def destroy
-    destroy_entity_of Mention, params
-    redirect_to mentions_path
+    destroy_entity_of MentionEntry, params
+    redirect_to mention_entries_path
   end
 
   private
-  def mention_params
-    filtered = params.require(:mention).permit(:id, :deed, :person, :place, :role, :notes)
+  def mention_entry_params
+    filtered = params.require(:mention_entry).permit(:id, :deed, :person, :place, :role, :notes)
 
     if filtered[:deed].to_s.empty?
       filtered[:deed] = nil
@@ -98,7 +98,7 @@ class MentionsController < ApplicationController
     end
 
     if filtered[:person].to_s.empty?
-      params['mention']['person'] = nil
+      params['mention_entry']['person'] = nil
     else
       filtered[:person] = Person.find_by! name: filtered[:person].to_s
     end

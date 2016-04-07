@@ -70,12 +70,12 @@ class DeedsController < ApplicationController
                               what: Deed.model_name.human(count: 1), id: @deed.id)
           target = 'deeds/form/refresh'
 
-        when :remove_mention
-          @mention = Mention.find_by id: params[:mention_id]
-          @deed.mentions.delete @mention
+        when :remove_mention_entry
+          @mention_entry = MentionEntry.find_by id: params[:mention_entry_id]
+          @deed.mention_entries.delete @mention_entry
           @deed.save!
-          @mention.delete
-          flash[:success] = t('views.deed.flash.removed_mention')
+          @mention_entry.delete
+          flash[:success] = t('views.deed.flash.removed_mention_entry')
           target = 'deeds/show'
 
         when :remove_reference

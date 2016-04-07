@@ -1,36 +1,36 @@
 <% content_for :entity_info, flush: true do %>
-  <div class="col-mention-deed">
-    <% unless mention.deed.nil? %>
+  <div class="col-mention_entry-deed">
+    <% unless mention_entry.deed.nil? %>
         <%= icon_for Deed %>
-        <%= mention.deed.title %>
-      <%= link_to deed_path(mention.deed), remote: true do %>
+        <%= mention_entry.deed.title %>
+      <%= link_to deed_path(mention_entry.deed), remote: true do %>
         <%= icon('search', class: 'fa-fw') %>
       <% end %>
     <% end %>
   </div>
-  <div class="col-mention-person">
-    <% unless mention.person.nil? %>
+  <div class="col-mention_entry-person">
+    <% unless mention_entry.person.nil? %>
         <%= icon_for Person %>
-        <%= mention.person.name %>
-      <%= link_to person_path(mention.person), remote: true do %>
+        <%= mention_entry.person.name %>
+      <%= link_to person_path(mention_entry.person), remote: true do %>
         <%= icon('search', class: 'fa-fw') %>
       <% end %>
     <% end %>
   </div>
-  <div class="col-mention-place">
-    <% unless mention.place.nil? %>
+  <div class="col-mention_entry-place">
+    <% unless mention_entry.place.nil? %>
         <%= icon_for Place %>
-        <%= mention.place.title %>
-      <%= link_to place_path(mention.place), remote: true do %>
+        <%= mention_entry.place.title %>
+      <%= link_to place_path(mention_entry.place), remote: true do %>
         <%= icon('search', class: 'fa-fw') %>
       <% end %>
     <% end %>
   </div>
-  <div class="col-mention-role">
-    <% unless mention.role.nil? %>
+  <div class="col-mention_entry-role">
+    <% unless mention_entry.role.nil? %>
         <%= icon_for Role %>
-        <%= mention.role.title %>
-      <%= link_to role_path(mention.role), remote: true do %>
+        <%= mention_entry.role.title %>
+      <%= link_to role_path(mention_entry.role), remote: true do %>
         <%= icon('search', class: 'fa-fw') %>
       <% end %>
     <% end %>
@@ -39,13 +39,13 @@
 
 <% content_for :entity_toolbar_associations, flush: true do %>
   <div class="btn-group btn-group-sm" role="group">
-    <% if mention.notes.nil? or mention.notes.empty? %>
+    <% if mention_entry.notes.nil? or mention_entry.notes.empty? %>
       <a class="btn btn-sm btn-outline-secondary disabled">
         <%= icon('comment-o', class: 'fa-fw') %>
       </a>
     <% else %>
       <a class="btn btn-sm btn-secondary"
-         title="<%= mention.notes %>"
+         title="<%= mention_entry.notes %>"
          data-toggle="tooltip">
         <%= icon('comment-o', class: 'fa-fw') %>
       </a>
@@ -54,4 +54,4 @@
 <% end %>
 
 <%= render partial: 'shared/index/entity',
-           locals: { entity_id: "mention-#{mention.id}", entity: mention } %>
+           locals: { entity_id: "mention_entry-#{mention_entry.id}", entity: mention_entry } %>

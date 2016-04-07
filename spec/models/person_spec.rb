@@ -23,8 +23,8 @@ describe Person, type: :model do
   end
 
   describe 'has association with' do
-    let(:mention1) { build :mention }
-    let(:mention2) { build :mention }
+    let(:mention_entry1) { build :mention_entry }
+    let(:mention_entry2) { build :mention_entry }
 
     specify 'many People', use_db: true do
       other = create :person, name: Faker::Name.name
@@ -35,49 +35,49 @@ describe Person, type: :model do
       expect(person.related).to include other
     end
 
-    specify 'many Mentions', use_db: true do
-      person.mentions << mention1
-      person.mentions << mention2
+    specify 'many MentionEntries', use_db: true do
+      person.mention_entries << mention_entry1
+      person.mention_entries << mention_entry2
       person.save!
 
       expect(person).to be_valid
-      expect(person.mentions).to include mention1, mention2
+      expect(person.mention_entries).to include mention_entry1, mention_entry2
     end
 
-    specify 'many mentioned Places through Mentions', use_db: true do
-      mention1.place = build :place
-      mention2.place = build :place, title: Faker::Name.title
+    specify 'many mention_entryed Places through MentionEntries', use_db: true do
+      mention_entry1.place = build :place
+      mention_entry2.place = build :place, title: Faker::Name.title
 
-      person.mentions << mention1
-      person.mentions << mention2
+      person.mention_entries << mention_entry1
+      person.mention_entries << mention_entry2
       person.save!
 
       expect(person).to be_valid
-      expect(person.mentioned_places).to include mention1.place, mention2.place
+      expect(person.mention_entryed_places).to include mention_entry1.place, mention_entry2.place
     end
 
-    specify 'many Roles through Mentions', use_db: true do
-      mention1.role = build :role
-      mention2.role = build :role, title: Faker::Name.title
+    specify 'many Roles through MentionEntries', use_db: true do
+      mention_entry1.role = build :role
+      mention_entry2.role = build :role, title: Faker::Name.title
 
-      person.mentions << mention1
-      person.mentions << mention2
+      person.mention_entries << mention_entry1
+      person.mention_entries << mention_entry2
       person.save!
 
       expect(person).to be_valid
-      expect(person.roles).to include mention1.role, mention2.role
+      expect(person.roles).to include mention_entry1.role, mention_entry2.role
     end
 
-    specify 'many Deeds through Mentions', use_db: true do
+    specify 'many Deeds through MentionEntries', use_db: true do
       deed = build :deed
-      mention1.deed = deed
-      mention2.deed = deed
-      person.mentions << mention1
-      person.mentions << mention2
+      mention_entry1.deed = deed
+      mention_entry2.deed = deed
+      person.mention_entries << mention_entry1
+      person.mention_entries << mention_entry2
       person.save!
 
       expect(person).to be_valid
-      expect(person.deeds).to include mention1.deed, mention2.deed
+      expect(person.deeds).to include mention_entry1.deed, mention_entry2.deed
     end
   end
 

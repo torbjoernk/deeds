@@ -93,12 +93,12 @@
   </div>
 
   <div class="btn-group btn-group-sm" role="group">
-    <%= link_to mentions_path(deed_id: deed.id),
+    <%= link_to mention_entries_path(deed_id: deed.id),
                 class: 'btn btn-sm btn-secondary',
-                title: t('views.show_linked', what: Mention.model_name.human(count: 2)),
+                title: t('views.show_linked', what: MentionEntry.model_name.human(count: 2)),
                 data: { toggle: 'tooltip' } do %>
-      <%= deed.mentions.count %>
-      <%= icon_for Mention %>
+      <%= deed.mention_entries.count %>
+      <%= icon_for MentionEntry %>
     <% end %>
     <%= link_to people_path(deed_id: deed.id),
                 class: 'btn btn-sm btn-secondary',

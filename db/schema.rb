@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 20160406143225) do
 
   add_index "documents", ["deed_id"], name: "index_documents_on_deed_id"
 
-  create_table "mentions", force: :cascade do |t|
+  create_table "mention_entries", force: :cascade do |t|
     t.integer  "deed_id"
     t.integer  "person_id"
     t.integer  "role_id"

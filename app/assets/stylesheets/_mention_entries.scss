@@ -2,22 +2,22 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#mentions.table {
+#mention_entries.table {
   .entity.row {
     .col-info {
-      .col-mention-deed {
+      .col-mention_entry-deed {
         @include make-col(2);
         @extend .p-x-0;
       }
-      .col-mention-person {
+      .col-mention_entry-person {
         @include make-col(2);
         @extend .p-x-0;
       }
-      .col-mention-place {
+      .col-mention_entry-place {
         @include make-col(2);
         @extend .p-x-0;
       }
-      .col-mention-role {
+      .col-mention_entry-role {
         @include make-col(2);
         @extend .p-x-0;
       }

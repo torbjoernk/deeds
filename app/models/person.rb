@@ -19,10 +19,10 @@ class Person < ActiveRecord::Base
   has_many :person_relations
   has_many :related, through: :person_relations
 
-  has_many :mentions
-  has_many :roles, through: :mentions, class_name: 'Role', source: :role
-  has_many :places, through: :mentions, class_name: 'Place', source: :place
-  has_many :deeds, through: :mentions, class_name: 'Deed', source: :deed
+  has_many :mention_entries
+  has_many :roles, through: :mention_entries, class_name: 'Role', source: :role
+  has_many :places, through: :mention_entries, class_name: 'Place', source: :place
+  has_many :deeds, through: :mention_entries, class_name: 'Deed', source: :deed
 
   before_save :default_values
 
@@ -34,15 +34,15 @@ class Person < ActiveRecord::Base
     Person.joins(:person_relations).where(person_relations: { related_id: self })
   end
 
-  def mentioned_deeds
+  def mention_entryed_deeds
     deeds.group(:title)
   end
 
-  def mentioned_roles
+  def mention_entryed_roles
     roles.group(:title)
   end
 
-  def mentioned_places
+  def mention_entryed_places
     places.group(:title)
   end
 
