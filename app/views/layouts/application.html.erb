@@ -16,7 +16,9 @@
             <div class="row">
               <div id="notes" class="col-md-10 offset-md-1">
                 <% if flash %>
-                  <%= render 'shared/flash' %>
+                  <% flash.each do |status, msg| %>
+                    <%= render partial: 'shared/flash', locals: { status: status, msg: msg } %>
+                  <% end %>
                 <% end %>
               </div>
             </div>

@@ -69,7 +69,6 @@ class MentionsController < ApplicationController
 
   def create
     @mention = Mention.create(mention_params)
-    @mention.save!
     flash[:success] = t('views.flash.created_entity',
                         what: Mention.model_name.human, id: @mention.id)
     redirect_to mentions_path
