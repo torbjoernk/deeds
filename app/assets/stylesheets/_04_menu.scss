@@ -5,3 +5,21 @@ ul.nav {
     }
   }
 }
+
+footer#menu-footer {
+  @include make-col(2);
+  @extend .p-a-1;
+  position: fixed;
+  bottom: 0;
+
+  .row {
+    div {
+      &:first-of-type {
+        @extend .p-r-0;
+      }
+      &:last-of-type {
+        @extend .p-l-0;
+      }
+    }
+  }
+}
