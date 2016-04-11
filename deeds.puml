@@ -1,0 +1,251 @@
+@startuml
+
+class Deed {
+  +int year
+  +int month
+  +int day
+  +Document[] documents
+  +Mention[] mentions
+}
+Deed "0..*" -- Meta.Notes
+
+
+namespace Source {
+  enum DocType {
+    ORIGINAL
+    REGEST
+    TRANSCRIPT
+    PRINT
+    DIGITAL
+  }
+
+  namespace Legal {
+    class Licence {
+      +string title
+      +string identifier
+    }
+    Licence "0..*" -- Meta.Notes
+
+    class LicenceUsage << Polymorphic >> {
+      +Licence licence
+      +string usage
+    }
+    LicenceUsage "0..*" -- Meta.Notes
+    Licence "0..*" .. "1..*" LicenceUsage
+  }
+
+  namespace Detail {
+    enum Language {
+      LATIN
+      OLD_GERMAN
+      NEW_GERMAN
+    }
+
+    class ContentLine {
+      +int line
+      +string text
+    }
+    ContentLine "0..*" -- Meta.Notes
+
+    class Content {
+      +Language language
+      +string text
+      +ContentLine[] lines
+      +Translation[] translations
+    }
+    Content "0..*" -- Meta.Notes
+    Content "1" *-- Language
+    Content "0..*" o-- "1" ContentLine
+    Content "0..*" o-- "1..*" Source.Legal.LicenceUsage
+
+    class Translation {
+      +Language language
+      +string text
+    }
+    Translation "0..*" -- Meta.Notes
+    Translation "1" *-- Language
+    Content "0..*" o-- "1" Translation
+    Translation "0..*" o-- "1..*" Source.Legal.LicenceUsage
+
+
+    class Picture << Polymorphic >> {
+      +string filename
+    }
+    Picture "0..*" -- Meta.Notes
+    Content "0..1" *-- "1..*" Picture
+    Picture "0..*" *-- "1..*" Source.Legal.LicenceUsage
+  }
+
+  class Document {
+    +string title
+    +DocType doctype
+    +Content content
+  }
+  Document "0..*" -- Meta.Notes
+  Document "1" *-- DocType
+  Document "1" *-- "1" Source.Detail.Content
+
+  enum AttachmentType {
+    HINGING
+    SILK_THREAD
+    BROKEN_OFF
+  }
+
+  class Seal {
+    +string title
+  }
+  Collection "0..*" o-- "1" Seal
+  (Collection, Seal) .. CollectionSeal
+
+  class CollectionSeal {
+    +Collection collection
+    +Seal seal
+    +AttachmentType
+    +string identifier
+  }
+  CollectionSeal "0..*" -- Meta.Notes
+  CollectionSeal "1" -- AttachmentType
+  Document "0..*" o-- "0..*" Seal
+  (Document, Seal) .. DocumentSeal
+
+  class DocumentSeal {
+    +Document document
+    +Seal seal
+  }
+  DocumentSeal "0..*" -- Meta.Notes
+
+  class Collection {
+    +string title
+  }
+  Collection "0..*" -- Meta.Notes
+  Collection "0..*" o-- "1" Document
+  (Collection, Document) .. CollectionDocument
+
+  class CollectionDocument {
+    +Collection collection
+    +Document document
+    +string identifier
+  }
+  CollectionDocument "0..*" -- Meta.Notes
+
+  class Storage {
+    +string title
+  }
+  Storage  "0..*" -- "0..*" Meta.Notes
+  Storage "0..*" o-- "1" Collection
+  (Storage, Collection) .. StorageCollection
+
+  class StorageCollection {
+    +Storage storage
+    +Collection collection
+    +string identifier
+  }
+  StorageCollection "0..*" -- Meta.Notes
+}
+
+Deed "0..*" o-- "1" Source.Document
+
+
+namespace Meta {
+  class Notes << Polymorphic >> {
+    +string text
+  }
+  Notes "0..*" -- "0..*" Source.Legal.LicenceUsage
+
+  class Mention {
+    +Person person
+    +Place place
+    +Role role
+  }
+  Mention "0..*" -- Meta.Notes
+
+  class Person {
+    +string name
+    +Person[] related
+  }
+  Person "0..*" -- Meta.Notes
+
+  class Place {
+    +string title
+    +Place[] related
+  }
+  Place "0..*" -- Meta.Notes
+
+  class Role {
+    +string title
+    +Role[] related
+  }
+  Role "0..*" -- Meta.Notes
+
+  Mention "1" *-- "1" Person
+  Mention "1" *-- "1" Place
+  Mention "1" *-- "1" Role
+
+  Person "1..*" -- "0..*" Person
+  (Person, Person) .. PersonRelation
+
+  class PersonRelation {
+    +Person person
+    +Person other
+  }
+  PersonRelation "0..*" -- Meta.Notes
+  Place "1..*" -- "0..*" Place
+  (Place, Place) .. PlaceRelation
+
+  class PlaceRelation {
+    +Place place
+    +Place other
+  }
+  PlaceRelation "0..*" -- Meta.Notes
+  Role "1..*" -- "0..*" Role
+  (Role, Role) .. RoleRelation
+
+  class RoleRelation {
+    +Role role
+    +Role other
+  }
+  RoleRelation "0..*" -- Meta.Notes
+}
+
+Deed "0..*" o-- "1" Meta.Mention
+
+
+namespace Literature {
+  note as NoteLit
+    subject to change
+  end note
+
+  class Author {
+    +string name
+  }
+
+  enum AuthorRole {
+    AUTHOR
+    EDITOR
+  }
+
+  class LiteratureCollection {
+    +string title
+  }
+
+  class Reference {
+    +string title
+    +string identifier
+    +LiteratureCollection incollection
+    +string bibtex
+  }
+  Reference "0..1" *-- "0..*" LiteratureCollection
+  Reference "0..*" o-- "0..*" Author
+  (Reference, Author) .. ReferenceAuthor
+
+  class ReferenceAuthor {
+    +Reference reference
+    +Author author
+    +AuthorRole role
+  }
+  ReferenceAuthor "1" *-- AuthorRole
+}
+
+
+
+@enduml
